@@ -1,0 +1,246 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>好玩的數學</title>
+    <style>
+        body {
+            background-image: linear-gradient(77deg, #d9faff, #c9dfff, #c7d8ff, #ffdbff);
+            user-select: none;
+        }
+
+        .formcenter {
+            position: fixed;
+            width: 456px;
+            height: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px;
+            background: #ffffff55;
+            z-index: 10;
+            box-shadow: 3px 3px 5px 0 #0003;
+            backdrop-filter: blur(10em);
+            padding: 25px;
+        }
+
+        input[type="button"],
+        input[type="submit"],
+        button {
+            background-color: #fff3;
+            border-radius: 5px;
+            border: 1px solid #999999;
+            margin: 5px;
+            padding: 5px 10px 5px 10px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover,
+        button:hover {
+            background-color: #ffffff80;
+        }
+
+        input[type="number"] {
+            background-color: #fff3;
+            border-radius: 5px;
+            border: 0;
+            border-bottom: 1px solid #999999;
+            margin: 5px;
+            padding: 5px 10px 5px 10px;
+            transition: 0.5s;
+            width: 90%;
+        }
+
+        input[type="number"]:focus {
+            border-bottom: 1px solid #398af5;
+        }
+
+
+        input[type="number"]:focus-visible {
+            outline: 0;
+        }
+
+        input[type="submit"] {
+            float: right;
+            background-color: #398af5;
+            color: white;
+            border: 1px solid #398af580;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #398bf5d0;
+        }
+
+        input[type="submit"],
+        input#canb {
+            width: 70px;
+            height: 40px;
+            margin-top: 20px;
+        }
+
+        .formframe1,
+        .formframe2 {
+            border-radius: 5px;
+            border: 1px solid #999999;
+            margin: 25px 5px;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .formframe2 {
+            width: calc(50% - 35px);
+            display: inline-block;
+            margin: 0px 5px;
+        }
+
+        .hide {
+            width: 1px;
+            opacity: 0;
+            margin: 0;
+            pointer-events: none;
+        }
+
+        .frame1b {
+            height: 50px;
+            width: calc(33.33333% - 20px);
+            font-size: 25px;
+        }
+
+        .frame2b {
+            height: 40px;
+            width: calc(33.33333% - 20px);
+            font-size: 20px;
+        }
+
+        @keyframes btckandset {
+            0% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes btmodown {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0.9);
+            }
+        }
+
+        .formframe1>input[type="button"].btselect1 {
+            animation: btckandset .25s;
+            border: 1px solid #398af5;
+            background-color: #398af580;
+        }
+
+        .formframe1>input[type="button"].btselect2 {
+            animation: btckandset .25s;
+            border: 1px solid #398af5;
+            background-color: #398af580;
+        }
+
+        .formframe1>input[type="button"]:active {
+            animation: btmodown .25s;
+            border: 1px solid #398af5;
+            background-color: #398af580;
+            transform: scale(0.9);
+        }
+
+        .formframe1>input[type="button"]:active {
+            animation: btmodown .25s;
+            border: 1px solid #398af5;
+            background-color: #398af580;
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="formcenter">
+        <form action="mq.php" method="get" id="mqform">
+            <div class="formframe1">
+                <b>模式</b>
+                <br>
+                <input type="button" class="frame1b" value="+">
+                <input type="radio" class="hide" name="mode" value="1" required>
+                <input type="button" class="frame1b" value="-">
+                <input type="radio" class="hide" name="mode" value="2" required>
+                <input type="button" class="frame1b" value="×">
+                <input type="radio" class="hide" name="mode" value="3" required>
+            </div>
+            <div class="formframe1">
+                <b>範圍</b>
+                <br>
+                <input type="button" class="frame2b" value="0~9">
+                <input type="radio" class="hide" name="qrange" value="1" required>
+                <input type="button" class="frame2b" value="0~99">
+                <input type="radio" class="hide" name="qrange" value="2" required>
+                <input type="button" class="frame2b" value="0~999">
+                <input type="radio" class="hide" name="qrange" value="3" required>
+                <input type="button" class="frame2b" value="0~9999">
+                <input type="radio" class="hide" name="qrange" value="4" required>
+                <input type="button" class="frame2b" value="0~99999">
+                <input type="radio" class="hide" name="qrange" value="5" required>
+            </div>
+            <div class="formframe2">
+                <b>總題數</b>
+                <br>
+                <input type="number" required name="qcount" min="1" autocomplete="off">
+            </div>
+            <div class="formframe2">
+                <b>每題間隔時間(秒)</b>
+                <br>
+                <input type="number" required name="qbreak" min="0" max="99" maxlength="2" autocomplete="off">
+            </div>
+            <input type="button" value="取消" id="canb">
+            <input type="submit" value="確認">
+        </form>
+    </div>
+    <script>
+        var mr = 0;
+        var qr = 0;
+        for (m = 0; m < document.getElementsByClassName('frame1b').length; m++) {
+            document.getElementsByClassName('frame1b')[m].onmouseup = function bt(m) {
+                if (mr !== 0) {
+                    document.getElementsByClassName('btselect1')[0].classList.remove('btselect1')
+                }
+                this.classList.add('btselect1')
+                mr = m + 1
+                this.nextElementSibling.checked = true;
+            }
+        }
+        for (q = 0; q < document.getElementsByClassName('frame2b').length; q++) {
+            document.getElementsByClassName('frame2b')[q].onmouseup = function bt(q) {
+                if (qr !== 0) {
+                    document.getElementsByClassName('btselect2')[0].classList.remove('btselect2')
+                }
+                this.classList.add('btselect2')
+                qr = q + 1
+                this.nextElementSibling.checked = true;
+            }
+        }
+        document.getElementById('canb').onclick = function () {
+            document.getElementById('mqform').reset()
+            if (mr !== 0) {
+                document.getElementsByClassName('btselect1')[0].classList.remove('btselect1')
+                mr = 0;
+            }
+            if (qr !== 0) {
+                document.getElementsByClassName('btselect2')[0].classList.remove('btselect2')
+                qr = 0;
+            }
+        }
+        if (localStorage.getItem('formerror') == 'notfindformvalue') {
+            localStorage.removeItem('formerror')
+            alert('⚠️警告! 請勿修改或刪除表單資料')
+        }
+    </script>
+</body>
+
+</html>
