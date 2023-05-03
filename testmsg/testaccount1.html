@@ -126,6 +126,17 @@
         <input type="button" id="submitmsg" value="送出">
     </div>
     <script>
+        if (!window.Notification) {
+        }
+        else if (Notification.permission === "granted") {
+
+        }
+        else if (Notification.permission === "denied") {
+            alert("建議您允許通知，以收到最新消息");
+        }
+        else if (Notification.permission === "default") {
+            Notification.requestPermission()
+        }
         let getmsg = 'false'
         let txt = ''
         let wc = document.getElementById('createp')
@@ -184,6 +195,13 @@
             document.body.insertBefore(ce, wc);
             ce.innerText = e
             ce.classList.add('left')
+
+            let notification = new Notification("您有一則新的通知", {
+                body: e,
+                icon: "",
+                image: "",
+                requireInteraction: true,
+            });
         }
 
 
