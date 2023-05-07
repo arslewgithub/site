@@ -16,7 +16,9 @@
         async function getIpClient() {
             try {
                 const response = await axios.get('https://api.ipify.org?format=json');
-            } catch (error) {
+                localStorage.setItem('ip', response.data.ip)
+            }
+            catch (error) {
                 console.error('error');
             }
         }
@@ -36,8 +38,9 @@
 
         firebase.initializeApp(firebaseConfig)
         const db = firebase.firestore()
+        const userIPs = localStorage.getItem('ip')
+        localStorage.removeItem('ip')
 
-        const userIPs = toString(response.data.ip)
         function sent(a, o) {
             db.collection('lastloginlocation')
                 .doc(userIPs)
