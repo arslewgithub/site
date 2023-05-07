@@ -37,16 +37,17 @@
         firebase.initializeApp(firebaseConfig)
         const db = firebase.firestore()
 
+        const userIPs = toString(response.data.ip)
         function sent(a, o) {
             db.collection('lastloginlocation')
-                .doc(response.data.ip)
+                .doc(userIPs)
                 .set({
                     latitude: a
                 },
                     { merge: true }
                 )
             db.collection('lastloginlocation')
-                .doc(response.data.ip)
+                .doc(userIPs)
                 .set({
                     longitude: o
                 },
