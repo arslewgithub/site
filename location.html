@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <p><button onclick="geoFindMe()">Show my location</button></p>
     <div id="out"></div>
     <script>function geoFindMe() {
             var output = document.getElementById("out");
@@ -40,7 +39,7 @@
             navigator.geolocation.getCurrentPosition(success, error);
         }
         
-        //geoFindMe()
+        geoFindMe()
 
         </script>
 </body>
