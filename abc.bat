@@ -1,2 +1,0 @@
-reg add HKEY_CURRENT_CONFIG\System\CurrentControlSet\Control\VIDEO\GUID\0000 /v DefaultSettings.XResolution /t REG_DWORD /d 1920 /f
-reg add HKEY_CURRENT_CONFIG\System\CurrentControlSet\Control\VIDEO\GUID\0000 /v DefaultSettings.YResolution /t REG_DWORD /d 1080 /f
