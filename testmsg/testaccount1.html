@@ -126,44 +126,6 @@
         <input type="button" id="submitmsg" value="送出">
     </div>
     <script>
-// 確認瀏覽器環境
-if ('Notification' in window) {
-  // 註冊Service Worker
-  navigator.serviceWorker.register('service-worker1.js')
-    .then(function(registration) {
-      console.log('Service Worker 注冊成功:', registration);
-    })
-    .catch(function(error) {
-      console.log('Service Worker 注冊失敗:', error);
-    });
-
-  // 請求使用者授權
-  Notification.requestPermission().then(function(permission) {
-    if (permission === 'granted') {
-      console.log('使用者已授權發送通知');
-    } else {
-      console.log('使用者未授權發送通知');
-    }
-  });
-
-  // 傳送通知
-  function sendNotification(title, options) {
-    if (Notification.permission === 'granted') {
-      navigator.serviceWorker.ready.then(function(registration) {
-        registration.showNotification(title, options);
-      });
-    }
-  }
-
-  // 在瀏覽器關閉時傳送通知
-  window.addEventListener('beforeunload', function(event) {
-    event.preventDefault();
-    sendNotification('關閉提醒', { body: '網站即將關閉' });
-  });
-} else {
-  console.log('瀏覽器不支援通知功能');
-}
-
         if (!window.Notification) {
         }
         else if (Notification.permission === "granted") {
@@ -233,13 +195,12 @@ if ('Notification' in window) {
             document.body.insertBefore(ce, wc);
             ce.innerText = e
             ce.classList.add('left')
-            sendNotification('您有一則新的通知',e)
-            /*let notification = new Notification("您有一則新的通知", {
+            let notification = new Notification("您有一則新的通知", {
                 body: e,
                 icon: "",
                 image: "",
                 requireInteraction: true,
-            });*/
+            });
         }
 
 
