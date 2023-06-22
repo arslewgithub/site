@@ -134,10 +134,6 @@ navigator.serviceWorker.register('service-worker1.js')
     console.log('Service Worker 注冊失敗:', error);
   });
 
-        if (!window.Notification) {
-        }
-        else if (Notification.permission === "granted") {
-
 function sendNotification(title, options) {
   if (Notification.permission === 'granted') {
     navigator.serviceWorker.ready.then(function(registration) {
@@ -145,6 +141,10 @@ function sendNotification(title, options) {
     });
   }
 }
+        if (!window.Notification) {
+        }
+        else if (Notification.permission === "granted") {
+
         }
         else if (Notification.permission === "denied") {
             alert("建議您允許通知，以收到最新消息");
