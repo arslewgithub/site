@@ -126,6 +126,14 @@
         <input type="button" id="submitmsg" value="送出">
     </div>
     <script>
+navigator.serviceWorker.register('service-worker.js')
+  .then(function(registration) {
+    console.log('Service Worker 注冊成功:', registration);
+  })
+  .catch(function(error) {
+    console.log('Service Worker 注冊失敗:', error);
+  });
+
         if (!window.Notification) {
         }
         else if (Notification.permission === "granted") {
