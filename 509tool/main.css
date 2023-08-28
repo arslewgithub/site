@@ -167,11 +167,11 @@ div.bar>table>tbody>tr>td {
 div.bar>table,
 div.bar>table>tbody,
 div.bar>table>tbody>tr>td,
-div.bar>table>tbody>tr>td>button {
+div.bar button.funbt {
     height: 100%;
 }
 
-div.bar>table>tbody>tr>td>button {
+div.bar button.funbt {
     background: transparent;
     width: 100%;
     border: 0;
@@ -179,17 +179,17 @@ div.bar>table>tbody>tr>td>button {
     transition: .25s;
 }
 
-div.bar>table>tbody>tr>td>button.select{
+div.bar button.funbt.select{
     background: #c9d9f5;
     border-bottom: 4px solid #6f9dff;
 }
 
-div.bar>table>tbody>tr>td>button.select:hover{
+div.bar button.funbt.select:hover{
     background: #ceddf8;
     border-bottom: 4px solid #7ba5ff;
 }
 
-div.bar>table>tbody>tr>td>button:hover{
+div.bar button.funbt:hover{
     background: #dce6f5;
     border-bottom: 4px solid #adc6fc;
 }
