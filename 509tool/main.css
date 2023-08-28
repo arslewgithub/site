@@ -1,0 +1,157 @@
+body {
+    background: #ebf3ff;
+    user-select: none;
+    margin: 0;
+}
+
+html, body{
+    height: 100%;
+}
+
+input#gsearch {
+    background-color: #ffffffff;
+    border: none;
+    border-radius: calc(0.5 * 44px);
+    color: #000000ff;
+    font-family: inherit;
+    font-size: inherit;
+    height: 44px;
+    outline: 0;
+    padding-inline-end: 40px;
+    padding-inline-start: 52px;
+    position: relative;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+button{
+    cursor: pointer;
+}
+
+div.blocks {
+    width: 100%;
+}
+
+div.blocks a {
+    display: inline-block;
+    width: calc(50% - 43px);
+    margin: 20px;
+}
+
+div.blocks a>button {
+    width: 100%;
+    min-height: 6rem;
+    border: 0;
+    transition: .25s;
+    border-radius: 10px;
+    font-size: 175%;
+    font-weight: bold;
+    box-shadow: 4px 4px 8px 0px #00000088;
+}
+
+div.blocks a>button:hover {
+    scale: 1.02;
+}
+
+div.blocks a>button:active {
+    scale: .95;
+}
+
+div.blocks a>button:focus-visible {
+    outline: 0;
+}
+div.blocks>a:nth-child(1)>button{
+    background-color: rgb(240, 157, 157);
+}
+
+div.blocks>a:nth-child(2)>button{
+    background: #9bcc84;
+}
+
+div.blocks>a:nth-child(3)>button{
+    background-color: rgb(215, 135, 226);
+}
+
+div.blocks>a:nth-child(4)>button{
+    background-color: rgb(140, 180, 255);
+}
+
+div.blocks>a:nth-child(5)>button{
+    background-color: rgb(162, 160, 255);
+}
+
+div.blocks>a:nth-child(6)>button{
+    background-color: rgb(140, 223, 202);
+}
+
+div.blocks>a:nth-child(7)>button{
+    background-color: rgb(100, 151, 199);
+}
+
+div.blocks>a:nth-child(8)>button{
+    background-color: rgb(255, 194, 165);
+}
+
+div.blocks>a:nth-child(9)>button{
+    background-color: rgb(238, 238, 238);
+}
+
+div.blocks>a:nth-child(10)>button{
+    background-color: rgb(97 219 163);
+}
+
+.x{
+    scale: 0;
+}
+
+div.blocks a>button>img {
+    height: 60px;
+    width: 60px;
+    background-color: #ffffff;
+    padding: 5px;
+    box-shadow: 2px 2px 0px 0px #33333355;
+    border-radius: 12.5px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+    margin-left: 20px;
+    float: left;
+}
+
+@media screen and (max-width: 900px) {
+    div.blocks a {
+        display: inline-block;
+        width: calc(100% - 43px);
+        margin: 20px;
+    }
+
+    div.blocks a>button>img {
+        height: 50px;
+        width: 50px;
+    }
+
+    div.blocks a>button {
+        font-size: 150%;
+    }
+}
+h1{
+    margin-left: 50px;
+    font-size: 30px;
+}
+
+div.main{
+    float: left;
+    height: max-content;
+    width: calc(100% - 43px);
+    padding: 0 20px;
+    margin-top: 85px;
+}
+
+div.bar {
+    position: fixed;
+    height: 75px;
+    width: 100%;
+    background-color: #e1e8f3;
+    border-left: 1px solid #d0d7e4;
+    z-index: 9999;
+    box-shadow: 0 2px 15px 0 #0008;
+}
