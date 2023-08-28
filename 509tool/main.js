@@ -5,6 +5,7 @@ function searchClear() {
 }
 
 document.getElementById('gsearch').onkeydown = searchClear;
+
 function initialization() {
     var xl = document.getElementsByClassName('x').length
     for (let e = 0; e < xl; e++) {
@@ -19,4 +20,5 @@ function initialization() {
         document.getElementsByTagName('a')[p].draggable = false;
     }
 }
+
 initialization()

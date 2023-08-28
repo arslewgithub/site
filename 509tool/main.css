@@ -4,7 +4,8 @@ body {
     margin: 0;
 }
 
-html, body{
+html,
+body {
     height: 100%;
 }
 
@@ -24,7 +25,7 @@ input#gsearch {
     margin-bottom: 2rem;
 }
 
-button{
+button {
     cursor: pointer;
 }
 
@@ -60,47 +61,48 @@ div.blocks a>button:active {
 div.blocks a>button:focus-visible {
     outline: 0;
 }
-div.blocks>a:nth-child(1)>button{
+
+div.blocks>a:nth-child(1)>button {
     background-color: rgb(240, 157, 157);
 }
 
-div.blocks>a:nth-child(2)>button{
+div.blocks>a:nth-child(2)>button {
     background: #9bcc84;
 }
 
-div.blocks>a:nth-child(3)>button{
+div.blocks>a:nth-child(3)>button {
     background-color: rgb(215, 135, 226);
 }
 
-div.blocks>a:nth-child(4)>button{
+div.blocks>a:nth-child(4)>button {
     background-color: rgb(140, 180, 255);
 }
 
-div.blocks>a:nth-child(5)>button{
+div.blocks>a:nth-child(5)>button {
     background-color: rgb(162, 160, 255);
 }
 
-div.blocks>a:nth-child(6)>button{
+div.blocks>a:nth-child(6)>button {
     background-color: rgb(140, 223, 202);
 }
 
-div.blocks>a:nth-child(7)>button{
+div.blocks>a:nth-child(7)>button {
     background-color: rgb(100, 151, 199);
 }
 
-div.blocks>a:nth-child(8)>button{
+div.blocks>a:nth-child(8)>button {
     background-color: rgb(255, 194, 165);
 }
 
-div.blocks>a:nth-child(9)>button{
+div.blocks>a:nth-child(9)>button {
     background-color: rgb(238, 238, 238);
 }
 
-div.blocks>a:nth-child(10)>button{
+div.blocks>a:nth-child(10)>button {
     background-color: rgb(97 219 163);
 }
 
-.x{
+.x {
     scale: 0;
 }
 
@@ -133,12 +135,13 @@ div.blocks a>button>img {
         font-size: 150%;
     }
 }
-h1{
+
+h1 {
     margin-left: 50px;
     font-size: 30px;
 }
 
-div.main{
+div.main {
     float: left;
     height: max-content;
     width: calc(100% - 43px);
@@ -154,4 +157,39 @@ div.bar {
     border-left: 1px solid #d0d7e4;
     z-index: 9999;
     box-shadow: 0 2px 15px 0 #0008;
+}
+
+div.bar>table>tbody>tr>td {
+    width: 25vw;
+    text-align: center;
+}
+
+div.bar>table,
+div.bar>table>tbody,
+div.bar>table>tbody>tr>td,
+div.bar>table>tbody>tr>td>button {
+    height: 100%;
+}
+
+div.bar>table>tbody>tr>td>button {
+    background: transparent;
+    width: 100%;
+    border: 0;
+    border-bottom: 4px solid #d0daf0;
+    transition: .25s;
+}
+
+div.bar>table>tbody>tr>td>button.select{
+    background: #c9d9f5;
+    border-bottom: 4px solid #6f9dff;
+}
+
+div.bar>table>tbody>tr>td>button.select:hover{
+    background: #ceddf8;
+    border-bottom: 4px solid #7ba5ff;
+}
+
+div.bar>table>tbody>tr>td>button:hover{
+    background: #dce6f5;
+    border-bottom: 4px solid #adc6fc;
 }
