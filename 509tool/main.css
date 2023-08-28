@@ -25,6 +25,10 @@ input#gsearch {
     margin-bottom: 2rem;
 }
 
+input#gsearch:focus{
+    box-shadow: 0 0 3px 1px #00000055;
+}
+
 button {
     cursor: pointer;
 }
@@ -42,7 +46,7 @@ div.blocks a {
 div.blocks a>button {
     width: 100%;
     min-height: 6rem;
-    border: 0;
+    border: 2px solid #00000044;
     transition: .25s;
     border-radius: 10px;
     font-size: 175%;
