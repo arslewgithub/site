@@ -1,6 +1,6 @@
 body {
     background: #ebf3ff;
-    /*user-select: none;*/
+    user-select: none;
     margin: 0;
     overflow-x: hidden;
 }
@@ -17,9 +17,9 @@ button {
 .ripple {
     position: absolute;
     border-radius: 50%;
-    background-color: #00000020;
+    background: radial-gradient(#0004, transparent, transparent);
     animation-name: ripple;
-    animation-duration: 1s;
+    animation-duration: 1.25s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
     pointer-events: none;
@@ -31,7 +31,7 @@ button {
         opacity: 1;
     }
     to {
-        transform: scale(4);
+        transform: scale(6);
         opacity: 0;
     }
 }
@@ -74,7 +74,7 @@ div.main {
     float: left;
     height: calc(100% - 75px);
     min-height: calc(100% - 75px);
-    width: calc(100% - 43px);
+    width: calc(100% - 40px);
     padding: 0 20px;
     transition: .25s;
 }
@@ -156,7 +156,7 @@ span.lineblock {
     display: block;
     margin-top: 30px;
     margin-bottom: 30px;
-    transition: .25s;
+    transition: 1.5s;
     padding: 20px;
     border-radius: 10px;
     overflow: hidden;
@@ -164,8 +164,8 @@ span.lineblock {
     position: relative;
 }
 
-span.lineblock:active {
-    background: #0001;
+span.lineblock:已啟用 {
+    background: #0002;
 }
 
 span.lineblock>h3{
