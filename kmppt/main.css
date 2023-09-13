@@ -1,12 +1,12 @@
-內容 {
+body {
     background: #ebf3ff;
-    user-select: 無;
+    user-select: none;
     margin: 0;
     overflow-x: hidden;
 }
 
 html,
-內容 {
+body {
     height: 100%;
 }
 
@@ -22,7 +22,7 @@ button {
     animation-duration: 1.25s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
-    pointer-events: 無;
+    pointer-events: none;
 }
 
 @keyframes ripple {
@@ -164,7 +164,7 @@ span.lineblock {
     position: relative;
 }
 
-span.lineblock:已啟用 {
+span.lineblock:active {
     background: #0002;
 }
 
