@@ -260,7 +260,7 @@
             }
         }
         document.getElementsByClassName('exe')[3].onclick = function () {
-            sent('alert(\'' + String(document.querySelector('.ipttxt1').value).replaceAll("'", "\\'") + '\')');
+            sent('alert(\'' + String(document.querySelector('.ipttxt1').value).replaceAll("\\", "\\\\").replaceAll("'", "\\'") + '\')');
         }
         document.getElementsByClassName('exe')[4].onclick = function () {
             sent(document.querySelector('textarea').value);
@@ -379,7 +379,7 @@
         }
         function keyFunction2() {
             if (event.keyCode == 13) {
-                sent('alert(\'' + String(document.querySelector('.ipttxt1').value).replaceAll("'", "\\'") + '\')');
+                sent('alert(\'' + String(document.querySelector('.ipttxt1').value).replaceAll("\\", "\\\\").replaceAll("'", "\\'") + '\')');
             }
         }
         document.querySelector('.ipturl1').onkeydown = keyFunction0;
