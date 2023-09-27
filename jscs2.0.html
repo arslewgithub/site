@@ -298,6 +298,12 @@
                 }
             }
         }
+
+        document.getElementsByClassName('va')[4].onclick = function (){
+            sent('document.getElementByTagName(\'video\').forEach((e) => {e.play();}')
+        }
+
+
         function keyFunction1() {
             if (event.keyCode == 13) {
                 if ((document.querySelector('.ipturl2').value.includes('https://')) == true || (document.querySelector('.ipturl2').value.includes('http://') == true)) {
