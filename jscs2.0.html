@@ -113,12 +113,12 @@
 </head>
 
 <body>
-    <div class="blockframe deving">
+    <div class="blockframe">
         <span>調整</span>
-        <select>
-            <option>影片和音樂</option>
-            <option>影片</option>
-            <option>音樂</option>
+        <select id="select1">
+            <option value="1">影片和音樂</option>
+            <option value="2">影片</option>
+            <option value="3">音樂</option>
         </select>
         <span>的播放速度至</span>
         <input type="number" value="100" style="width: 50px;">
@@ -127,10 +127,10 @@
     </div>
     <div class="blockframe deving">
         <span>調整頁面上的所有</span>
-        <select>
-            <option>影片和音樂</option>
-            <option>影片</option>
-            <option>音樂</option>
+        <select id="select2">
+            <option value="1">影片和音樂</option>
+            <option value="2">影片</option>
+            <option value="3">音樂</option>
         </select>
         <span>:</span>
         <br>
@@ -221,9 +221,17 @@
             setTimeout(cs, 100);
         }
 
-        /*document.getElementsByClassName('exe')[0].onclick = function () {
-            sent(document.getElementById('sentmsg').value)
-        }*/
+        document.getElementsByClassName('exe')[0].onclick = function () {
+           if(document.querySelector('#select1').value == '1'){
+'document.getElementByTagName(\'video\').forEach((e) => {e.playbackRate = (' + querySelector('input[type=number]').value / 100) + '});document.getElementByTagName(\'audio\').forEach((e) => {e.playbackRate = (' + querySelector('input[type=number]').value / 100) + '})'
+    }
+           else if(document.querySelector('#select1').value == '2'){
+           'document.getElementByTagName(\'video\').forEach((e) => {e.playbackRate = (' + querySelector('input[type=number]').value / 100) + '})'
+    }
+           else if(document.querySelector('#select1').value == '3'){
+'document.getElementByTagName(\'audio\').forEach((e) => {e.playbackRate = (' + querySelector('input[type=number]').value / 100) + '})'
+}
+        }
         document.getElementsByClassName('exe')[1].onclick = function () {
             if (document.querySelector('#select3').value == '1') {
                 if ((document.querySelector('.ipturl1').value.includes('https://')) == true || (document.querySelector('.ipturl1').value.includes('http://') == true)) {
