@@ -105,7 +105,8 @@
         input[type="url"].ipturl1 {
             width: calc(100% - 183px);
         }
-        .deving{
+
+        .deving {
             opacity: .5;
             pointer-events: none;
         }
@@ -222,15 +223,15 @@
         }
 
         document.getElementsByClassName('exe')[0].onclick = function () {
-           if(document.querySelector('#select1').value == '1'){
-               sent('document.getElementByTagName(\'video\').forEach((e) => {e.playbackRate = (' + document.querySelector('input[type=number]').value / 100 + '});document.getElementByTagName(\'audio\').forEach((e) => {e.playbackRate = (' + document.querySelector('input[type=number]').value / 100 + '})')
-           }
-           else if(document.querySelector('#select1').value == '2'){
-               sent('document.getElementByTagName(\'video\').forEach((e) => {e.playbackRate = (' + document.querySelector('input[type=number]').value / 100 + '})')
-           }
-           else if(document.querySelector('#select1').value == '3'){
-               sent('document.getElementByTagName(\'audio\').forEach((e) => {e.playbackRate = (' + document.querySelector('input[type=number]').value / 100 + '})')
-           }
+            if (document.querySelector('#select1').value == '1') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+            }
+            else if (document.querySelector('#select1').value == '2') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+            }
+            else if (document.querySelector('#select1').value == '3') {
+                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+            }
         }
         document.getElementsByClassName('exe')[1].onclick = function () {
             if (document.querySelector('#select3').value == '1') {
@@ -300,24 +301,72 @@
         }
 
 
-        document.getElementsByClassName('va')[0].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime -= 5000;})') 
-         }
-        document.getElementsByClassName('va')[1].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime -= 1e5;})') 
-         }
-        document.getElementsByClassName('va')[2].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime += 1e5;})') 
-         }
-        document.getElementsByClassName('va')[3].onclick = function (){
-            sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime += 5000;})')
+        document.getElementsByClassName('va')[0].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime -= 5;});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime -= 5;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime -= 5;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime -= 5;})')
+            }
         }
-        document.getElementsByClassName('va')[4].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.play();})') 
-         }
-         document.getElementsByClassName('va')[4].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.pause();})') 
-         }
+        document.getElementsByClassName('va')[1].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime -= 10;});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime -= 10;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime -= 10;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime -= 10;})')
+            }
+        }
+        document.getElementsByClassName('va')[2].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime += 10;});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime += 10;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime += 10;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime += 10;})')
+            }
+        }
+        document.getElementsByClassName('va')[3].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime += 5;});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime += 5;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime += 5;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime += 5;})')
+            }
+        }
+        document.getElementsByClassName('va')[4].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.play();});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.play();})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.play()};)')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.play();})')
+            }
+        }
+        document.getElementsByClassName('va')[5].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.pause();});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.pause();})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.pause()};)')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.pause();})')
+            }
+        }
         function keyFunction1() {
             if (event.keyCode == 13) {
                 if ((document.querySelector('.ipturl2').value.includes('https://')) == true || (document.querySelector('.ipturl2').value.includes('http://') == true)) {
