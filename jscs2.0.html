@@ -301,19 +301,22 @@
 
 
         document.getElementsByClassName('va')[0].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime -= 5000;}') 
+             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime -= 5000;})') 
          }
         document.getElementsByClassName('va')[1].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime -= 1e5;}') 
+             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime -= 1e5;})') 
          }
         document.getElementsByClassName('va')[2].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime += 1e5;}') 
+             sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime += 1e5;})') 
          }
         document.getElementsByClassName('va')[3].onclick = function (){
-            sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime += 5000;}')
+            sent('document.getElementByTagName(\'video\').forEach((e) => {e.currentTime += 5000;})')
         }
         document.getElementsByClassName('va')[4].onclick = function (){ 
-             sent('document.getElementByTagName(\'video\').forEach((e) => {e.pause();}') 
+             sent('document.getElementByTagName(\'video\').forEach((e) => {e.play();})') 
+         }
+         document.getElementsByClassName('va')[4].onclick = function (){ 
+             sent('document.getElementByTagName(\'video\').forEach((e) => {e.pause();})') 
          }
         function keyFunction1() {
             if (event.keyCode == 13) {
