@@ -222,12 +222,12 @@
         }
 
         document.getElementsByClassName('exe')[0].onclick = function () {
-            if(document.querySelector('#select1').value == '1'){
+           if(document.querySelector('#select1').value == '1'){
                sent('document.getElementByTagName(\'video\').forEach((e) => {e.playbackRate = (' + querySelector('input[type=number]').value / 100) + '});document.getElementByTagName(\'audio\').forEach((e) => {e.playbackRate = (' + querySelector('input[type=number]').value / 100) + '})')
            }
            else if(document.querySelector('#select1').value == '2'){
                sent('document.getElementByTagName(\'video\').forEach((e) => {e.playbackRate = (' + querySelector('input[type=number]').value / 100) + '})')
-    }
+           }
            else if(document.querySelector('#select1').value == '3'){
                sent('document.getElementByTagName(\'audio\').forEach((e) => {e.playbackRate = (' + querySelector('input[type=number]').value / 100) + '})')
            }
