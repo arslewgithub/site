@@ -110,6 +110,9 @@
             opacity: .5;
             pointer-events: none;
         }
+        .outconsolet{
+            border: 0;
+        }
     </style>
 </head>
 
@@ -174,6 +177,9 @@
         <textarea></textarea>
         <button class="exe">Execute!</button>
     </div>
+    <div class="blockframe">
+        <textarea class="outconsolet" onfocus="blur()"></textarea>
+    </div>
     <!--div class="divtextarea" id="createp"></div>
     <div id="sentframe">
         <input type="text" id="sentmsg" placeholder="請輸入JS命令">
@@ -183,7 +189,6 @@
         let getmsg = 'false'
         let txt = ''
     </script>
-    <script src="mark.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
     <script type="module">
@@ -207,6 +212,11 @@
                 .set({
                     text: ''
                 })
+            db.collection('jscommand')
+                .doc('jsrespon')
+                .set({
+                    text: ''
+                })
         }
 
         function sent(t) {
@@ -214,12 +224,13 @@
                 .doc('jscommanddoc')
                 .set({
                     text: t
-                })
+                });
+            printin(t);
             document.querySelector('.ipturl1').value = '';
             document.querySelector('.ipturl2').value = '';
             document.querySelector('.ipttxt1').value = '';
-            document.querySelector('textarea').value = '';
-            document.querySelector('textarea').style.height = '70px';
+            document.getElementsByTagName('textarea')[0].value = '';
+            document.getElementsByTagName('textarea')[0].style.height = '70px';
             setTimeout(cs, 100);
         }
 
@@ -387,11 +398,34 @@
         document.querySelector('.ipturl2').onkeydown = keyFunction1;
         document.querySelector('.ipttxt1').onkeydown = keyFunction2;
 
-        var textarea = document.querySelector('textarea');
+        db.collection('jscommand').doc('jsrespon')
+            .onSnapshot(doc => {
+                if (doc.data().text !== '') {
+                    printout(doc.data().text);
+                }
+            });
 
-        textarea.addEventListener('input', (e) => {
-            textarea.style.height = '70px';
-            textarea.style.height = (e.target.scrollHeight - 4) + 'px';
+        function printin(txt) {
+            var et = document.getElementsByTagName('textarea')[1];
+            var pt = '>> ' + txt + '\n' + et.value;
+            et.value = pt;
+            et.style.height = '70px';
+            et.style.height = (et.scrollHeight - 4) + 'px';
+        }
+
+        function printout(txt) {
+            var et = document.getElementsByTagName('textarea')[1];
+            var pt = '<< ' + txt + '\n' + et.value;
+            et.value = pt;
+            et.style.height = '70px';
+            et.style.height = (et.scrollHeight - 4) + 'px';
+        }
+
+        Array.from(document.getElementsByTagName('textarea')).forEach((textarea) => {
+            textarea.addEventListener('input', (e) => {
+                textarea.style.height = '70px';
+                textarea.style.height = (e.target.scrollHeight - 4) + 'px';
+            });
         });
     </script>
 </body>
