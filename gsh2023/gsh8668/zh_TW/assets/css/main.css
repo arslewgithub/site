@@ -4054,3 +4054,7 @@ div.briefing-text-image.image {
 	padding: 0;
 }
 
+
+.gamebutton {
+	display:none;
+}
