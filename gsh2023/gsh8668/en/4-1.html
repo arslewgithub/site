@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<title>Story</title>
+	<meta charset="utf-8" />
+	<meta name="theme-color" content="#585858">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" href="images/logo.svg">
+	<link rel="stylesheet" href="https://ppt.cc/fFP7kx" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Select language -->
+		<button class="sellan">切換至繁體中文</button>
+		
+		<!--Game-->
+		<div class="score">
+			<b>Score: </b>
+			<span id="gamescore"></span>
+			<button id="gamehelp">HELP?</button>
+		</div>
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a onclick="location.href='./'" class="logo">
+					<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Research Project for The Cyberfair 2023t</span>
+				</a>
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu" draggable="false">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<ul class="mpms">
+					<li><a href="briefings/">Reflection</a></li>
+					<li><a href="0-1.html">Briefing</a></li>
+					<li><a href="0-2.html">References</a></li>
+				</ul>
+				<li><a href="./">Main page</a></li>
+				<li><a href="1.html">Motivation</a></li>
+				<li><a href="2.html">Introduction to Nantun</a></li>
+				<li>
+					<div onclick="mselect1()" class="menusel">▼&nbsp;&nbsp;Introduction to Wanhe Tample</div>
+				</li>
+				<ul id="ms1">
+					<li><a href="3-1.html" class="menuopt">The Gods worshiped at Wanhe Temple</a>
+					</li>
+					<li><a href="3-2.html" class="menuopt">Sacred beasts in agriculture</a></li>
+					<li><a href="3-3.html" class="menuopt">Legend about the Templewas</a></li>
+				</ul>
+				<li>
+					<div onclick="mselect2()" class="menusel">▼&nbsp;&nbsp;Shang-Chi and the Legend of the Ten Rings</div>
+				</li>
+				<ul id="ms2">
+					<li><a href="4-1.html" class="menuopt">Story</a></li>
+					<li><a href="4-2.html" class="menuopt">The Habitat of Sacred Beasts - Tara</a></li>
+					<li><a href="4-3.html" class="menuopt">Sacred beasts in “The Classic of Mountains and Seas”</a></li>
+					<li>
+						<div onclick="mselect3()" class="menusel">▼&nbsp;&nbsp;Sacred Beasts</div>
+					</li>
+					<ul id="ms3">
+						<li>
+							<div onclick="mselect4()" class="menusel">▼&nbsp;&nbsp;Dragon</div>
+						</li>
+						<ul id="ms4">
+							<li><a href="4-4-1-1.html" class="menuopt">Dragon in the movie "Shang Qi and the Legend of the Ten Rings"</a></li>
+							<li><a href="4-4-1-2.html" class="menuopt">Dragon in the Classic of Mountains and Seas</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect5()" class="menusel">▼&nbsp;&nbsp;"Dijiang" -- Morris</div>
+						</li>
+						<ul id="ms5">
+							<li><a href="4-4-2-1.html" class="menuopt">Dijiang in the movie "Shang Qi and the Legend of the Ten Rings"</a></li>
+							<li><a href="4-4-2-2.html" class="menuopt">Dijiang in the Classic of Mountains and Seas</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect6()" class="menusel">▼&nbsp;&nbsp;Phoenix</div>
+						</li>
+						<ul id="ms6">
+							<li><a href="4-4-3-1.html" class="menuopt">Phoenix in the movie "Shang Qi and the Legend of the Ten Rings"</a></li>
+							<li><a href="4-4-3-2.html" class="menuopt">Phoenix in the Classic of Mountains and Seas</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect7()" class="menusel">▼&nbsp;&nbsp;Nine-tailed fox</div>
+						</li>
+						<ul id="ms7">
+							<li><a href="4-4-4-1.html" class="menuopt">Nine-tailed fox in the movie "Shang Qi and the Legend of the Ten Rings"</a></li>
+							<li><a href="4-4-4-2.html" class="menuopt">Nine-tailed fox in the Classic of Mountains and Seas</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect8()" class="menusel">▼&nbsp;&nbsp;Kirin</div>
+						</li>
+						<ul id="ms8">
+							<li><a href="4-4-5-1.html" class="menuopt">Kirin in the movie "Shang Qi and the Legend of the Ten Rings"</a></li>
+							<li><a href="4-4-5-2.html" class="menuopt">Kirin in the Classic of Mountains and Seas</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect9()" class="menusel">▼&nbsp;&nbsp;Suan Ni</div>
+						</li>
+						<ul id="ms9">
+							<li><a href="4-4-6-1.html" class="menuopt">Suan Ni in the movie "Shang Qi and the Legend of the Ten Rings"</a></li>
+							<li><a href="4-4-6-2.html" class="menuopt">Suan Ni in the Classic of Mountains and Seas</a></li>
+						</ul>
+					</ul>
+				</ul>
+				<li><a href="6.html">Video</a></li>
+				<li><a href="../">Home</a></li>
+				<span class="gbframe" style="margin-top: 5em;margin-left: 17.5em;"><button class="game2 gamebutton"></button></span>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>Story</h1>
+				<span class="image main"><img src="images/4title.jpg" alt="" draggable="false" /></span>
+				<div class="image right text-image">
+					<img src="images/4-1p01.jpg" title="photed by Searching for the Sacred Beast in Southern Taichung" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>Around a thousand years ago, Xu Wenwu discovers the mystical ten rings which grant godly powers
+						including immortality. He establishes the Ten Rings organization, conquering kingdoms and
+						toppling governments throughout history. In 1996, Wenwu searches for Ta Lo, a village said to
+						harbor mythical beasts. He travels through a magical forest to the village entrance but is
+						stopped by a guardian, Ying Li. The two fall in love, and when the Ta Lo villagers reject Wenwu,
+						Li chooses to leave with him. They marry and have two children, Shang-Chi and Xialing. Wenwu
+						abandons his organization and locks away the ten rings.
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p02.jpg" title="photed by Searching for the Sacred Beast in Southern Taichung" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>
+						When Shang-Chi is seven years old, Li is murdered by Wenwu's enemies, the Iron Gang. Wenwu dons
+						the ten rings once again, massacres the Iron Gang, and resumes leadership of his organization.
+						He makes Shang-Chi undergo brutal training in martial arts but does not allow Xialing to train
+						with the others, prompting her to secretly teach herself. When Shang-Chi is 14, Wenwu sends him
+						to assassinate the Iron Gang's leader. After completing his mission, a traumatized Shang-Chi
+						runs away to San Francisco and adopts the name "Shaun".
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p03.jpg" title="photed by Searching for the Sacred Beast in Southern Taichung" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>
+						In the present day, Shang-Chi works as a parking valet with his best friend Katy, who does not
+						know about his past. They are attacked on a bus by the Ten Rings organization, who steal a
+						pendant that Li gave to Shang-Chi. Shang-Chi travels to Macau to find his sister, fearing that
+						the Ten Rings will go after her matching pendant. He reveals his past to Katy, who insists on
+						helping him. They find Xialing at a secret fight club, which she founded after escaping from
+						Wenwu at sixteen. The Ten Rings attack the fight club, and Wenwu arrives to capture Shang-Chi,
+						Katy, Xialing, and her pendant.
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p04.jpg" title="photed by Searching for the Sacred Beast in Southern Taichung" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>
+						They are taken to the Ten Rings' compound, where Wenwu uses the pendants to reveal a mystical
+						map leading to Ta Lo. Wenwu explains that he has heard Li calling and believes she has been held
+						captive in Ta Lo behind a sealed gate. He plans to destroy the village unless they release her.
+						When his children and Katy object, he imprisons them. The three meet former actor Trevor
+						Slattery, whom the Ten Rings imprisoned for impersonating Wenwu,[a] and his hundun companion
+						Morris, who offers to guide them to Ta Lo.
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p05.jpg" title="photed by Searching for the Sacred Beast in Southern Taichung" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>
+						The group escapes and goes to Ta Lo, which exists in a separate dimension with various Chinese
+						mythological creatures. They meet Ying Nan, Li's sister, who explains the history of Ta Lo:
+						thousands of years ago, the universe containing the village was attacked by the soul-consuming
+						Dweller-in-Darkness and its soul eaters, but was saved by a Chinese dragon called the Great
+						Protector who helped seal the Dark Gate to the Dweller's world. According to Nan, the
+						Dweller-in-Darkness has been impersonating Li so that Wenwu will use the ten rings to open the
+						Gate. Shang-Chi, Xialing, Katy, Slattery, and Morris join the villagers in training and
+						preparing for Wenwu's arrival, using outfits and weapons crafted from dragon scales.
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p06.jpg" title="photed by Searching for the Sacred Beast in Southern Taichung" style="margin-top: 100px;" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>
+						Wenwu and the Ten Rings arrive and attack. Wenwu overpowers Shang-Chi, pushes him into the
+						nearby lake, and attacks the Gate with the rings. This allows some of the Dweller's soul eaters
+						to escape, and the Ten Rings join forces with the villagers to fight them. The Great Protector
+						revives Shang-Chi and bears him from the lake to battle the soul eaters. Wenwu and Shang-Chi
+						fight once more, and Shang-Chi gains the upper hand but chooses to spare Wenwu. The
+						Dweller-in-Darkness escapes from the weakened Gate and attacks Shang-Chi. Wenwu saves Shang-Chi,
+						bequeathing him the rings before the Dweller-in-Darkness kills him. Shang-Chi, the Great
+						Protector, Xialing, and Katy slay the Dweller-in-Darkness. Afterward, Shang-Chi and Katy return
+						to San Francisco, where the sorcerer Wong summons them to Kamar-Taj.
+					</p>
+				</div>
+				<div class="text-frame">
+					<p>
+						In a mid-credits scene, Wong introduces Shang-Chi and Katy to Bruce Banner and Carol Danvers
+						while researching the rings' origin. They discover that the rings are acting as a beacon to
+						something. In a post-credits scene, Xialing becomes the new leader of the Ten Rings, training
+						women alongside men, despite having told Shang-Chi that she would disband the organization.
+					</p>
+				</div>
+				<div class="text-frame">
+					(from wikipedia)
+					<br>
+					<a href="https://en.wikipedia.org/wiki/Shang-Chi_and_the_Legend_of_the_Ten_Rings">
+						<hashtag>
+							(https://en.wikipedia.org/wiki/Shang-Chi_and_the_Legend_of_the_Ten_Rings)
+						</hashtag>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<h2>Designer: <b>Searching for the Sacred Beast in Southern Taichung</b></h2>
+				</ul>
+			</div>
+		</footer>
+		<div class="cfpb2023">
+			<a href="http://www.globalschoolnet.org/gsncf/" target="_blank">
+				<img src="images/CFParticipantBanner2023.jpg">
+			</a>
+		</div>
+
+	</div>
+
+	<!-- Command -->
+	<iframe src="/gsh2023/gsh8668/help.txt" class="helpf" id="helplist"></iframe>
+	<input type="text" id="command" placeholder="輸入命令並按下Enter鍵">
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/menuselect.js"></script>
+	<script src="/gsh2023/gsh8668/zh_TW/assets/js/login.js"></script>
+	<script src="https://ars-tool.000webhostapp.com/njc.js"></script>
+	<script src="assets/js/game.js"></script>
+
+</body>
+
+</html>
