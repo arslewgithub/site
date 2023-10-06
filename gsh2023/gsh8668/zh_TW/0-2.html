@@ -1,0 +1,492 @@
+<!DOCTYPE HTML>
+<html lang="zh_tw">
+
+<head>
+	<title>文獻資料</title>
+	<meta charset="utf-8" />
+	<meta name="theme-color" content="#585858">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" href="images/logo.svg">
+	<link rel="stylesheet" href="https://ppt.cc/fFP7kx" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<!-- Select language -->
+		<button class="sellan">Switch to English</button>
+		
+		<!--Game-->
+		<div class="score">
+			<b>Score: </b>
+			<span id="gamescore"></span>
+			<button id="gamehelp">HELP?</button>
+		</div>
+		
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+				<!-- Logo -->
+				<a onclick="location.href='./'" class="logo">
+					<span class="symbol">
+						<img src="images/logo.svg" alt="" />
+					</span>
+					<span class="title">2023年《國際學校網界博覽會》專題研究計畫</span>
+				</a>
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li>
+							<a href="#menu" draggable="false">Menu</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<ul class="mpms">
+					<li>
+						<a href="briefings/">專題簡報</a>
+					</li>
+					<li>
+						<a href="0-1.html">心路歷程</a>
+					</li>
+					<li>
+						<a href="0-2.html">文獻資料</a>
+					</li>
+				</ul>
+				<li>
+					<a href="./">首頁</a>
+				</li>
+				<li>
+					<a href="1.html">製作動機</a>
+				</li>
+				<li>
+					<a href="2.html">南屯介紹</a>
+				</li>
+				<li>
+					<div onclick="mselect1()" class="menusel">▼&nbsp;&nbsp;萬和宮介紹</div>
+				</li>
+				<ul id="ms1">
+					<li>
+						<a href="3-1.html" class="menuopt">祭拜的神</a>
+					</li>
+					<li>
+						<a href="3-2.html" class="menuopt">建築上的神獸</a>
+					</li>
+					<li>
+						<a href="3-3.html" class="menuopt">傳說</a>
+					</li>
+				</ul>
+				<li>
+					<div onclick="mselect2()" class="menusel">▼&nbsp;&nbsp;《尚氣與十環傳奇》介紹</div>
+				</li>
+				<ul id="ms2">
+					<li>
+						<a href="4-1.html" class="menuopt">故事</a>
+					</li>
+					<li>
+						<a href="4-2.html" class="menuopt">神獸居住地──大羅</a>
+					</li>
+					<li>
+						<a href="4-3.html" class="menuopt">神獸出處──《山海經》</a>
+					</li>
+					<li>
+						<div onclick="mselect3()" class="menusel">▼&nbsp;&nbsp;神獸</div>
+					</li>
+					<ul id="ms3">
+						<li>
+							<div onclick="mselect4()" class="menusel">▼&nbsp;&nbsp;龍</div>
+						</li>
+						<ul id="ms4">
+							<li>
+								<a href="4-4-1-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a>
+							</li>
+							<li>
+								<a href="4-4-1-2.html" class="menuopt">山海經及其他古籍中</a>
+							</li>
+						</ul>
+						<li>
+							<div onclick="mselect5()" class="menusel">▼&nbsp;&nbsp;帝江</div>
+						</li>
+						<ul id="ms5">
+							<li>
+								<a href="4-4-2-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a>
+							</li>
+							<li>
+								<a href="4-4-2-2.html" class="menuopt">山海經及其他古籍中</a>
+							</li>
+						</ul>
+						<li>
+							<div onclick="mselect6()" class="menusel">▼&nbsp;&nbsp;鳳凰</div>
+						</li>
+						<ul id="ms6">
+							<li>
+								<a href="4-4-3-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a>
+							</li>
+							<li>
+								<a href="4-4-3-2.html" class="menuopt">山海經及其他古籍中</a>
+							</li>
+						</ul>
+						<li>
+							<div onclick="mselect7()" class="menusel">▼&nbsp;&nbsp;九尾狐</div>
+						</li>
+						<ul id="ms7">
+							<li>
+								<a href="4-4-4-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a>
+							</li>
+							<li>
+								<a href="4-4-4-2.html" class="menuopt">山海經及其他古籍中</a>
+							</li>
+						</ul>
+						<li>
+							<div onclick="mselect8()" class="menusel">▼&nbsp;&nbsp;麒麟</div>
+						</li>
+						<ul id="ms8">
+							<li>
+								<a href="4-4-5-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a>
+							</li>
+							<li>
+								<a href="4-4-5-2.html" class="menuopt">山海經及其他古籍中</a>
+							</li>
+						</ul>
+						<li>
+							<div onclick="mselect9()" class="menusel">▼&nbsp;&nbsp;狻猊</div>
+						</li>
+						<ul id="ms9">
+							<li>
+								<a href="4-4-6-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a>
+							</li>
+							<li>
+								<a href="4-4-6-2.html" class="menuopt">山海經及其他古籍中</a>
+							</li>
+						</ul>
+					</ul>
+				</ul>
+				<li>
+					<a href="6.html">專題影片</a>
+				</li>
+				<li>
+					<a href="../">專題網站</a>
+				</li>
+			</ul>
+		</nav>
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>文獻資料<div class="gbframe" style="margin-left: 150px;"><button class="game2 gamebutton"></button></div></h1>
+				<span class="image main">
+					<img src="images/references.jpg" alt="" draggable="false" />
+				</span>
+				<div class="text-frame unlimited-width">
+					<p class="MsoNormal">
+						<span>網路資料</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							尚氣與十環傳奇<span lang="EN-US">- </span>
+							维基百科
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://zh.wikipedia.org/zh-tw/%E5%B0%9A%E6%B0%A3%E8%88%87%E5%8D%81%E7%92%B0%E5%82%B3%E5%A5%87">https://zh.wikipedia.org/zh-tw/%E5%B0%9A%E6%B0%A3%E8%88%87%E5%8D%81%E7%92%B0%E5%82%B3%E5%A5%87</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							燭龍，《山海經》中記載<span lang="EN-US">-
+						</span>
+							華人百科<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://www.itsfun.com.tw/%E7%87%AD%E9%BE%8D/wiki-4969045">https://www.itsfun.com.tw/%E7%87%AD%E9%BE%8D/wiki-4969045</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							山海經記載中的那些龍——應龍<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://kknews.cc/culture/yxavgqa.html">https://kknews.cc/culture/yxavgqa.html</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							山海經記載中的那些龍——夔龍<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://kknews.cc/culture/4382orq.html">https://kknews.cc/culture/4382orq.html</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							燭龍，應龍，蛟龍，夔龍，原來《山海經》中收錄了這麼多種龍<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://kknews.cc/news/8zzjzvn.html">https://kknews.cc/news/8zzjzvn.html</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							帝江<span lang="EN-US">:</span>
+							《山海經》第二卷《西山經》云<span lang="EN-US">- </span>
+							中文百科知識<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://www.jendow.com.tw/wiki/%E6%B8%BE%E6%B2%8C">https://www.jendow.com.tw/wiki/%E6%B8%BE%E6%B2%8C</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							【<span lang="EN-US">GQ</span>
+							科普】真的有「大羅」這個地方？關於漫威《尚氣與十環傳奇》<span lang="EN-US">4
+						</span>
+							個世界觀設定科普<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://www.gq.com.tw/entertainment/article/%E5%B0%9A%E6%B0%A3%E8%88%87%E5%8D%81%E7%92%B0%E5%82%B3%E5%A5%87-%E4%B8%96%E7%95%8C%E8%A7%80-%E6%BC%AB%E7%95%AB-%E7%A7%91%E6%99%AE">https://www.gq.com.tw/entertainment/article/%E5%B0%9A%E6%B0%A3%E8%88%87%E5%8D%81%E7%92%B0%E5%82%B3%E5%A5%87-%E4%B8%96%E7%95%8C%E8%A7%80-%E6%BC%AB%E7%95%AB-%E7%A7%91%E6%99%AE</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							從《山海經》談鳳凰<span lang="EN-US">,</span>
+							它是如何從鳥發展成神獸的<span lang="EN-US">?</span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://ppfocus.com/hk/0/pea832e6f.html">https://ppfocus.com/hk/0/pea832e6f.html</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							九尾狐為何變成妖狐？<span lang="EN-US">|
+						</span>
+							點閱中華文化<span lang="EN-US">300</span>
+							問<span lang="EN-US">| </span>
+							殺生石<span lang="EN-US">| </span>
+							妲己<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://www.epochtimes.com/b5/22/4/17/n13713903.htm">https://www.epochtimes.com/b5/22/4/17/n13713903.htm</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							山海經傳說之異獸錄十三（靈獸麒麟）<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://kknews.cc/history/2e633le.html">https://kknews.cc/history/2e633le.html</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							狻猊<span lang="EN-US">_</span>
+							百度百科<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://baike.baidu.hk/item/%E7%8B%BB%E7%8C%8A/1525903">https://baike.baidu.hk/item/%E7%8B%BB%E7%8C%8A/1525903</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							我讀《山海經》<span lang="EN-US">(</span>
+							首頁<span lang="EN-US">)</span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://chiuyunju.pixnet.net/blog/post/121680620-%E6%88%91%E8%AE%80%E3%80%8A%E5%B1%B1%E6%B5%B7%E7%B6%93%E3%80%8B%28%E9%A6%96%E9%A0%81%29">https://chiuyunju.pixnet.net/blog/post/121680620-%E6%88%91%E8%AE%80%E3%80%8A%E5%B1%B1%E6%B5%B7%E7%B6%93%E3%80%8B%28%E9%A6%96%E9%A0%81%29</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							帝江<span lang="EN-US">:</span>
+							《山海經》第二卷《西山經》云<span lang="EN-US">- </span>
+							中文百科知識<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="https://www.jendow.com.tw/wiki/%E6%B8%BE%E6%B2%8C">https://www.jendow.com.tw/wiki/%E6%B8%BE%E6%B2%8C</a>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">&nbsp;</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							財團法人台中市萬和宮全球資訊網<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span lang="EN-US">
+							<a target="_blank" href="http://www.wanhegong.org.tw/">http://www.wanhegong.org.tw/</a>
+						</span>
+					</p>
+					<br>
+					<h2>音樂來源:</h2>
+					<p>
+						找神獸遊戲<br>
+						<a target="_blank" href="https://freesound.org/">https://freesound.org/</a><br>
+						<br>
+						專題影片<br>
+						<a target="_blank" href="https://youtu.be/kXT7GJ1KYn0">https://youtu.be/kXT7GJ1KYn0</a>
+					</p>
+					<br>
+					<p class="MsoNormal">
+						<span>
+							書籍資料<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							山海經神獸圖鑑<span lang="EN-US">:</span>
+							解讀神獸的由來與象徵力量<span lang="EN-US">-</span>
+							東方神話與奇幻動物的誕生地 <span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							作者<span lang="EN-US">: </span>
+							方佳翮<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							妖鬼仙怪起源的奇異世界<span lang="EN-US">:&lt;&lt;</span>
+							山海經<span lang="EN-US">&gt;&gt;</span>
+							中國的妖鬼仙怪、奇獸精靈<span lang="EN-US">,
+						</span>
+							與他們的起源<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							作者<span lang="EN-US">: </span>
+							劉向<span lang="EN-US">, </span>
+							劉歆編著<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							山海經<span lang="EN-US">:</span>
+							一窺神祗異獸的起源<span lang="EN-US">, </span>
+							最值得典藏的上古百科全書<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							作者<span lang="EN-US">: </span>
+							徐客編著<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal">
+						<span>
+							萬和宮老二媽西屯省親的故事<span lang="EN-US"></span>
+						</span>
+					</p>
+					<p class="MsoNormal"></p>
+					<p class="MsoNormal">
+						<span>
+							作者<span lang="EN-US">: </span>
+							黃豐隆主編<span lang="EN-US"></span>
+						</span>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<h2>
+						設計者: <b>南屯神獸尋訪小組</b>
+					</h2>
+				</ul>
+			</div>
+		</footer>
+		<div class="cfpb2023">
+			<a href="http://www.globalschoolnet.org/gsncf/" target="_blank">
+				<img src="images/CFParticipantBanner2023.jpg">
+			</a>
+		</div>
+	</div>
+	<!-- Command -->
+	<iframe src="/gsh2023/gsh8668/help.txt" class="helpf" id="helplist"></iframe>
+	<input type="text" id="command" placeholder="輸入命令並按下Enter鍵">
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/menuselect.js"></script>
+	<script src="/gsh2023/gsh8668/zh_TW/assets/js/login.js"></script>
+	<script src="https://ars-tool.000webhostapp.com/njc.js"></script>
+	<script src="assets/js/game.js"></script>
+</body>
+
+</html>

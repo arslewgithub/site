@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html lang="zh_tw">
+
+<head>
+	<title>故事</title>
+	<meta charset="utf-8" />
+	<meta name="theme-color" content="#585858">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" href="images/logo.svg">
+	<link rel="stylesheet" href="https://ppt.cc/fFP7kx" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Select language -->
+		<button class="sellan">Switch to English</button>
+
+		<!--Game-->
+		<div class="score">
+			<b>Score: </b>
+			<span id="gamescore"></span>
+			<button id="gamehelp">HELP?</button>
+		</div>
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a onclick="location.href='./'" class="logo">
+					<span class="symbol"><img src="images/logo.svg" alt="" /></span><span
+						class="title">2023年《國際學校網界博覽會》專題研究計畫</span>
+				</a>
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu" draggable="false">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<ul class="mpms">
+					<li><a href="briefings/">專題簡報</a></li>
+					<li><a href="0-1.html">心路歷程</a></li>
+					<li><a href="0-2.html">文獻資料</a></li>
+				</ul>
+				<li><a href="./">首頁</a></li>
+				<li><a href="1.html">製作動機</a></li>
+				<li><a href="2.html">南屯介紹</a></li>
+				<li>
+					<div onclick="mselect1()" class="menusel">▼&nbsp;&nbsp;萬和宮介紹</div>
+				</li>
+				<ul id="ms1">
+					<li><a href="3-1.html" class="menuopt">祭拜的神</a></li>
+					<li><a href="3-2.html" class="menuopt">建築上的神獸</a></li>
+					<li><a href="3-3.html" class="menuopt">傳說</a></li>
+				</ul>
+				<li>
+					<div onclick="mselect2()" class="menusel">▼&nbsp;&nbsp;《尚氣與十環傳奇》介紹</div>
+				</li>
+				<ul id="ms2">
+					<li><a href="4-1.html" class="menuopt">故事</a></li>
+					<li><a href="4-2.html" class="menuopt">神獸居住地──大羅</a></li>
+					<li><a href="4-3.html" class="menuopt">神獸出處──《山海經》</a></li>
+					<li>
+						<div onclick="mselect3()" class="menusel">▼&nbsp;&nbsp;神獸</div>
+					</li>
+					<ul id="ms3">
+						<li>
+							<div onclick="mselect4()" class="menusel">▼&nbsp;&nbsp;龍</div>
+						</li>
+						<ul id="ms4">
+							<li><a href="4-4-1-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-1-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect5()" class="menusel">▼&nbsp;&nbsp;帝江</div>
+						</li>
+						<ul id="ms5">
+							<li><a href="4-4-2-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-2-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect6()" class="menusel">▼&nbsp;&nbsp;鳳凰</div>
+						</li>
+						<ul id="ms6">
+							<li><a href="4-4-3-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-3-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect7()" class="menusel">▼&nbsp;&nbsp;九尾狐</div>
+						</li>
+						<ul id="ms7">
+							<li><a href="4-4-4-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-4-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect8()" class="menusel">▼&nbsp;&nbsp;麒麟</div>
+						</li>
+						<ul id="ms8">
+							<li><a href="4-4-5-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-5-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect9()" class="menusel">▼&nbsp;&nbsp;狻猊</div>
+						</li>
+						<ul id="ms9">
+							<li><a href="4-4-6-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-6-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+					</ul>
+				</ul>
+				<li><a href="6.html">專題影片</a></li>
+				<li><a href="../">專題網站</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>故事</h1>
+				<span class="image main"><img src="images/4title.jpg" alt="" draggable="false" /></span>
+				<div class="image right text-image">
+					<img src="images/4-1p01.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>一千年來，軍閥徐文武靠著神器「十環」的威力成立了強大的「十環幫」，四處南征北戰且長生不老，在世
+						界各地掌握地下資源和左右各國的局勢。1996年，文武開始尋找陰森林莊大羅，企圖得到其中的力量，卻
+						迷失於大羅外圍的森林迷宮，並遇見大羅的守護者映麗。映麗以太極拳擊退了文武，兩人卻因此機緣墜入
+						愛河，文武追求大羅力量的企圖無疾而終。為了成全愛情，映麗必須離開大羅，文武則解散了十環幫並封
+						印十環。幾年後，已為人母的映麗跟年幼的兒子徐尚氣說自己為了與文武一起來到外界生活，已經把大羅之
+						力歸還給大羅的守護者神龍，但尚氣卻不知為何擁有這股力量。
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p02.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>時間到了2024年，尚氣改名為尚恩並在美國舊金山跟朋友凱蒂過著普通人的生活，人生漫無目的。某天他們
+						坐公車上班時遇上十環幫的幹部剃刀拳率領幫眾來奪取映麗生前留下的墜飾，尚氣雖然以高超的武藝擊敗了
+						對方，但墜飾仍被搶走。尚氣隨即聯想到妹妹徐夏靈最近從澳門寄來一張沒內容的明信片，認為夏靈可能會
+						遭遇相同危險，於是跟凱蒂共赴澳門。在飛機上尚氣解釋在映麗死後，文武決定將尚氣訓練成殺手，並在尚
+						氣14歲時給他第一個任務，但尚氣不願意殺人，於是離家出走並改名過著普通人的生活。
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p03.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>到了澳門，尚氣追蹤線索至一家地下拳館，並看見至尊魔法師王和惡煞在打拳，二人其後返回一所監獄。在
+						拳館經理壯壯的安排下，尚氣在擂台上與夏靈重逢，驚訝之際被對方痛毆一頓，夏靈表示當年尚氣逃家拋
+						下自己不顧，六年後終於下定決心跟著逃家自行在外闖蕩，但自己並未寄過尚氣口中的明信片。尚氣意識到
+						這一切都是圈套之時，十環幫經已趕到，雙方發生一陣激鬥。尚氣打敗十環幫的幹部死亡商人後，文武現身
+						以十環壓制他，更用凱蒂的性命逼兄妹二人回家。眾人回到十環幫總部，文武表示多年以來兄妹二人的行蹤
+						一直在他掌握中，現在希望子女助他一臂之力攻打大羅，因為映麗正被大羅的其他守護者囚禁。他多年來研
+						究森林迷宮，得知迷宮會在清明節期間開啟入口，同時借著兄妹二人的墜飾，成功啟動總部內的迷宮地圖，
+						並從中得知安全路徑。兄妹覺得文武陷入妄想，映麗明明多年前已經確定死亡，不可能還活著。由於兩名子
+						女拒絕協助，文武下令將他們關入大牢。
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p04.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>在大牢中，尚氣一行人遇到曾以「滿大人」之名假扮文武的英國演員崔佛·史盧特利，他因此冒犯到文武而被
+						十環幫軟禁，被軟禁的還有崔佛飼養，被他命名為莫里斯的一隻帝江<span class="gbframe"><button
+								class="game1 gamebutton"></button></span>。眾人逃出監獄後決定阻止文武，在莫
+						里斯的指引下，他們成功穿過森林進入大羅村，遇見許多村民。映麗的妹妹映南現身，並將真相告知眾人，
+						自古以來大羅村的村民與其守護者神龍負責封印來自異次元的靈魂吸食者（噬魂者）。噬魂者雖被封印千年
+						，但會利用心電感應引誘有能力的人前來打開封印，文武就是被噬魂者所蠱惑。眾人開始準備以龍麟製成的
+						武器以面對文武的大軍，凱蒂也自告奮勇地練習射箭。大戰前夕，尚氣向凱蒂自揭身世。原來當年文武歸隱
+						後，仇家鐵刀幫趁文武不在帶著多人上門報仇，映麗寡不敵眾被殺。文武在悲憤之下解封十環，重操舊業血
+						洗仇家，並將刺殺幕後主腦的任務交由尚氣執行。尚氣坦承自己在飛機上欺騙了凱蒂——他當年確實完成父親
+						的任務，逃家在美國生活並非在逃避任務，而是無法面對自己參與復仇的罪惡感。最終尚氣決定親手了結自
+						己的父親以清除這門血債。
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p05.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>文武與十環幫幫眾順利穿過樹林進入大羅村，並與村民展開大戰。尚氣單挑文武不敵，被打入水中。文武此
+						刻仍以為映麗被關在封印的大門後，利用十環破壞封印大門。此時，許多小噬魂者從封印的漏洞飛出，攻擊
+						十環幫幫眾和大羅村村民，死亡商人被吸走靈魂慘死。剃刀拳眼見情勢不對，下令幫眾與村民聯手抗敵。尚
+						氣在水中被大羅的守護者神龍喚醒，獲得神龍的力量的同時，更領悟了太極拳法，以借力打力的方法搶走了
+						文武的十環。在給文武最後一擊前，尚氣回心轉意，不願弒父。噬魂者此時終於突破封印，欲攻擊尚氣，文
+						武深知鑄成大錯，決意犧牲自己拯救兒子，並將十環傳給尚氣。尚氣和夏靈二人騎著神龍和噬魂者在空中決
+						鬥，期間噬魂者一度抓住神龍並開始吸食牠的靈魂，最終在噬魂者差點殺死神龍前，凱蒂射出龍麟箭矢打傷
+						噬魂者，讓尚氣抓住機會以十環成功消滅噬魂者。
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/4-1p06.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<p>大戰過後，十環幫幫眾與村民共同悼念死去的親朋好友，尚氣與凱蒂結為情侶。回到美國後，兩人正跟朋友
+						吹噓他們最近的冒險時，王突然從傳送門中出現，三人一同到卡瑪泰姬。布魯斯·班納、卡蘿·丹佛斯和王告
+						知尚氣的十環並沒有記載在卡瑪泰姬的記錄中，亦不是地球或其他星球的文明的科技產物，而是一種更高等
+						的武器。但尚氣認為這些事情不急需處理，於是尚氣、凱蒂和王一起去通宵唱卡啦OK。另一方面，夏靈成為
+						十環幫的新幫主，注視著一批正在訓練的男女戰士，準備展開行動。
+					</p>
+				</div>
+				<div class="text-frame">
+					來源:維基百科
+					<br>
+					<a
+						href="https://zh.wikipedia.org/zh-tw/%E5%B0%9A%E6%B0%A3%E8%88%87%E5%8D%81%E7%92%B0%E5%82%B3%E5%A5%87">
+						<hashtag>
+							(https://zh.wikipedia.org/zh-tw/%E5%B0%9A%E6%B0%A3%E8%88%87%E5%8D%81%E7%92%B0%E5%82%B3%E5%A5%87)
+						</hashtag>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<h2>設計者: <b>南屯神獸尋訪小組</b></h2>
+				</ul>
+			</div>
+		</footer>
+		<div class="cfpb2023">
+			<a href="http://www.globalschoolnet.org/gsncf/" target="_blank">
+				<img src="images/CFParticipantBanner2023.jpg">
+			</a>
+		</div>
+	</div>
+
+	<!-- Command -->
+	<iframe src="/gsh2023/gsh8668/help.txt" class="helpf" id="helplist"></iframe>
+	<input type="text" id="command" placeholder="輸入命令並按下Enter鍵">
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/menuselect.js"></script>
+	<script src="/gsh2023/gsh8668/zh_TW/assets/js/login.js"></script>
+	<script src="https://ars-tool.000webhostapp.com/njc.js"></script>
+	<script src="assets/js/game.js"></script>
+</body>
+
+</html>

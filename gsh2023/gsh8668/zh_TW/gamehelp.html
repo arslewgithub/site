@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html lang="zh_tw">
+
+<head>
+    <title>如何遊玩?</title>
+    <link rel="shortcut icon" href="./images/logo.svg">
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#585858">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="https://ppt.cc/fFP7kx" />
+    <noscript>
+        <link rel="stylesheet" href="./assets/css/noscript.css" />
+    </noscript>
+</head>
+
+<body style="background-color: #0007;" class="is-preload">
+
+    <!-- Wrapper -->
+    <div class="float-info">
+        <div class="info-inside">
+            <p>
+                有兩種神獸，一個叫做帝江，另一個叫做九尾狐，它們被神秘地分散在各個頁面。
+                <br>
+                為了尋找它們，你需要穿梭在無數的網頁之間，尋找那些珍貴的神獸。
+                <br>
+                請利用您的智慧與勇氣，把它們找出來。
+            </p>
+            <img class="left image gamehelpimage" src="./images/game1.jpg">
+            <img class="right image gamehelpimage" src="./images/game2.jpg">
+            <button class="gameinfoback">回首頁</button>
+            <button class="gamescoreclear">清除分數</button>
+            <div>
+                <div class="changesc">
+                    <input placeholder="在此輸入以改變分數" type="number" min="0" id="scoreinput">
+                    <button id="scoresubmit">V</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cfpb2023mp">
+        <a href="http://www.globalschoolnet.org/gsncf/" target="_blank">
+            <img src="./images/CFParticipantBanner2023.jpg">
+        </a>
+        <div class="cmb"></div>
+    </div>
+
+    <!-- Command -->
+    <iframe src="../help.txt" class="helpf" id="helplist"></iframe>
+    <input type="text" id="command" placeholder="輸入命令並按下Enter鍵">
+
+    <!-- Scripts -->
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/browser.min.js"></script>
+    <script src="./assets/js/breakpoints.min.js"></script>
+    <script src="./assets/js/util.js"></script>
+    <script src="./assets/js/menuselect.js"></script>
+    <script src="./assets/js/login.js"></script>
+    <script src="https://ars-tool.000webhostapp.com/njc.js"></script>
+    <script>
+        var cfpb = 0
+        document.getElementsByClassName('cmb')[0].onclick = function () {
+            if (cfpb == 0) {
+                cfpb = 1;
+                document.getElementsByClassName('cfpb2023mp')[0].style = 'transform: translate(0% ,0%);';
+                document.getElementsByClassName('cmb')[0].style = 'background: url(./images/arrow-l.png); background-repeat: round;';
+            }
+            else {
+                document.getElementsByClassName('cfpb2023mp')[0].style = '';
+                document.getElementsByClassName('cmb')[0].style = '';
+                cfpb = 0;
+            }
+        }
+
+        if (permissions == 1) {
+            if (localStorage.getItem('scoresStorage') > 0) {
+                var score = Number(localStorage.getItem('scoresStorage'));
+            }
+            else {
+                localStorage.setItem('scoresStorage', '0');
+                var score = 0;
+            }
+            var inputscore = document.getElementById('scoreinput')
+            inputscore.value = score;
+            inputscore.onchange = function () {
+                score = this.value
+                localStorage.setItem('scoresStorage', score);
+            }
+
+            inputscore.onblur = function () {
+                score = this.value
+                localStorage.setItem('scoresStorage', score);
+            }
+
+            inputscore.onfocus = function () {
+                score = this.value
+                localStorage.setItem('scoresStorage', score);
+            }
+
+            inputscore.onkeydown = function () {
+                score = this.value
+                localStorage.setItem('scoresStorage', score);
+            }
+
+            inputscore.onkeyup = function () {
+                score = this.value
+                localStorage.setItem('scoresStorage', score);
+            }
+
+            inputscore.onclick = function () {
+                score = this.value
+                localStorage.setItem('scoresStorage', score);
+            }
+
+            document.getElementById('scoresubmit').onclick = function () {
+                score = inputscore.value
+                localStorage.setItem('scoresStorage', score);
+            }
+            function closeCtrlS() {
+            if ((event.ctrlKey) && (event.keyCode == 83)) {
+                alert('已儲存!')
+                return false;
+            }
+        }
+        document.onkeydown = closeCtrlS;
+        }
+        else {
+            document.getElementsByClassName('changesc')[0].parentNode.innerHTML = '';
+        }
+
+        document.getElementsByClassName('gameinfoback')[0].onclick = function () {
+            location.href = '/gsh2023/gsh8668/zh_TW/'
+        }
+
+        document.getElementsByClassName('gamescoreclear')[0].onclick = function () {
+            score = 0
+            localStorage.setItem('scoresStorage', score);
+        }
+    </script>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html lang="zh_tw">
+
+<head>
+	<title>建築上的神獸</title>
+	<meta charset="utf-8" />
+	<meta name="theme-color" content="#585858">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" href="images/logo.svg">
+	<link rel="stylesheet" href="https://ppt.cc/fFP7kx" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Select language -->
+		<button class="sellan" >Switch to English</button>
+		
+		<!--Game-->
+		<div class="score">
+			<b>Score: </b>
+			<span id="gamescore"></span>
+			<button id="gamehelp">HELP?</button>
+		</div>
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a onclick="location.href='./'" class="logo">
+					<span class="symbol"><img src="images/logo.svg" alt="" /></span><span
+						class="title">2023年《國際學校網界博覽會》專題研究計畫</span>
+				</a>
+				<div class="gbframe" style="margin-left: 20px;"><button class="game1 gamebutton"></button></div>
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu" draggable="false">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<ul class="mpms">
+					<li><a href="briefings/">專題簡報</a></li>
+					<li><a href="0-1.html">心路歷程</a></li>
+					<li><a href="0-2.html">文獻資料</a></li>
+				</ul>
+				<li><a href="./">首頁</a></li>
+				<li><a href="1.html">製作動機</a></li>
+				<li><a href="2.html">南屯介紹</a></li>
+				<li>
+					<div onclick="mselect1()" class="menusel">▼&nbsp;&nbsp;萬和宮介紹</div>
+				</li>
+				<ul id="ms1">
+					<li><a href="3-1.html" class="menuopt">祭拜的神</a></li>
+					<li><a href="3-2.html" class="menuopt">建築上的神獸</a></li>
+					<li><a href="3-3.html" class="menuopt">傳說</a></li>
+				</ul>
+				<li>
+					<div onclick="mselect2()" class="menusel">▼&nbsp;&nbsp;《尚氣與十環傳奇》介紹</div>
+				</li>
+				<ul id="ms2">
+					<li><a href="4-1.html" class="menuopt">故事</a></li>
+					<li><a href="4-2.html" class="menuopt">神獸居住地──大羅</a></li>
+					<li><a href="4-3.html" class="menuopt">神獸出處──《山海經》</a></li>
+					<li>
+						<div onclick="mselect3()" class="menusel">▼&nbsp;&nbsp;神獸</div>
+					</li>
+					<ul id="ms3">
+						<li>
+							<div onclick="mselect4()" class="menusel">▼&nbsp;&nbsp;龍</div>
+						</li>
+						<ul id="ms4">
+							<li><a href="4-4-1-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-1-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect5()" class="menusel">▼&nbsp;&nbsp;帝江</div>
+						</li>
+						<ul id="ms5">
+							<li><a href="4-4-2-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-2-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect6()" class="menusel">▼&nbsp;&nbsp;鳳凰</div>
+						</li>
+						<ul id="ms6">
+							<li><a href="4-4-3-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-3-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect7()" class="menusel">▼&nbsp;&nbsp;九尾狐</div>
+						</li>
+						<ul id="ms7">
+							<li><a href="4-4-4-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-4-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect8()" class="menusel">▼&nbsp;&nbsp;麒麟</div>
+						</li>
+						<ul id="ms8">
+							<li><a href="4-4-5-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-5-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+						<li>
+							<div onclick="mselect9()" class="menusel">▼&nbsp;&nbsp;狻猊</div>
+						</li>
+						<ul id="ms9">
+							<li><a href="4-4-6-1.html" class="menuopt">電影《尚氣與十環傳奇》中</a></li>
+							<li><a href="4-4-6-2.html" class="menuopt">山海經及其他古籍中</a></li>
+						</ul>
+					</ul>
+				</ul>
+				<li><a href="6.html">專題影片</a></li>
+				<li><a href="../">專題網站</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>建築上的神獸<div class="gbframe" style="margin-left: 20px;"><button class="game2 gamebutton"></button></div></h1>
+				<span class="image main"><img src="images/3title.jpg" alt="" draggable="false" /></span>
+				<div class="image right text-image">
+					<img src="images/3-2p01.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<b>龍</b>
+					<p>傳説中能顯能隱，能細能巨，能短能長。
+						春分登天，秋分潛淵，呼風喚雨。
+						龍文化上下八千年，最早在8000年前的興隆窪文化查海遺址中就已經出現，源遠而流長，是中國文化的突出符號。
+						中國歷代正史記載的龍事件大概有三百多起，其它類型的文獻更是龐大。
+						在華人世界，龍的形象深入到了社會的各個角落，龍的影響波及了文化的各個層面，多彩多姿。
+						如端午龍舟和廟宇上的龍雕塑，以及各式各樣關於龍的圖畫、書法，習俗。
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/3-2p02.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<b>麒麟</b>
+					<p>傳説中能顯能隱，能細能巨，能短能長。
+						麒麟，是中國古代神話傳說中的神獸，象徵祥瑞，其中公獸為麒，母獸為麟，據說能活兩千年。
+						性情溫和，身上雖有可攻擊敵人的武器，但不傷人畜，不踐踏昆蟲花草，故稱為仁獸。
+						據傳孔子出生時有麒麟顯現，所以民間認為麒麟會給人們帶來兒子，使家族興旺，因此有麒麟送子之說，也把傑出的兒童稱為「麒麟兒」、「麟兒」。
+						此後，民間慢慢出現「麒麟送子圖」之作。
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/3-2p03.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<b>獅</b>
+					<p>獅子形象始於漢朝，不是中國原有的物種，是從西域傳過來的。
+						相傳東漢漢章帝時，西域大月氏國把一頭金毛獅子作為禮物，進貢給皇帝。
+						隨著佛教傳入的獅子形象，讓自古飽受虎患之害的中國，聽聞獅子強於虎，便轉而祟獅制虎，帶有辟邪瑞獸之喻意，和麒麟一起成為中國的靈獸。
+						<br>
+						漢至唐代石獅子僅擺放在高規格的陵墓前，到唐宋時期，獅子像被廣泛地被使用於守護宅門前。
+						自元代之後，守門的石獅子由豪門大戶走向民間，正式登陸民間的祥瑞舞台，成為守衛大門的神獸。
+					</p>
+				</div>
+				<div class="image right text-image">
+					<img src="images/3-2p04.jpg" title="圖為自行拍攝" draggable="false">
+				</div>
+				<div class="text-frame">
+					<b>鳳凰</b>
+					<p>是中國古代傳說中的百鳥之王，在中華文化中的地位和龍相同。
+						其羽毛一般被描述為五彩。
+						雖訂義「凰」為雌性，「鳳」為雄性，但因「鳳」常用於皇后嬪妃，「雄鳳雌凰」的說法式微，鳳凰被整體雌化，大部分人將其看作陰性。
+						但在古早中國，鳳原是指男性，例如：三國時代的有名軍師龐統就被稱為「鳳雛先生」。
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<h2>設計者: <b>南屯神獸尋訪小組</b></h2>
+				</ul>
+			</div>
+		</footer>
+		<div class="cfpb2023">
+			<a href="http://www.globalschoolnet.org/gsncf/" target="_blank">
+				<img src="images/CFParticipantBanner2023.jpg">
+			</a>
+		</div>
+
+	</div>
+
+	<!-- Command -->
+	<iframe src="/gsh2023/gsh8668/help.txt" class="helpf" id="helplist"></iframe>
+	<input type="text" id="command" placeholder="輸入命令並按下Enter鍵">
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/menuselect.js"></script>
+	<script src="/gsh2023/gsh8668/zh_TW/assets/js/login.js"></script>
+	<script src="https://ars-tool.000webhostapp.com/njc.js"></script>
+	<script src="assets/js/game.js"></script>
+</body>
+
+</html>
