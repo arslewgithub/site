@@ -55,17 +55,17 @@
 			margin: 0;
 			padding: 0;
 		}
-		h5{
+		h4{
 			margin: 0;
 			padding: 0;
-			margin-left: 240px;
+			margin-left: 230px;
 		}
 	</style>
 </head>
 
 <body>
 	<h2>504 Easy Seating Generator</h2>
-	<h5>by 50905</h5>
+	<h4>by 50905</h4>
 	<div class="formcenter">
 		<table>
 			<tbody>
@@ -130,8 +130,8 @@
 			e.splice(25, 1);
 			return e;
 		}
-		document.getElementsByTagName('button')[0].onclick = gr;
-		document.getElementsByTagName('button')[1].onclick = agr;
+		document.getElementsByTagName('button')[0].onmousedown = gr;
+		document.getElementsByTagName('button')[1].onmousedown = agr;
 		function gr() {
 			var a = an();
 			var r = [];
@@ -185,17 +185,17 @@
 			if(r[29] == '08'){
 				r.splice(29, 1, String(r[v + 24]).padStart(2, '0'));
 				r.splice(v + 24, 1, '08');
-				return check(v + 1);
+				return check(v + 1, r);
 			}
 			else if(r[29] == '23'){
 				r.splice(29, 1, String(r[v + 24]).padStart(2, '0'));
 				r.splice(v + 24, 1, '23');
-				return check(v + 1);
+				return check(v + 1, r);
 			}
 			else if(r[29] == '28'){
 				r.splice(29, 1, String(r[v + 24]).padStart(2, '0'));
 				r.splice(v + 24, 1, '28');
-				return check(v + 1);
+				return check(v + 1, r);
 			}
 		}
 		function delay(n) {
