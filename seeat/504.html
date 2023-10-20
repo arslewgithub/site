@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
- <meta name="description" content="504座位隨機抽選器，快速生成座位表，不用慢慢一個一個用其他選號器抽選，再慢慢寫到黑板上，一個按鈕按下去，直接顯示！">
+	<meta name="description" content="504座位隨機抽選器，快速生成座位表，不用慢慢一個一個用其他選號器抽選，再慢慢寫到黑板上，一個按鈕按下去，直接顯示！">
 	<meta name="viewport" content="width=413.571, initial-scale=0.91">
 	<title>22nd 504 Set Seat</title>
 	<style>
@@ -13,13 +12,11 @@
 			margin: 0;
 			background: #e0f0ff;
 		}
-
 		table,
 		tbody {
 			width: 420px;
 			height: 300px;
 		}
-
 		td {
 			width: 100rem;
 			height: 50px;
@@ -95,24 +92,21 @@
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
-				</tr>
-				<tr>
+				</tr><tr>
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
-				</tr>
-				<tr>
+				</tr><tr>
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
-				</tr>
-				<tr>
+				</tr><tr>
 					<td class=""></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
@@ -131,6 +125,9 @@
 			for (var i = 1; i < 35; i++) {
 				e.push(i);
 			};
+			e.splice(7, 1);
+			e.splice(21, 1);
+			e.splice(25, 1);
 			return e;
 		}
 		document.getElementsByTagName('button')[0].onclick = gr;
@@ -138,9 +135,16 @@
 		function gr() {
 			var a = an();
 			var r = [];
-			for (var c = 0; c < 34; c++) {
+			for (var c = 0; c < 31; c++) {
 				r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
 			};
+			var t = [25, 26, 27, 28, 30, 31, 32, 33]
+			var m1 = Number(t.splice(Math.floor(Math.random() * t.length), 1));
+			r.splice(m1, 0, '08');
+			var m2 = Number(t.splice(Math.floor(Math.random() * t.length), 1));
+			r.splice(m2, 0, '23');
+			var m3 = Number(t.splice(Math.floor(Math.random() * t.length), 1));
+			r.splice(m3, 0, '28');
 			document.querySelectorAll('.chart').forEach((e, n) => {
 				e.innerHTML = r[n];
 			});
@@ -150,9 +154,16 @@
 			document.getElementsByTagName('button')[1].disabled = true;
 			var a = an();
 			var r = [];
-			for (var c = 0; c < 34;c++) {
+			for (var c = 0; c < 31;c++) {
 				r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
 			};
+			var t = [25, 26, 27, 28, 30, 31, 32, 33]
+			var m1 = Number(t.splice(Math.floor(Math.random() * t.length), 1));
+			r.splice(m1, 0, '08');
+			var m2 = Number(t.splice(Math.floor(Math.random() * t.length), 1));
+			r.splice(m2, 0, '23');
+			var m3 = Number(t.splice(Math.floor(Math.random() * t.length), 1));
+			r.splice(m3, 0, '28');
 			document.querySelectorAll('.chart').forEach((e, n) => {
 				e.innerHTML = '00';
 			});
@@ -178,5 +189,4 @@
 		});
 	</script>
 </body>
-
 </html>
