@@ -183,18 +183,18 @@
 		}
 		function check(v, r){
 			if(r[29] == '08'){
-				r.splice(29, 1, String(r[v + 24]).padStart(2, '0'));
-				r.splice(v + 24, 1, '08');
+				r.splice(29, 1, String(r[v + 25]).padStart(2, '0'));
+				r.splice(v + 25, 1, '08');
 				return check(v + 1, r);
 			}
 			else if(r[29] == '23'){
-				r.splice(29, 1, String(r[v + 24]).padStart(2, '0'));
-				r.splice(v + 24, 1, '23');
+				r.splice(29, 1, String(r[v + 25]).padStart(2, '0'));
+				r.splice(v + 25, 1, '23');
 				return check(v + 1, r);
 			}
 			else if(r[29] == '28'){
-				r.splice(29, 1, String(r[v + 24]).padStart(2, '0'));
-				r.splice(v + 24, 1, '28');
+				r.splice(29, 1, String(r[v + 25]).padStart(2, '0'));
+				r.splice(v + 25, 1, '28');
 				return check(v + 1, r);
 			}
 		}
