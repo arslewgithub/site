@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        #wait {
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin: 0px;
+            display: inline-block;
+        }
+
+        #order2id {
+            color: red;
+            font-size: 35px;
+        }
+
+        .block {
+            text-align: center;
+        }
+
+        #okbutton {
+            border-radius: 100px;
+            background-color: #bdc293;
+            border: 2px solid #a2a777;
+            color: rgb(94, 94, 94);
+            padding: 5px;
+            text-align: center;
+            font-size: 22px;
+            margin-top: 10px;
+        }
+
+        #okbutton.gettedorder{
+            background-color: #4dc47d;
+            border: 2px solid #35a361;
+            font-weight: bold;
+            color: black;
+        }
+        #okbutton.orderfinish{
+            background-color: #dde572;
+            border: 2px solid #a6ac56;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+    <title>HWSH 509 點餐系統</title>
+</head>
+
+<body>
+    <h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+    <main style="display: none;">
+        <div class="title-framep">
+            <div class="title-frame">
+                <h1 class="title-text1">歡慶惠文22周年校慶!</h1>
+                <h1 class="title-text2">509 點餐系統</h1>
+            </div>
+        </div>
+        <div class="block">
+            <h1>我們已收到您的訂單</h1>
+            <br>
+            <h1>取餐號碼:</h1>
+            <h1 id="order2id">未知</h1>
+            <br>
+            <h1>應給付金額:</h1>
+            <h1 id="normalmoney">未知</h1>
+            <h1>元</h1>
+            <br>
+            <div id="okbutton">未知的錯誤!</div>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        if (localStorage.getItem('id') != null) {
+            var storgeoID = localStorage.getItem('id');
+            db.collection('userdata').doc(storgeoID)
+                .onSnapshot(doc => {
+                    document.querySelector('main').style = '';
+                    try { wait.remove(); } catch (e) { };
+                    order2id.innerHTML = doc.data().id;
+                    normalmoney.innerHTML = doc.data().money;
+                    if (doc.data().complete == true) {
+                        okbutton.innerHTML = '取餐完畢<br>請好好享用';
+                        okbutton.classList = ['gettedorder']
+                        localStorage.removeItem('id')
+                    }
+                    else if ((doc.data().complete == false) && (doc.data().cantake == true)) {
+                        okbutton.innerHTML = '餐點已準備完畢<br>請至509攤位領取';
+                        okbutton.classList = ['orderfinish']
+                    }
+                    else if ((doc.data().complete == false) && (doc.data().cantake == false)) {
+                        okbutton.innerHTML = '目前尚無法取餐';
+                        okbutton.classList = []
+                    }
+                    else{
+                        alert('未知的錯誤!\n請找509的工作人員詢問報修!')
+                    }
+                });
+        }
+        else {
+            location.replace('../order')
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .block-title {
+            margin-bottom: 5px;
+            margin-left: 20px;
+            font-size: 50px;
+        }
+
+        .block-content {
+            margin-top: 5px;
+            margin-bottom: 40px;
+            margin-left: 20px;
+            font-size: 30px;
+        }
+
+        .counter-frame {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .true-button.fbt {
+            float: right;
+        }
+
+        .false-button,
+        .true-button {
+            width: 100%;
+            height: 54px;
+            font-size: 24.5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        #wait {
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+    </style>
+    <title>509 點餐系統 - 待製作清單</title>
+</head>
+
+<body>
+    <div class="title-framep">
+        <div class="title-frame">
+            <h1 class="title-text1">歡慶惠文22周年校慶!</h1>
+        </div>
+    </div>
+    <div class="block">
+        <div class="block-title">肉燥麵</div>
+        <span class="block-content">可領餐: </span>
+        <span class="block-content" id="noodleok"></span>
+        <span class="block-content"> 份</span>
+        <br>
+        <span class="block-content">待做餐: </span>
+        <span class="block-content" id="noodleunok"></span>
+        <span class="block-content"> 份</span>
+        <br>
+        <input type="button" class="true-button" id="cancelok" value="已做完一份">
+        <br>
+        <input type="button" class="false-button" id="isok" value="需撤回一份">
+    </div>
+    <div class="block">
+        <div class="block-title">剩餘食材</div>
+        <span class="block-content">肉燥麵: </span>
+        <span class="block-content" id="noodleremain"></span>
+        <span class="block-content"> 份</span>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        db.collection('database').doc('noodle')
+            .onSnapshot((v) => {
+                noodleremain.innerHTML = v.data().previewcount + v.data().unok
+            });
+    </script>
+</body>
+
+</html>

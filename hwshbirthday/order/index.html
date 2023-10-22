@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .block-title {
+            margin-top: 30px;
+            margin-bottom: 5px;
+            margin-left: 20px;
+            font-size: 50px;
+        }
+
+        .block-content {
+            margin-top: 5px;
+            margin-bottom: 40px;
+            margin-left: 20px;
+            font-size: 30px;
+        }
+
+        #noodleinput {
+            text-align: center;
+            font-size: 20px;
+            border: 2px solid #999999;
+            width: 150px;
+            background: #fffa;
+        }
+
+        .counter-frame {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .true-button.fbt {
+            float: right;
+        }
+
+        .false-button.fbt,
+        .true-button.fbt {
+            width: 128px;
+            height: 48px;
+            font-size: 17.5px;
+            display: inline-block;
+        }
+
+        #noodleplus {
+            border-radius: 0 1em 1em 0;
+            margin-left: 15px;
+            padding: 7.5px;
+            padding-right: 10px;
+            font-size: 20px;
+        }
+
+        #noodlereduce {
+            border-radius: 1em 0 0 1em;
+            margin-right: 15px;
+            padding: 7.5px;
+            padding-left: 10px;
+            font-size: 20px;
+        }
+
+        #wait {
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+    </style>
+    <title>HWSH 509 點餐系統</title>
+</head>
+
+<body>
+    <h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+    <main style="display: none;">
+        <div class="title-framep">
+            <div class="title-frame">
+                <h1 class="title-text1">歡慶惠文22周年校慶!</h1>
+                <h1 class="title-text2">509 點餐系統</h1>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-title">肉燥麵</div>
+            <span class="block-content">目前剩餘: </span>
+            <span class="block-content" id="noodlenow"></span>
+            <span class="block-content"> 份</span>
+            <div class="counter-frame">
+                <input type="button" value=" - " id="noodlereduce" class="false-button">
+                <input type="number" value="1" min="1" maxlength="2" id="noodleinput">
+                <input type="button" value=" + " id="noodleplus" class="true-button">
+            </div>
+        </div>
+        <div class="block">
+            <input type="button" class="fbt false-button" id="cencel" value="退出點餐">
+            <input type="button" class="fbt true-button" id="sub" value="確認送出">
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        if (localStorage.getItem('id') == null || localStorage.getItem('id') == '' || localStorage.getItem('id') == undefined) {
+            var noodlecount = 50;
+            db.collection('database').doc('noodle')
+                .onSnapshot(doc => {
+                    noodlecount = doc.data().previewcount;
+                    noodlenow.innerHTML = noodlecount;
+                    if (Number(noodleinput.value) > noodlecount) {
+                        noodleinput.value = noodlecount;
+                    }
+                    document.querySelector('main').style = '';
+                    if (noodlecount < 1) {
+                        sub.disabled = true;
+                        noodleplus.disabled = true;
+                        noodlereduce.disabled = true;
+                        noodleinput.disabled = true;
+                    }
+                    try { wait.remove() } catch (e) { };
+                });
+            noodleinput.oninput = function () {
+                if ((!Number.isInteger(Number(this.value))) && (this.value != '')) {
+                    this.value = Math.floor(Number(this.value));
+                }
+                else if (Number(this.value) > noodlecount) {
+                    this.value = noodlecount;
+                }
+                else if ((Number(this.value) < 1) && (this.value != '')) {
+                    this.value = 1;
+                }
+            }
+            noodleplus.onclick = function () {
+                if (Number(noodleinput.value) >= noodlecount) {
+                    noodleinput.value = noodlecount;
+                }
+                else if (Number(noodleinput.value) < 1) {
+                    noodleinput.value = 1;
+                }
+                else {
+                    noodleinput.value = Number(noodleinput.value) + 1;
+                }
+            }
+            noodlereduce.onclick = function () {
+                if (Number(noodleinput.value) > noodlecount) {
+                    noodleinput.value = noodlecount;
+                }
+                else if (Number(noodleinput.value) <= 1) {
+                    noodleinput.value = 1;
+                }
+                else {
+                    noodleinput.value = Number(noodleinput.value) - 1;
+                }
+            }
+            cencel.onclick = function () {
+                if (confirm("您確定要退出嗎？")) {
+                    noodleinput.value = 1;
+                    history.go(-10000);
+                    location.replace('about:blank');
+                }
+            }
+            sub.onclick = function () {
+                if (!Number.isInteger(Number(noodleinput.value))) {
+                    noodleinput.value = Math.floor(Number(noodleinput.value));
+                }
+                else if (Number(noodleinput.value) > noodlecount) {
+                    noodleinput.value = noodlecount;
+                }
+                else if (Number(noodleinput.value) < 1) {
+                    noodleinput.value = 1;
+                }
+                if (noodlecount < 1) {
+                    return false;
+                }
+                var nv = noodleinput.value;
+                var orderID = String(Math.floor(Math.random() * 1E8)).padStart(8, "0")
+                localStorage.setItem('id', orderID)
+                dbset('userdata', orderID, {
+                    id: orderID,
+                    money: Number(nv) * 50,
+                    noodle: Number(nv),
+                    time: String(new Date().getHours()).padStart(2, '0') + ':' + String(new Date().getMinutes()).padStart(2, '0') + ':' + String(new Date().getSeconds()).padStart(2, '0'),
+                    complete: false,
+                    cantake: false
+                });
+                dbget('database', 'noodle').then((v) => {
+                    dbupdate('database', 'noodle', {
+                        previewcount: Number(v.data().previewcount - Number(nv)),
+                        unok: Number(v.data().unok + Number(nv))
+                    });
+                })
+                dbget('database', 'numberbase').then((v) => { dbupdate('database', 'numberbase', { allmoey: v.data().allmoey + (Number(nv) * 50) }); })
+                dbget('database', 'arraybase').then((v) => { var arrbs = v.data().order; arrbs.push(orderID); dbupdate('database', 'arraybase', { order: arrbs }) })
+                setTimeout('location.reload()', 500)
+            }
+        }
+        else {
+            location.replace('../order2')
+        }
+    </script>
+</body>
+
+</html>

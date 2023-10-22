@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .true-button.fbt {
+            float: right;
+        }
+
+        .false-button.fbt,
+        .true-button.fbt {
+            width: 128px;
+            height: 48px;
+            font-size: 17.5px;
+            display: inline-block;
+        }
+
+        .finishorder {
+            float: right;
+            margin-right: 20px;
+        }
+
+        .deleteorder {
+            margin-left: 10px;
+        }
+
+        .deleteorder,
+        .finishorder {
+            margin-top: 10px;
+            width: 128px;
+            height: 48px;
+            font-size: 17.5px;
+            display: inline-block;
+        }
+
+        #jump {
+            background: #FBAE17;
+            border: 2px solid #b17b10;
+            border-radius: 100px;
+            color: #00A400;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 19px;
+            height: 48px;
+        }
+
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin: 0px;
+            display: inline-block;
+        }
+
+        .view-id {
+            font-size: 30px;
+        }
+
+        .s1 {
+            margin-left: 20px;
+        }
+
+        .s2 {
+            margin-left: 40px;
+        }
+
+        .s3 {
+            margin-left: 60px;
+        }
+
+        #wait {
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+    </style>
+    <title>509 點餐系統總覽</title>
+</head>
+
+<body>
+    <h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+    <main style="display: none;">
+        <div class="title-framep">
+            <div class="title-framec">
+                <h1 class="title-text1">歡慶惠文22周年校慶!</h1>
+                <h1 class="title-text2">點餐總覽/管理介面</h1>
+            </div>
+        </div>
+        <div class="block" style="text-align: center;">
+            <h2>交易金額: </h2>
+            <h2 id="allmoney"></h2>
+            <h2> 元</h2>
+            <input type="button" id="jump" value="檢視做餐進度">
+        </div>
+    </main>
+    <!--div class="block">
+        <h2 class="s1 view-id">ID: </h2>
+        <h2 class="view-id"></h2>
+        <br>
+        <h2 class="s2">點餐內容: </h2>
+        <br>
+        <h2 class="s3">肉燥麵: </h2>
+        <h2></h2>
+        <br>
+        <h2 class="s2">應支付金額: </h2>
+        <h2></h2>
+        <br>
+        <h2 class="s2">訂餐時間: </h2>
+        <h2></h2>
+        <br>
+        <input type="button" value="刪除訂單" id="deleteorder" class="false-button">
+        <input type="button" value="完成訂單" id="finishorder" class="true-button">
+    </div-->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        var loadon = 0;
+        db.collection('database').doc('numberbase')
+            .onSnapshot(doc => {
+                allmoney.innerHTML = doc.data().allmoey;
+                document.querySelector('main').style = '';
+                try { wait.remove(); } catch (e) { }
+            });
+        jump.onclick = function () { location.href = '../ordercook/' }
+        db.collection('database').doc('arraybase')
+            .onSnapshot(doc => {
+                if (loadon == 1) {
+                    createBlock(doc.data().order[doc.data().order.length - 1])
+                }
+                else {
+                    for (var i = 0; i < doc.data().order.length; i++) {
+                        createBlock(doc.data().order[i])
+                    }
+                    setTimeout('initialization()', 500)
+                    loadon = 1
+                }
+            });
+        function createBlock(arrl) {
+            var newblock = document.createElement('div');
+            let inf = {};
+            db.collection('userdata').doc(String(arrl))
+                .get().then(doc => {
+                    inf = doc.data();
+                    newblock.innerHTML = '<h2 class="s1 view-id">ID: </h2><h2 class="view-id">' + inf.id +
+                        '</h2><br><h2 class="s2">點餐內容: </h2><br><h2 class="s3">肉燥麵: </h2><h2>' + inf.noodle +
+                        '</h2><br><h2 class="s2">應支付金額: </h2><h2>' + inf.money +
+                        '</h2><br><h2 class="s2">訂餐時間: </h2><h2>' + inf.time +
+                        '</h2><br><input type="button" value="刪除訂單" disabled="disabled" class="deleteorder false-button"><input type="button" value="完成訂單" class="finishorder true-button">';
+                });
+            newblock.classList.add('block');
+            document.getElementsByTagName('main')[0].appendChild(newblock);
+        }
+        function initialization() {
+            for (let i = 0; i < document.getElementsByClassName('finishorder').length; i++) {
+                document.getElementsByClassName('finishorder')[i].onclick = function () {
+                    if (confirm("確定已完成？")) {
+                        dbget('database', 'arraybase').then((v) => {
+                            var arrbs = v.data().order;
+                            dbupdate('userdata', String(arrbs[i]), {complete: true})
+                            arrbs.splice(i, 1);
+                            dbupdate('database', 'arraybase', { order: arrbs })
+                            setTimeout('location.reload()', 250)
+                        })
+                    }
+                }
+            };
+            for (let i = 0; i < document.getElementsByClassName('deleteorder').length; i++) {
+                document.getElementsByClassName('deleteorder')[i].onclick = function () {
+                    if (confirm("您真的確定要刪除嗎？")) {
+                        if (confirm("您真的真的確定要刪除嗎？(刪除的訂單將無法恢復)")) {
+                            dbget('database', 'arraybase').then((v) => {
+                                var arrbs = v.data().order;
+                                db.collection('userdata')
+                                    .doc(String(arrbs[i]))
+                                    .delete()
+                                    .then(() => {
+                                        alert('Data successfully deleted!');
+                                        setTimeout('location.reload()', 250)
+                                    })
+                                arrbs.splice(i, 1);
+                                dbupdate('database', 'arraybase', { order: arrbs })
+                            })
+                        }
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>
