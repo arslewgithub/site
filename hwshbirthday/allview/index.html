@@ -110,14 +110,23 @@
         jump.onclick = function () { location.href = '../ordercook/' }
         db.collection('database').doc('arraybase')
             .onSnapshot(doc => {
-                if (loadon == 1) {
+                if (loadon >= 1) {
                     location.reload()
                 }
                 else {
                     for (var i = 0; i < doc.data().order.length; i++) {
                         createBlock(doc.data().order[i])
                     }
-                    loadon = 1
+                    loadon += 1
+                }
+            });
+        db.collection('database').doc('noodle')
+            .onSnapshot(doc => {
+                if (loadon >= 2) {
+                    //location.reload()
+                }
+                else {
+                    loadon += 1;
                 }
             });
         async function createBlock(arrl) {
@@ -146,15 +155,28 @@
         }
         function initialization() {
             for (let i = 0; i < document.getElementsByClassName('finishorder').length; i++) {
-                document.getElementsByClassName('finishorder')[i].onclick = function () {
+                document.getElementsByClassName('finishorder')[i].onclick = async function () {
                     if (confirm("確定已完成？")) {
-                        dbget('database', 'arraybase').then((v) => {
+                        await dbget('database', 'arraybase').then(async (v) => {
                             var arrbs = v.data().order;
-                            dbupdate('userdata', String(arrbs[i]), { complete: true })
+                            var dbnd
+                            await dbget('database', 'noodle').then(async (c) => {
+                                dbnd = c.data().nowok;
+                            })
+                            await dbget('userdata', String(arrbs[i])).then(async (d) => {
+                                await dbupdate('database', 'noodle', { nowok: dbnd - d.data().noodle });
+                            })
+                            await dbupdate('userdata', String(arrbs[i]), { complete: true });
                             arrbs.splice(i, 1);
-                            dbupdate('database', 'arraybase', { order: arrbs })
-                            setTimeout('location.reload()', 250)
+                            await dbupdate('database', 'arraybase', { order: arrbs });
                         })
+                        await dbget('database', 'noodle').then(async (v) => {
+                            var dbnd = v.data().nowok;
+                            await dbupdate('userdata', String(arrbs[i]), { complete: true });
+                            arrbs.splice(i, 1);
+                            await dbupdate('database', 'arraybase', { order: arrbs });
+                        })
+                        location.reload();
                     }
                 }
             };
