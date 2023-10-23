@@ -82,8 +82,8 @@
        var dataunok, dataoked;
         db.collection('database').doc('noodle')
             .onSnapshot((v) => {
-                dataunok = v.data.unok;
-                dataoked = v.data.oked;
+                dataunok = v.data().unok;
+                dataoked = v.data().oked;
                 noodleremain.innerHTML = v.data().previewcount + v.data().unok;
                 noodleok.innerHTML = dataoked;
                 noodleunok.innerHTML = dataunok;
