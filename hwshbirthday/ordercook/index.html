@@ -50,6 +50,8 @@
 </head>
 
 <body>
+	<h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+	<main style="display: none;">
     <div class="title-framep">
         <div class="title-frame">
             <h1 class="title-text1">歡慶惠文22周年校慶!</h1>
@@ -75,6 +77,7 @@
         <span class="block-content" id="noodleremain"></span>
         <span class="block-content"> 份</span>
     </div>
+    </main>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -87,10 +90,26 @@
                 noodleremain.innerHTML = v.data().previewcount + v.data().unok;
                 noodleok.innerHTML = dataoked;
                 noodleunok.innerHTML = dataunok;
+                document.querySelector('main').style = '';
+                try { wait.remove(); } catch (e) { }
             });
         cancelok.onclick = function () {
         	if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')){
         		if (dataoked > 0) {
+        			dbget('database', 'arraybase').then((v) => {
+						var oarray = v.data().order;
+						var n = dataunok - 1;
+						for (var i = 0; i < oarray.length; i++){
+							dbget('userdata', oarray[i]).then((doc) => {
+								if (doc.data().cantake != (n - doc.data().noodle >= 0)){
+									db.update('userdata', oarray[i], {
+										cantake: (n - doc.data().noodle >= 0)
+									})
+								}
+								n = doc.data().noodle;
+							})
+						}
+					})
 					dbupdate('database', 'noodle', {
 						unok: dataunok + 1,
 						nowok: dataoked - 1
@@ -101,6 +120,26 @@
 				}
 			}
         }
+        isok.onclick = function () {
+			dbget('database', 'arraybase').then((v) => {
+				var oarray = v.data().order;
+				var n = dataoked + 1;
+				for (var i = 0; i < oarray.length; i++){
+					dbget('userdata', oarray[i]).then((doc) => {
+						if (doc.data().cantake != (n - doc.data().noodle >= 0)){
+							db.update('userdata', oarray[i], {
+								cantake: (n - doc.data().noodle >= 0)
+							})
+						}
+						n = doc.data().noodle;
+					})
+				}
+			})
+			dbupdate('database', 'noodle', {
+				unok: dataunok - 1,
+				nowok: dataoked + 1
+			})
+		}
     </script>
 </body>
 
