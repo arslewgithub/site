@@ -102,7 +102,7 @@
                         for (var i = 0; i < oarray.length; i++) {
                             dbget('userdata', oarray[i]).then((doc) => {
                                 if (doc.data().cantake != (n - doc.data().noodle >= 0)) {
-                                    db.update('userdata', oarray[i], {
+                                    dbupdate('userdata', oarray[i], {
                                         cantake: (n - doc.data().noodle >= 0)
                                     })
                                 }
@@ -127,7 +127,7 @@
                 for (var i = 0; i < oarray.length; i++) {
                     dbget('userdata', oarray[i]).then((doc) => {
                         if (doc.data().cantake != (n - doc.data().noodle >= 0)) {
-                            db.update('userdata', oarray[i], {
+                            dbupdate('userdata', oarray[i], {
                                 cantake: (n - doc.data().noodle >= 0)
                             })
                         }
