@@ -79,9 +79,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
+       var dataunok, dataoked;
         db.collection('database').doc('noodle')
             .onSnapshot((v) => {
-                noodleremain.innerHTML = v.data().previewcount + v.data().unok
+                dataunok = v.data.unok;
+                dataoked = v.data.oked;
+                noodleremain.innerHTML = v.data().previewcount + v.data().unok;
+                noodleok.innerHTML = dataoked;
+                noodleunok.innerHTML = dataunok;
             });
     </script>
 </body>
