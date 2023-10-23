@@ -100,9 +100,9 @@
                         var oarray = v.data().order;
                         var n = dataunok - 1;
                         for (var i = 0; i < oarray.length; i++) {
-                            dbget('userdata', oarray[i]).then((doc) => {
-                                if (doc.data().cantake != (n - doc.data().noodle >= 0)) {
-                                    dbupdate('userdata', oarray[i], {
+                            dbget('userdata', String(oarray[i])).then((doc) => {
+                                if (doc.data().cantake != (n - doc.data().noodle > 0)) {
+                                    dbupdate('userdata', doc.id, {
                                         cantake: (n - doc.data().noodle >= 0)
                                     })
                                 }
@@ -123,13 +123,15 @@
         isok.onclick = function () {
             dbget('database', 'arraybase').then((v) => {
                 var oarray = v.data().order;
+                console.log('oarray = ' + oarray);
                 var n = dataoked + 1;
+                console.log('n = ' + n);
                 for (var i = 0; i < oarray.length; i++) {
-                    dbget('userdata', oarray[i]).then((doc) => {
-                        if (doc.data().cantake != (n - doc.data().noodle >= 0)) {
-                            dbupdate('userdata', oarray[i], {
+                    db.collection('userdata').doc(String(oarray[i])).get().then((doc) => {
+                        if (doc.data().cantake != (n - doc.data().noodle > 0)) {
+                            eval(dbupdate('userdata', doc.id, {
                                 cantake: (n - doc.data().noodle >= 0)
-                            })
+                            }))
                         }
                         n -= doc.data().noodle;
                     })
