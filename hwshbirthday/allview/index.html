@@ -30,7 +30,7 @@
         .deleteorder,
         .finishorder {
             margin-top: 10px;
-            width: 128px;
+            width: 100px;
             height: 48px;
             font-size: 17.5px;
             display: inline-block;
@@ -96,24 +96,6 @@
             <input type="button" id="jump" value="檢視做餐進度">
         </div>
     </main>
-    <!--div class="block">
-        <h2 class="s1 view-id">ID: </h2>
-        <h2 class="view-id"></h2>
-        <br>
-        <h2 class="s2">點餐內容: </h2>
-        <br>
-        <h2 class="s3">肉燥麵: </h2>
-        <h2></h2>
-        <br>
-        <h2 class="s2">應支付金額: </h2>
-        <h2></h2>
-        <br>
-        <h2 class="s2">訂餐時間: </h2>
-        <h2></h2>
-        <br>
-        <input type="button" value="刪除訂單" id="deleteorder" class="false-button">
-        <input type="button" value="完成訂單" id="finishorder" class="true-button">
-    </div-->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -129,30 +111,38 @@
         db.collection('database').doc('arraybase')
             .onSnapshot(doc => {
                 if (loadon == 1) {
-                    createBlock(doc.data().order[doc.data().order.length - 1])
+                    location.reload()
                 }
                 else {
                     for (var i = 0; i < doc.data().order.length; i++) {
                         createBlock(doc.data().order[i])
                     }
-                    setTimeout('initialization()', 500)
                     loadon = 1
                 }
             });
-        function createBlock(arrl) {
+        async function createBlock(arrl) {
             var newblock = document.createElement('div');
             let inf = {};
-            db.collection('userdata').doc(String(arrl))
+            await db.collection('userdata').doc(String(arrl))
                 .get().then(doc => {
                     inf = doc.data();
+                    var rtf;
+                    if (inf.cantake) {
+                        rtf = ' ';
+                    }
+                    else {
+                        rtf = ' disabled="disabled" ';
+                    }
                     newblock.innerHTML = '<h2 class="s1 view-id">ID: </h2><h2 class="view-id">' + inf.id +
                         '</h2><br><h2 class="s2">點餐內容: </h2><br><h2 class="s3">肉燥麵: </h2><h2>' + inf.noodle +
                         '</h2><br><h2 class="s2">應支付金額: </h2><h2>' + inf.money +
                         '</h2><br><h2 class="s2">訂餐時間: </h2><h2>' + inf.time +
-                        '</h2><br><input type="button" value="刪除訂單" disabled="disabled" class="deleteorder false-button"><input type="button" value="完成訂單" class="finishorder true-button">';
+                        '</h2><br><input type="button" value="刪除訂單" disabled="true" class="deleteorder false-button"><input type="button" value="完成訂單"' + rtf +
+                        'class="finishorder true-button">';
                 });
             newblock.classList.add('block');
             document.getElementsByTagName('main')[0].appendChild(newblock);
+            initialization()
         }
         function initialization() {
             for (let i = 0; i < document.getElementsByClassName('finishorder').length; i++) {
@@ -160,7 +150,7 @@
                     if (confirm("確定已完成？")) {
                         dbget('database', 'arraybase').then((v) => {
                             var arrbs = v.data().order;
-                            dbupdate('userdata', String(arrbs[i]), {complete: true})
+                            dbupdate('userdata', String(arrbs[i]), { complete: true })
                             arrbs.splice(i, 1);
                             dbupdate('database', 'arraybase', { order: arrbs })
                             setTimeout('location.reload()', 250)
