@@ -173,6 +173,11 @@
                 if (noodlecount < 1) {
                     return false;
                 }
+                sub.disabled = 'true';
+                cencel.disabled = 'true';
+                noodleplus.disabled = 'true';
+                noodlereduce.disabled = 'true';
+                noodleinput.disabled = 'true';
                 var nv = noodleinput.value;
                 var orderID = String(Math.floor(Math.random() * 1E8)).padStart(8, "0")
                 await localStorage.setItem('id', orderID)
@@ -195,14 +200,15 @@
                     var arrbs = v.data().order;
                     var carray = v.data().cantakelist;
                     arrbs.push(orderID);
-                    carray.push(false)
+                    carray.push(false);
                     dbupdate('database', 'arraybase', { order: arrbs, cantakelist: carray });
                 })
+                await setCantake(0);
                 location.reload()
             }
         }
         else {
-            location.replace('../order2')
+            location.replace('../order2');
         }
     </script>
 </body>

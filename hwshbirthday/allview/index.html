@@ -116,7 +116,6 @@
                 let rc = doc.data().order.filter((e) => {
                     return loadoarr.indexOf(e) === -1
                 })
-                console.log('rt: [' + rt + ']\nrc:[' + rc + ']')
                 for (var t = 0; t < rt.length; t++) {
                     await removeBlock(rt[t])
                 }
@@ -130,7 +129,6 @@
                 for (var i = 0; i < doc.data().cantakelist.length; i++) {
                     await ctbtable(!doc.data().cantakelist[i], i)
                 }
-                console.log('order:[' + doc.data().order + ']\ncantakelist:[' + doc.data().cantakelist + ']')
                 initialization();
             });
         async function createBlock(arrl) {
@@ -188,6 +186,7 @@
                 }
             };
             var carray;
+            var userarr = await getCopyUserData();
             for (let i = 0; i < document.getElementsByClassName('deleteorder').length; i++) {
                 document.getElementsByClassName('deleteorder')[i].onclick = function () {
                     if (confirm("您真的確定要刪除嗎？")) {
@@ -218,19 +217,17 @@
                                     })
                                 arrbs.splice(i, 1);
                                 dbupdate('database', 'arraybase', { order: arrbs })
-                                await dbget('database', 'noodle').then(async (k) => {k
-                                    var n = k.data().nowok + 1;
+                                await dbget('database', 'noodle').then(async (k) => {
+                                    var n = k.data().nowok;
                                     carray = [];
                                     for (var i = 0; i < arrbs.length; i++) {
-                                        await db.collection('userdata').doc(String(arrbs[i])).get().then(async (doc) => {
-                                            if (doc.data().cantake != (n - doc.data().noodle >= 0)) {
-                                                await dbupdate('userdata', doc.id, {
-                                                    cantake: (n - doc.data().noodle >= 0)
-                                                })
-                                            }
-                                            carray.push((n - doc.data().noodle >= 0))
-                                            n -= doc.data().noodle;
-                                        })
+                                        if (userarr[arrbs[i]].cantake != (n - userarr[arrbs[i]].noodle > 0)) {
+                                            dbupdate('userdata', arrbs[i], {
+                                                cantake: (n - userarr[arrbs[i]].noodle >= 0)
+                                            })
+                                        }
+                                        carray.push((n - userarr[arrbs[i]].noodle >= 0))
+                                        n -= userarr[arrbs[i]].noodle;
                                     }
                                     dbupdate('database', 'arraybase', { cantakelist: carray })
                                 })

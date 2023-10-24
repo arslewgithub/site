@@ -96,20 +96,19 @@
         cancelok.onclick = async function () {
             if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
                 if (dataoked > 0) {
+                    userarr = await getCopyUserData();
                     await dbget('database', 'arraybase').then(async (v) => {
                         oarray = v.data().order;
                         var n = dataoked - 1;
                         carray = [];
                         for (var i = 0; i < oarray.length; i++) {
-                            await db.collection('userdata').doc(String(oarray[i])).get().then(async (doc) => {
-                                if (doc.data().cantake != (n - doc.data().noodle > 0)) {
-                                    await dbupdate('userdata', doc.id, {
-                                        cantake: (n - doc.data().noodle >= 0)
-                                    })
-                                }
-                                carray.push((n - doc.data().noodle >= 0))
-                                n -= doc.data().noodle;
-                            })
+                            if (userarr[oarray[i]].cantake != (n - userarr[oarray[i]].noodle > 0)) {
+                                dbupdate('userdata', oarray[i], {
+                                    cantake: (n - userarr[oarray[i]].noodle >= 0)
+                                })
+                            }
+                            carray.push((n - userarr[oarray[i]].noodle >= 0))
+                            n -= userarr[oarray[i]].noodle;
                         }
                         dbupdate('database', 'arraybase', { cantakelist: carray })
                     })
@@ -124,20 +123,19 @@
             }
         }
         isok.onclick = async function () {
-            await dbget('database', 'arraybase').then(async (v) => {
+            userarr = await getCopyUserData();
+            await dbget('database', 'arraybase').then((v) => {
                 oarray = v.data().order;
                 var n = dataoked + 1;
                 carray = [];
                 for (var i = 0; i < oarray.length; i++) {
-                    await db.collection('userdata').doc(String(oarray[i])).get().then(async (doc) => {
-                        if (doc.data().cantake != (n - doc.data().noodle > 0)) {
-                            await dbupdate('userdata', doc.id, {
-                                cantake: (n - doc.data().noodle >= 0)
-                            })
-                        }
-                        carray.push((n - doc.data().noodle >= 0))
-                        n -= doc.data().noodle;
-                    })
+                    if (userarr[oarray[i]].cantake != (n - userarr[oarray[i]].noodle > 0)) {
+                        dbupdate('userdata', oarray[i], {
+                            cantake: (n - userarr[oarray[i]].noodle >= 0)
+                        })
+                    }
+                    carray.push((n - userarr[oarray[i]].noodle >= 0))
+                    n -= userarr[oarray[i]].noodle;
                 }
                 dbupdate('database', 'arraybase', { cantakelist: carray })
             })
