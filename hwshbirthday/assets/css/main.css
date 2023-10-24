@@ -4,18 +4,18 @@ html {
 }
 
 h1.title-text1 {
-    color: #FF9A51F0;
+    color: #FFAA61;
     margin: 1px;
     text-wrap: nowrap;
-    text-shadow: 2px 0px 0px #000;
+    text-shadow: 2px 1px 0px #000;
 }
 
 h1.title-text2 {
-    color: #CE3F51F0;
+    color: #FE6F71;
     float: right;
     margin: 1px;
     text-wrap: nowrap;
-    text-shadow: 2px 0px 0px #000;
+    text-shadow: 2px 1px 0px #000;
 }
 
 .title-framec {
