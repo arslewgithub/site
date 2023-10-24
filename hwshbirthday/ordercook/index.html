@@ -82,7 +82,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
-        var dataunok, dataoked;
+        var dataunok, dataoked, carray, oarray;
         db.collection('database').doc('noodle')
             .onSnapshot((v) => {
                 dataunok = v.data().unok;
@@ -93,23 +93,25 @@
                 document.querySelector('main').style = '';
                 try { wait.remove(); } catch (e) { }
             });
-        cancelok.onclick = function () {
+        cancelok.onclick = async function () {
             if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
                 if (dataoked > 0) {
-                    dbget('database', 'arraybase').then((v) => {
-                        var oarray = v.data().order;
-                        console.log('oarray = ' + oarray);
+                    await dbget('database', 'arraybase').then(async (v) => {
+                        oarray = v.data().order;
                         var n = dataoked - 1;
+                        carray = [];
                         for (var i = 0; i < oarray.length; i++) {
-                            db.collection('userdata').doc(String(oarray[i])).get().then((doc) => {
+                            await db.collection('userdata').doc(String(oarray[i])).get().then(async (doc) => {
                                 if (doc.data().cantake != (n - doc.data().noodle > 0)) {
-                                    dbupdate('userdata', doc.id, {
+                                    await dbupdate('userdata', doc.id, {
                                         cantake: (n - doc.data().noodle >= 0)
                                     })
                                 }
+                                carray.push((n - doc.data().noodle >= 0))
                                 n -= doc.data().noodle;
                             })
                         }
+                        dbupdate('database', 'arraybase', { cantakelist: carray })
                     })
                     dbupdate('database', 'noodle', {
                         unok: dataunok + 1,
@@ -121,21 +123,23 @@
                 }
             }
         }
-        isok.onclick = function () {
-            dbget('database', 'arraybase').then((v) => {
-                var oarray = v.data().order;
-                console.log('oarray = ' + oarray);
+        isok.onclick = async function () {
+            await dbget('database', 'arraybase').then(async (v) => {
+                oarray = v.data().order;
                 var n = dataoked + 1;
+                carray = [];
                 for (var i = 0; i < oarray.length; i++) {
-                    db.collection('userdata').doc(String(oarray[i])).get().then((doc) => {
+                    await db.collection('userdata').doc(String(oarray[i])).get().then(async (doc) => {
                         if (doc.data().cantake != (n - doc.data().noodle > 0)) {
-                            dbupdate('userdata', doc.id, {
+                            await dbupdate('userdata', doc.id, {
                                 cantake: (n - doc.data().noodle >= 0)
                             })
                         }
+                        carray.push((n - doc.data().noodle >= 0))
                         n -= doc.data().noodle;
                     })
                 }
+                dbupdate('database', 'arraybase', { cantakelist: carray })
             })
             dbupdate('database', 'noodle', {
                 unok: dataunok - 1,

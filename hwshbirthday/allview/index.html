@@ -100,7 +100,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
-        var loadon = 0;
+        var loadoarr = [], loadcarr = 0;
         db.collection('database').doc('numberbase')
             .onSnapshot(doc => {
                 allmoney.innerHTML = doc.data().allmoey;
@@ -109,25 +109,29 @@
             });
         jump.onclick = function () { location.href = '../ordercook/' }
         db.collection('database').doc('arraybase')
-            .onSnapshot(doc => {
-                if (loadon >= 1) {
-                    location.reload()
+            .onSnapshot(async doc => {
+                let rt = loadoarr.filter((e) => {
+                    return doc.data().order.indexOf(e) === -1
+                })
+                let rc = doc.data().order.filter((e) => {
+                    return loadoarr.indexOf(e) === -1
+                })
+                console.log('rt: [' + rt + ']\nrc:[' + rc + ']')
+                for (var t = 0; t < rt.length; t++) {
+                    await removeBlock(rt[t])
                 }
-                else {
-                    for (var i = 0; i < doc.data().order.length; i++) {
-                        createBlock(doc.data().order[i])
-                    }
-                    loadon += 1
+                for (var i = 0; i < rc.length; i++) {
+                    await createBlock(rc[i])
                 }
-            });
-        db.collection('database').doc('noodle')
-            .onSnapshot(doc => {
-                if (loadon >= 2) {
-                    setTimeout('location.reload()', 500)
+                loadoarr = [];
+                for (var i = 0; i < doc.data().order.length; i++) {
+                    loadoarr.push(doc.data().order[i])
                 }
-                else {
-                    loadon += 1;
+                for (var i = 0; i < doc.data().cantakelist.length; i++) {
+                    await ctbtable(!doc.data().cantakelist[i], i)
                 }
+                console.log('order:[' + doc.data().order + ']\ncantakelist:[' + doc.data().cantakelist + ']')
+                initialization();
             });
         async function createBlock(arrl) {
             var newblock = document.createElement('div');
@@ -135,6 +139,7 @@
             await db.collection('userdata').doc(String(arrl))
                 .get().then(doc => {
                     inf = doc.data();
+                    newblock.id = 'ck' + String(inf.id)
                     var rtf;
                     if (inf.cantake) {
                         rtf = ' ';
@@ -146,14 +151,23 @@
                         '</h2><br><h2 class="s2">點餐內容: </h2><br><h2 class="s3">肉燥麵: </h2><h2>' + inf.noodle +
                         '</h2><br><h2 class="s2">應支付金額: </h2><h2>' + inf.money +
                         '</h2><br><h2 class="s2">訂餐時間: </h2><h2>' + inf.time +
-                        '</h2><br><input type="button" value="刪除訂單" disabled="true" class="deleteorder false-button"><input type="button" value="完成訂單"' + rtf +
+                        '</h2><br><input type="button" value="刪除訂單" class="deleteorder false-button"><input type="button" value="完成訂單"' + rtf +
                         'class="finishorder true-button">';
                 });
             newblock.classList.add('block');
+            newblock.classList.add('ectrl');
             document.getElementsByTagName('main')[0].appendChild(newblock);
-            initialization()
         }
-        function initialization() {
+
+        async function ctbtable(ctarr, n) {
+            document.querySelectorAll('.finishorder')[n].disabled = ctarr;
+        }
+
+        async function removeBlock(arr) {
+            document.getElementById('ck' + String(arr)).remove();
+        }
+
+        async function initialization() {
             for (let i = 0; i < document.getElementsByClassName('finishorder').length; i++) {
                 document.getElementsByClassName('finishorder')[i].onclick = async function () {
                     if (confirm("確定已完成？")) {
@@ -170,31 +184,56 @@
                             arrbs.splice(i, 1);
                             await dbupdate('database', 'arraybase', { order: arrbs });
                         })
-                        await dbget('database', 'noodle').then(async (v) => {
-                            var dbnd = v.data().nowok;
-                            await dbupdate('userdata', String(arrbs[i]), { complete: true });
-                            arrbs.splice(i, 1);
-                            await dbupdate('database', 'arraybase', { order: arrbs });
-                        })
-                        location.reload();
                     }
                 }
             };
+            var carray;
             for (let i = 0; i < document.getElementsByClassName('deleteorder').length; i++) {
                 document.getElementsByClassName('deleteorder')[i].onclick = function () {
                     if (confirm("您真的確定要刪除嗎？")) {
                         if (confirm("您真的真的確定要刪除嗎？(刪除的訂單將無法恢復)")) {
-                            dbget('database', 'arraybase').then((v) => {
-                                var arrbs = v.data().order;
+                            var arrbs;
+                            dbget('database', 'arraybase').then(async (v) => {
+                                arrbs = v.data().order;
+                                await dbget('userdata', String(arrbs[i])).then((x) => {
+                                    xdn = x.data().noodle;
+                                    xdm = x.data().money;
+                                    dbget('database', 'noodle').then((c) => {
+                                        dbupdate('database', 'noodle', {
+                                            previewcount: Number(c.data().previewcount + Number(xdn)),
+                                            unok: Number(c.data().unok - Number(xdn))
+                                        });
+                                    })
+                                    dbget('database', 'numberbase').then((v) => {
+                                        dbupdate('database', 'numberbase', {
+                                            allmoey: v.data().allmoey - Number(xdm)
+                                        });
+                                    })
+                                })
                                 db.collection('userdata')
                                     .doc(String(arrbs[i]))
                                     .delete()
                                     .then(() => {
                                         alert('Data successfully deleted!');
-                                        setTimeout('location.reload()', 250)
                                     })
                                 arrbs.splice(i, 1);
                                 dbupdate('database', 'arraybase', { order: arrbs })
+                                await dbget('database', 'noodle').then(async (k) => {k
+                                    var n = k.data().nowok + 1;
+                                    carray = [];
+                                    for (var i = 0; i < arrbs.length; i++) {
+                                        await db.collection('userdata').doc(String(arrbs[i])).get().then(async (doc) => {
+                                            if (doc.data().cantake != (n - doc.data().noodle >= 0)) {
+                                                await dbupdate('userdata', doc.id, {
+                                                    cantake: (n - doc.data().noodle >= 0)
+                                                })
+                                            }
+                                            carray.push((n - doc.data().noodle >= 0))
+                                            n -= doc.data().noodle;
+                                        })
+                                    }
+                                    dbupdate('database', 'arraybase', { cantakelist: carray })
+                                })
                             })
                         }
                     }

@@ -21,7 +21,8 @@
             display: inline-block;
         }
 
-        h1.title-text1, h1.title-text2 {
+        h1.title-text1,
+        h1.title-text2 {
             display: block;
         }
 
@@ -45,13 +46,14 @@
             margin-top: 10px;
         }
 
-        #okbutton.gettedorder{
+        #okbutton.gettedorder {
             background-color: #4dc47d;
             border: 2px solid #35a361;
             font-weight: bold;
             color: black;
         }
-        #okbutton.orderfinish{
+
+        #okbutton.orderfinish {
             background-color: #dde572;
             border: 2px solid #a6ac56;
             font-weight: bold;
@@ -91,30 +93,35 @@
             var storgeoID = localStorage.getItem('id');
             db.collection('userdata').doc(storgeoID)
                 .onSnapshot(doc => {
-                    document.querySelector('main').style = '';
-                    try { wait.remove(); } catch (e) { };
-                    order2id.innerHTML = doc.data().id;
-                    normalmoney.innerHTML = doc.data().money;
-                    if (doc.data().complete == true) {
-                        okbutton.innerHTML = '取餐完畢<br>請好好享用';
-                        okbutton.classList = ['gettedorder']
-                        localStorage.removeItem('id')
+                    try {
+                        document.querySelector('main').style = '';
+                        try { wait.remove(); } catch (e) { };
+                        order2id.innerHTML = doc.data().id;
+                        normalmoney.innerHTML = doc.data().money;
+                        if (doc.data().complete == true) {
+                            okbutton.innerHTML = '取餐完畢<br>請好好享用';
+                            okbutton.classList = ['gettedorder']
+                            localStorage.removeItem('id')
+                        }
+                        else if ((doc.data().complete == false) && (doc.data().cantake == true)) {
+                            okbutton.innerHTML = '餐點已準備完畢<br>請至509攤位領取';
+                            okbutton.classList = ['orderfinish']
+                        }
+                        else if ((doc.data().complete == false) && (doc.data().cantake == false)) {
+                            okbutton.innerHTML = '目前尚無法取餐';
+                            okbutton.classList = []
+                        }
                     }
-                    else if ((doc.data().complete == false) && (doc.data().cantake == true)) {
-                        okbutton.innerHTML = '餐點已準備完畢<br>請至509攤位領取';
-                        okbutton.classList = ['orderfinish']
-                    }
-                    else if ((doc.data().complete == false) && (doc.data().cantake == false)) {
-                        okbutton.innerHTML = '目前尚無法取餐';
-                        okbutton.classList = []
-                    }
-                    else{
-                        alert('未知的錯誤!\n請找509的工作人員詢問報修!')
+                    catch (e) {
+                        console.error(e)
+                        alert('錯誤! 請找509的工作人員詢問報修!\nError: Can\'t find \"ID\" on Database')
+                        localStorage.removeItem('id');
+                        location.replace('../order');
                     }
                 });
         }
         else {
-            location.replace('../order')
+            location.replace('../order');
         }
     </script>
 </body>

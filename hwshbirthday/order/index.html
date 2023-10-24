@@ -160,7 +160,7 @@
                     location.replace('about:blank');
                 }
             }
-            sub.onclick = function () {
+            sub.onclick = async function () {
                 if (!Number.isInteger(Number(noodleinput.value))) {
                     noodleinput.value = Math.floor(Number(noodleinput.value));
                 }
@@ -175,8 +175,8 @@
                 }
                 var nv = noodleinput.value;
                 var orderID = String(Math.floor(Math.random() * 1E8)).padStart(8, "0")
-                localStorage.setItem('id', orderID)
-                dbset('userdata', orderID, {
+                await localStorage.setItem('id', orderID)
+                await dbset('userdata', orderID, {
                     id: orderID,
                     money: Number(nv) * 50,
                     noodle: Number(nv),
@@ -184,15 +184,21 @@
                     complete: false,
                     cantake: false
                 });
-                dbget('database', 'noodle').then((v) => {
+                await dbget('database', 'noodle').then((v) => {
                     dbupdate('database', 'noodle', {
                         previewcount: Number(v.data().previewcount - Number(nv)),
                         unok: Number(v.data().unok + Number(nv))
                     });
                 })
-                dbget('database', 'numberbase').then((v) => { dbupdate('database', 'numberbase', { allmoey: v.data().allmoey + (Number(nv) * 50) }); })
-                dbget('database', 'arraybase').then((v) => { var arrbs = v.data().order; arrbs.push(orderID); dbupdate('database', 'arraybase', { order: arrbs }) })
-                setTimeout('location.reload()', 500)
+                await dbget('database', 'numberbase').then((v) => { dbupdate('database', 'numberbase', { allmoey: v.data().allmoey + (Number(nv) * 50) }); })
+                await dbget('database', 'arraybase').then((v) => {
+                    var arrbs = v.data().order;
+                    var carray = v.data().cantakelist;
+                    arrbs.push(orderID);
+                    carray.push(false)
+                    dbupdate('database', 'arraybase', { order: arrbs, cantakelist: carray });
+                })
+                location.reload()
             }
         }
         else {
