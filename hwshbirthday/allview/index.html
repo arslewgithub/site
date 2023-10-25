@@ -102,7 +102,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
-        var loadoarr = [], loadcarr = 0;
+        var loadoarr = [], loadcarr = [];
         db.collection('database').doc('numberbase')
             .onSnapshot(doc => {
                 allmoney.innerHTML = doc.data().allmoey;
