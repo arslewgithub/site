@@ -128,13 +128,10 @@
                 for (var i = 0; i < doc.data().order.length; i++) {
                     loadoarr.push(doc.data().order[i])
                 }
-                for (var i = 0; i < doc.data().order.length; i++) {
-                    loadcarr.push(doc.data().cantakelist[i])
-                }
-                for (var i = 0; i < doc.data().cantakelist.length; i++) {
-                    await ctbtable(!loadcarr[i], i)
-                }
                 initialization();
+                for (var i = 0; i < doc.data().cantakelist.length; i++) {
+                    ctbtable(!doc.data().cantakelist[i], i)
+                }
             });
         async function createBlock(arrl) {
             var newblock = document.createElement('div');
@@ -171,11 +168,14 @@
         }
 
         async function initialization() {
+            var carray;
+            var userarr = await getCopyUserData();
             for (let i = 0; i < document.getElementsByClassName('finishorder').length; i++) {
                 document.getElementsByClassName('finishorder')[i].onclick = async function () {
                     if (confirm("確定已完成？")) {
                         await dbget('database', 'arraybase').then(async (v) => {
                             var arrbs = v.data().order;
+                            var arrcbs = v.data().cantakelist;
                             var dbnd
                             await dbget('database', 'noodle').then(async (c) => {
                                 dbnd = c.data().nowok;
@@ -186,12 +186,12 @@
                             await dbupdate('userdata', String(arrbs[i]), { complete: true });
                             arrbs.splice(i, 1);
                             await dbupdate('database', 'arraybase', { order: arrbs });
+                            arrcbs.splice(i, 1);
+                            dbupdate('database', 'arraybase', { cantakelist: arrcbs })
                         })
                     }
                 }
             };
-            var carray;
-            var userarr = await getCopyUserData();
             for (let i = 0; i < document.getElementsByClassName('deleteorder').length; i++) {
                 document.getElementsByClassName('deleteorder')[i].onclick = function () {
                     if (confirm("您真的確定要刪除嗎？")) {
