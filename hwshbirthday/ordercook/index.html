@@ -128,7 +128,7 @@
             userarr = await getCopyUserData();
             await dbget('database', 'arraybase').then((v) => {
                 oarray = v.data().order;
-                var n = dataoked + 1;
+                var n = dataoked;
                 carray = [];
                 for (var i = 0; i < oarray.length; i++) {
                     if (userarr[oarray[i]].cantake != (n - userarr[oarray[i]].noodle > 0)) {
