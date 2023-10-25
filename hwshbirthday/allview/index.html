@@ -132,7 +132,20 @@
                 for (var i = 0; i < doc.data().cantakelist.length; i++) {
                     ctbtable(!doc.data().cantakelist[i], i)
                 }
+                checkBlock(doc.data().order[i])
             });
+        async function checkBlock(arr) {
+            var tl = await getCopyUserData();
+            if(arr.length != document.querySelectorAll('.ectrl').length){
+                document.querySelectorAll('.ectrl').forEach(e => {
+                    e.remove();
+                })
+                var tl = getCopyUserData();
+                for (var i = 0; i < arr.length; i++) {
+                    await createBlock(tl[arr[i]]);
+                }
+            }
+        }
         async function createBlock(arrl) {
             var newblock = document.createElement('div');
             let inf = {};
@@ -218,7 +231,7 @@
                                     .doc(String(arrbs[i]))
                                     .delete()
                                     .then(() => {
-                                        alert('Data successfully deleted!');
+                                        //alert('Data successfully deleted!');
                                     })
                                 arrbs.splice(i, 1);
                                 dbupdate('database', 'arraybase', { order: arrbs })
