@@ -128,8 +128,11 @@
                 for (var i = 0; i < doc.data().order.length; i++) {
                     loadoarr.push(doc.data().order[i])
                 }
+                for (var i = 0; i < doc.data().order.length; i++) {
+                    loadcarr.push(doc.data().cantakelist[i])
+                }
                 for (var i = 0; i < doc.data().cantakelist.length; i++) {
-                    await ctbtable(!doc.data().cantakelist[i], i)
+                    await ctbtable(!loadcarr[i], i)
                 }
                 initialization();
             });
