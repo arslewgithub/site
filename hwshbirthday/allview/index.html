@@ -132,7 +132,7 @@
                 for (var i = 0; i < doc.data().cantakelist.length; i++) {
                     ctbtable(!doc.data().cantakelist[i], i)
                 }
-                checkBlock(doc.data().order[i])
+                checkBlock(loadoarr)
             });
         async function checkBlock(arr) {
             var tl = await getCopyUserData();
@@ -207,8 +207,8 @@
             };
             for (let i = 0; i < document.getElementsByClassName('deleteorder').length; i++) {
                 document.getElementsByClassName('deleteorder')[i].onclick = function () {
-                    if (confirm("您真的確定要刪除嗎？")) {
-                        if (confirm("您真的真的確定要刪除嗎？(刪除的訂單將無法恢復)")) {
+                    //if (confirm("您真的確定要刪除嗎？")) {
+                        //if (confirm("您真的真的確定要刪除嗎？(刪除的訂單將無法恢復)")) {
                             var arrbs;
                             dbget('database', 'arraybase').then(async (v) => {
                                 arrbs = v.data().order;
@@ -231,7 +231,7 @@
                                     .doc(String(arrbs[i]))
                                     .delete()
                                     .then(() => {
-                                        //alert('Data successfully deleted!');
+                                        alert('Data successfully deleted!');
                                     })
                                 arrbs.splice(i, 1);
                                 dbupdate('database', 'arraybase', { order: arrbs })
