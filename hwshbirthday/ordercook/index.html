@@ -131,7 +131,7 @@
                 var n = dataoked;
                 carray = [];
                 for (var i = 0; i < oarray.length; i++) {
-                    if (userarr[oarray[i]].cantake != (n - userarr[oarray[i]].noodle > 0)) {
+                    if (userarr[oarray[i]].cantake != (n - userarr[oarray[i]].noodle >= 0)) {
                         dbupdate('userdata', oarray[i], {
                             cantake: (n - userarr[oarray[i]].noodle >= 0)
                         })
