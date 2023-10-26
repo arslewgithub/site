@@ -1,17 +1,18 @@
 html {
     min-height: 100%;
-    background: linear-gradient(-70deg, #9F88FF, #4c19ff);
+    background: #993344;
+    /*background: #FFF;*/
 }
 
 h1.title-text1 {
-    color: #FFAA61;
+    color: #FFAA50;
     margin: 1px;
     text-wrap: nowrap;
     text-shadow: 2px 1px 0px #000;
 }
 
 h1.title-text2 {
-    color: #FE6F71;
+    color: #7080FF;
     float: right;
     margin: 1px;
     text-wrap: nowrap;
@@ -34,12 +35,14 @@ body {
 }
 
 .block {
-    background: linear-gradient(-70deg, #A4FFD3CD, #8EC2FFCD);
+    background: linear-gradient(-70deg, #FFFFFF9A, #FFE5F080, #FFFFFF8A);
+    /*background: linear-gradient(-70deg, #AAAAAA8A 0%, #FFFFFF80 40%, #AAAAAA8A 100%);*/
     border-radius: 17.5px;
     margin-top: 20px;
     margin-bottom: 20px;
     box-shadow: 2px 2px 4px 0 #222222aa;
     padding: 20px;
+    color: #000;
 }
 
 button,
@@ -60,8 +63,8 @@ input[type="button"].false-button {
 button.true-button,
 input[type="button"].true-button {
     border-radius: 100px;
-    background-color: #19AF55CD;
-    border: 2px solid green;
+    background-color: #1955EFCD;
+    border: 2px solid #0933AA;
     color: white;
     padding: 5px;
     text-align: center;
