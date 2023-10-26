@@ -42,7 +42,7 @@ async function setCantake(num) {
             var n = k.data().nowok + num;
             carray = [];
             for (var i = 0; i < arrbs.length; i++) {
-                if (userarr[arrbs[i]].cantake != (n - userarr[arrbs[i]].noodle > 0)) {
+                if (userarr[arrbs[i]].cantake != (n - userarr[arrbs[i]].noodle >= 0)) {
                     dbupdate('userdata', arrbs[i], {
                         cantake: (n - userarr[arrbs[i]].noodle >= 0)
                     })
