@@ -7,6 +7,19 @@ const firebaseConfig = {
     appId: "1:63492103924:web:f1408217b35c82ce7948a1",
     measurementId: "G-5ZE5FV7ZM4"
 };
+
+/*
+const firebaseConfig = {
+    apiKey: "AIzaSyAf9DnH-DXzlXmeyqCniQopqP6VC-k0B-c",
+    authDomain: "garden-party2.firebaseapp.com",
+    projectId: "garden-party2",
+    storageBucket: "garden-party2.appspot.com",
+    messagingSenderId: "235268083051",
+    appId: "1:235268083051:web:374a29c4d8bc035abf902e",
+    measurementId: "G-B3T6VJ26XV"
+};
+*/
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 function dbset(collection, doc, setContent) {
