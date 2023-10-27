@@ -197,7 +197,7 @@
                         unok: Number(v.data().unok + Number(nv))
                     });
                 })
-                await dbget('database', 'numberbase').then((v) => { dbupdate('database', 'numberbase', { allmoey: v.data().allmoey + (Number(nv) * 50) }); })
+                await dbget('database', 'numberbase').then((v) => { dbupdate('database', 'numberbase', { allmoey: v.data().allmoey + (Number(nv) * 45) }); })
                 await dbget('database', 'arraybase').then((v) => {
                     var arrbs = v.data().order;
                     var carray = v.data().cantakelist;
