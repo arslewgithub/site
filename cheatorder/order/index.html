@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <meta name="description" content="509-線上點餐系統 為惠文高中校慶園遊會準備的線上點餐系統">
+    <link rel="shortcut icon" href="../../seeat/favicon509.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .block-title {
+            margin-top: 30px;
+            margin-bottom: 5px;
+            margin-left: 20px;
+            font-size: 50px;
+        }
+
+        .block-content {
+            margin-top: 5px;
+            margin-bottom: 40px;
+            margin-left: 20px;
+            font-size: 30px;
+        }
+
+        #noodleinput {
+            text-align: center;
+            font-size: 20px;
+            border: 2px solid #999999;
+            width: 150px;
+            background: #fffa;
+        }
+
+        .counter-frame {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .true-button.fbt {
+            float: right;
+        }
+
+        .false-button.fbt,
+        .true-button.fbt {
+            width: 128px;
+            height: 48px;
+            font-size: 17.5px;
+            display: inline-block;
+        }
+
+        #noodleplus {
+            border-radius: 0 1em 1em 0;
+            margin-left: 15px;
+            padding: 7.5px;
+            padding-right: 10px;
+            font-size: 20px;
+        }
+
+        #noodlereduce {
+            border-radius: 1em 0 0 1em;
+            margin-right: 15px;
+            padding: 7.5px;
+            padding-left: 10px;
+            font-size: 20px;
+        }
+
+        #wait {
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+    </style>
+    <title>HWSH 509 點餐系統</title>
+</head>
+
+<body>
+    <h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+    <main style="display: none;">
+        <div class="title-framep">
+            <div class="title-frame">
+                <h1 class="title-text1">歡慶惠文22周年校慶!</h1>
+                <h1 class="title-text2">509 點餐系統</h1>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-title">肉燥麵</div>
+            <span class="block-content">目前剩餘: </span>
+            <span class="block-content" id="noodlenow"></span>
+            <span class="block-content"> 份</span>
+            <div class="counter-frame">
+                <input type="button" value=" - " id="noodlereduce" class="false-button">
+                <input type="number" value="1" id="noodleinput">
+                <input type="button" value=" + " id="noodleplus" class="true-button">
+            </div>
+        </div>
+        <div class="block" id= "cheat">
+            <span>Order ID: </span>
+            <input type="text" placeholder="order ID" id="setid">
+            <br>
+            <span>Time line: </span>
+            <input type="number" placeholder="Defult position" id="arrposition">
+            <br>
+            <span>Set Time: </span>
+            <input type="time" step="2" placeholder="Input Time" id="timeset">
+            <br>
+            <span>Set Money: </span>
+            <input type="number" value="50" placeholder="Input Money" id="mny">
+        </div>
+        <div class="block">
+            <input type="button" class="fbt false-button" id="cencel" value="退出點餐">
+            <input type="button" class="fbt true-button" id="sub" value="確認送出">
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+            var noodlecount = 50, timess = 0;
+            db.collection('database').doc('noodle')
+                .onSnapshot(doc => {
+                    noodlecount = doc.data().previewcount;
+                    noodlenow.innerHTML = noodlecount;
+                    document.querySelector('main').style = '';
+                    try { wait.remove() } catch (e) { };
+                });
+            noodleinput.oninput = function () {
+                mny.value = Number(noodleinput.value) * 50;
+            }
+            noodleplus.onclick = function () {
+                noodleinput.value = Number(noodleinput.value) + 1;
+                mny.value = Number(noodleinput.value) * 50;
+            }
+            noodlereduce.onclick = function () {
+                noodleinput.value = Number(noodleinput.value) - 1;
+                mny.value = Number(noodleinput.value) * 50;
+            }
+            cencel.onclick = function () {
+                if (timess >= 3) {
+                    if (confirm("您確定要退出嗎？")) {
+                        cheat.remove();
+                    }
+                }
+                else {
+            	    timess += 1;
+                }
+            }
+            timeset.value = String(new Date().getHours()).padStart(2, '0') + ':' + String(new Date().getMinutes()).padStart(2, '0') + ':' + String(new Date().getSeconds()).padStart(2, '0');
+            sub.onclick = async function () {
+                if (timeset.value == '') {
+                    timeset.value = String(new Date().getHours()).padStart(2, '0') + ':' + String(new Date().getMinutes()).padStart(2, '0') + ':' + String(new Date().getSeconds()).padStart(2, '0');;
+                }
+                var nv = noodleinput.value;
+                var orderID = setid.value;
+                console.log(orderID)
+                await dbset('userdata', orderID, {
+                    id: orderID,
+                    money: Number(mny),
+                    noodle: Number(nv),
+                    time: String(timeset.value),
+                    complete: false,
+                    cantake: false
+                });
+                await dbget('database', 'noodle').then((v) => {
+                    dbupdate('database', 'noodle', {
+                        previewcount: Number(v.data().previewcount - Number(nv)),
+                        unok: Number(v.data().unok + Number(nv))
+                    });
+                })
+                await dbget('database', 'numberbase').then((v) => { dbupdate('database', 'numberbase', { allmoey: v.data().allmoey + (Number(nv) * 50) }); })
+                await dbget('database', 'arraybase').then((v) => {
+                    var arrbs = v.data().order;
+                    var carray = v.data().cantakelist;
+                    if (arrposition.value < 0) {
+                        arrbs.push(orderID);
+                    }
+                    else {
+                        arrbs.splice(arrposition.value, 0, orderID)
+                    }
+                    carray.push(true);
+                    dbupdate('database', 'arraybase', { order: arrbs, cantakelist: carray });
+                })
+                await setCantake(0);
+            }
+            setid.value = String(Math.floor(Math.random() * 1E8)).padStart(8, "0")
+    </script>
+</body>
+
+</html>
