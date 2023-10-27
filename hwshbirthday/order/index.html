@@ -185,7 +185,7 @@
                 await localStorage.setItem('id', orderID)
                 await dbset('userdata', orderID, {
                     id: orderID,
-                    money: Number(nv) * 50,
+                    money: Number(nv) * 45,
                     noodle: Number(nv),
                     time: String(new Date().getHours()).padStart(2, '0') + ':' + String(new Date().getMinutes()).padStart(2, '0') + ':' + String(new Date().getSeconds()).padStart(2, '0'),
                     complete: false,
