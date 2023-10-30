@@ -11,13 +11,15 @@
 			width: 100%;
 			height: 100%;
 			margin: 0;
-			background: #e0f0ff;
+			background: #dce8ff;
 		}
+
 		table,
 		tbody {
 			width: 420px;
 			height: 300px;
 		}
+
 		td {
 			width: 100rem;
 			height: 50px;
@@ -29,10 +31,11 @@
 		}
 
 		td.chart {
-			border: .5px solid #999999;
+			border: 0.5px solid #999999;
 			border-radius: 7px;
-			background: #ffcec2;
-			box-shadow: inset -1.25px -1.25px 0px .5px #555555;
+			background: #9c153c;
+			color: #ffd268;
+			box-shadow: inset -1.25px -1.25px 0px 0.5px #555555;
 			transition: .125s;
 		}
 
@@ -43,15 +46,15 @@
 		button {
 			width: 400px;
 			height: 40px;
-			background: #99a9ff;
-			border: 2px solid #999999;
+			background: #ffb9d8;
+			border: 0;
 			border-radius: 50px;
 			margin-top: 10px;
 			margin-left: 10px;
 			font-size: 18px;
 			cursor: pointer;
 			transition: .25s;
-			box-shadow: 0 0 8px .5px #333a;
+			box-shadow: 0 0 8px 0.5px #333a;
 		}
 
 		button:disabled {
@@ -60,37 +63,39 @@
 			border: 1px solid #c0c0c0;
 			cursor: not-allowed;
 		}
-		
+
 		button:active {
 			opacity: .7;
 			scale: .95;
 			box-shadow: 0 0 1px 0px #333a;
 		}
-		
+
 		td.geted {
 			animation: getani .5s;
 		}
-		
-		h2{
+
+		h2 {
 			margin: 0;
 			padding: 0;
 		}
-		
-		h4{
+
+		h4 {
 			margin: 0;
 			padding: 0;
 			margin-left: 230px;
 		}
-		
+
 		@keyframes getani {
 			0% {
 				scale: 1;
 			}
+
 			50% {
 				scale: 1.3;
 				background: #ffb499;
 				color: #760;
 			}
+
 			100% {
 				scale: 1;
 			}
@@ -158,7 +163,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<button>快速重新生成</button><br>
+		<button style="background: #fcffbb;">快速重新生成</button><br>
 		<button>動畫重新生成</button>
 	</div>
 	<script>
@@ -264,7 +269,6 @@
 				setTimeout(resolve, n * 1000);
 			});
 		}
-		gr();
 	</script>
 </body>
 
