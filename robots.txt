@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /hwshbirthday
+Disallow: /hwshbirthday/order
+Disallow: /hwshbirthday/ordercook
+Disallow: /hwshbirthday/allview
+Disallow: /hwshbirthday/order2
+Allow: /seeat
+Allow: /seeat/504
+Allow: /su/mathqn
+Allow: /seeat
