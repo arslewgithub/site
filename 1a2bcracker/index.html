@@ -17,8 +17,6 @@
 			margin-bottom: 20px;
 			display: block;
 		}
-		.block input{
-		}
 		.block span{
 			margin-bottom: 10px;
 			display: inline-block;
@@ -40,19 +38,34 @@
 			outline: none;
 			border-bottom: 2px solid #57f;
 		}
-		#ans, #ret, #rrt{
-			width: 111px;
+		#ans, #ret{
+			width: 71px;
 			height: 32px;
 			background: #0000;
 			border: 2px solid #999;
 			font-size: 30px;
 			transition: .25s;
 			border-radius: 5px;
-			padding: 20px;
+			padding-left: 10px;
+			padding-right: 10px;
 		}
-		#ans:focus, #ret:focus, #rrt:focus{
+		#ans:focus, #ret:focus{
 			outline: none;
 			border: 2px solid #57f;
+		}
+		#rrt{
+			width: 71px;
+			height: 32px;
+			background: #0000;
+			border: 0;
+			border-bottom: 2px solid #999;
+			font-size: 30px;
+			transition: .25s;
+		}
+		#rrt:focus{
+			border: 0;
+			outline: none;
+			border-bottom: 2px solid #57f;
 		}
 		#ret{
 			float: right;
