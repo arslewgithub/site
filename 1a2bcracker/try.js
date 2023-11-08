@@ -2,24 +2,29 @@ restart.onclick = start;
 subans.onclick = crack;
 ret.oninput = diffif;
 AA.oninput = function (){
-    if (Number(AA.value) > 10){
-        AA.value = AA.value % 10;
+    if (String(AA.value).length > 1){
+        AA.value = String(AA.value).slice(1);
     }
     if (Number(AA.value) + Number(BB.value) > 4){
         AA.value = 4 - Number(BB.value);
     }
 };
 BB.oninput = function (){
-    if (Number(BB.value) > 10){
-        BB.value = BB.value % 10;
+    if (String(BB.value).length > 1){
+        BB.value = String(BB.value).slice(1);
     }
     if (Number(AA.value) + Number(BB.value) > 4){
         BB.value = 4 - Number(AA.value);
     }
 };
 ans.oninput = function (){
-    if (Number(ans.value) > 9876){
-        ans.value = ans.value % 10000;
+    if (String(ans.value).length > 4){
+        ans.value = String(ans.value).slice(1);
+    }
+};
+rrt.oninput = function (){
+    if (String(rrt.value).length > 4){
+        rrt.value = String(rrt.value).slice(1);
     }
 };
 
@@ -29,7 +34,7 @@ start();
 
 function start () {
     clist = getList();
-    rrt.value = clist[0];
+    rrt.value = clist[Math.floor(clist.length / 2)];
     AA.value = '';
     BB.value = '';
     ans.value = String(getList()[Math.floor(Math.random()*getList().length)]);
@@ -58,13 +63,13 @@ function diff (s1, s2) {
     var a = 0;
     var b = 0;
     
-    for (var i = 0; i < 4; i++) {
+    for (var i =0; i < 4; i++) {
         if(s1[i] == s2[i]){
-            a += 1;
+            a += 1; //a++;
         }
         var idx = s2.indexOf(s1[i]);
         if(idx != -1 && idx != i){
-            b += 1;
+            b += 1; //b++;
         }
     }
     return {a: a, b: b};
@@ -84,14 +89,14 @@ function crack () {
         }
     }
     console.log(clist)
-    rrt.value = clist[0];
+    rrt.value = clist[Math.floor(clist.length / 2)];
     AA.value = '';
     BB.value = '';
 }
 
 function diffif(){
-    if (Number(ret.value) > 9876){
-        ret.value = ret.value % 10000;
+    if (String(ret.value).length > 4){
+        ret.value = String(ret.value).slice(1);
     }
     var r = diff(ans.value, ret.value)
     rur.innerHTML = r.a + 'A' + r.b + 'B';
