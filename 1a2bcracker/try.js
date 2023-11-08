@@ -34,7 +34,7 @@ start();
 
 function start () {
     clist = getList();
-    rrt.value = clist[Math.floor(clist.length / 2)];
+    rrt.value = clist[0];
     AA.value = '';
     BB.value = '';
     ans.value = String(getList()[Math.floor(Math.random()*getList().length)]);
@@ -89,7 +89,7 @@ function crack () {
         }
     }
     console.log(clist)
-    rrt.value = clist[Math.floor(clist.length / 2)];
+    rrt.value = clist[0];
     AA.value = '';
     BB.value = '';
 }
