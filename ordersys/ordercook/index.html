@@ -207,7 +207,6 @@
         ncancelok.onclick = async function () {
             if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
                 if (cdataarr.noodle.nowok > 0) {
-                    userarr = await getCopyUserData();
                     await setCantake(-1, 1);
                     dbupdate('database', 'noodle', {
                         unok: cdataarr.noodle.unok + 1,
@@ -220,8 +219,7 @@
             }
         }
         nisok.onclick = async function () {
-            userarr = await getCopyUserData();
-            await setCantake(1, 1);
+            await setCantake();
             dbupdate('database', 'noodle', {
                 unok: cdataarr.noodle.unok - 1,
                 nowok: cdataarr.noodle.nowok + 1
@@ -230,8 +228,7 @@
         rcancelok.onclick = async function () {
             if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
                 if (cdataarr.brpss.nowok > 0) {
-                    userarr = await getCopyUserData();
-                    await setCantake(-1, 2);
+                    await setCantake();
                     dbupdate('database', 'brpss', {
                         unok: cdataarr.brpss.unok + 1,
                         nowok: cdataarr.brpss.nowok - 1
@@ -243,8 +240,7 @@
             }
         }
         risok.onclick = async function () {
-            userarr = await getCopyUserData();
-            await setCantake(1, 2);
+            await setCantake();
             dbupdate('database', 'brpss', {
                 unok: cdataarr.brpss.unok - 1,
                 nowok: cdataarr.brpss.nowok + 1
@@ -253,8 +249,7 @@
         fncancelok.onclick = async function () {
             if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
                 if (cdataarr.fi_noodle.nowok > 0) {
-                    userarr = await getCopyUserData();
-                    await setCantake(-1, 3);
+                    await setCantake();
                     dbupdate('database', 'fi_noodle', {
                         unok: cdataarr.fi_noodle.unok + 1,
                         nowok: cdataarr.fi_noodle.nowok - 1
@@ -266,8 +261,7 @@
             }
         }
         fnisok.onclick = async function () {
-            userarr = await getCopyUserData();
-            await setCantake(1, 3);
+            await setCantake();
             dbupdate('database', 'fi_noodle', {
                 unok: cdataarr.fi_noodle.unok - 1,
                 nowok: cdataarr.fi_noodle.nowok + 1
@@ -276,8 +270,7 @@
         bncancelok.onclick = async function () {
             if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
                 if (cdataarr.beef_noodle.nowok > 0) {
-                    userarr = await getCopyUserData();
-                    await setCantake(-1, 4);
+                    await setCantake();
                     dbupdate('database', 'beef_noodle', {
                         unok: cdataarr.beef_noodle.unok + 1,
                         nowok: cdataarr.beef_noodle.nowok - 1
@@ -289,8 +282,7 @@
             }
         }
         bnisok.onclick = async function () {
-            userarr = await getCopyUserData();
-            await setCantake(1, 4);
+            await setCantake();
             dbupdate('database', 'beef_noodle', {
                 unok: cdataarr.beef_noodle.unok - 1,
                 nowok: cdataarr.beef_noodle.nowok + 1
@@ -299,8 +291,7 @@
         scancelok.onclick = async function () {
             if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
                 if (cdataarr.salad.nowok > 0) {
-                    userarr = await getCopyUserData();
-                    await setCantake(-1, 5);
+                    await setCantake();
                     dbupdate('database', 'salad', {
                         unok: cdataarr.salad.unok + 1,
                         nowok: cdataarr.salad.nowok - 1
@@ -312,8 +303,7 @@
             }
         }
         sisok.onclick = async function () {
-            userarr = await getCopyUserData();
-            await setCantake(1, 5);
+            await setCantake();
             dbupdate('database', 'salad', {
                 unok: cdataarr.salad.unok - 1,
                 nowok: cdataarr.salad.nowok + 1

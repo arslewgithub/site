@@ -112,7 +112,7 @@
                 await initialization();
             });
         async function makeBlock() {
-        	var arr = cdataarr.arraybase.order;
+            var arr = cdataarr.arraybase.order;
             document.querySelectorAll('.ectrl').forEach(e => {
                 e.remove();
             })
@@ -190,6 +190,7 @@
                     if (confirm("您真的確定要刪除嗎？")) {
                         if (confirm("您真的真的確定要刪除嗎？(刪除的訂單將無法恢復)")) {
                             var arrbs = cdataarr.arraybase.order;
+                            const cuv = cuserarr[JSON.stringify(arrbs[i])];
                             var xdn = cuv.noodle;
                             var xdfn = cuv.fi_noodle;
                             var xdbn = cuv.beef_noodle;
@@ -219,12 +220,12 @@
                             dbupdate('database', 'numberbase', {
                                 allmoey: Number(cdataarr.numberbase.allmoey - Number(xdm))
                             });
-                           db.collection('userdata')
-                               .doc(String(arrbs[i]))
-                               .delete()
-                           arrbs.splice(i, 1);
-                           dbupdate('database', 'arraybase', { order: arrbs })
-                           setCantake(0);
+                            db.collection('userdata')
+                                .doc(String(arrbs[i]))
+                                .delete()
+                            arrbs.splice(i, 1);
+                            dbupdate('database', 'arraybase', { order: arrbs })
+                            setCantake(0);
                         }
                     }
                 }
