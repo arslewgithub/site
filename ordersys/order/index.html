@@ -521,7 +521,6 @@
                 '#okbutton.orderfinish {background-color: #dde572;' +
                 'border: 2px solid #a6ac56;font-weight: bold;color: black;}'
             var storgeoID = localStorage.getItem('id');
-            setCantake(0);
             db.collection('userdata').doc(storgeoID)
                 .onSnapshot(doc => {
                     try {
@@ -546,7 +545,7 @@
                         console.error(e)
                         alert('錯誤! 請找工作人員詢問報修!\nError: Can\'t find \"ID\" on Database')
                         localStorage.removeItem('id');
-                        location.replace('../order');
+                        location.reload();
                     }
                 });
         }
