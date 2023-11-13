@@ -156,16 +156,16 @@
 
         async function initialization() {
             var carray;
-            var userarr = await getCopyUserData();
             for (let i = 0; i < document.getElementsByClassName('finishorder').length; i++) {
                 document.getElementsByClassName('finishorder')[i].onclick = async function () {
                     if (confirm("確定已完成？")) {
-                        var xdn = cuserarr[JSON.stringify(arrbs[i])].noodle;
-                        var xdfn = cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
-                        var xdbn = cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
-                        var xdr = cuserarr[JSON.stringify(arrbs[i])].brpss;
-                        var xds = cuserarr[JSON.stringify(arrbs[i])].salad;
                         var arrbs = cdataarr.arraybase.order;
+                        const cuv = cuserarr[JSON.stringify(arrbs[i])];
+                        var xdn = cuv.noodle;
+                        var xdfn = cuv.fi_noodle;
+                        var xdbn = cuv.beef_noodle;
+                        var xdr = cuv.brpss;
+                        var xds = cuv.salad;
                         var arrcbs = cdataarr.arraybase.cantakelist;
                         var dbfnd = cdataarr.fi_noodle.nowok;
                         var dbbnd = cdataarr.beef_noodle.nowok;
@@ -190,12 +190,12 @@
                     if (confirm("您真的確定要刪除嗎？")) {
                         if (confirm("您真的真的確定要刪除嗎？(刪除的訂單將無法恢復)")) {
                             var arrbs = cdataarr.arraybase.order;
-                            var xdn = cuserarr[JSON.stringify(arrbs[i])].noodle;
-                            var xdfn = cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
-                            var xdbn = cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
-                            var xdr = cuserarr[JSON.stringify(arrbs[i])].brpss;
-                            var xds = cuserarr[JSON.stringify(arrbs[i])].salad;
-                            var xdm = cuserarr[JSON.stringify(arrbs[i])].money;
+                            var xdn = cuv.noodle;
+                            var xdfn = cuv.fi_noodle;
+                            var xdbn = cuv.beef_noodle;
+                            var xdr = cuv.brpss;
+                            var xds = cuv.salad;
+                            var xdm = cuv.money;
                             dbupdate('database', 'noodle', {
                                 previewcount: Number(cdataarr.noodle.previewcount + Number(xdn)),
                                 unok: Number(cdataarr.noodle.unok - Number(xdn))
