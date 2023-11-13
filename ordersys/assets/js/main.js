@@ -54,7 +54,7 @@ db.collection('database')
             var c = doc.data();
             cdataarr[String(doc.id)] = JSON.parse(JSON.stringify(c));
             document.querySelector('main').style = '';
-            try { wait.remove(); } catch (e) {};
+            try { wait.remove(); } catch (e) { };
         });
     });
 db.collection('userdata')
@@ -64,7 +64,7 @@ db.collection('userdata')
             cuserarr[JSON.stringify(doc.id)] = JSON.parse(JSON.stringify(c));
         });
     });
- 
+
 function setCantake(num) {
     var arrbs = cdataarr.arraybase.order;
     var n = cdataarr.noodle.nowok + num;
@@ -74,17 +74,35 @@ function setCantake(num) {
     var s = cdataarr.salad.nowok + num;
     carray = [];
     for (var i = 0; i < arrbs.length; i++) {
-    	var tf = false;
-        if (n >= cuserarr[JSON.stringify(arrbs[i])].noodle && fn >= cuserarr[JSON.stringify(arrbs[i])].fi_noodle && bn >= cuserarr[JSON.stringify(arrbs[i])].beef_noodle && r >= cuserarr[JSON.stringify(arrbs[i])].brpss && s >= cuserarr[JSON.stringify(arrbs[i])].salad) {
+        var tf = false;
+        const cus = cuserarr[JSON.stringify(arrbs[i])];
+        if (n >= cus.noodle && fn >= cus.fi_noodle && bn >= cus.beef_noodle && r >= cus.brpss && s >= cus.salad) {
             tf = true;
+            n -= cus.noodle;
+            fn -= cus.fi_noodle;
+            bn -= cus.beef_noodle;
+            s -= cus.salad;
+            r -= cus.brpss;
+        }
+        else {
+            if (n < cus.noodle) {
+                n = 0;
+            }
+            if (fn < cus.fi_noodle) {
+                fn = 0;
+            }
+            if (bn < cus.beef_noodle) {
+                bn = 0;
+            }
+            if (r < cus.brpss) {
+                r = 0;
+            }
+            if (s < cus.salad) {
+                s = 0;
+            }
         }
         carray.push(tf);
-        n -= cuserarr[JSON.stringify(arrbs[i])].noodle;
-        fn -= cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
-        bn -= cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
-        s -= cuserarr[JSON.stringify(arrbs[i])].salad;
-        r -= cuserarr[JSON.stringify(arrbs[i])].brpss;
-        if (cuserarr[JSON.stringify(arrbs[i])].cantake != tf) {
+        if (cus.cantake != tf) {
             dbupdate('userdata', arrbs[i], {
                 cantake: tf
             })
@@ -94,11 +112,7 @@ function setCantake(num) {
 }
 
 function delay(n) {
-			return new Promise(function (resolve) {
-				setTimeout(resolve, n * 1000);
-			});
-		}
-		
-/*
-{"arraybase":{"order":[],"cantakelist":[]},"beef_noodle":{"previewcount":50,"unok":0,"nowok":0},"brpss":{"nowok":0,"previewcount":60,"name":"魯肉飯","unok":0},"fi_noodle":{"previewcount":120,"name":"炒泡麵","unok":0,"nowok":0},"noodle":{"unok":0,"previewcount":80,"nowok":0,"name":"肉燥麵"},"numberbase":{"allmoey":0},"salad":{"previewcount":90,"unok":0,"nowok":0}}
-*/
+    return new Promise(function (resolve) {
+        setTimeout(resolve, n * 1000);
+    });
+}
