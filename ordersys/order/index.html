@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="../assets/css/main.css">
-    <style>
+    <style id="sty">
         .block-title {
             margin-top: 10px;
             margin-bottom: 5px;
@@ -337,7 +337,7 @@
                     this.value = Math.floor(Number(this.value));
                 }
                 else if (Number(this.value) > fnoodlecount) {
-                    this.value = noodlecount;
+                    this.value = fnoodlecount;
                 }
                 else if ((Number(this.value) < 0) && (this.value != '')) {
                     this.value = 0;
@@ -370,7 +370,7 @@
                     this.value = Math.floor(Number(this.value));
                 }
                 else if (Number(this.value) > bnoodlecount) {
-                    this.value = noodlecount;
+                    this.value = bnoodlecount;
                 }
                 else if ((Number(this.value) < 0) && (this.value != '')) {
                     this.value = 0;
@@ -410,32 +410,39 @@
                 }
             }
             sub.onclick = async function () {
-                sub.disabled = 'true';
-                cencel.disabled = 'true';
-                noodleplus.disabled = 'true';
-                fnoodleplus.disabled = 'true';
-                bnoodleplus.disabled = 'true';
-                riceplus.disabled = 'true';
-                saladplus.disabled = 'true';
-                noodlereduce.disabled = 'true';
-                fnoodlereduce.disabled = 'true';
-                bnoodlereduce.disabled = 'true';
-                ricereduce.disabled = 'true';
-                saladreduce.disabled = 'true';
-                noodleinput.disabled = 'true';
-                fnoodleinput.disabled = 'true';
-                bnoodleinput.disabled = 'true';
-                saladinput.disabled = 'true';
-                riceinput.disabled = 'true';
+                if(localStorage.getItem('dev') != 'on'){
+                    sub.disabled = 'true';
+                    cencel.disabled = 'true';
+                    noodleplus.disabled = 'true';
+                    fnoodleplus.disabled = 'true';
+                    bnoodleplus.disabled = 'true';
+                    riceplus.disabled = 'true';
+                    saladplus.disabled = 'true';
+                    noodlereduce.disabled = 'true';
+                    fnoodlereduce.disabled = 'true';
+                    bnoodlereduce.disabled = 'true';
+                    ricereduce.disabled = 'true';
+                    saladreduce.disabled = 'true';
+                    noodleinput.disabled = 'true';
+                    fnoodleinput.disabled = 'true';
+                    bnoodleinput.disabled = 'true';
+                    saladinput.disabled = 'true';
+                    riceinput.disabled = 'true';
+                }
                 var nv = noodleinput.value;
                 var fnv = fnoodleinput.value;
                 var bnv = bnoodleinput.value;
                 var sv = saladinput.value;
                 var rv = riceinput.value;
                 var am = (Number(nv) * 45) + (Number(sv) * 30) + (Number(fnv) * 40) + (Number(bnv) * 65) + (Number(rv) * 60);
-                if(am <= 0){location.reload();return false;}
-                var orderID = String(Math.floor(Math.random() * 1E8)).padStart(8, "0")
-                await localStorage.setItem('id', orderID)
+                if(am <= 0){return false;}
+                var orderID = Math.floor(Math.random() * 1296).toString(36).toUpperCase() + String(cdataarr.numberbase.id).padStart(2, "0");
+                dbupdate('database', 'numberbase', {
+                    id: cdataarr.numberbase.id + 1
+                })
+                if(localStorage.getItem('dev') != 'on'){
+                    await localStorage.setItem('id', orderID)
+                }
                 await dbset('userdata', orderID, {
                     id: orderID,
                     money: am,
@@ -487,11 +494,61 @@
                     dbupdate('database', 'arraybase', { order: arrbs, cantakelist: carray });
                 })
                 setCantake(0);
-                location.reload()
+                if(localStorage.getItem('dev') != 'on'){
+                    location.reload();
+                }
             }
         }
         else {
-            location.replace('../order2');
+            document.querySelector('main').innerHTML = '<div class="title-framep">' +
+                '<div class="title-frame">' +
+                '<h1 class="title-text1">校慶園遊會點餐</h1>' +
+                '<h1 class="title-text2">候餐區</h1></div></div>' +
+                '<div class="block"><h1>我們已收到您的訂單</h1><br>' +
+                '<h1>取餐號碼:</h1><h1 id="order2id">未知</h1>' +
+                '<br><h1>應給付金額:</h1><h1 id="normalmoney">未知</h1>' +
+                '<h1>元</h1><br><div id="okbutton">未知的錯誤!</div></div>';
+            sty.innerHTML = '#wait {color: white;font-size: 20px;font-weight: bolder;}' +
+                'h1,h2,h3,h4,h5 {margin: 0px;display: inline-block;}' +
+                'h1.title-text1,h1.title-text2 {display: block;}' +
+                '#order2id {color: red;font-size: 35px;}' +
+                '.block {text-align: center;}' +
+                '#okbutton {border-radius: 100px;background-color: #bdc293;' +
+                'border: 2px solid #a2a777;color: rgb(94, 94, 94);padding: 5px;' +
+                'text-align: center;font-size: 22px;margin-top: 10px;}' +
+                '#okbutton.gettedorder {background-color: #4dc47d;' +
+                'border: 2px solid #35a361;font-weight: bold;color: black;}' +
+                '#okbutton.orderfinish {background-color: #dde572;' +
+                'border: 2px solid #a6ac56;font-weight: bold;color: black;}'
+            var storgeoID = localStorage.getItem('id');
+            db.collection('userdata').doc(storgeoID)
+                .onSnapshot(doc => {
+                    try {
+                        setCantake(0);
+                        document.querySelector('main').style = '';
+                        order2id.innerHTML = doc.data().id;
+                        normalmoney.innerHTML = doc.data().money;
+                        if (doc.data().complete == true) {
+                            okbutton.innerHTML = '取餐完畢<br>請好好享用';
+                            okbutton.classList = ['gettedorder']
+                            localStorage.removeItem('id')
+                        }
+                        else if ((doc.data().complete == false) && (doc.data().cantake == true)) {
+                            okbutton.innerHTML = '餐點已準備完畢<br>請領取';
+                            okbutton.classList = ['orderfinish']
+                        }
+                        else if ((doc.data().complete == false) && (doc.data().cantake == false)) {
+                            okbutton.innerHTML = '目前尚無法取餐';
+                            okbutton.classList = []
+                        }
+                    }
+                    catch (e) {
+                        console.error(e)
+                        alert('錯誤! 請找工作人員詢問報修!\nError: Can\'t find \"ID\" on Database')
+                        localStorage.removeItem('id');
+                        location.replace('../order');
+                    }
+                });
         }
     </script>
 </body>

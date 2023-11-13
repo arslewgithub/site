@@ -101,73 +101,46 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
-        var loadoarr = [], loadcarr = [];
         db.collection('database').doc('numberbase')
             .onSnapshot(doc => {
                 allmoney.innerHTML = doc.data().allmoey;
             });
         jump.onclick = function () { location.href = '../ordercook/' }
         db.collection('database').doc('arraybase')
-            .onSnapshot(async doc => {
-                let rt = loadoarr.filter((e) => {
-                    return doc.data().order.indexOf(e) === -1
-                })
-                let rc = doc.data().order.filter((e) => {
-                    return loadoarr.indexOf(e) === -1
-                })
-                for (var t = 0; t < rt.length; t++) {
-                    await removeBlock(rt[t])
-                }
-                for (var i = 0; i < rc.length; i++) {
-                    await createBlock(rc[i])
-                }
-                loadoarr = [];
-                for (var i = 0; i < doc.data().order.length; i++) {
-                    loadoarr.push(doc.data().order[i])
-                }
-                initialization();
-                for (var i = 0; i < doc.data().cantakelist.length; i++) {
-                    ctbtable(!doc.data().cantakelist[i], i)
-                }
-                checkBlock(loadoarr)
+            .onSnapshot(async () => {
+                await makeBlock()
+                await initialization();
             });
-        async function checkBlock(arr) {
-            var tl = await getCopyUserData();
-            if(arr.length != document.querySelectorAll('.ectrl').length){
-                document.querySelectorAll('.ectrl').forEach(e => {
-                    e.remove();
-                })
-                var tl = getCopyUserData();
-                for (var i = 0; i < arr.length; i++) {
-                    await createBlock(tl[arr[i]]);
-                }
+        async function makeBlock() {
+        	var arr = cdataarr.arraybase.order;
+            document.querySelectorAll('.ectrl').forEach(e => {
+                e.remove();
+            })
+            for (var i = 0; i < arr.length; i++) {
+                await createBlock(cuserarr[JSON.stringify(arr[i])]);
             }
         }
         async function createBlock(arrl) {
             var newblock = document.createElement('div');
-            let inf = {};
-            await db.collection('userdata').doc(String(arrl))
-                .get().then(doc => {
-                    inf = doc.data();
-                    newblock.id = 'ck' + String(inf.id)
-                    var rtf;
-                    if (inf.cantake) {
-                        rtf = ' ';
-                    }
-                    else {
-                        rtf = ' disabled="disabled" ';
-                    }
-                    newblock.innerHTML = '<h2 class="s1 view-id">ID: </h2><h2 class="view-id">' + inf.id +
-                        '</h2><br><h2 class="s2">點餐內容: </h2><br><h2 class="s3">肉燥麵: </h2><h2>' + inf.noodle +
-                        '</h2><br><h2 class="s3">牛肉麵: </h2><h2>' + inf.beef_noodle +
-                        '</h2><br><h2 class="s3">炒泡麵: </h2><h2>' + inf.fi_noodle +
-                        '</h2><br><h2 class="s3">滷肉飯: </h2><h2>' + inf.brpss +
-                        '</h2><br><h2 class="s3">沙拉: </h2><h2>' + inf.salad +
-                        '</h2><br><h2 class="s2">應支付金額: </h2><h2>' + inf.money +
-                        '</h2><br><h2 class="s2">訂餐時間: </h2><h2>' + inf.time +
-                        '</h2><br><input type="button" value="刪除訂單" class="deleteorder false-button"><input type="button" value="完成訂單"' + rtf +
-                        'class="finishorder true-button">';
-                });
+            let inf = arrl;
+            newblock.id = 'ck' + String(inf.id)
+            var rtf;
+            if (inf.cantake) {
+                rtf = ' ';
+            }
+            else {
+                rtf = ' disabled="disabled" ';
+            }
+            newblock.innerHTML = '<h2 class="s1 view-id">ID: </h2><h2 class="view-id">' + inf.id +
+                '</h2><br><h2 class="s2">點餐內容: </h2><br><h2 class="s3">肉燥麵: </h2><h2>' + inf.noodle +
+                '</h2><br><h2 class="s3">牛肉麵: </h2><h2>' + inf.beef_noodle +
+                '</h2><br><h2 class="s3">炒泡麵: </h2><h2>' + inf.fi_noodle +
+                '</h2><br><h2 class="s3">滷肉飯: </h2><h2>' + inf.brpss +
+                '</h2><br><h2 class="s3">沙拉: </h2><h2>' + inf.salad +
+                '</h2><br><h2 class="s2">應支付金額: </h2><h2>' + inf.money +
+                '</h2><br><h2 class="s2">訂餐時間: </h2><h2>' + inf.time +
+                '</h2><br><input type="button" value="刪除訂單" class="deleteorder false-button"><input type="button" value="完成訂單"' + rtf +
+                'class="finishorder true-button">';
             newblock.classList.add('block');
             newblock.classList.add('ectrl');
             document.getElementsByTagName('main')[0].appendChild(newblock);
@@ -187,11 +160,11 @@
             for (let i = 0; i < document.getElementsByClassName('finishorder').length; i++) {
                 document.getElementsByClassName('finishorder')[i].onclick = async function () {
                     if (confirm("確定已完成？")) {
-                        xdn = cuserarr[JSON.stringify(arrbs[i])].noodle;
-                        xdfn = cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
-                        xdbn = cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
-                        xdr = cuserarr[JSON.stringify(arrbs[i])].brpss;
-                        xds = cuserarr[JSON.stringify(arrbs[i])].salad;
+                        var xdn = cuserarr[JSON.stringify(arrbs[i])].noodle;
+                        var xdfn = cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
+                        var xdbn = cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
+                        var xdr = cuserarr[JSON.stringify(arrbs[i])].brpss;
+                        var xds = cuserarr[JSON.stringify(arrbs[i])].salad;
                         var arrbs = cdataarr.arraybase.order;
                         var arrcbs = cdataarr.arraybase.cantakelist;
                         var dbfnd = cdataarr.fi_noodle.nowok;
@@ -217,12 +190,12 @@
                     if (confirm("您真的確定要刪除嗎？")) {
                         if (confirm("您真的真的確定要刪除嗎？(刪除的訂單將無法恢復)")) {
                             var arrbs = cdataarr.arraybase.order;
-                            xdn = cuserarr[JSON.stringify(arrbs[i])].noodle;
-                            xdfn = cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
-                            xdbn = cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
-                            xdr = cuserarr[JSON.stringify(arrbs[i])].brpss;
-                            xds = cuserarr[JSON.stringify(arrbs[i])].salad;
-                            xdm = cuserarr[JSON.stringify(arrbs[i])].money;
+                            var xdn = cuserarr[JSON.stringify(arrbs[i])].noodle;
+                            var xdfn = cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
+                            var xdbn = cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
+                            var xdr = cuserarr[JSON.stringify(arrbs[i])].brpss;
+                            var xds = cuserarr[JSON.stringify(arrbs[i])].salad;
+                            var xdm = cuserarr[JSON.stringify(arrbs[i])].money;
                             dbupdate('database', 'noodle', {
                                 previewcount: Number(cdataarr.noodle.previewcount + Number(xdn)),
                                 unok: Number(cdataarr.noodle.unok - Number(xdn))

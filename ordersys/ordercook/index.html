@@ -300,7 +300,7 @@
             if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
                 if (cdataarr.salad.nowok > 0) {
                     userarr = await getCopyUserData();
-                    await setCantake(-1);
+                    await setCantake(0);
                     dbupdate('database', 'salad', {
                         unok: cdataarr.salad.unok + 1,
                         nowok: cdataarr.salad.nowok - 1
