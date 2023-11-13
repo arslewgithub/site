@@ -73,19 +73,19 @@ function setCantake(num, p) {
     var s = cdataarr.salad.nowok;
     switch (p) {
         case 1:
-            n + num;
+            n += num;
             break;
         case 2:
-            r + num;
+            r += num;
             break;
         case 3:
-            fn + num;
+            fn += num;
             break;
         case 4:
-            bn + num;
+            bn += num;
             break;
         case 5:
-            s + num;
+            s += num;
             break;
         default:
             break;
