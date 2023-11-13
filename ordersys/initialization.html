@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <link rel="shortcut icon" href="../../seeat/favicon509.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+    	button{
+            width: 100%;
+            background: #FBAE17;
+            border: 2px solid #b17b10;
+            border-radius: 100px;
+            color: #00A400;
+            font-size: 19px;
+            height: 48px;
+        }
+    </style>
+    <title>點餐系統</title>
+</head>
+
+<body>
+    <h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+    <main style="display: none;">
+        <div class="title-framep">
+            <div class="title-frame">
+                <h1 class="title-text1">校慶園遊會點餐</h1>
+                <h1 class="title-text2">還原資料庫</h1>
+            </div>
+        </div>
+        <div class="block">
+            <button onclick="s()">還原資料庫</button>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAf9DnH-DXzlXmeyqCniQopqP6VC-k0B-c",
+            authDomain: "garden-party2.firebaseapp.com",
+            projectId: "garden-party2",
+            storageBucket: "garden-party2.appspot.com",
+            messagingSenderId: "235268083051",
+            appId: "1:235268083051:web:374a29c4d8bc035abf902e",
+            measurementId: "G-B3T6VJ26XV"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const vd = db.collection('database');
+        document.querySelector('main').style = '';
+        wait.remove();
+        function d(name, obj){
+        	return vd.doc(name).set(obj);
+        }
+        function s(){
+        	if(confirm('是否還原資料庫中的 `database`')){
+                d('arraybase', {order:[],cantakelist:[]});
+                d('beef_noodle', {previewcount:50,unok:0,nowok:0});
+                d('brpss', {nowok:0,previewcount:60,name:"滷肉飯",unok:0});
+                d('fi_noodle', {previewcount:120,name:"炒泡麵",unok:0,nowok:0});
+                d('noodle', {unok:0,previewcount:80,nowok:0,name:"肉燥麵"});
+                d('numberbase', {allmoey:0,id:0});
+                d('salad', {previewcount:90,unok:0,nowok:0});
+            }
+        }
+    </script>
+</body>
+
+</html>

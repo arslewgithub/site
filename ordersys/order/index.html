@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <link rel="shortcut icon" href="../../seeat/favicon509.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .block-title {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            margin-left: 20px;
+            font-size: 50px;
+        }
+
+        .block-content {
+            margin-top: 5px;
+            margin-bottom: 40px;
+            margin-left: 20px;
+            font-size: 30px;
+        }
+
+        .counter-frame input[type="number"] {
+            text-align: center;
+            font-size: 20px;
+            border: 2px solid #999999;
+            width: 150px;
+            background: #fffa;
+        }
+
+        .counter-frame {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .true-button.fbt {
+            float: right;
+        }
+
+        .false-button.fbt,
+        .true-button.fbt {
+            width: 128px;
+            height: 48px;
+            font-size: 17.5px;
+            display: inline-block;
+        }
+
+        .counter-frame input[type="button"].p {
+            border-radius: 0 1em 1em 0;
+            margin-left: 15px;
+            padding: 7.5px;
+            padding-right: 10px;
+            font-size: 20px;
+        }
+
+        .counter-frame input[type="button"].d {
+            border-radius: 1em 0 0 1em;
+            margin-right: 15px;
+            padding: 7.5px;
+            padding-left: 10px;
+            font-size: 20px;
+        }
+
+        #wait {
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+    </style>
+    <title>點餐系統</title>
+</head>
+
+<body>
+    <h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+    <main style="display: none;">
+        <div class="title-framep">
+            <div class="title-frame">
+                <h1 class="title-text1">校慶園遊會點餐</h1>
+                <h1 class="title-text2">點餐區</h1>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-title">肉燥麵</div>
+            <span class="block-content">NT$ 45</span><br>
+            <span class="block-content">目前剩餘: </span>
+            <span class="block-content" id="noodlenow"></span>
+            <span class="block-content"> 份</span>
+            <div class="counter-frame">
+                <input type="button" value=" - " id="noodlereduce" class="false-button d">
+                <input type="number" value="0" min="0" maxlength="2" id="noodleinput">
+                <input type="button" value=" + " id="noodleplus" class="true-button p">
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-title">滷肉飯</div>
+            <span class="block-content">NT$ 60</span><br>
+            <span class="block-content">目前剩餘: </span>
+            <span class="block-content" id="ricenow"></span>
+            <span class="block-content"> 份</span>
+            <div class="counter-frame">
+                <input type="button" value=" - " id="ricereduce" class="false-button d">
+                <input type="number" value="0" min="0" maxlength="2" id="riceinput">
+                <input type="button" value=" + " id="riceplus" class="true-button p">
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-title">炒泡麵</div>
+            <span class="block-content">NT$ 40</span><br>
+            <span class="block-content">目前剩餘: </span>
+            <span class="block-content" id="fnoodlenow"></span>
+            <span class="block-content"> 份</span>
+            <div class="counter-frame">
+                <input type="button" value=" - " id="fnoodlereduce" class="false-button d">
+                <input type="number" value="0" min="0" maxlength="2" id="fnoodleinput">
+                <input type="button" value=" + " id="fnoodleplus" class="true-button p">
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-title">牛肉麵</div>
+            <span class="block-content">NT$ 65</span><br>
+            <span class="block-content">目前剩餘: </span>
+            <span class="block-content" id="bnoodlenow"></span>
+            <span class="block-content"> 份</span>
+            <div class="counter-frame">
+                <input type="button" value=" - " id="bnoodlereduce" class="false-button d">
+                <input type="number" value="0" min="0" maxlength="2" id="bnoodleinput">
+                <input type="button" value=" + " id="bnoodleplus" class="true-button p">
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-title">沙拉</div>
+            <span class="block-content">NT$ 30</span><br>
+            <span class="block-content">目前剩餘: </span>
+            <span class="block-content" id="saladnow"></span>
+            <span class="block-content"> 份</span>
+            <div class="counter-frame">
+                <input type="button" value=" - " id="saladreduce" class="false-button d">
+                <input type="number" value="0" min="0" maxlength="2" id="saladinput">
+                <input type="button" value=" + " id="saladplus" class="true-button p">
+            </div>
+        </div>
+        <div class="block">
+            <input type="button" class="fbt false-button" id="cencel" value="退出點餐">
+            <input type="button" class="fbt true-button" id="sub" value="確認送出">
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        if (localStorage.getItem('id') == null || localStorage.getItem('id') == '' || localStorage.getItem('id') == undefined) {
+            var noodlecount = 80, saladcount = 80, ricecount = 80, bnoodlecount = 80, fnoodlecount = 80, am;
+            db.collection('database').doc('noodle')
+                .onSnapshot(doc => {
+                    noodlecount = doc.data().previewcount;
+                    noodlenow.innerHTML = noodlecount;
+                    if (Number(noodleinput.value) > noodlecount) {
+                        noodleinput.value = noodlecount;
+                    }
+                    if (noodlecount < 1) {
+                        checkallcount();
+                        noodleplus.disabled = true;
+                        noodlereduce.disabled = true;
+                        noodleinput.disabled = true;
+                    }
+                });
+            db.collection('database').doc('salad')
+                .onSnapshot(doc => {
+                    saladcount = doc.data().previewcount;
+                    saladnow.innerHTML = saladcount;
+                    if (Number(saladinput.value) > noodlecount) {
+                        saladinput.value = saladcount;
+                    }
+                    document.querySelector('main').style = '';
+                    if (saladcount < 1) {
+                        checkallcount();
+                        saladplus.disabled = true;
+                        saladreduce.disabled = true;
+                        saladinput.disabled = true;
+                    }
+                });
+            db.collection('database').doc('fi_noodle')
+                .onSnapshot(doc => {
+                    fnoodlecount = doc.data().previewcount;
+                    fnoodlenow.innerHTML = fnoodlecount;
+                    if (Number(fnoodleinput.value) > fnoodlecount) {
+                        fnoodleinput.value = fnoodlecount;
+                    }
+                    document.querySelector('main').style = '';
+                    if (fnoodlecount < 1) {
+                        checkallcount();
+                        fnoodleplus.disabled = true;
+                        fnoodlereduce.disabled = true;
+                        fnoodleinput.disabled = true;
+                    }
+                });
+            db.collection('database').doc('beef_noodle')
+                .onSnapshot(doc => {
+                    bnoodlecount = doc.data().previewcount;
+                    bnoodlenow.innerHTML = bnoodlecount;
+                    if (Number(bnoodleinput.value) > bnoodlecount) {
+                        bnoodleinput.value = bnoodlecount;
+                    }
+                    document.querySelector('main').style = '';
+                    if (bnoodlecount < 1) {
+                        checkallcount();
+                        bnoodleplus.disabled = true;
+                        bnoodlereduce.disabled = true;
+                        bnoodleinput.disabled = true;
+                    }
+                });
+            db.collection('database').doc('brpss')
+                .onSnapshot(doc => {
+                    ricecount = doc.data().previewcount;
+                    ricenow.innerHTML = ricecount;
+                    if (Number(riceinput.value) > ricecount) {
+                        riceinput.value = ricecount;
+                    }
+                    document.querySelector('main').style = '';
+                    if (ricecount < 1) {
+                        checkallcount();
+                        riceplus.disabled = true;
+                        ricereduce.disabled = true;
+                        riceinput.disabled = true;
+                    }
+                });
+            function checkallcount(){
+                if(noodlecount < 1 && saladcount < 1 && ricecount < 1 && bnoodlecount < 1 && fnoodlecount < 1){
+                    sub.disabled = true;
+                }
+            }
+            noodleinput.oninput = function () {
+                if ((!Number.isInteger(Number(this.value))) && (this.value != '')) {
+                    this.value = Math.floor(Number(this.value));
+                }
+                else if (Number(this.value) > noodlecount) {
+                    this.value = noodlecount;
+                }
+                else if ((Number(this.value) < 0) && (this.value != '')) {
+                    this.value = 0;
+                }
+            }
+            noodleplus.onclick = function () {
+                if (Number(noodleinput.value) >= noodlecount) {
+                    noodleinput.value = noodlecount;
+                }
+                else if (Number(noodleinput.value) < 0) {
+                    noodleinput.value = 0;
+                }
+                else {
+                    noodleinput.value = Number(noodleinput.value) + 1;
+                }
+            }
+            noodlereduce.onclick = function () {
+                if (Number(noodleinput.value) > noodlecount) {
+                    noodleinput.value = noodlecount;
+                }
+                else if (Number(noodleinput.value) <= 0) {
+                    noodleinput.value = 0;
+                }
+                else {
+                    noodleinput.value = Number(noodleinput.value) - 1;
+                }
+            }
+            saladinput.oninput = function () {
+                if ((!Number.isInteger(Number(this.value))) && (this.value != '')) {
+                    this.value = Math.floor(Number(this.value));
+                }
+                else if (Number(this.value) > saladcount) {
+                    this.value = saladcount;
+                }
+                else if ((Number(this.value) < 0) && (this.value != '')) {
+                    this.value = 0;
+                }
+            }
+            saladplus.onclick = function () {
+                if (Number(saladinput.value) >= saladcount) {
+                    saladinput.value = saladcount;
+                }
+                else if (Number(saladinput.value) < 0) {
+                    saladinput.value = 0;
+                }
+                else {
+                    saladinput.value = Number(saladinput.value) + 1;
+                }
+            }
+            saladreduce.onclick = function () {
+                if (Number(saladinput.value) > saladcount) {
+                    saladinput.value = saladcount;
+                }
+                else if (Number(saladinput.value) <= 0) {
+                    saladinput.value = 0;
+                }
+                else {
+                    saladinput.value = Number(saladinput.value) - 1;
+                }
+            }
+            riceinput.oninput = function () {
+                if ((!Number.isInteger(Number(this.value))) && (this.value != '')) {
+                    this.value = Math.floor(Number(this.value));
+                }
+                else if (Number(this.value) > ricecount) {
+                    this.value = ricecount;
+                }
+                else if ((Number(this.value) < 0) && (this.value != '')) {
+                    this.value = 0;
+                }
+            }
+            riceplus.onclick = function () {
+                if (Number(riceinput.value) >= ricecount) {
+                    riceinput.value = ricecount;
+                }
+                else if (Number(riceinput.value) < 0) {
+                    riceinput.value = 0;
+                }
+                else {
+                    riceinput.value = Number(riceinput.value) + 1;
+                }
+            }
+            ricereduce.onclick = function () {
+                if (Number(riceinput.value) > ricecount) {
+                    riceinput.value = ricecount;
+                }
+                else if (Number(riceinput.value) <= 0) {
+                    riceinput.value = 0;
+                }
+                else {
+                    riceinput.value = Number(riceinput.value) - 1;
+                }
+            }
+            fnoodleinput.oninput = function () {
+                if ((!Number.isInteger(Number(this.value))) && (this.value != '')) {
+                    this.value = Math.floor(Number(this.value));
+                }
+                else if (Number(this.value) > fnoodlecount) {
+                    this.value = noodlecount;
+                }
+                else if ((Number(this.value) < 0) && (this.value != '')) {
+                    this.value = 0;
+                }
+            }
+            fnoodleplus.onclick = function () {
+                if (Number(fnoodleinput.value) >= fnoodlecount) {
+                    noodleinput.value = noodlecount;
+                }
+                else if (Number(fnoodleinput.value) < 0) {
+                    fnoodleinput.value = 0;
+                }
+                else {
+                    fnoodleinput.value = Number(fnoodleinput.value) + 1;
+                }
+            }
+            fnoodlereduce.onclick = function () {
+                if (Number(fnoodleinput.value) > fnoodlecount) {
+                    fnoodleinput.value = noodlecount;
+                }
+                else if (Number(fnoodleinput.value) <= 0) {
+                    fnoodleinput.value = 0;
+                }
+                else {
+                    fnoodleinput.value = Number(fnoodleinput.value) - 1;
+                }
+            }
+            bnoodleinput.oninput = function () {
+                if ((!Number.isInteger(Number(this.value))) && (this.value != '')) {
+                    this.value = Math.floor(Number(this.value));
+                }
+                else if (Number(this.value) > bnoodlecount) {
+                    this.value = noodlecount;
+                }
+                else if ((Number(this.value) < 0) && (this.value != '')) {
+                    this.value = 0;
+                }
+            }
+            bnoodleplus.onclick = function () {
+                if (Number(bnoodleinput.value) >= bnoodlecount) {
+                    bnoodleinput.value = bnoodlecount;
+                }
+                else if (Number(bnoodleinput.value) < 0) {
+                    bnoodleinput.value = 0;
+                }
+                else {
+                    bnoodleinput.value = Number(bnoodleinput.value) + 1;
+                }
+            }
+            bnoodlereduce.onclick = function () {
+                if (Number(bnoodleinput.value) > bnoodlecount) {
+                    noodleinput.value = bnoodlecount;
+                }
+                else if (Number(bnoodleinput.value) <= 0) {
+                    bnoodleinput.value = 0;
+                }
+                else {
+                    bnoodleinput.value = Number(bnoodleinput.value) - 1;
+                }
+            }
+            cencel.onclick = function () {
+                if (confirm("您確定要退出嗎？")) {
+                    noodleinput.value = 1;
+                    saladinput.value = 1;
+                    riceinput.value = 1;
+                    fnoodleinput.value = 1;
+                    bnoodleinput.value = 1;
+                    history.go(-10000);
+                    location.replace('about:blank');
+                }
+            }
+            sub.onclick = async function () {
+                sub.disabled = 'true';
+                cencel.disabled = 'true';
+                noodleplus.disabled = 'true';
+                fnoodleplus.disabled = 'true';
+                bnoodleplus.disabled = 'true';
+                riceplus.disabled = 'true';
+                saladplus.disabled = 'true';
+                noodlereduce.disabled = 'true';
+                fnoodlereduce.disabled = 'true';
+                bnoodlereduce.disabled = 'true';
+                ricereduce.disabled = 'true';
+                saladreduce.disabled = 'true';
+                noodleinput.disabled = 'true';
+                fnoodleinput.disabled = 'true';
+                bnoodleinput.disabled = 'true';
+                saladinput.disabled = 'true';
+                riceinput.disabled = 'true';
+                var nv = noodleinput.value;
+                var fnv = fnoodleinput.value;
+                var bnv = bnoodleinput.value;
+                var sv = saladinput.value;
+                var rv = riceinput.value;
+                var am = (Number(nv) * 45) + (Number(sv) * 30) + (Number(fnv) * 40) + (Number(bnv) * 65) + (Number(rv) * 60);
+                if(am <= 0){return false;}
+                var orderID = String(Math.floor(Math.random() * 1E8)).padStart(8, "0")
+                await localStorage.setItem('id', orderID)
+                await dbset('userdata', orderID, {
+                    id: orderID,
+                    money: am,
+                    noodle: Number(nv),
+                    beef_noodle: Number(bnv),
+                    fi_noodle: Number(fnv),
+                    brpss: Number(rv),
+                    salad: Number(sv),
+                    time: String(new Date().getHours()).padStart(2, '0') + ':' + String(new Date().getMinutes()).padStart(2, '0') + ':' + String(new Date().getSeconds()).padStart(2, '0'),
+                    complete: false,
+                    cantake: false
+                });
+                await dbget('database', 'noodle').then((v) => {
+                    dbupdate('database', 'noodle', {
+                        previewcount: Number(v.data().previewcount - Number(nv)),
+                        unok: Number(v.data().unok + Number(nv))
+                    });
+                })
+                await dbget('database', 'brpss').then((v) => {
+                    dbupdate('database', 'brpss', {
+                        previewcount: Number(v.data().previewcount - Number(rv)),
+                        unok: Number(v.data().unok + Number(rv))
+                    });
+                })
+                await dbget('database', 'fi_noodle').then((v) => {
+                    dbupdate('database', 'fi_noodle', {
+                        previewcount: Number(v.data().previewcount - Number(fnv)),
+                        unok: Number(v.data().unok + Number(fnv))
+                    });
+                })
+                await dbget('database', 'beef_noodle').then((v) => {
+                    dbupdate('database', 'beef_noodle', {
+                        previewcount: Number(v.data().previewcount - Number(bnv)),
+                        unok: Number(v.data().unok + Number(bnv))
+                    });
+                })
+                await dbget('database', 'salad').then((v) => {
+                    dbupdate('database', 'salad', {
+                        previewcount: Number(v.data().previewcount - Number(sv)),
+                        unok: Number(v.data().unok + Number(sv))
+                    });
+                })
+                await dbget('database', 'numberbase').then((v) => { dbupdate('database', 'numberbase', { allmoey: v.data().allmoey + am }); })
+                await dbget('database', 'arraybase').then((v) => {
+                    var arrbs = v.data().order;
+                    var carray = v.data().cantakelist;
+                    arrbs.push(orderID);
+                    carray.push(false);
+                    dbupdate('database', 'arraybase', { order: arrbs, cantakelist: carray });
+                })
+                setCantake(0);
+                location.reload()
+            }
+        }
+        else {
+            location.replace('../order2');
+        }
+    </script>
+</body>
+
+</html>

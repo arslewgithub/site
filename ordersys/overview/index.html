@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <link rel="shortcut icon" href="../../seeat/favicon509.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .true-button.fbt {
+            float: right;
+        }
+
+        .false-button.fbt,
+        .true-button.fbt {
+            width: 128px;
+            height: 48px;
+            font-size: 17.5px;
+            display: inline-block;
+        }
+
+        .finishorder {
+            float: right;
+            margin-right: 20px;
+        }
+
+        .deleteorder {
+            margin-left: 10px;
+        }
+
+        .deleteorder,
+        .finishorder {
+            margin-top: 10px;
+            width: 100px;
+            height: 48px;
+            font-size: 17.5px;
+            display: inline-block;
+        }
+
+        #jump {
+            background: #FBAE17;
+            border: 2px solid #b17b10;
+            border-radius: 100px;
+            color: #00A400;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 19px;
+            height: 48px;
+        }
+
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin: 0px;
+            display: inline-block;
+        }
+
+        .view-id {
+            font-size: 30px;
+        }
+
+        .s1 {
+            margin-left: 20px;
+        }
+
+        .s2 {
+            margin-left: 40px;
+        }
+
+        .s3 {
+            margin-left: 60px;
+        }
+
+        #wait {
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+    </style>
+    <title>點餐系統總覽</title>
+</head>
+
+<body>
+    <h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+    <main style="display: none;">
+        <div class="title-framep">
+            <div class="title-framec">
+                <h1 class="title-text1">校慶園遊會點餐</h1>
+                <h1 class="title-text2">點餐總覽/管理介面</h1>
+            </div>
+        </div>
+        <div class="block" style="text-align: center;">
+            <h2>交易金額: </h2>
+            <h2 id="allmoney"></h2>
+            <h2> 元</h2>
+            <input type="button" id="jump" value="檢視做餐進度">
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        var loadoarr = [], loadcarr = [];
+        db.collection('database').doc('numberbase')
+            .onSnapshot(doc => {
+                allmoney.innerHTML = doc.data().allmoey;
+            });
+        jump.onclick = function () { location.href = '../ordercook/' }
+        db.collection('database').doc('arraybase')
+            .onSnapshot(async doc => {
+                let rt = loadoarr.filter((e) => {
+                    return doc.data().order.indexOf(e) === -1
+                })
+                let rc = doc.data().order.filter((e) => {
+                    return loadoarr.indexOf(e) === -1
+                })
+                for (var t = 0; t < rt.length; t++) {
+                    await removeBlock(rt[t])
+                }
+                for (var i = 0; i < rc.length; i++) {
+                    await createBlock(rc[i])
+                }
+                loadoarr = [];
+                for (var i = 0; i < doc.data().order.length; i++) {
+                    loadoarr.push(doc.data().order[i])
+                }
+                initialization();
+                for (var i = 0; i < doc.data().cantakelist.length; i++) {
+                    ctbtable(!doc.data().cantakelist[i], i)
+                }
+                checkBlock(loadoarr)
+            });
+        async function checkBlock(arr) {
+            var tl = await getCopyUserData();
+            if(arr.length != document.querySelectorAll('.ectrl').length){
+                document.querySelectorAll('.ectrl').forEach(e => {
+                    e.remove();
+                })
+                var tl = getCopyUserData();
+                for (var i = 0; i < arr.length; i++) {
+                    await createBlock(tl[arr[i]]);
+                }
+            }
+        }
+        async function createBlock(arrl) {
+            var newblock = document.createElement('div');
+            let inf = {};
+            await db.collection('userdata').doc(String(arrl))
+                .get().then(doc => {
+                    inf = doc.data();
+                    newblock.id = 'ck' + String(inf.id)
+                    var rtf;
+                    if (inf.cantake) {
+                        rtf = ' ';
+                    }
+                    else {
+                        rtf = ' disabled="disabled" ';
+                    }
+                    newblock.innerHTML = '<h2 class="s1 view-id">ID: </h2><h2 class="view-id">' + inf.id +
+                        '</h2><br><h2 class="s2">點餐內容: </h2><br><h2 class="s3">肉燥麵: </h2><h2>' + inf.noodle +
+                        '</h2><br><h2 class="s3">牛肉麵: </h2><h2>' + inf.beef_noodle +
+                        '</h2><br><h2 class="s3">炒泡麵: </h2><h2>' + inf.fi_noodle +
+                        '</h2><br><h2 class="s3">滷肉飯: </h2><h2>' + inf.brpss +
+                        '</h2><br><h2 class="s3">沙拉: </h2><h2>' + inf.salad +
+                        '</h2><br><h2 class="s2">應支付金額: </h2><h2>' + inf.money +
+                        '</h2><br><h2 class="s2">訂餐時間: </h2><h2>' + inf.time +
+                        '</h2><br><input type="button" value="刪除訂單" class="deleteorder false-button"><input type="button" value="完成訂單"' + rtf +
+                        'class="finishorder true-button">';
+                });
+            newblock.classList.add('block');
+            newblock.classList.add('ectrl');
+            document.getElementsByTagName('main')[0].appendChild(newblock);
+        }
+
+        async function ctbtable(ctarr, n) {
+            document.querySelectorAll('.finishorder')[n].disabled = ctarr;
+        }
+
+        async function removeBlock(arr) {
+            document.getElementById('ck' + String(arr)).remove();
+        }
+
+        async function initialization() {
+            var carray;
+            var userarr = await getCopyUserData();
+            for (let i = 0; i < document.getElementsByClassName('finishorder').length; i++) {
+                document.getElementsByClassName('finishorder')[i].onclick = async function () {
+                    if (confirm("確定已完成？")) {
+                        xdn = cuserarr[JSON.stringify(arrbs[i])].noodle;
+                        xdfn = cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
+                        xdbn = cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
+                        xdr = cuserarr[JSON.stringify(arrbs[i])].brpss;
+                        xds = cuserarr[JSON.stringify(arrbs[i])].salad;
+                        var arrbs = cdataarr.arraybase.order;
+                        var arrcbs = cdataarr.arraybase.cantakelist;
+                        var dbfnd = cdataarr.fi_noodle.nowok;
+                        var dbbnd = cdataarr.beef_noodle.nowok;
+                        var dbrd = cdataarr.brpss.nowok;
+                        var dbsd = cdataarr.salad.nowok;
+                        var dbnd = cdataarr.noodle.nowok;
+                        await dbupdate('database', 'noodle', { nowok: dbnd - xdn });
+                        await dbupdate('database', 'noodle', { nowok: dbsd - xds });
+                        await dbupdate('database', 'noodle', { nowok: dbrd - xdr });
+                        await dbupdate('database', 'noodle', { nowok: dbbnd - xdbn });
+                        await dbupdate('database', 'noodle', { nowok: dbfnd - xdfn });
+                        await dbupdate('userdata', String(arrbs[i]), { complete: true });
+                        arrbs.splice(i, 1);
+                        await dbupdate('database', 'arraybase', { order: arrbs });
+                        arrcbs.splice(i, 1);
+                        dbupdate('database', 'arraybase', { cantakelist: arrcbs })
+                    }
+                }
+            };
+            for (let i = 0; i < document.getElementsByClassName('deleteorder').length; i++) {
+                document.getElementsByClassName('deleteorder')[i].onclick = function () {
+                    if (confirm("您真的確定要刪除嗎？")) {
+                        if (confirm("您真的真的確定要刪除嗎？(刪除的訂單將無法恢復)")) {
+                            var arrbs = cdataarr.arraybase.order;
+                            xdn = cuserarr[JSON.stringify(arrbs[i])].noodle;
+                            xdfn = cuserarr[JSON.stringify(arrbs[i])].fi_noodle;
+                            xdbn = cuserarr[JSON.stringify(arrbs[i])].beef_noodle;
+                            xdr = cuserarr[JSON.stringify(arrbs[i])].brpss;
+                            xds = cuserarr[JSON.stringify(arrbs[i])].salad;
+                            xdm = cuserarr[JSON.stringify(arrbs[i])].money;
+                            dbupdate('database', 'noodle', {
+                                previewcount: Number(cdataarr.noodle.previewcount + Number(xdn)),
+                                unok: Number(cdataarr.noodle.unok - Number(xdn))
+                            });
+                            dbupdate('database', 'salad', {
+                                previewcount: Number(cdataarr.salad.previewcount + Number(xds)),
+                                unok: Number(cdataarr.salad.unok - Number(xds))
+                            });
+                            dbupdate('database', 'beef_noodle', {
+                                previewcount: Number(cdataarr.beef_noodle.previewcount + Number(xdbn)),
+                                unok: Number(cdataarr.beef_noodle.unok - Number(xdbn))
+                            });
+                            dbupdate('database', 'fi_noodle', {
+                                previewcount: Number(cdataarr.fi_noodle.previewcount + Number(xdfn)),
+                                unok: Number(cdataarr.fi_noodle.unok - Number(xdfn))
+                            });
+                            dbupdate('database', 'brpss', {
+                                previewcount: Number(cdataarr.brpss.previewcount + Number(xdr)),
+                                unok: Number(cdataarr.brpss.unok - Number(xdr))
+                            });
+                            dbupdate('database', 'numberbase', {
+                                allmoey: Number(cdataarr.numberbase.allmoey - Number(xdm))
+                            });
+                           db.collection('userdata')
+                               .doc(String(arrbs[i]))
+                               .delete()
+                           arrbs.splice(i, 1);
+                           dbupdate('database', 'arraybase', { order: arrbs })
+                           setCantake(0);
+                        }
+                    }
+                }
+            };
+            setCantake(0);
+        }
+    </script>
+</body>
+
+</html>

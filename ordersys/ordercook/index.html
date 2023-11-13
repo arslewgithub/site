@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <link rel="shortcut icon" href="../../seeat/favicon509.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .block-title {
+            margin-bottom: 5px;
+            margin-left: 20px;
+            font-size: 50px;
+        }
+
+        .block-content {
+            margin-top: 5px;
+            margin-bottom: 40px;
+            margin-left: 20px;
+            font-size: 30px;
+        }
+
+        .false-button,
+        .true-button {
+            width: 49%;
+            height: 45px;
+            font-size: 20px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .true-button {
+        	float: right;
+        }
+
+        #wait {
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+        
+        #jump {
+            background: #FBAE17;
+            border: 2px solid #b17b10;
+            border-radius: 100px;
+            color: #00A400;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 19px;
+            height: 48px;
+        }
+        
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin: 0px;
+            display: inline-block;
+        }
+    </style>
+    <title>點餐系統 - 待製作清單</title>
+</head>
+
+<body>
+    <h1 id="wait">Please wait a moment, JavaScript and CSS are loading...</h1>
+    <main style="display: none;">
+        <div class="title-framep">
+            <div class="title-frame">
+                <h1 class="title-text1">校慶園遊會點餐</h1>
+                <h1 class="title-text2">待製作清單</h1>
+            </div>
+        </div>
+        <div class="block" style="text-align: center;">
+            <h2>交易金額: </h2>
+            <h2 id="allmoney"></h2>
+            <h2> 元</h2>
+            <input type="button" id="jump" value="檢視訂單">
+        </div>
+        <div class="block">
+            <div class="block-title">肉燥麵</div>
+            <span class="block-content">可領餐: </span>
+            <span class="block-content" id="noodleok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">待做餐: </span>
+            <span class="block-content" id="noodleunok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <input type="button" class="true-button" id="nisok" value="已做完一份">
+            <input type="button" class="false-button" id="ncancelok" value="需撤回一份">
+        </div>
+        <div class="block">
+            <div class="block-title">滷肉飯</div>
+            <span class="block-content">可領餐: </span>
+            <span class="block-content" id="riceok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">待做餐: </span>
+            <span class="block-content" id="riceunok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <input type="button" class="true-button" id="risok" value="已做完一份">
+            <input type="button" class="false-button" id="rcancelok" value="需撤回一份">
+        </div>
+        <div class="block">
+            <div class="block-title">炒泡麵</div>
+            <span class="block-content">可領餐: </span>
+            <span class="block-content" id="fnoodleok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">待做餐: </span>
+            <span class="block-content" id="fnoodleunok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <input type="button" class="true-button" id="fnisok" value="已做完一份">
+            <input type="button" class="false-button" id="fncancelok" value="需撤回一份">
+        </div>
+        <div class="block">
+            <div class="block-title">牛肉麵</div>
+            <span class="block-content">可領餐: </span>
+            <span class="block-content" id="bnoodleok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">待做餐: </span>
+            <span class="block-content" id="bnoodleunok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <input type="button" class="true-button" id="bnisok" value="已做完一份">
+            <input type="button" class="false-button" id="bncancelok" value="需撤回一份">
+        </div>
+        <div class="block">
+            <div class="block-title">沙拉</div>
+            <span class="block-content">可領餐: </span>
+            <span class="block-content" id="saladok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">待做餐: </span>
+            <span class="block-content" id="saladunok"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <input type="button" class="true-button" id="sisok" value="已做完一份">
+            <input type="button" class="false-button" id="scancelok" value="需撤回一份">
+        </div>
+        <div class="block">
+            <div class="block-title">剩餘食材</div>
+            <span class="block-content">肉燥麵: </span>
+            <span class="block-content" id="noodleremain"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">滷肉飯: </span>
+            <span class="block-content" id="riceremain"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">炒泡麵: </span>
+            <span class="block-content" id="fnoodleremain"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">牛肉麵: </span>
+            <span class="block-content" id="bnoodleremain"></span>
+            <span class="block-content"> 份</span>
+            <br>
+            <span class="block-content">沙拉: </span>
+            <span class="block-content" id="saladremain"></span>
+            <span class="block-content"> 份</span>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        var carray, oarray;
+        db.collection('database').doc('numberbase')
+            .onSnapshot(doc => {
+                allmoney.innerHTML = doc.data().allmoey;
+            });
+        jump.onclick = function () { location.href = '../overview/' }
+        db.collection('database').doc('noodle')
+            .onSnapshot((v) => {
+                noodleremain.innerHTML = v.data().previewcount + v.data().unok;
+                noodleok.innerHTML = v.data().nowok;
+                noodleunok.innerHTML = v.data().unok;
+            });
+        db.collection('database').doc('brpss')
+            .onSnapshot((v) => {
+                riceremain.innerHTML = v.data().previewcount + v.data().unok;
+                riceok.innerHTML = v.data().nowok;
+                riceunok.innerHTML = v.data().unok;
+            });
+        db.collection('database').doc('fi_noodle')
+            .onSnapshot((v) => {
+                fnoodleremain.innerHTML = v.data().previewcount + v.data().unok;
+                fnoodleok.innerHTML = v.data().nowok;
+                fnoodleunok.innerHTML = v.data().unok;
+            });
+        db.collection('database').doc('beef_noodle')
+            .onSnapshot((v) => {
+                bnoodleremain.innerHTML = v.data().previewcount + v.data().unok;
+                bnoodleok.innerHTML = v.data().nowok;
+                bnoodleunok.innerHTML = v.data().unok;
+            });
+        db.collection('database').doc('salad')
+            .onSnapshot((v) => {
+                saladremain.innerHTML = v.data().previewcount + v.data().unok;
+                saladok.innerHTML = v.data().nowok;
+                saladunok.innerHTML = v.data().unok;
+            });
+        ncancelok.onclick = async function () {
+            if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
+                if (cdataarr.noodle.nowok > 0) {
+                    userarr = await getCopyUserData();
+                    await setCantake(-1);
+                    dbupdate('database', 'noodle', {
+                        unok: cdataarr.noodle.unok + 1,
+                        nowok: cdataarr.noodle.nowok - 1
+                    })
+                }
+                else {
+                    alert('無法撤回!\n可領餐數量不可低於0!')
+                }
+            }
+        }
+        nisok.onclick = async function () {
+            userarr = await getCopyUserData();
+            await setCantake(1);
+            dbupdate('database', 'noodle', {
+                unok: cdataarr.noodle.unok - 1,
+                nowok: cdataarr.noodle.nowok + 1
+            })
+        }
+        rcancelok.onclick = async function () {
+            if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
+                if (cdataarr.brpss.nowok > 0) {
+                    userarr = await getCopyUserData();
+                    await setCantake(-1);
+                    dbupdate('database', 'brpss', {
+                        unok: cdataarr.brpss.unok + 1,
+                        nowok: cdataarr.brpss.nowok - 1
+                    })
+                }
+                else {
+                    alert('無法撤回!\n可領餐數量不可低於0!')
+                }
+            }
+        }
+        risok.onclick = async function () {
+            userarr = await getCopyUserData();
+            await setCantake(1);
+            dbupdate('database', 'brpss', {
+                unok: cdataarr.brpss.unok - 1,
+                nowok: cdataarr.brpss.nowok + 1
+            })
+        }
+        fncancelok.onclick = async function () {
+            if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
+                if (cdataarr.fi_noodle.nowok > 0) {
+                    userarr = await getCopyUserData();
+                    await setCantake(-1);
+                    dbupdate('database', 'fi_noodle', {
+                        unok: cdataarr.fi_noodle.unok + 1,
+                        nowok: cdataarr.fi_noodle.nowok - 1
+                    })
+                }
+                else {
+                    alert('無法撤回!\n可領餐數量不可低於0!')
+                }
+            }
+        }
+        fnisok.onclick = async function () {
+            userarr = await getCopyUserData();
+            await setCantake(1);
+            dbupdate('database', 'fi_noodle', {
+                unok: cdataarr.fi_noodle.unok - 1,
+                nowok: cdataarr.fi_noodle.nowok + 1
+            })
+        }
+        bncancelok.onclick = async function () {
+            if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
+                if (cdataarr.beef_noodle.nowok > 0) {
+                    userarr = await getCopyUserData();
+                    await setCantake(-1);
+                    dbupdate('database', 'beef_noodle', {
+                        unok: cdataarr.beef_noodle.unok + 1,
+                        nowok: cdataarr.beef_noodle.nowok - 1
+                    })
+                }
+                else {
+                    alert('無法撤回!\n可領餐數量不可低於0!')
+                }
+            }
+        }
+        bnisok.onclick = async function () {
+            userarr = await getCopyUserData();
+            await setCantake(1);
+            dbupdate('database', 'beef_noodle', {
+                unok: cdataarr.beef_noodle.unok - 1,
+                nowok: cdataarr.beef_noodle.nowok + 1
+            })
+        }
+        scancelok.onclick = async function () {
+            if (confirm('是否確定撤回?\n請確認您剛剛是因為誤操作導致數量錯誤')) {
+                if (cdataarr.salad.nowok > 0) {
+                    userarr = await getCopyUserData();
+                    await setCantake(-1);
+                    dbupdate('database', 'salad', {
+                        unok: cdataarr.salad.unok + 1,
+                        nowok: cdataarr.salad.nowok - 1
+                    })
+                }
+                else {
+                    alert('無法撤回!\n可領餐數量不可低於0!')
+                }
+            }
+        }
+        sisok.onclick = async function () {
+            userarr = await getCopyUserData();
+            await setCantake(1);
+            dbupdate('database', 'salad', {
+                unok: cdataarr.salad.unok - 1,
+                nowok: cdataarr.salad.nowok + 1
+            })
+        }
+    </script>
+</body>
+
+</html>
