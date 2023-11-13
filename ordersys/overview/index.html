@@ -173,10 +173,10 @@
                         var dbsd = cdataarr.salad.nowok;
                         var dbnd = cdataarr.noodle.nowok;
                         await dbupdate('database', 'noodle', { nowok: dbnd - xdn });
-                        await dbupdate('database', 'noodle', { nowok: dbsd - xds });
-                        await dbupdate('database', 'noodle', { nowok: dbrd - xdr });
-                        await dbupdate('database', 'noodle', { nowok: dbbnd - xdbn });
-                        await dbupdate('database', 'noodle', { nowok: dbfnd - xdfn });
+                        await dbupdate('database', 'salad', { nowok: dbsd - xds });
+                        await dbupdate('database', 'brpss', { nowok: dbrd - xdr });
+                        await dbupdate('database', 'beef_noodle', { nowok: dbbnd - xdbn });
+                        await dbupdate('database', 'fi_noodle', { nowok: dbfnd - xdfn });
                         await dbupdate('userdata', String(arrbs[i]), { complete: true });
                         arrbs.splice(i, 1);
                         await dbupdate('database', 'arraybase', { order: arrbs });

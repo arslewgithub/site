@@ -228,8 +228,8 @@
                         riceinput.disabled = true;
                     }
                 });
-            function checkallcount(){
-                if(noodlecount < 1 && saladcount < 1 && ricecount < 1 && bnoodlecount < 1 && fnoodlecount < 1){
+            function checkallcount() {
+                if (noodlecount < 1 && saladcount < 1 && ricecount < 1 && bnoodlecount < 1 && fnoodlecount < 1) {
                     sub.disabled = true;
                 }
             }
@@ -410,7 +410,7 @@
                 }
             }
             sub.onclick = async function () {
-                if(localStorage.getItem('dev') != 'on'){
+                if (localStorage.getItem('dev') != 'on') {
                     sub.disabled = 'true';
                     cencel.disabled = 'true';
                     noodleplus.disabled = 'true';
@@ -435,12 +435,12 @@
                 var sv = saladinput.value;
                 var rv = riceinput.value;
                 var am = (Number(nv) * 45) + (Number(sv) * 30) + (Number(fnv) * 40) + (Number(bnv) * 65) + (Number(rv) * 60);
-                if(am <= 0){return false;}
+                if (am <= 0) { return false; }
                 var orderID = Math.floor(Math.random() * 1296).toString(36).toUpperCase() + String(cdataarr.numberbase.id).padStart(2, "0");
                 dbupdate('database', 'numberbase', {
                     id: cdataarr.numberbase.id + 1
                 })
-                if(localStorage.getItem('dev') != 'on'){
+                if (localStorage.getItem('dev') != 'on') {
                     await localStorage.setItem('id', orderID)
                 }
                 await dbset('userdata', orderID, {
@@ -493,9 +493,10 @@
                     carray.push(false);
                     dbupdate('database', 'arraybase', { order: arrbs, cantakelist: carray });
                 })
-                setCantake(0);
-                if(localStorage.getItem('dev') != 'on'){
-                    location.reload();
+                await setCantake(0);
+                delay(10);
+                if (localStorage.getItem('dev') != 'on') {
+                    await location.reload();
                 }
             }
         }
