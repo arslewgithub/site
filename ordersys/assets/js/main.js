@@ -64,7 +64,6 @@ db.collection('userdata')
             cuserarr[JSON.stringify(doc.id)] = JSON.parse(JSON.stringify(c));
         });
     });
-prompt()
 function setCantake(num, p) {
     var arrbs = cdataarr.arraybase.order;
     var n = cdataarr.noodle.nowok;
