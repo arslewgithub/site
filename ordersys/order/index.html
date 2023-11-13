@@ -521,10 +521,10 @@
                 '#okbutton.orderfinish {background-color: #dde572;' +
                 'border: 2px solid #a6ac56;font-weight: bold;color: black;}'
             var storgeoID = localStorage.getItem('id');
+            setCantake(0);
             db.collection('userdata').doc(storgeoID)
                 .onSnapshot(doc => {
                     try {
-                        setCantake(0);
                         document.querySelector('main').style = '';
                         order2id.innerHTML = doc.data().id;
                         normalmoney.innerHTML = doc.data().money;

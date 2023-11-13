@@ -64,14 +64,33 @@ db.collection('userdata')
             cuserarr[JSON.stringify(doc.id)] = JSON.parse(JSON.stringify(c));
         });
     });
-
-function setCantake(num) {
+prompt()
+function setCantake(num, p) {
     var arrbs = cdataarr.arraybase.order;
-    var n = cdataarr.noodle.nowok + num;
-    var fn = cdataarr.fi_noodle.nowok + num;
-    var bn = cdataarr.beef_noodle.nowok + num;
-    var r = cdataarr.brpss.nowok + num;
-    var s = cdataarr.salad.nowok + num;
+    var n = cdataarr.noodle.nowok;
+    var fn = cdataarr.fi_noodle.nowok;
+    var bn = cdataarr.beef_noodle.nowok;
+    var r = cdataarr.brpss.nowok;
+    var s = cdataarr.salad.nowok;
+    switch (p) {
+        case 1:
+            n + num;
+            break;
+        case 2:
+            r + num;
+            break;
+        case 3:
+            fn + num;
+            break;
+        case 4:
+            bn + num;
+            break;
+        case 5:
+            s + num;
+            break;
+        default:
+            break;
+    }
     carray = [];
     for (var i = 0; i < arrbs.length; i++) {
         var tf = false;
