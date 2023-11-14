@@ -494,7 +494,7 @@
                     dbupdate('database', 'arraybase', { order: arrbs, cantakelist: carray });
                 })
                 await setCantake(0);
-                delay(10);
+                delay(0.1);
                 if (localStorage.getItem('dev') != 'on') {
                     await location.reload();
                 }
