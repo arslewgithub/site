@@ -2,274 +2,330 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=413.571, initial-scale=0.91">
-	<link rel="shortcut icon" href="favicon509.png">
-	<title>ARS - 509 Set Seat</title>
-	<style>
-		body {
-			width: 100%;
-			height: 100%;
-			margin: 0;
-			background: #dce8ff;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=413.571, initial-scale=0.91">
+    <link rel="shortcut icon" href="favicon509.png">
+    <title>ARS - 509 Set Seat</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background: #dce8ff;
+        }
 
-		table,
-		tbody {
-			width: 420px;
-			height: 300px;
-		}
+        table,
+        tbody {
+            width: 420px;
+            height: 300px;
+        }
 
-		td {
-			width: 100rem;
-			height: 50px;
-			padding: 0px;
-			vertical-align: center;
-			text-align: center;
-			font-size: 27.5px;
-			user-select: none;
-		}
+        td {
+            width: 100rem;
+            height: 50px;
+            padding: 0px;
+            vertical-align: center;
+            text-align: center;
+            font-size: 27.5px;
+            user-select: none;
+        }
 
-		td.chart {
-			border: 0.5px solid #999999;
-			border-radius: 7px;
-			background: #9c153c;
-			color: #ffd268;
-			box-shadow: inset -1.25px -1.25px 0px 0.5px #555555;
-			transition: .125s;
-		}
+        td.chart {
+            border: 0.5px solid #999999;
+            border-radius: 7px;
+            background: #9c153c;
+            color: #ffd268;
+            box-shadow: inset -1.25px -1.25px 0px 0.5px #555555;
+            transition: .125s;
+        }
 
-		td.chart:active {
-			box-shadow: inset 1px 1px 0px .5px #555555;
-		}
+        td.chart:active {
+            box-shadow: inset 1px 1px 0px .5px #555555;
+        }
 
-		button {
-			width: 400px;
-			height: 40px;
-			background: #ffb9d8;
-			border: 0;
-			border-radius: 50px;
-			margin-top: 10px;
-			margin-left: 10px;
-			font-size: 18px;
-			cursor: pointer;
-			transition: .25s;
-			box-shadow: 0 0 8px 0.5px #333a;
-		}
+        button {
+            width: 400px;
+            height: 40px;
+            background: #ffb9d8;
+            border: 0;
+            border-radius: 50px;
+            margin-top: 10px;
+            margin-left: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: .25s;
+            box-shadow: 0 0 8px 0.5px #333a;
+        }
 
-		button:disabled {
-			filter: saturate(.5);
-			opacity: .75;
-			border: 1px solid #c0c0c0;
-			cursor: not-allowed;
-		}
+        button:disabled {
+            filter: saturate(.5);
+            opacity: .75;
+            border: 1px solid #c0c0c0;
+            cursor: not-allowed;
+        }
 
-		button:active {
-			opacity: .7;
-			scale: .95;
-			box-shadow: 0 0 1px 0px #333a;
-		}
+        button:active {
+            opacity: .7;
+            scale: .95;
+            box-shadow: 0 0 1px 0px #333a;
+        }
 
-		td.geted {
-			animation: getani .75s;
-		}
+        td.geted {
+            animation: getani .75s;
+        }
 
-		h2 {
-			margin: 0;
-			padding: 0;
-		}
+        h2 {
+            margin: 0;
+            padding: 0;
+        }
 
-		h4 {
-			margin: 0;
-			padding: 0;
-			margin-left: 230px;
-		}
+        h4 {
+            margin: 0;
+            padding: 0;
+            margin-left: 230px;
+        }
 
-		@keyframes getani {
-			0% {
-				scale: 1;
-			}
+        @keyframes getani {
+            0% {
+                scale: 1;
+            }
 
-			50% {
-				scale: 1.3;
-				background: #ffd268;
-				color: #9c153c;
-			}
+            50% {
+                scale: 1.3;
+                background: #ffd268;
+                color: #9c153c;
+            }
 
-			100% {
-				scale: 1;
-			}
-		}
-	</style>
+            100% {
+                scale: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
-	<div class="formcenter">
-		<table>
-			<tbody>
-				<tr>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class=""></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-				</tr>
-				<tr>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-				</tr>
-				<tr>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-				</tr>
-				<tr>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-				</tr>
-				<tr>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-				</tr>
-				<tr>
-					<td class=""></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class="chart"></td>
-					<td class=""></td>
-				</tr>
-			</tbody>
-		</table>
-		<button style="background: #fcffbb;">快速重新生成</button><br>
-		<button>動畫重新生成</button>
-	</div>
-	<script>
-		function an() {
-			var e = [];
-			for (var i = 1; i < 40; i++) {
-				e.push(i);
-			};
-			e.splice(4, 1);
-			return e;
-		}
-		document.getElementsByTagName('button')[0].onclick = gr;
-		document.getElementsByTagName('button')[1].onclick = agr;
-		function gr() {
-			const d = Date.now();
-			var a = an();
-			if (Math.random() > 0.6) {
-				switch (Math.floor(Math.random() * 3)) {
-					case 0:
-						var t = String(a.splice(32, 1));
-						break;
-
-					case 1:
-						var t = String(a.splice(26, 1));
-						break;
-
-					case 2:
-						var t = String(a.splice(29, 1));
-						break;
-
-					default:
-						break;
-				}
-			}
-			else {
-				var t = String(a.splice((Math.floor(Math.random() * 13) + 24), 1));
-			}
-			var r = [];
-			for (var c = 0; c < 37; c++) {
-				r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
-			};
-			var k = (Math.floor(Math.random() * 14) + 13);
-			r.splice((k + 6), 0, t);
-			r.splice(k, 0, '05');
-			document.querySelectorAll('.chart').forEach((e, n) => {
-				e.innerHTML = r[n];
-			});
-			console.log((Date.now() - d) / 1000 + 's')
-		}
-		async function agr() {
-			document.getElementsByTagName('button')[0].disabled = true;
-			document.getElementsByTagName('button')[1].disabled = true;
-			const s = Date.now();
-			var a = an();
-			if (Math.random() > 0.6) {
-				switch (Math.floor(Math.random() * 3)) {
-					case 0:
-						var t = String(a.splice(32, 1));
-						break;
-
-					case 1:
-						var t = String(a.splice(26, 1));
-						break;
-
-					case 2:
-						var t = String(a.splice(29, 1));
-						break;
-
-					default:
-						break;
-				}
-			}
-			else {
-				var t = String(a.splice((Math.floor(Math.random() * 13) + 24), 1));
-			}
-			var r = [];
-			for (var c = 0; c < 37; c++) {
-				r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
-			};
-			var k = (Math.floor(Math.random() * 14) + 13);
-			r.splice((k + 6), 0, t);
-			r.splice(k, 0, '05');
-			document.querySelectorAll('.chart').forEach((e, n) => {
-				e.innerHTML = '00';
-			});
-			var anii = [];
-			for (var d = 0; d < 39; d++) {
-				anii[d] = setInterval("document.querySelectorAll('.chart')[" + d + "].innerHTML = String(Math.floor(Math.random() * 36) + 1).padStart(2, '0')", 1);
-			};
-			for (var q = 0; q < 39; q++) {
-				await delay(0.057);
-				clearInterval(anii[q]);
-				document.querySelectorAll('.chart')[q].classList.add('geted');
-				document.querySelectorAll('.chart')[q].innerHTML = r[q];
-				setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 800);
-			};
-			console.log((Date.now() - s) / 1000 + 's')
-			document.getElementsByTagName('button')[0].disabled = false;
-			document.getElementsByTagName('button')[1].disabled = false;
-		}
-		function delay(n) {
-			return new Promise(function (resolve) {
-				setTimeout(resolve, n * 1000);
-			});
-		}
-	</script>
+    <div class="formcenter">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class=""></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class=""></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class=""></td>
+                </tr>
+            </tbody>
+        </table>
+        <button style="background: #fcffbb;">快速重新生成</button><br>
+        <button>動畫重新生成</button>
+    </div>
+    <script>
+        function an() {
+            var e = [];
+            for (var i = 1; i < 40; i++) {
+                e.push(i);
+            };
+            e.splice(4, 1);
+            return e;
+        }
+        document.getElementsByTagName('button')[0].onclick = gr;
+        document.getElementsByTagName('button')[1].onclick = agr;
+        function gr() {
+            const d = Date.now();
+            var a = an();
+            if (Math.random() > 0.005) {
+                switch (Math.floor(Math.random() * 4)) {
+                    case 0:
+                        var t = String(a.splice(32, 1));
+                        break;
+                    case 1:
+                        var t = String(a.splice(26, 1));
+                        break;
+                    case 2:
+                        var t = String(a.splice(29, 1));
+                        break;
+                    case 3:
+                        var t = String(a.splice(25, 1));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else {
+                var t = String(a.splice((Math.floor(Math.random() * 13) + 24), 1));
+            }
+            switch (Math.floor(Math.random() * 2)) {
+                case 0:
+                    var m = [String(a.splice(10, 1)), String(a.splice(13, 1))];
+                    break;
+                case 1:
+                    var m = [String(a.splice(14, 1)), String(a.splice(10, 1))];
+                    break;
+                default:
+                    break;
+            }
+            switch (Math.floor(Math.random() * 4)) {
+                case 0:
+                    var p = 0;
+                    break;
+                case 1:
+                    var p = 1;
+                    break;
+                case 2:
+                    var p = 3;
+                    break;
+                case 3:
+                    var p = 4;
+                    break;
+                default:
+                    break;
+            }
+            var r = [];
+            for (var c = 0; c < 37; c++) {
+                r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
+            };
+            r.splice(p, 0, m[1]);
+            r.splice(p, 0, m[0]);
+            var k = (Math.floor(Math.random() * 14) + 13);
+            r.splice((k + 6), 0, t);
+            r.splice(k, 0, '05');
+            document.querySelectorAll('.chart').forEach((e, n) => {
+                e.innerHTML = r[n];
+            });
+            console.log((Date.now() - d) / 1000 + 's')
+        }
+        async function agr() {
+            document.getElementsByTagName('button')[0].disabled = true;
+            document.getElementsByTagName('button')[1].disabled = true;
+            const s = Date.now();
+            var a = an();
+            if (Math.random() > 0.005) {
+                switch (Math.floor(Math.random() * 4)) {
+                    case 0:
+                        var t = String(a.splice(32, 1));
+                        break;
+                    case 1:
+                        var t = String(a.splice(26, 1));
+                        break;
+                    case 2:
+                        var t = String(a.splice(29, 1));
+                        break;
+                    case 3:
+                        var t = String(a.splice(25, 1));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else {
+                var t = String(a.splice((Math.floor(Math.random() * 13) + 24), 1));
+            }
+            switch (Math.floor(Math.random() * 2)) {
+                case 0:
+                    var m = [String(a.splice(10, 1)), String(a.splice(13, 1))];
+                    break;
+                case 1:
+                    var m = [String(a.splice(14, 1)), String(a.splice(10, 1))];
+                    break;
+                default:
+                    break;
+            }
+            switch (Math.floor(Math.random() * 4)) {
+                case 0:
+                    var p = 0;
+                    break;
+                case 1:
+                    var p = 1;
+                    break;
+                case 2:
+                    var p = 3;
+                    break;
+                case 3:
+                    var p = 4;
+                    break;
+                default:
+                    break;
+            }
+            var r = [];
+            for (var c = 0; c < 37; c++) {
+                r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
+            };
+            r.splice(p, 0, m[1]);
+            r.splice(p, 0, m[0]);
+            var k = (Math.floor(Math.random() * 14) + 13);
+            r.splice((k + 6), 0, t);
+            r.splice(k, 0, '05');
+            document.querySelectorAll('.chart').forEach((e, n) => {
+                e.innerHTML = '00';
+            });
+            var anii = [];
+            for (var d = 0; d < 39; d++) {
+                anii[d] = setInterval("document.querySelectorAll('.chart')[" + d + "].innerHTML = String(Math.floor(Math.random() * 36) + 1).padStart(2, '0')", 1);
+            };
+            for (var q = 0; q < 39; q++) {
+                await delay(0.0875);
+                clearInterval(anii[q]);
+                document.querySelectorAll('.chart')[q].classList.add('geted');
+                document.querySelectorAll('.chart')[q].innerHTML = r[q];
+                setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 800);
+            };
+            console.log((Date.now() - s) / 1000 + 's')
+            document.getElementsByTagName('button')[0].disabled = false;
+            document.getElementsByTagName('button')[1].disabled = false;
+        }
+        function delay(n) {
+            return new Promise(function (resolve) {
+                setTimeout(resolve, n * 1000);
+            });
+        }
+    </script>
 </body>
 
 </html>
