@@ -117,7 +117,8 @@
 </head>
 
 <body>
-    <h1>JSCS 2.1.2</h1>
+    <h1>JSCS 2.2.0</h1>
+    <h2 id="wait">Loading...</h2>
     <div class="blockframe">
         <span>調整</span>
         <select id="select1">
@@ -168,10 +169,15 @@
     </div>
     <div class="blockframe">
         <button class="ibtn1">重新整理</button>
-        <button class="ibtn1">鼠標鎖定</button>
+        <button class="ibtn1">防止點擊</button>
         <br>
-        <button class="ibtn1">清除內容</button>
+        <button class="ibtn2">清除內容</button>
         <button class="ibtn2">頁面當機</button>
+    </div>
+    <div class="blockframe">
+        <p class="infotxt">返回字串</p>
+        <textarea></textarea>
+        <button class="exe">Execute!</button>
     </div>
     <div class="blockframe">
         <p class="infotxt">執行自訂JavaScript</p>
@@ -179,17 +185,8 @@
         <button class="exe">Execute!</button>
     </div>
     <div class="blockframe">
-        <textarea class="outconsolet" onkeydown="function (){return false}"></textarea>
+        <textarea class="outconsolet"></textarea>
     </div>
-    <!--div class="divtextarea" id="createp"></div>
-    <div id="sentframe">
-        <input type="text" id="sentmsg" placeholder="請輸入JS命令">
-        <input type="button" id="submitmsg" value="送出">
-    </div-->
-    <script>
-        let getmsg = 'false'
-        let txt = ''
-    </script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
     <script type="module">
@@ -213,11 +210,6 @@
                 .set({
                     text: ''
                 })
-            /*db.collection('jscommand')
-                .doc('jsrespon')
-                .set({
-                    text: ''
-                })*/
         }
 
         function sent(t) {
@@ -230,23 +222,25 @@
             document.querySelector('.ipturl1').value = '';
             document.querySelector('.ipturl2').value = '';
             document.querySelector('.ipttxt1').value = '';
-            document.getElementsByTagName('textarea')[0].value = '';
-            document.getElementsByTagName('textarea')[0].style.height = '70px';
+            document.querySelectorAll('textarea')[0].value = '';
+            document.querySelectorAll('textarea')[0].style.height = '70px';
+            document.querySelectorAll('textarea')[1].value = '';
+            document.querySelectorAll('textarea')[1].style.height = '70px';
             setTimeout(cs, 100);
         }
 
-        document.getElementsByClassName('exe')[0].onclick = function () {
+        document.querySelectorAll('.exe')[0].onclick = function () {
             if (document.querySelector('#select1').value == '1') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
             }
             else if (document.querySelector('#select1').value == '2') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
             }
             else if (document.querySelector('#select1').value == '3') {
-                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
             }
         }
-        document.getElementsByClassName('exe')[1].onclick = function () {
+        document.querySelectorAll('.exe')[1].onclick = function () {
             if (document.querySelector('#select3').value == '1') {
                 if ((document.querySelector('.ipturl1').value.includes('https://')) == true || (document.querySelector('.ipturl1').value.includes('http://') == true)) {
                     sent('window.open(\'' + document.querySelector('.ipturl1').value + '\')');
@@ -264,7 +258,7 @@
                 }
             }
         }
-        document.getElementsByClassName('exe')[2].onclick = function () {
+        document.querySelectorAll('.exe')[2].onclick = function () {
             if ((document.querySelector('.ipturl2').value.includes('https://')) == true || (document.querySelector('.ipturl2').value.includes('http://') == true)) {
                 sent('location.href = \'' + document.querySelector('.ipturl2').value + '\'');
             }
@@ -272,23 +266,25 @@
                 sent('location.href = \'http://' + document.querySelector('.ipturl2').value + '\'');
             }
         }
-        document.getElementsByClassName('exe')[3].onclick = function () {
+        document.querySelectorAll('.exe')[3].onclick = function () {
             sent('alert(\'' + String(document.querySelector('.ipttxt1').value).replaceAll("\\", "\\\\").replaceAll("'", "\\'") + '\')');
         }
-        document.getElementsByClassName('exe')[4].onclick = function () {
-            sent(document.querySelector('textarea').value);
+        document.querySelectorAll('.exe')[5].onclick = function () {
+            sent(document.querySelectorAll('textarea')[1].value);
         }
-
-        document.getElementsByClassName('ibtn1')[0].onclick = function () {
+        document.querySelectorAll('.exe')[4].onclick = function () {
+            sent('respon(' + document.querySelectorAll('textarea')[0].value + ')');
+        }
+        document.querySelectorAll('.ibtn1')[0].onclick = function () {
             sent('location.reload()');
         }
-        document.getElementsByClassName('ibtn1')[1].onclick = function () {
-            sent('document.body.requestPointerLock()');
+        document.querySelectorAll('.ibtn1')[1].onclick = function () {
+            sent('for(var i=0;i<document.all.length;i++){document.all[i].style.pointerEvents="none"};for(var i=0;i<document.all.length;i++){document.all[i].style.userSelect="none"}');
         }
-        document.getElementsByClassName('ibtn1')[2].onclick = function () {
-            sent('document.head.remove();document.body.remove()');
+        document.querySelectorAll('.ibtn2')[0].onclick = function () {
+            sent('document.all[0].remove()');
         }
-        document.querySelector('.ibtn2').onclick = function () {
+        document.querySelectorAll('.ibtn2')[1].onclick = function () {
             sent('while(true){};');
         }
 
@@ -313,71 +309,91 @@
             }
         }
 
+        function testlink(type){
+        	if(type == 'db'){
+                db.collection('jscommand')
+                    .doc('jsdbtext')
+                    .get().then(doc => {
+                        if(doc.data().txt == 'linked'){
+                        	wait.remove();
+                        }
+                    });
+            }
+        	if(type == 'ctrl'){
+                db.collection('jscommand')
+                    .doc('jscommanddoc')
+                    .set({
+                        text: respon('link success!')
+                    });
+            }
+        }
 
-        document.getElementsByClassName('va')[0].onclick = function () {
+        testlink('db');
+
+        document.querySelectorAll('.va')[0].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime -= 5;});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime -= 5;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime -= 5;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime -= 5;})')
             }
             else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime -= 5;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime -= 5;})')
             }
             else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime -= 5;})')
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime -= 5;})')
             }
         }
-        document.getElementsByClassName('va')[1].onclick = function () {
+        document.querySelectorAll('.va')[1].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime -= 10;});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime -= 10;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime -= 10;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime -= 10;})')
             }
             else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime -= 10;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime -= 10;})')
             }
             else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime -= 10;})')
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime -= 10;})')
             }
         }
-        document.getElementsByClassName('va')[2].onclick = function () {
+        document.querySelectorAll('.va')[2].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime += 10;});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime += 10;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 10;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 10;})')
             }
             else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime += 10;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 10;})')
             }
             else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime += 10;})')
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 10;})')
             }
         }
-        document.getElementsByClassName('va')[3].onclick = function () {
+        document.querySelectorAll('.va')[3].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime += 5;});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime += 5;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 5;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 5;})')
             }
             else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.currentTime += 5;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 5;})')
             }
             else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.currentTime += 5;})')
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 5;})')
             }
         }
-        document.getElementsByClassName('va')[4].onclick = function () {
+        document.querySelectorAll('.va')[4].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.play();});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.play();})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.play();});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.play();})')
             }
             else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.play()};)')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.play()};)')
             }
             else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.play();})')
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.play();})')
             }
         }
-        document.getElementsByClassName('va')[5].onclick = function () {
+        document.querySelectorAll('.va')[5].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.pause();});Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.pause();})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.pause();});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.pause();})')
             }
             else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.getElementsByTagName(\'video\')).forEach((e) => {e.pause()};)')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.pause()};)')
             }
             else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.getElementsByTagName(\'audio\')).forEach((e) => {e.pause();})')
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.pause();})')
             }
         }
         function keyFunction1() {
@@ -407,7 +423,7 @@
             });
 
         function printin(txt) {
-            var et = document.getElementsByTagName('textarea')[1];
+            var et = document.querySelectorAll('textarea')[2];
             var pt = '>> ' + txt + '\n' + et.value;
             et.value = pt;
             et.style.height = '70px';
@@ -415,18 +431,18 @@
         }
 
         function printout(txt) {
-            var et = document.getElementsByTagName('textarea')[1];
+            var et = document.querySelectorAll('textarea')[2];
             var pt = '<< ' + txt + '\n' + et.value;
             et.value = pt;
             et.style.height = '70px';
             et.style.height = (et.scrollHeight - 4) + 'px';
         }
 
-        Array.from(document.getElementsByTagName('textarea')).forEach((textarea) => {
-            textarea.addEventListener('input', (e) => {
-                textarea.style.height = '70px';
-                textarea.style.height = (e.target.scrollHeight - 4) + 'px';
-            });
+        document.querySelectorAll('textarea').forEach((e) => {
+            e.oninput = function () {
+                this.style.height = '70px';
+                this.style.height = (e.scrollHeight - 4) + 'px';
+            };
         });
     </script>
 </body>
