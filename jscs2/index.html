@@ -113,7 +113,6 @@
         }
         div.blockframe.outconsolet{
             width: 100%;
-            padding-bottom: 4px;
         }
         .outconsolet .input_log {
             background: #f0f8ffe0;
@@ -158,11 +157,12 @@
         #consoleclear{
         	width: min-content;
             cursor: pointer;
-            margin-bottom: -30px;
-            margin-left: 20px;
+            margin-right: 5%;
             z-index: 5;
             position: relative;
             background: #FDD;
+            float: right;
+            transform: translateY(-50%);
         }
         button:active, 
         input:active, 
@@ -178,7 +178,7 @@
 </head>
 
 <body>
-    <h1>JSCS 2.3.7</h1>
+    <h1>JSCS 2.3.9</h1>
     <h4>JavaScript Command Sender</h4>
     <h2 id="wait">Loading...</h2>
     <div class="blockframe">
@@ -242,8 +242,7 @@
         <button class="exe">Execute!</button>
     </div>
     <div class="blockframe" id="consoleclear">❌</div>
-    <div class="blockframe outconsolet" style="height: 0;">
-        <div class="empty"></div>
+    <div class="blockframe outconsolet">
     </div>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
@@ -467,9 +466,11 @@
             	document.querySelectorAll('.outconsolet .input_log').forEach((e) => {e.remove();});
             	document.querySelectorAll('.outconsolet .output_log').forEach((e) => {e.remove();});
             	document.querySelectorAll('.outconsolet .output_error').forEach((e) => {e.remove();});
-                adjusthHeight();
+                consoleclear.style.display = 'none';
             }
         }
+
+        consoleclear.style.display = 'none';
 
         function printin(txt) {
             var et = document.querySelector('div.outconsolet');
@@ -483,17 +484,13 @@
                         this.nextSibling.focus();
                     }catch(e){}
                     this.remove();
+                    if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
+                        consoleclear.style.display = 'none';
+                    }
                 }
             }
             et.insertBefore(jslog, et.firstChild);
-            adjusthHeight();
-        }
-        var rahtimes = 0;
-        
-        function adjusthHeight(){
-        	var e = document.querySelector('div.outconsolet');
-            e.style.height = '0px';
-            e.style.height = (e.scrollHeight - 4) + 'px';
+            consoleclear.style.display = 'block';
         }
         
         function printout(txt, type) {
@@ -536,11 +533,13 @@
                         this.nextSibling.focus();
                     }catch(e){}
                     this.remove();
+                    if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
+                        consoleclear.style.display = 'none';
+                    }
                 }
             }
             et.insertBefore(jslog, et.firstChild);
-            et.style.height = '0px';
-            et.style.height = (et.scrollHeight - 4) + 'px';
+            consoleclear.style.display = 'block';
         }
         
         function printouterr(txt) {
@@ -556,11 +555,13 @@
                         this.nextSibling.focus();
                     }catch(e){}
                     this.remove();
+                    if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
+                        consoleclear.style.display = 'none';
+                    }
                 }
             }
             et.insertBefore(jslog, et.firstChild);
-            et.style.height = '0px';
-            et.style.height = (et.scrollHeight - 4) + 'px';
+            consoleclear.style.display = 'block';
         }
 
         document.querySelectorAll('textarea').forEach((e) => {
@@ -569,12 +570,6 @@
                 this.style.height = (e.scrollHeight - 4) + 'px';
             };
         });
-        document.querySelector('.outconsolet').oninput = function () {
-                this.style.height = '0px';
-                this.style.height = (this.scrollHeight - 10) + 'px';
-            };
-        document.querySelector('.outconsolet').style.height = '0px';
-        document.querySelector('.outconsolet').style.height = (document.querySelector('.outconsolet').scrollHeight) + 'px';
     </script>
 </body>
 
