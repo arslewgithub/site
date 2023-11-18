@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Command Sender</title>
     <style>
+        html{
+            height: max-content;
+            min-height: 100%;
+        }
         textarea {
             min-height: 70px;
             width: calc(100% - 10px);
@@ -29,6 +33,7 @@
 
         body {
             background-image: linear-gradient(777deg, #d5f9ff, #c6dbff, #bed3ff, #ffd5ff);
+            background-size: cover;
         }
 
         p.infotxt {
@@ -107,25 +112,31 @@
         input[type="url"].ipturl1 {
             width: calc(100% - 183px);
         }
+
         .deving {
             opacity: .5;
             pointer-events: none;
         }
-        div.blockframe.outconsolet{
+
+        div.blockframe.outconsolet {
             width: 100%;
         }
+
         .outconsolet .input_log {
             background: #f0f8ffe0;
         }
+
         .outconsolet .output_log {
             background: #bcfe;
         }
+
         .outconsolet .output_error {
             background: #fbbe;
         }
+
         .outconsolet>.output_error,
         .outconsolet>.input_log,
-        .outconsolet>.output_log{
+        .outconsolet>.output_log {
             padding: 10px;
             margin: 5px;
             border-radius: 7px;
@@ -133,29 +144,35 @@
             word-break: break-all;
             animation: consoleani .25s;
         }
-        @keyframes consoleani{
-            0%{
+
+        @keyframes consoleani {
+            0% {
                 opacity: .1;
                 transform: translateY(-100%);
             }
-            100%{
-            	opacity: 1;
+
+            100% {
+                opacity: 1;
                 transform: translateY(0%);
             }
         }
-        .empty{
-        	width: 100%;
+
+        .empty {
+            width: 100%;
             height: .00558036px;
             display: block;
             margin: 0;
             padding: 0;
             border: 0;
         }
-        h1, h4{
-        	margin: 1px;
+
+        h1,
+        h4 {
+            margin: 1px;
         }
-        #consoleclear{
-        	width: min-content;
+
+        #consoleclear {
+            width: min-content;
             cursor: pointer;
             margin-right: 5%;
             z-index: 5;
@@ -164,13 +181,15 @@
             float: right;
             transform: translateY(-50%);
         }
-        button:active, 
-        input:active, 
+
+        button:active,
+        input:active,
         #consoleclear:active {
             scale: .97;
         }
-        button, 
-        input, 
+
+        button,
+        input,
         #consoleclear {
             transition: .125s;
         }
@@ -178,72 +197,74 @@
 </head>
 
 <body>
-    <h1>JSCS 2.3.9</h1>
+    <h1>JSCS 2.3.10</h1>
     <h4>JavaScript Command Sender</h4>
     <h2 id="wait">Loading...</h2>
-    <div class="blockframe">
-        <span>調整</span>
-        <select id="select1">
-            <option value="1">影片和音樂</option>
-            <option value="2">影片</option>
-            <option value="3">音樂</option>
-        </select>
-        <span>的播放速度至</span>
-        <input type="number" value="100" style="width: 50px;">
-        <span>%</span>
-        <button class="exe">Execute!</button>
-    </div>
-    <div class="blockframe">
-        <span>調整頁面上的所有</span>
-        <select id="select2">
-            <option value="1">影片和音樂</option>
-            <option value="2">影片</option>
-            <option value="3">音樂</option>
-        </select>
-        <span>:</span>
-        <br>
-        <button class="va">-5s</button>
-        <button class="va">-10s</button>
-        <button class="va">+10s</button>
-        <button class="va">+5s</button>
-        <button class="va">播放</button>
-        <button class="va">暫停</button>
-    </div>
-    <div class="blockframe">
-        <span>開啟</span>
-        <select id="select3">
-            <option value="1">新分頁</option>
-            <option value="2">新視窗</option>
-        </select>
-        <span>，網址是</span>
-        <input type="url" class="ipturl1">
-        <button class="exe">Execute!</button>
-    </div>
-    <div class="blockframe">
-        <span>跳轉網頁至</span>
-        <input type="url" class="ipturl2">
-        <button class="exe">Execute!</button>
-    </div>
-    <div class="blockframe">
-        <span>顯示提示訊息</span>
-        <input type="text" class="ipttxt1">
-        <button class="exe">Execute!</button>
-    </div>
-    <div class="blockframe">
-        <button class="ibtn1">重新整理</button>
-        <button class="ibtn1">防止點擊</button>
-        <br>
-        <button class="ibtn2">清除內容</button>
-        <button class="ibtn2">頁面當機</button>
-    </div>
-    <div class="blockframe">
-        <p class="infotxt">執行自訂JavaScript</p>
-        <textarea></textarea>
-        <button class="exe">Execute!</button>
-    </div>
-    <div class="blockframe" id="consoleclear">❌</div>
-    <div class="blockframe outconsolet">
-    </div>
+    <main style="display: none;">
+        <div class="blockframe">
+            <span>調整</span>
+            <select id="select1">
+                <option value="1">影片和音樂</option>
+                <option value="2">影片</option>
+                <option value="3">音樂</option>
+            </select>
+            <span>的播放速度至</span>
+            <input type="number" value="100" style="width: 50px;">
+            <span>%</span>
+            <button class="exe">Execute!</button>
+        </div>
+        <div class="blockframe">
+            <span>調整頁面上的所有</span>
+            <select id="select2">
+                <option value="1">影片和音樂</option>
+                <option value="2">影片</option>
+                <option value="3">音樂</option>
+            </select>
+            <span>:</span>
+            <br>
+            <button class="va">-5s</button>
+            <button class="va">-10s</button>
+            <button class="va">+10s</button>
+            <button class="va">+5s</button>
+            <button class="va">播放</button>
+            <button class="va">暫停</button>
+        </div>
+        <div class="blockframe">
+            <span>開啟</span>
+            <select id="select3">
+                <option value="1">新分頁</option>
+                <option value="2">新視窗</option>
+            </select>
+            <span>，網址是</span>
+            <input type="url" class="ipturl1">
+            <button class="exe">Execute!</button>
+        </div>
+        <div class="blockframe">
+            <span>跳轉網頁至</span>
+            <input type="url" class="ipturl2">
+            <button class="exe">Execute!</button>
+        </div>
+        <div class="blockframe">
+            <span>顯示提示訊息</span>
+            <input type="text" class="ipttxt1">
+            <button class="exe">Execute!</button>
+        </div>
+        <div class="blockframe">
+            <button class="ibtn1">重新整理</button>
+            <button class="ibtn1">防止點擊</button>
+            <br>
+            <button class="ibtn2">清除內容</button>
+            <button class="ibtn2">頁面當機</button>
+        </div>
+        <div class="blockframe">
+            <p class="infotxt">執行自訂JavaScript</p>
+            <textarea></textarea>
+            <button class="exe">Execute!</button>
+        </div>
+        <div class="blockframe" id="consoleclear">❌</div>
+        <div class="blockframe outconsolet">
+        </div>
+    </main>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
     <script type="module">
@@ -361,6 +382,7 @@
         }
 
         wait.remove();
+        document.querySelector('main').style.display = ''
 
         document.querySelectorAll('.va')[0].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
@@ -460,65 +482,65 @@
                     printouterr(doc.data().text);
                 }
             });
-        
-        consoleclear.onclick = function (){
-            if(confirm('確定要清空輸出記錄?')){
-            	document.querySelectorAll('.outconsolet .input_log').forEach((e) => {e.remove();});
-            	document.querySelectorAll('.outconsolet .output_log').forEach((e) => {e.remove();});
-            	document.querySelectorAll('.outconsolet .output_error').forEach((e) => {e.remove();});
-                consoleclear.style.display = 'none';
+
+        consoleclear.onclick = function () {
+            if (confirm('確定要清空輸出記錄?')) {
+                document.querySelectorAll('.outconsolet .input_log').forEach((e) => { e.remove(); });
+                document.querySelectorAll('.outconsolet .output_log').forEach((e) => { e.remove(); });
+                document.querySelectorAll('.outconsolet .output_error').forEach((e) => { e.remove(); });
+                consoleclear.style.scale = '0';
             }
         }
 
-        consoleclear.style.display = 'none';
+        consoleclear.style.scale = '0';
 
         function printin(txt) {
             var et = document.querySelector('div.outconsolet');
-        	var jslog = document.createElement('div');
+            var jslog = document.createElement('div');
             jslog.innerHTML = String(txt).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll(' ', '&nbsp;').replaceAll('\n', '<br>');
             jslog.classList.add('input_log');
             jslog.contentEditable = 'true';
             jslog.oninput = function () {
-                if(this.innerHTML == ""){
-                	try{
+                if (this.innerHTML == "") {
+                    try {
                         this.nextSibling.focus();
-                    }catch(e){}
+                    } catch (e) { }
                     this.remove();
                     if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
-                        consoleclear.style.display = 'none';
+                        consoleclear.style.scale = '0';
                     }
                 }
             }
             et.insertBefore(jslog, et.firstChild);
-            consoleclear.style.display = 'block';
+            consoleclear.style.scale = '1';
         }
-        
+
         function printout(txt, type) {
             var et = document.querySelector('div.outconsolet');
-        	var jslog = document.createElement('div');
-            switch (txt){
-            	case 'undefined': 
+            var jslog = document.createElement('div');
+            switch (txt) {
+                case 'undefined':
                     jslog.style.color = '#626';
                     type = 'undefinded';
                     break;
-            	case 'null': 
+                case 'null':
                     jslog.style.color = '#826';
                     break;
                 default:
                     break;
             }
-            switch (type){
-            	case 'string': 
+            switch (type) {
+                case 'string':
                     txt = "'" + txt + "'";
                     jslog.style.color = '#B40';
                     break;
-            	case 'number': 
+                case 'number':
                     jslog.style.color = '#20B';
                     break;
-            	case 'bigint': 
+                case 'bigint':
                     jslog.style.color = '#20B';
                     break;
-            	case 'boolean': 
+                case 'boolean':
                     jslog.style.color = '#072';
                     break;
                 default:
@@ -528,40 +550,40 @@
             jslog.classList.add('output_log');
             jslog.contentEditable = 'true';
             jslog.oninput = function () {
-                if(this.innerHTML == ""){
-                	try{
+                if (this.innerHTML == "") {
+                    try {
                         this.nextSibling.focus();
-                    }catch(e){}
+                    } catch (e) { }
                     this.remove();
                     if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
-                        consoleclear.style.display = 'none';
+                        consoleclear.style.scale = '0';
                     }
                 }
             }
             et.insertBefore(jslog, et.firstChild);
-            consoleclear.style.display = 'block';
+            consoleclear.style.scale = '1';
         }
-        
+
         function printouterr(txt) {
             var et = document.querySelector('div.outconsolet');
-        	var jslog = document.createElement('div');
+            var jslog = document.createElement('div');
             jslog.innerHTML = String(txt).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll(' ', '&nbsp;').replaceAll('\n', '<br>');
             jslog.classList.add('output_error');
             jslog.contentEditable = 'true';
             jslog.style.color = '#C00';
             jslog.oninput = function () {
-                if(this.innerHTML == ""){
-                	try{
+                if (this.innerHTML == "") {
+                    try {
                         this.nextSibling.focus();
-                    }catch(e){}
+                    } catch (e) { }
                     this.remove();
                     if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
-                        consoleclear.style.display = 'none';
+                        consoleclear.style.scale = '0';
                     }
                 }
             }
             et.insertBefore(jslog, et.firstChild);
-            consoleclear.style.display = 'block';
+            consoleclear.style.scale = '1';
         }
 
         document.querySelectorAll('textarea').forEach((e) => {
