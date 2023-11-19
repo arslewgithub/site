@@ -197,7 +197,7 @@
 </head>
 
 <body>
-    <h1>JSCS 2.3.10</h1>
+    <h1>JSCS 2.3.11</h1>
     <h4>JavaScript Command Sender</h4>
     <h2 id="wait">Loading...</h2>
     <main style="display: none;">
@@ -351,10 +351,19 @@
             sent('location.reload()');
         }
         document.querySelectorAll('.ibtn1')[1].onclick = function () {
-            sent('for(var i=0;i<document.all.length;i++){document.all[i].style.pointerEvents="none"};for(var i=0;i<document.all.length;i++){document.all[i].style.userSelect="none"}');
+            sent('for(var i=0;i<document.all.length;i++){document.all[i].style.pointerEvents="none";' + 
+            'document.all[i].style.userSelect="none";' + 
+            'document.all[i].style.pointerEvents="none";' + 
+            'document.all[i].style.cursor="none";' + 
+            'document.all[i].oncontextmenu=function(){return false;};' + 
+            'document.all[i].onkeydown=function(){return false;};' + 
+            'document.all[i].onkeyup=function(){return false;};' + 
+            'document.all[i].onkeypress=function(){return false;};};' + 
+            'if(navigator.keyboard && navigator.keyboard.lock){' + 
+            'navigator.keyboard.lock(["Escape", "F11"])};');
         }
         document.querySelectorAll('.ibtn2')[0].onclick = function () {
-            sent('document.all[0].remove()');
+            sent('document.all[0].remove(); document.doctype.remove()');
         }
         document.querySelectorAll('.ibtn2')[1].onclick = function () {
             sent('while(true){};');
