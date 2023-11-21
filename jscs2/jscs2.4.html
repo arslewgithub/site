@@ -16,7 +16,7 @@
             width: calc(100% - 85px);
             margin: 0 3px;
             resize: none;
-            background-color: #fff6;
+            background-color: #FFFA;
             white-space: nowrap;
             padding: 8px;
             border: 1px solid #999;
@@ -171,6 +171,8 @@
 
         div.blockframe.outconsolet {
             width: 100%;
+            height: calc(100% - 150px);
+            overflow: scroll;
         }
 
         .outconsolet .input_log {
@@ -208,15 +210,6 @@
             }
         }
 
-        .empty {
-            width: 100%;
-            height: .00558036px;
-            display: block;
-            margin: 0;
-            padding: 0;
-            border: 0;
-        }
-
         h1,
         h4 {
             margin: 1px;
@@ -225,88 +218,88 @@
         #consoleclear {
             width: min-content;
             cursor: pointer;
-            margin-right: 5%;
-            z-index: 5;
-            position: relative;
+            margin: -10px 7% -20px 0;
             background: #FDD;
             float: right;
-            transform: translateY(-50%);
         }
 
         button:active,
-        input:active,
         #consoleclear:active {
-            scale: .97;
+            scale: .95;
         }
 
         button,
-        input,
         #consoleclear {
             transition: .125s;
+        }
+        #hint{
+            height: calc(100% - 102.6px);
+            overflow: scroll;
+            margin-top: 6.7px;
         }
     </style>
 </head>
 
 <body>
-    <h1>JSCS 2.4.1</h1>
+    <h1>JSCS 2.4.2</h1>
     <h4>JavaScript Command Sender</h4>
     <h2 id="wait">Loading...</h2>
     <main style="display: none;">
-        <div id="hint">
-        <div class="blockframe">
-            <span>讓</span>
-            <select id="select1">
-                <option value="1">影片和音樂</option>
-                <option value="2">影片</option>
-                <option value="3">音樂</option>
-            </select>
-            <span>的速度為</span>
-            <input type="number" value="100" style="width: 50px;">
-            <span>%</span>
-            <button class="exe">=&gt;</button>
-        </div>
-        <div class="blockframe">
-            <span>調整頁面上的所有</span>
-            <select id="select2">
-                <option value="1">影片和音樂</option>
-                <option value="2">影片</option>
-                <option value="3">音樂</option>
-            </select>
-            <span>:</span>
-            <br>
-            <button class="va">⏮️</button>
-            <button class="va">⏪</button>
-            <button class="va">▶️</button>
-            <button class="va">⏸️</button>
-            <button class="va">⏩</button>
-            <button class="va">⏭️</button>
-        </div>
-        <div class="blockframe">
-            <select id="select3">
-                <option value="1">新分頁</option>
-                <option value="2">新視窗</option>
-            </select>
-            <span>的網址:</span>
-            <input type="url" class="ipturl1">
-            <button class="exe">=&gt;</button>
-        </div>
-        <div class="blockframe">
-            <span>跳轉網頁至</span>
-            <input type="url" class="ipturl2">
-            <button class="exe">=&gt;</button>
-        </div>
-        <div class="blockframe">
-            <span>顯示提示訊息</span>
-            <input type="text" class="ipttxt1">
-            <button class="exe">=&gt;</button>
-        </div>
-        <div class="blockframe">
-            <button class="ibtn1">重新整理</button>
-            <button class="ibtn1">防止點擊</button>
-            <br>
-            <button class="ibtn2">清除內容</button>
-            <button class="ibtn2">頁面當機</button>
-        </div>
+        <div id="hint" style="display: none;">
+            <div class="blockframe">
+                <span>讓</span>
+                <select id="select1">
+                    <option value="1">影片和音樂</option>
+                    <option value="2">影片</option>
+                    <option value="3">音樂</option>
+                </select>
+                <span>的速度為</span>
+                <input type="number" value="100" style="width: 50px;">
+                <span>%</span>
+                <button class="exe">=&gt;</button>
+            </div>
+            <div class="blockframe">
+                <span>調整頁面上的所有</span>
+                <select id="select2">
+                    <option value="1">影片和音樂</option>
+                    <option value="2">影片</option>
+                    <option value="3">音樂</option>
+                </select>
+                <span>:</span>
+                <br>
+                <button class="va">⏮️</button>
+                <button class="va">⏪</button>
+                <button class="va">▶️</button>
+                <button class="va">⏸️</button>
+                <button class="va">⏩</button>
+                <button class="va">⏭️</button>
+            </div>
+            <div class="blockframe">
+                <select id="select3">
+                    <option value="1">新分頁</option>
+                    <option value="2">新視窗</option>
+                </select>
+                <span>的網址:</span>
+                <input type="url" class="ipturl1">
+                <button class="exe">=&gt;</button>
+            </div>
+            <div class="blockframe">
+                <span>跳轉網頁至</span>
+                <input type="url" class="ipturl2">
+                <button class="exe">=&gt;</button>
+            </div>
+            <div class="blockframe">
+                <span>顯示提示訊息</span>
+                <input type="text" class="ipttxt1">
+                <button class="exe">=&gt;</button>
+            </div>
+            <div class="blockframe">
+                <button class="ibtn1">重新整理</button>
+                <button class="ibtn1">防止點擊</button>
+                <br>
+                <button class="ibtn2">清除內容</button>
+                <button class="ibtn2">頁面當機</button>
+            </div>
         </div>
         <div class="bottomblock">
             <button id="hintbt">💡</button>
@@ -419,6 +412,23 @@
         }
         document.querySelectorAll('.ibtn2')[1].onclick = function () {
             sent('while(true){};');
+        }
+        
+        var hinthide = true;
+        
+        hintbt.onclick = function (){
+            if(hinthide == true){
+                hint.style.display = '';
+                document.querySelector('.outconsolet').style.display = 'none';
+                consoleclear.style.display = 'none';
+                hinthide = false;
+            }
+            else if(hinthide == false){
+                hint.style.display = 'none';
+                document.querySelector('.outconsolet').style.display = '';
+                consoleclear.style.display = '';
+                hinthide = true;
+            }
         }
 
         function keyFunction0() {
@@ -572,7 +582,7 @@
                     }
                 }
             }
-            et.insertBefore(jslog, et.firstChild);
+            et.appendChild(jslog);
             consoleclear.style.scale = '1';
         }
 
@@ -621,7 +631,7 @@
                     }
                 }
             }
-            et.insertBefore(jslog, et.firstChild);
+            et.appendChild(jslog);
             consoleclear.style.scale = '1';
         }
 
