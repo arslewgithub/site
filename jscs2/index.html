@@ -11,15 +11,58 @@
             height: max-content;
             min-height: 100%;
         }
-        textarea {
-            min-height: 70px;
-            width: calc(100% - 10px);
+        .bottomblock textarea {
+            height: 32px;
+            width: calc(100% - 85px);
+            margin: 0 3px;
             resize: none;
             background-color: #fff6;
             white-space: nowrap;
-            padding: 4px;
+            padding: 8px;
             border: 1px solid #999;
             border-radius: 7px;
+        }
+        
+        .bottomblock .exe {
+            min-height: 100%;
+            padding: 0;
+            margin: 0 10px 0 0;
+            border: 1px solid #273dff;
+            border-radius: 10px;
+            background-color: #97adff;
+            cursor: pointer;
+            user-select: none;
+            color: #273dff;
+            font-weight: bold;
+            width: 40px;
+            float: right;
+        }
+        
+        .bottomblock #hintbt {
+            width: 30px;
+            min-height: 100%;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #27BB3D;
+            border-radius: 10px;
+            background-color: #97EEAD;
+            cursor: pointer;
+            user-select: none;
+            font-weight: bold;
+            float: left;
+        }
+        
+        .bottomblock {
+            position: fixed;
+            z-index: 99;
+            top: 100%;
+            transform: translate(-8px, -100%);
+            background: #FFFD;
+            margin: 0;
+            padding: 10px 5px;
+            width: 100%;
+            display: flex;
         }
 
         div.blockframe {
@@ -62,15 +105,16 @@
 
         div.blockframe button.exe {
             border: 1px solid #273dff;
-            margin: 10px 0;
             border-radius: 10px;
             background-color: #97adff;
             height: 30px;
             cursor: pointer;
             user-select: none;
-            width: 100%;
             color: #273dff;
             font-weight: bold;
+            width: 40px;
+            margin: -2px 0;
+            float: right;
         }
 
         button.va {
@@ -200,19 +244,15 @@
         #consoleclear {
             transition: .125s;
         }
-        div.blockframe button.exe.ribe{
-            width: 40px;
-            margin: -2px 0;
-            float: right;
-        }
     </style>
 </head>
 
 <body>
-    <h1>JSCS 2.4.0</h1>
+    <h1>JSCS 2.4.1</h1>
     <h4>JavaScript Command Sender</h4>
     <h2 id="wait">Loading...</h2>
     <main style="display: none;">
+        <div id="hint">
         <div class="blockframe">
             <span>讓</span>
             <select id="select1">
@@ -223,7 +263,7 @@
             <span>的速度為</span>
             <input type="number" value="100" style="width: 50px;">
             <span>%</span>
-            <button class="exe ribe">=&gt;</button>
+            <button class="exe">=&gt;</button>
         </div>
         <div class="blockframe">
             <span>調整頁面上的所有</span>
@@ -248,17 +288,17 @@
             </select>
             <span>的網址:</span>
             <input type="url" class="ipturl1">
-            <button class="exe ribe">=&gt;</button>
+            <button class="exe">=&gt;</button>
         </div>
         <div class="blockframe">
             <span>跳轉網頁至</span>
             <input type="url" class="ipturl2">
-            <button class="exe ribe">=&gt;</button>
+            <button class="exe">=&gt;</button>
         </div>
         <div class="blockframe">
             <span>顯示提示訊息</span>
             <input type="text" class="ipttxt1">
-            <button class="exe ribe">=&gt;</button>
+            <button class="exe">=&gt;</button>
         </div>
         <div class="blockframe">
             <button class="ibtn1">重新整理</button>
@@ -267,10 +307,11 @@
             <button class="ibtn2">清除內容</button>
             <button class="ibtn2">頁面當機</button>
         </div>
-        <div class="blockframe">
-            <p class="infotxt">執行自訂JavaScript</p>
+        </div>
+        <div class="bottomblock">
+            <button id="hintbt">💡</button>
             <textarea></textarea>
-            <button class="exe">執行</button>
+            <button class="exe">=&gt;</button>
         </div>
         <div class="blockframe" id="consoleclear">❌</div>
         <div class="blockframe outconsolet">
@@ -311,7 +352,7 @@
             document.querySelector('.ipturl2').value = '';
             document.querySelector('.ipttxt1').value = '';
             document.querySelectorAll('textarea')[0].value = '';
-            document.querySelectorAll('textarea')[0].style.height = '70px';
+            document.querySelectorAll('textarea')[0].style.height = '32px';
             setTimeout(cs, 100);
         }
 
@@ -608,8 +649,13 @@
 
         document.querySelectorAll('textarea').forEach((e) => {
             e.oninput = function () {
-                this.style.height = '70px';
-                this.style.height = (e.scrollHeight - 4) + 'px';
+                this.style.height = '32px';
+                if(e.scrollHeight <= 310){
+                    this.style.height = e.scrollHeight + 'px';
+                }
+                else{
+                    this.style.height = '310px';
+                }
             };
         });
     </script>
