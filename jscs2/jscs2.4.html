@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Command Sender</title>
     <style>
-        html{
-            height: max-content;
-            min-height: 100%;
+        html {
+            height: 100%;
         }
-        
+
         .bottomblock textarea {
             height: 16px;
             width: calc(100% - 85px);
@@ -23,7 +22,7 @@
             border: 1px solid #999;
             border-radius: 7px;
         }
-        
+
         .bottomblock .exe {
             min-height: 100%;
             padding: 0;
@@ -38,7 +37,7 @@
             width: 40px;
             float: right;
         }
-        
+
         .bottomblock #hintbt {
             width: 30px;
             min-height: 100%;
@@ -53,7 +52,7 @@
             font-weight: bold;
             float: left;
         }
-        
+
         .bottomblock {
             position: fixed;
             z-index: 99;
@@ -78,6 +77,13 @@
         body {
             background-image: linear-gradient(777deg, #d5f9ff, #c6dbff, #bed3ff, #ffd5ff);
             background-size: cover;
+            height: 100%;
+            margin: 0 8px;
+            overflow: hidden;
+        }
+
+        main {
+            height: 100%;
         }
 
         p.infotxt {
@@ -172,8 +178,8 @@
 
         div.blockframe.outconsolet {
             width: 100%;
-            height: calc(100% - 150px);
-            overflow: scroll;
+            height: calc(100% - 160px);
+            overflow-x: auto;
         }
 
         .outconsolet .input_log {
@@ -233,10 +239,22 @@
         #consoleclear {
             transition: .125s;
         }
-        #hint{
+
+        #hint {
             height: calc(100% - 102.6px);
-            overflow: scroll;
+            overflow: auto;
             margin-top: 6.7px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            border: 3px solid #0000;
+            background-clip: content-box;
+            background-color: #ababab;
         }
     </style>
 </head>
@@ -397,16 +415,16 @@
             sent('location.reload()');
         }
         document.querySelectorAll('.ibtn1')[1].onclick = function () {
-            sent('for(var i=0;i<document.all.length;i++){document.all[i].style.pointerEvents="none";' + 
-            'document.all[i].style.userSelect="none";' + 
-            'document.all[i].style.pointerEvents="none";' + 
-            'document.all[i].style.cursor="none";' + 
-            'document.all[i].oncontextmenu=function(){return false;};' + 
-            'document.all[i].onkeydown=function(){return false;};' + 
-            'document.all[i].onkeyup=function(){return false;};' + 
-            'document.all[i].onkeypress=function(){return false;};};' + 
-            'if(navigator.keyboard && navigator.keyboard.lock){' + 
-            'navigator.keyboard.lock(["Escape", "F11"])};');
+            sent('for(var i=0;i<document.all.length;i++){document.all[i].style.pointerEvents="none";' +
+                'document.all[i].style.userSelect="none";' +
+                'document.all[i].style.pointerEvents="none";' +
+                'document.all[i].style.cursor="none";' +
+                'document.all[i].oncontextmenu=function(){return false;};' +
+                'document.all[i].onkeydown=function(){return false;};' +
+                'document.all[i].onkeyup=function(){return false;};' +
+                'document.all[i].onkeypress=function(){return false;};};' +
+                'if(navigator.keyboard && navigator.keyboard.lock){' +
+                'navigator.keyboard.lock(["Escape", "F11"])};');
         }
         document.querySelectorAll('.ibtn2')[0].onclick = function () {
             sent('document.all[0].remove(); document.doctype.remove()');
@@ -414,17 +432,17 @@
         document.querySelectorAll('.ibtn2')[1].onclick = function () {
             sent('while(true){};');
         }
-        
+
         var hinthide = true;
-        
-        hintbt.onclick = function (){
-            if(hinthide == true){
+
+        hintbt.onclick = function () {
+            if (hinthide == true) {
                 hint.style.display = '';
                 document.querySelector('.outconsolet').style.display = 'none';
                 consoleclear.style.display = 'none';
                 hinthide = false;
             }
-            else if(hinthide == false){
+            else if (hinthide == false) {
                 hint.style.display = 'none';
                 document.querySelector('.outconsolet').style.display = '';
                 consoleclear.style.display = '';
@@ -661,10 +679,10 @@
         document.querySelectorAll('textarea').forEach((e) => {
             e.oninput = function () {
                 this.style.height = '15.5px';
-                if(e.scrollHeight <= 310){
+                if (e.scrollHeight <= 310) {
                     this.style.height = e.scrollHeight - 15.5 + 'px';
                 }
-                else{
+                else {
                     this.style.height = '310px';
                 }
             };
