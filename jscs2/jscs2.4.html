@@ -12,8 +12,8 @@
         }
 
         .bottomblock textarea {
-            height: 16px;
-            width: calc(100% - 85px);
+            height: 19px;
+            width: calc(100% - 105px);
             margin: 0 3px;
             resize: none;
             background-color: #FFFA;
@@ -34,12 +34,17 @@
             user-select: none;
             color: #273dff;
             font-weight: bold;
-            width: 40px;
+            width: 50px;
             float: right;
+            background-size: 23px;
+            background-repeat: no-repeat;
+            background-image: url(https://cdn-icons-png.flaticon.com/512/6220/6220543.png);
+            background-position: 50%;
+            
         }
 
         .bottomblock #hintbt {
-            width: 30px;
+            width: 40px;
             min-height: 100%;
             font-size: 16px;
             padding: 0;
@@ -122,6 +127,10 @@
             width: 40px;
             margin: -2px 0;
             float: right;
+            background-size: 20px;
+            background-repeat: no-repeat;
+            background-image: url(https://cdn-icons-png.flaticon.com/512/6220/6220543.png);
+            background-position: 50%;
         }
 
         button.va {
@@ -171,7 +180,7 @@
             width: calc(100% - 183px);
         }
 
-        .deving {
+        .deving, *:disabled {
             opacity: .5;
             pointer-events: none;
         }
@@ -256,15 +265,25 @@
             background-clip: content-box;
             background-color: #ababab;
         }
+        
+        h1,
+        h2,
+        h4{
+            margin-left: 20px;
+        }
+        
+        .ed{
+            filter: brightness(.75);
+        }
     </style>
 </head>
 
 <body>
-    <h1>JSCS 2.4.4</h1>
+    <h1>JSCS 2.4.5</h1>
     <h4>JavaScript Command Sender</h4>
     <h2 id="wait">Loading...</h2>
     <main style="display: none;">
-        <div id="hint" style="display: none;">
+        <div id="hint">
             <div class="blockframe">
                 <span>讓</span>
                 <select id="select1">
@@ -275,7 +294,7 @@
                 <span>的速度為</span>
                 <input type="number" value="100" style="width: 50px;">
                 <span>%</span>
-                <button class="exe">=&gt;</button>
+                <button class="exe"></button>
             </div>
             <div class="blockframe">
                 <span>調整頁面上的所有</span>
@@ -300,17 +319,17 @@
                 </select>
                 <span>的網址:</span>
                 <input type="url" class="ipturl1">
-                <button class="exe">=&gt;</button>
+                <button class="exe"></button>
             </div>
             <div class="blockframe">
                 <span>跳轉網頁至</span>
                 <input type="url" class="ipturl2">
-                <button class="exe">=&gt;</button>
+                <button class="exe"></button>
             </div>
             <div class="blockframe">
                 <span>顯示提示訊息</span>
                 <input type="text" class="ipttxt1">
-                <button class="exe">=&gt;</button>
+                <button class="exe"></button>
             </div>
             <div class="blockframe">
                 <button class="ibtn1">重新整理</button>
@@ -322,11 +341,11 @@
         </div>
         <div class="bottomblock">
             <button id="hintbt">💡</button>
-            <textarea></textarea>
-            <button class="exe">=&gt;</button>
+            <textarea placeholder="發送JavaScript"></textarea>
+            <button class="exe"></button>
         </div>
-        <div class="blockframe" id="consoleclear">❌</div>
-        <div class="blockframe outconsolet">
+        <div class="blockframe" id="consoleclear" style="display: none;">❌</div>
+        <div class="blockframe outconsolet" style="display: none;">
         </div>
     </main>
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
@@ -354,17 +373,19 @@
         }
 
         function sent(t) {
-            db.collection('jscommand')
-                .doc('jscommanddoc')
-                .set({
-                    text: t
-                });
-            printin(t);
+            if (t !== '') {
+                db.collection('jscommand')
+                    .doc('jscommanddoc')
+                    .set({
+                        text: t
+                    });
+                printin(t);
+            }
             document.querySelector('.ipturl1').value = '';
             document.querySelector('.ipturl2').value = '';
             document.querySelector('.ipttxt1').value = '';
             document.querySelectorAll('textarea')[0].value = '';
-            document.querySelectorAll('textarea')[0].style.height = '16px';
+            document.querySelectorAll('textarea')[0].style.height = '19px';
             setTimeout(cs, 100);
         }
 
@@ -433,17 +454,19 @@
             sent('while(true){};');
         }
 
-        var hinthide = true;
+        var hinthide = false;
 
         hintbt.onclick = function () {
             if (hinthide == true) {
                 hint.style.display = '';
+                hintbt.classList.remove('ed');
                 document.querySelector('.outconsolet').style.display = 'none';
                 consoleclear.style.display = 'none';
                 hinthide = false;
             }
             else if (hinthide == false) {
                 hint.style.display = 'none';
+                hintbt.classList.add('ed');
                 document.querySelector('.outconsolet').style.display = '';
                 consoleclear.style.display = '';
                 hinthide = true;
