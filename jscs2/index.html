@@ -23,7 +23,7 @@
         }
 
         div.blockframe {
-            margin: 10px;
+            margin: 5px 10px;
             padding: 10px;
             border: 1px solid #999999;
             background-color: #e3eaff;
@@ -61,34 +61,40 @@
         }
 
         div.blockframe button.exe {
-            border: 1px solid #27ff3d;
+            border: 1px solid #273dff;
             margin: 10px 0;
             border-radius: 10px;
-            background-color: aquamarine;
+            background-color: #97adff;
             height: 30px;
             cursor: pointer;
             user-select: none;
             width: 100%;
+            color: #273dff;
+            font-weight: bold;
         }
 
         button.va {
-            border: 1px solid #657aff;
-            margin: 2px;
+            border: 1px solid #FA0;
+            margin: 10px 2px 2px 2px;
             border-radius: 10px;
-            background-color: rgb(173, 204, 255);
-            height: 30px;
+            background-color: #FF6;
+            height: 40px;
             cursor: pointer;
             user-select: none;
+            font-size: 18px;
+            width: calc((100% / 6) - 8px)
         }
 
         button.ibtn1 {
             border: 1px solid #5024ff;
             background-color: #b69dff;
+            color: #5024ff;
         }
 
         button.ibtn2 {
             border: 1px solid #ff0000;
             background-color: #ff8f8f;
+            color: #F00;
         }
 
         button.ibtn1,
@@ -99,14 +105,15 @@
             cursor: pointer;
             user-select: none;
             margin: 5px;
+            font-size: 16px;
         }
 
         input[type="text"].ipttxt1 {
-            width: calc(100% - 109px);
+            width: calc(100% - 152px);
         }
 
         input[type="url"].ipturl2 {
-            width: calc(100% - 93px);
+            width: calc(100% - 136px);
         }
 
         input[type="url"].ipturl1 {
@@ -142,18 +149,18 @@
             border-radius: 7px;
             border: .5px solid #999;
             word-break: break-all;
-            animation: consoleani .25s;
+            animation: consoleani .35s;
         }
 
         @keyframes consoleani {
             0% {
                 opacity: 0;
-                transform: translateY(-100%);
+                transform: translateX(-100%);
             }
 
             100% {
                 opacity: 1;
-                transform: translateY(0%);
+                transform: translateX(0%);
             }
         }
 
@@ -193,25 +200,30 @@
         #consoleclear {
             transition: .125s;
         }
+        div.blockframe button.exe.ribe{
+            width: 40px;
+            margin: -2px 0;
+            float: right;
+        }
     </style>
 </head>
 
 <body>
-    <h1>JSCS 2.3.11</h1>
+    <h1>JSCS 2.4.0</h1>
     <h4>JavaScript Command Sender</h4>
     <h2 id="wait">Loading...</h2>
     <main style="display: none;">
         <div class="blockframe">
-            <span>調整</span>
+            <span>讓</span>
             <select id="select1">
                 <option value="1">影片和音樂</option>
                 <option value="2">影片</option>
                 <option value="3">音樂</option>
             </select>
-            <span>的播放速度至</span>
+            <span>的速度為</span>
             <input type="number" value="100" style="width: 50px;">
             <span>%</span>
-            <button class="exe">Execute!</button>
+            <button class="exe ribe">=&gt;</button>
         </div>
         <div class="blockframe">
             <span>調整頁面上的所有</span>
@@ -222,32 +234,31 @@
             </select>
             <span>:</span>
             <br>
-            <button class="va">-5s</button>
-            <button class="va">-10s</button>
-            <button class="va">+10s</button>
-            <button class="va">+5s</button>
-            <button class="va">播放</button>
-            <button class="va">暫停</button>
+            <button class="va">⏮️</button>
+            <button class="va">⏪</button>
+            <button class="va">▶️</button>
+            <button class="va">⏸️</button>
+            <button class="va">⏩</button>
+            <button class="va">⏭️</button>
         </div>
         <div class="blockframe">
-            <span>開啟</span>
             <select id="select3">
                 <option value="1">新分頁</option>
                 <option value="2">新視窗</option>
             </select>
-            <span>，網址是</span>
+            <span>的網址:</span>
             <input type="url" class="ipturl1">
-            <button class="exe">Execute!</button>
+            <button class="exe ribe">=&gt;</button>
         </div>
         <div class="blockframe">
             <span>跳轉網頁至</span>
             <input type="url" class="ipturl2">
-            <button class="exe">Execute!</button>
+            <button class="exe ribe">=&gt;</button>
         </div>
         <div class="blockframe">
             <span>顯示提示訊息</span>
             <input type="text" class="ipttxt1">
-            <button class="exe">Execute!</button>
+            <button class="exe ribe">=&gt;</button>
         </div>
         <div class="blockframe">
             <button class="ibtn1">重新整理</button>
@@ -259,7 +270,7 @@
         <div class="blockframe">
             <p class="infotxt">執行自訂JavaScript</p>
             <textarea></textarea>
-            <button class="exe">Execute!</button>
+            <button class="exe">執行</button>
         </div>
         <div class="blockframe" id="consoleclear">❌</div>
         <div class="blockframe outconsolet">
@@ -395,13 +406,13 @@
 
         document.querySelectorAll('.va')[0].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime -= 5;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime -= 5;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime = 0;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime = 0;})')
             }
             else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime -= 5;})')
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime = 0;})')
             }
             else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime -= 5;})')
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime = 0;})')
             }
         }
         document.querySelectorAll('.va')[1].onclick = function () {
@@ -417,28 +428,6 @@
         }
         document.querySelectorAll('.va')[2].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 10;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 10;})')
-            }
-            else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 10;})')
-            }
-            else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 10;})')
-            }
-        }
-        document.querySelectorAll('.va')[3].onclick = function () {
-            if (document.querySelector('#select2').value == '1') {
-                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 5;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 5;})')
-            }
-            else if (document.querySelector('#select2').value == '2') {
-                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 5;})')
-            }
-            else if (document.querySelector('#select2').value == '3') {
-                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 5;})')
-            }
-        }
-        document.querySelectorAll('.va')[4].onclick = function () {
-            if (document.querySelector('#select2').value == '1') {
                 sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.play();});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.play();})')
             }
             else if (document.querySelector('#select2').value == '2') {
@@ -448,7 +437,7 @@
                 sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.play();})')
             }
         }
-        document.querySelectorAll('.va')[5].onclick = function () {
+        document.querySelectorAll('.va')[3].onclick = function () {
             if (document.querySelector('#select2').value == '1') {
                 sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.pause();});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.pause();})')
             }
@@ -457,6 +446,28 @@
             }
             else if (document.querySelector('#select2').value == '3') {
                 sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.pause();})')
+            }
+        }
+        document.querySelectorAll('.va')[4].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 10;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 10;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 10;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 10;})')
+            }
+        }
+        document.querySelectorAll('.va')[5].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime = e.duration;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime = e.duration;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime = e.duration;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime = e.duration;})')
             }
         }
         function keyFunction1() {
