@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -42,32 +42,48 @@
         td.chart:active {
             box-shadow: inset 1px 1px 0px .5px #555555;
         }
+        
+        td.chart[contenteditable="true"]:focus {
+            background: #ffd268;
+            color: #9c153c;
+            outline: none;
+        }
 
         button {
             width: 400px;
-            height: 40px;
+            height: 45px;
             background: #ffb9d8;
             border: 0;
-            border-radius: 50px;
+            border-radius: 8px;
             margin-top: 10px;
             margin-left: 10px;
+            padding-bottom: 5px;
             font-size: 18px;
             cursor: pointer;
-            transition: .25s;
-            box-shadow: 0 0 8px 0.5px #333a;
+            transition: .125s;
+            box-shadow: inset 0 -5px 0px 0px #111;
+            font-weight: bold;
+            user-select: none;
         }
 
         button:disabled {
             filter: saturate(.5);
             opacity: .75;
-            border: 1px solid #c0c0c0;
             cursor: not-allowed;
+        }
+        
+        button:disabled:active {
+            box-shadow: inset 0 -5px 0px 0px #111;
+            padding-bottom: 5px;
+            height: 45px;
+            margin-top: 10px;
         }
 
         button:active {
-            opacity: .7;
-            scale: .95;
-            box-shadow: 0 0 1px 0px #333a;
+            box-shadow: inset 0 0 0px 0px #111;
+            padding-bottom: 0;
+            height: 40px;
+            margin-top: 15px;
         }
 
         td.geted {
@@ -83,6 +99,15 @@
             margin: 0;
             padding: 0;
             margin-left: 230px;
+        }
+        
+        .btdiv {
+            display: flex;
+            width: 410px;
+        }
+        
+        button#editbt {
+            color: #fff;
         }
 
         @keyframes getani {
@@ -163,168 +188,15 @@
                 </tr>
             </tbody>
         </table>
-        <button style="background: #fcffbb;">快速重新生成</button><br>
-        <button>動畫重新生成</button>
+        <div class="btdiv">
+            <button style="background: #bbffbb; color: #13a928;">快速重新生成</button><br>
+            <button style="color: #b91253;">動畫重新生成</button>
+            <button style="background: #fcffbb; color: #a88711;">手動重新生成</button><br>
+        </div>
+        <button id="editbt" style="background: #5678ff;">開啟修改模式</button><br>
     </div>
     <script>
-        function an() {
-            var e = [];
-            for (var i = 1; i < 40; i++) {
-                e.push(i);
-            };
-            e.splice(4, 1);
-            return e;
-        }
-        document.getElementsByTagName('button')[0].onclick = gr;
-        document.getElementsByTagName('button')[1].onclick = agr;
-        function gr() {
-            const d = Date.now();
-            var a = an();
-            if (Math.random() > 0.005) {
-                switch (Math.floor(Math.random() * 4)) {
-                    case 0:
-                        var t = String(a.splice(32, 1));
-                        break;
-                    case 1:
-                        var t = String(a.splice(26, 1));
-                        break;
-                    case 2:
-                        var t = String(a.splice(29, 1));
-                        break;
-                    case 3:
-                        var t = String(a.splice(25, 1));
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else {
-                var t = String(a.splice((Math.floor(Math.random() * 13) + 24), 1));
-            }
-            switch (Math.floor(Math.random() * 2)) {
-                case 0:
-                    var m = [String(a.splice(10, 1)), String(a.splice(13, 1))];
-                    break;
-                case 1:
-                    var m = [String(a.splice(14, 1)), String(a.splice(10, 1))];
-                    break;
-                default:
-                    break;
-            }
-            switch (Math.floor(Math.random() * 4)) {
-                case 0:
-                    var p = 0;
-                    break;
-                case 1:
-                    var p = 1;
-                    break;
-                case 2:
-                    var p = 3;
-                    break;
-                case 3:
-                    var p = 4;
-                    break;
-                default:
-                    break;
-            }
-            var r = [];
-            for (var c = 0; c < 37; c++) {
-                r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
-            };
-            r.splice(p, 0, m[1]);
-            r.splice(p, 0, m[0]);
-            var k = (Math.floor(Math.random() * 14) + 13);
-            r.splice((k + 6), 0, t);
-            r.splice(k, 0, '05');
-            document.querySelectorAll('.chart').forEach((e, n) => {
-                e.innerHTML = r[n];
-            });
-            console.log((Date.now() - d) / 1000 + 's')
-        }
-        async function agr() {
-            document.getElementsByTagName('button')[0].disabled = true;
-            document.getElementsByTagName('button')[1].disabled = true;
-            const s = Date.now();
-            var a = an();
-            if (Math.random() > 0.005) {
-                switch (Math.floor(Math.random() * 4)) {
-                    case 0:
-                        var t = String(a.splice(32, 1));
-                        break;
-                    case 1:
-                        var t = String(a.splice(26, 1));
-                        break;
-                    case 2:
-                        var t = String(a.splice(29, 1));
-                        break;
-                    case 3:
-                        var t = String(a.splice(25, 1));
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else {
-                var t = String(a.splice((Math.floor(Math.random() * 13) + 24), 1));
-            }
-            switch (Math.floor(Math.random() * 2)) {
-                case 0:
-                    var m = [String(a.splice(10, 1)), String(a.splice(13, 1))];
-                    break;
-                case 1:
-                    var m = [String(a.splice(14, 1)), String(a.splice(10, 1))];
-                    break;
-                default:
-                    break;
-            }
-            switch (Math.floor(Math.random() * 4)) {
-                case 0:
-                    var p = 0;
-                    break;
-                case 1:
-                    var p = 1;
-                    break;
-                case 2:
-                    var p = 3;
-                    break;
-                case 3:
-                    var p = 4;
-                    break;
-                default:
-                    break;
-            }
-            var r = [];
-            for (var c = 0; c < 37; c++) {
-                r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
-            };
-            r.splice(p, 0, m[1]);
-            r.splice(p, 0, m[0]);
-            var k = (Math.floor(Math.random() * 14) + 13);
-            r.splice((k + 6), 0, t);
-            r.splice(k, 0, '05');
-            document.querySelectorAll('.chart').forEach((e, n) => {
-                e.innerHTML = '00';
-            });
-            var anii = [];
-            for (var d = 0; d < 39; d++) {
-                anii[d] = setInterval("document.querySelectorAll('.chart')[" + d + "].innerHTML = String(Math.floor(Math.random() * 36) + 1).padStart(2, '0')", 1);
-            };
-            for (var q = 0; q < 39; q++) {
-                await delay(0.0875);
-                clearInterval(anii[q]);
-                document.querySelectorAll('.chart')[q].classList.add('geted');
-                document.querySelectorAll('.chart')[q].innerHTML = r[q];
-                setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 800);
-            };
-            console.log((Date.now() - s) / 1000 + 's')
-            document.getElementsByTagName('button')[0].disabled = false;
-            document.getElementsByTagName('button')[1].disabled = false;
-        }
-        function delay(n) {
-            return new Promise(function (resolve) {
-                setTimeout(resolve, n * 1000);
-            });
-        }
+        eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('C 18(){K(f e=[],t=1;t<19;t++)e.D(t);S e.h(4,1),e}C g(){1a e=E.F();f t=b();9.u(".v").L((e,a)=>{e.x=t[a]}),T.U((E.F()-e)/N+"s")}1s C 1b(){9.m("p")[0].k=!0,9.m("p")[1].k=!0,9.m("p")[2].k=!0,B.k=!0;1a e=E.F();f t=b();9.u(".v").L((e,t)=>{e.x="1c"});K(f a=[],l=0;l<V;l++)a[l]=1d("9.u(\'.v\')["+l+"].x = 1e(j.y(j.w() * 1f) + 1).W(2, \'0\')",1);K(f n=0;n<V;n++)1t 1g(.1u),X(a[n]),9.u(".v")[n].G.Y("H"),9.u(".v")[n].x=t[n],O(\'9.u(".v")[\'+n+\'].G.Z("H")\',11);T.U((E.F()-e)/N+"s"),9.m("p")[0].k=!1,9.m("p")[1].k=!1,9.m("p")[2].k=!1,B.k=!1}9.m("p")[0].P=g,9.m("p")[1].P=1b,9.m("p")[2].P=1h,B.P=1i;f I,q=0,M=[],s,12=-7,Q=!1;C 1i(){1==Q?(B.1j.1k="#1v",B.x="開啟修改模式",9.u(".v").L(e=>{e.1l=!1}),Q=!1,9.m("p")[0].k=!1,9.m("p")[1].k=!1,9.m("p")[2].k=!1):(B.1j.1k="#1w",B.x="關閉修改模式",9.u(".v").L(e=>{e.1l=!0}),Q=!0,9.m("p")[0].k=!0,9.m("p")[1].k=!0,9.m("p")[2].k=!0)}C 1h(){z(9.m("p")[0].k=!0,9.m("p")[1].k=!0,B.k=!0,1m 0===I){s=E.F(),I=b(),9.u(".v").L((e,t)=>{e.x="1c"}),M=[];K(f e=0;e<V;e++)M[e]=1d("9.u(\'.v\')["+e+"].x = 1e(j.y(j.w() * 1f) + 1).W(2, \'0\')",1)}A q<1x?(X(M[q]),9.u(".v")[q].G.Y("H"),9.u(".v")[q].x=I[q],O(\'9.u(".v")[\'+q+\'].G.Z("H")\',11),q+=1):(X(M[q]),9.u(".v")[q].G.Y("H"),9.u(".v")[q].x=I[q],O(\'9.u(".v")[\'+q+\'].G.Z("H")\',11),q=0,I=1m 0,T.U((E.F()-s)/N+"s"),9.m("p")[0].k=!1,9.m("p")[1].k=!1,B.k=!1)}C b(){f e=18();z(j.w()>.1n)z(j.w()<.7)z(j.w()<.5)f t=e.h(16,1)+"",a=e.h(17,1)+"";A z(j.w()<.4)f a=e.h(16,1)+"",t=e.h(1o,1)+"";A f a=e.h(16,1)+"",t=e.h(17,1)+"";A z(j.w()<.5)f a=e.h(1o,1)+"",t=e.h(15,1)+"";A z(j.w()<.8)f a=e.h(17,1)+"",t=e.h(15,1)+"";A f t=e.h(1y,1)+"",a=e.h(15,1)+"";A f t=e.h(j.y(13*j.w())+1z,1)+"",a=e.h(15,1)+"";1p(j.y(2*j.w())){J 0:f l=[e.h(10,1)+"",e.h(13,1)+""];R;J 1:f l=[e.h(14,1)+"",e.h(10,1)+""]}1p(j.y(4*j.w())){J 0:f n=0;R;J 1:f n=1;R;J 2:f n=3;R;J 3:f n=4}K(f o=[],r=0;r<1A;r++)o.D((e.h(j.y(j.w()*e.1B),1)+"").W(2,"0"));o.h(n,0,l[1]),o.h(n,0,l[0]);f c=j.y(14*j.w())+13;o.h(c,0,"1n");f s=19;12<=0&&(s=1q,12++);f d=j.y(1q*j.w());z(d<s&&c%7!=6&&(c+1)%7!=6){f i=o.h(c+2*j.y(d/1C)-1,1,a+"")+"";o.D(i)}A z(d<1r&&c%7==6){f i=o.h(c+1,1,a+"")+"";o.D(i)}A z(d<1r&&(c+1)%7==6){f i=o.h(c-1,1,a+"")+"";o.D(i)}A{f i=o.h(j.y(1D*j.w()),1,a+"");o.D(i)}S o.h(c+7,0,t),o}C 1g(e){S 1E 1F(C(t){O(t,N*e)})}',62,104,'|||||||||document||||||var||splice||Math|disabled||getElementsByTagName|||button|||||querySelectorAll|chart|random|innerHTML|floor|if|else|editbt|function|push|Date|now|classList|geted|so|case|for|forEach|anii|1e3|setTimeout|onclick|em|break|return|console|log|39|padStart|clearInterval|add|remove||800|ct||||32|29|an|40|const|ag|00|setInterval|String|36|delay|sg|eb|style|background|contentEditable|void|05|26|switch|100|99|async|await|0875|5678ff|fe5550|38|25|24|34|length|50|37|new|Promise'.split('|'),0,{}))
     </script>
 </body>
 
