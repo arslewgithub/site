@@ -10,9 +10,14 @@
             width: max-content;
             height: 100%;
             margin: 0;
-            margin-left: calc(50vw - 195px);
+            margin-left: calc(50vw - 210px);
             background: #dce8ff;
 		}
+        @media (max-width:400px), print{
+            body {
+                margin-left: calc(50vw - 195px);
+            }
+        }
 		table,
 		tbody {
 			width: 420px;
@@ -209,7 +214,7 @@
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
-					<td class="chart"></td>
+					<td class=""></td>
 					<td class=""></td>
 				</tr>
 			</tbody>
@@ -231,12 +236,12 @@
 	    <h4>About:</h4>
 	    <h5>Project Name: Seeat</h5>
 	    <h5>Series Code: S504</h5>
-	    <h5>Version: 3</h5>
-	    <h5>Last Update: 2023-11-29</h5>
+	    <h5>Version: 4</h5>
+	    <h5>Last Update: 2023-12-05</h5>
 	    <h5>Contact the developer: s110076@mail.hwsh.tc.edu.tw</h5>
 	    <h4>Series:</h4>
 	    <h5>Seeat 509: <a href="https://gweb.airratstrip.tk/seeat/">https://gweb.airratstrip.tk/seeat/</a></h5>
-	    <h5>Seeat 504: <a href="https://gweb.airratstrip.tk/seeat/504">https://gweb.airratstrip.tk/seeat/504.html</a></h5>
+	    <h5>Seeat 504: <a href="https://gweb.airratstrip.tk/seeat/504">https://gweb.airratstrip.tk/seeat/504/</a></h5>
 	</div>
 	<script>
         document.getElementsByTagName('button')[0].onclick = g;
@@ -372,19 +377,19 @@
             }
         }
 		function b() {
-			var a = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 30, 31, 32, 34];
+			var a = [1, 2, 3, 5, 6, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 30, 31, 32, 34];
 			var r = [];
-			var take = [String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'), '07', '08', '15', '23', '28', '29', '33'];
+			var take = ['07', '08', '15', '23', '28', '29', '33'];
 			for (var c = 0; c < 26; c++) {
 				r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
 			};
-			for (var c = 0; c < 8; c++) {
+			for (var c = 0; c < 7; c++) {
 				r.push(String(take.splice(Math.floor(Math.random() * take.length), 1)).padStart(2, '0'));
 			};
-			var t1 = String(r.splice(28, 1));
+			var t1 = String(r.splice(29, 1));
 			var t2 = String(r.splice(25, 1));
 			r.splice(25, 0, t1);
-			r.splice(28, 0, t2);
+			r.splice(29, 0, t2);
 			presave = r;
 			return r;
 		}
@@ -393,7 +398,7 @@
 				setTimeout(resolve, n * 1000);
 			});
 		}
-		if (localStorage.getItem('seeat') == null || localStorage.getItem('seeat') == []) {
+		if (localStorage.getItem('seeat') == null || localStorage.getItem('seeat') == [] || JSON.parse(localStorage.getItem('seeat')).length != 34) {
 		    document.querySelectorAll('.chart').forEach((e, n) => {
 			    e.innerHTML = '';
 		    });
