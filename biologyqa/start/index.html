@@ -138,7 +138,10 @@
     </main>
     <footer>製作者: </footer>
     <script>
-        var qac = 0;
+        var qac = 1;
+        if (localStorage.getItem('qsn') != null && Number(localStorage.getItem('qsn')) >= 1) {
+            qnin.value = Number(localStorage.getItem('qsn'));
+        }
         qnin.oninput = function () {
             if ((!Number.isInteger(Number(this.value))) && (this.value != '')) {
                 this.value = Math.floor(Number(this.value));
@@ -180,7 +183,9 @@
             allqc = Number(j.length);
         });
         bs.onclick = async function () {
-            localStorage.setItem('qsn', String(qnin.value));
+            if (String(qnin.value) == '') {
+                localStorage.setItem('qsn', String(qnin.value));
+            }
             location.href = '../';
         }
     </script>
