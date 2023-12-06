@@ -192,11 +192,13 @@ div.block {
 .false {
     background: #FAA;
     color: #be0000;
+    box-shadow: 0 0 2px 0 #0008;
 }
 
 .true {
     background: #AEA;
     color: #00a500;
+    box-shadow: 0 0 2px 0 #0008;
 }
 
 div.block span {
@@ -217,4 +219,11 @@ body {
     width: 43px;
     float: left;
     margin-left: 10px;
+}
+
+#qsframe img {
+    max-width: 100%;
+    max-height: 100px;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 #0008;
 }
