@@ -1,0 +1,189 @@
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生物問答遊戲</title>
+    <style>
+        #qnin {
+            text-align: center;
+            font-size: 20px;
+            border: 2px solid #999999;
+            width: 150px;
+            background: #fffa;
+        }
+
+        .counter-frame {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        #plus {
+            border-radius: 0 1em 1em 0;
+            margin-left: 15px;
+            padding: 7.5px;
+            padding-right: 10px;
+            font-size: 20px;
+            background-color: #1955EFCD;
+            border: 2px solid #0933AA;
+            color: white;
+            text-align: center;
+        }
+
+        #reduce {
+            border-radius: 1em 0 0 1em;
+            margin-right: 15px;
+            padding: 7.5px;
+            padding-left: 10px;
+            font-size: 20px;
+            background-color: #C42626CD;
+            border: 2px solid #990000;
+            color: white;
+            text-align: center;
+        }
+        
+        html {
+            background: #E9EAEE;
+            background-size: cover;
+        }
+        
+        #bs {
+            border-radius: 8px;
+            width: 30vw;
+            padding: 10px;
+            margin: 5px;
+            font-size: 20px;
+            background: #45D;
+            color: white;
+            border: 0;
+            animation: bta infinite .5s;
+            margin-left: 0;
+        }
+        
+        .bf {
+            margin: calc(35vw - 8px);
+            font-size: 20px;
+        }
+        
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+        
+        main {
+            width: 100vw;
+            height: calc(100vh - 40px);
+            max-height: calc(100vh - 40px);
+        }
+        
+        h1 {
+            width: calc(100vw - 8px);
+            display: flex;
+            justify-content: center;
+            margin-left: -4px;
+        }
+        
+        p {
+            margin-bottom: -30px;
+            width: calc(100vw - 8px);
+            display: flex;
+            justify-content: center;
+        }
+        
+        footer {
+            background: #000A;
+            color: white;
+            height: 40px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+        }
+        
+        .center {
+            position: fixed;
+            top: calc(50vh - 40px);
+            transform: translateY(-50%);
+        }
+        
+        @keyframes bta {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+                filter: brightness(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="center">
+            <h1>細胞尋寶大作戰</h1>
+            <span class="bf"><button id="bs">Start</button></span>
+            <p>選擇題數: </p>
+            <div class="counter-frame">
+                <input type="button" value=" - " id="reduce">
+                <input type="number" value="5" min="0" maxlength="2" id="qnin">
+                <input type="button" value=" + " id="plus">
+            </div>
+        </div>
+    </main>
+    <footer>製作者: </footer>
+    <script>
+        var qac = 0;
+        qnin.oninput = function () {
+            if ((!Number.isInteger(Number(this.value))) && (this.value != '')) {
+                this.value = Math.floor(Number(this.value));
+            }
+            else if (Number(this.value) > allqc) {
+                this.value = allqc;
+            }
+            else if ((Number(this.value) < 1) && (this.value != '')) {
+                this.value = 1;
+            }
+        }
+        plus.onclick = function () {
+            if (Number(qnin.value) >= allqc) {
+                qnin.value = allqc;
+            }
+            else if (Number(qnin.value) < 1) {
+                qnin.value = 1;
+            }
+            else {
+                qnin.value = Number(qnin.value) + 1;
+            }
+        }
+        reduce.onclick = function () {
+            if (Number(qnin.value) > allqc) {
+                qnin.value = allqc;
+            }
+            else if (Number(qnin.value) <= 1) {
+                qnin.value = 1;
+            }
+            else {
+                qnin.value = Number(qnin.value) - 1;
+            }
+        }
+        fetch("../question.json")
+        .then(function (r) {
+            return r.json();
+        })
+        .then(function (j) {
+            allqc = Number(j.length);
+        });
+        bs.onclick = async function () {
+            localStorage.setItem('qsn', String(qnin.value));
+            location.href = '';
+        }
+    </script>
+</body>
+
+</html>
