@@ -21,7 +21,7 @@ fetch("question.json")
         show();
     });
 function show() {
-    lq.innerHTML = '已完成: ' + data.nqsn + '/' + data.aqsn;
+    lq.innerHTML = '已作答: ' + data.nqsn + '/' + data.aqsn;
     btframe.innerHTML = '';
     qsframe.innerHTML = data.qst[data.nqsn][0].question;
     var s = [];
@@ -37,11 +37,16 @@ function show() {
     }
 }
 submitbt.onclick = function () {
-    data.selectarr.push(data.cacheset)
+    backbt.disabled = false;
+    data.selectarr[data.nqsn] = data.cacheset;
     data.cacheset = undefined;
     if (data.nqsn < data.aqsn - 1) {
         data.nqsn += 1;
         show();
+        if (Number(data.selectarr[data.nqsn]) >= 0 && Number(data.selectarr[data.nqsn]) < data.qst[data.nqsn][0].selection.length) {
+            document.querySelectorAll('#btframe button')[data.selectarr[data.nqsn]].classList.add('selected');
+            data.cacheset = data.selectarr[data.nqsn];
+        }
     }
     else {
         document.body.innerHTML = '';
@@ -84,5 +89,17 @@ submitbt.onclick = function () {
             document.body.appendChild(s);
             s.appendChild(m);
         }
+    }
+}
+
+backbt.onclick = function () {
+    if (data.nqsn > 0) {
+        if (data.nqsn == 1) {
+            backbt.disabled = true;
+        }
+        data.nqsn -= 1;
+        show();
+        document.querySelectorAll('#btframe button')[data.selectarr[data.nqsn]].classList.add('selected');
+        data.cacheset = data.selectarr[data.nqsn];
     }
 }
