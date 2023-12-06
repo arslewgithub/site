@@ -1,6 +1,6 @@
 var data = {};
 if (localStorage.getItem('qsn') == null) {
-    data.aqsn = 5;
+    data.aqsn = 7;
 }
 else {
     data.aqsn = Number(localStorage.getItem('qsn'));

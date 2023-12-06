@@ -116,13 +116,13 @@ div.top-info span {
     background: #fff5;
     backdrop-filter: blur(20px);
     border: 0;
-    padding: 20px;
+    padding: 15px;
     font-size: 20px;
     user-select: none;
     box-shadow: 0 0 2px 0 #0008;
     margin: 15px;
     margin-top: 20px;
-    max-height: 120px;
+    max-height: 250px;
     overflow: auto;
     word-wrap: break-word;
 }
@@ -224,7 +224,8 @@ body {
 #qsframe img,
 div.block img {
     max-width: 100%;
-    max-height: 100px;
-    border-radius: 4px;
+    max-height: 200px;
+    border-radius: 12px;
     box-shadow: 0 0 2px 0 #0008;
+    border: 3px solid #EEE;
 }
