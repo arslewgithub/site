@@ -183,7 +183,7 @@
             allqc = Number(j.length);
         });
         bs.onclick = async function () {
-            if (String(qnin.value) == '') {
+            if (String(qnin.value) != '') {
                 localStorage.setItem('qsn', String(qnin.value));
             }
             location.href = '../';
