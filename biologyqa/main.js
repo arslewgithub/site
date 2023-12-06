@@ -1,6 +1,6 @@
 var data = {};
 if (localStorage.getItem('qsn') == null) {
-    data.aqsn = 4;
+    data.aqsn = 5;
 }
 else {
     data.aqsn = Number(localStorage.getItem('qsn'));
@@ -47,7 +47,7 @@ submitbt.onclick = function () {
         document.body.innerHTML = '';
         var t = document.createElement('div');
         t.classList.add('top-info')
-        t.innerHTML = '<a href="start"><button id="back"></button></a><span>檢視答題結果</span>';
+        t.innerHTML = '<a href=""><button id="back"></button></a><span>檢視答題結果</span>';
         document.body.appendChild(t);
         for (let i = 0; i < data.aqsn; i++) {
             var s = document.createElement('div');
@@ -74,7 +74,6 @@ submitbt.onclick = function () {
                     }
                 }
             }
-            k += '<hr>詳解: ' + data.qst[i][0].explanation;
             if (data.qst[i][0].answer == data.selectarr[i]) {
                 s.classList.add('true');
             } else {
