@@ -227,3 +227,11 @@ body {
     border-radius: 4px;
     box-shadow: 0 0 2px 0 #0008;
 }
+
+#qsframe img,
+div.block img {
+    max-width: 100%;
+    max-height: 100px;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 #0008;
+}
