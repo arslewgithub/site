@@ -7,14 +7,15 @@ else {
 }
 data.qst = [];
 data.nqsn = 0;
+data.rt = Number(new Date().getTime()) + (data.aqsn * 15000);
 data.cacheset = undefined;
 data.selectarr = [];
 fetch("question.json")
     .then(function (response) {
         return response.json();
     })
-    .then(function (myJson) {
-        data.qa = myJson;
+    .then(function (q) {
+        data.qa = q;
         for (let i = 0; i < data.aqsn; i++) {
             data.qst.push(data.qa.splice(Math.floor(Math.random() * data.qa.length), 1));
         }
@@ -30,6 +31,7 @@ function show() {
         s[i].innerHTML = "(" + (i + 10).toString(36).toUpperCase() + ") " + data.qst[data.nqsn][0].selection[i];
         s[i].onclick = () => {
             data.cacheset = i;
+            data.selectarr[data.nqsn] = data.cacheset;
             document.querySelectorAll('button.selected').forEach((e) => { e.classList.remove('selected') })
             s[i].classList.add('selected');
         }
@@ -49,11 +51,13 @@ submitbt.onclick = function () {
         }
     }
     else {
+        data.nqsn += 1;
         document.body.innerHTML = '';
         var t = document.createElement('div');
-        t.classList.add('top-info')
-        t.innerHTML = '<a href="start/"><button id="back"></button></a><span>檢視答題結果</span>';
+        t.classList.add('top-info');
+        t.innerHTML = '<a href="start/"><button id="back"></button></a><span>檢視答題結果</span><span id="stime"></span>';
         document.body.appendChild(t);
+        var c = 0, e = 0;
         for (let i = 0; i < data.aqsn; i++) {
             var s = document.createElement('div');
             var m = document.createElement('span');
@@ -81,14 +85,17 @@ submitbt.onclick = function () {
             }
             if (data.qst[i][0].answer == data.selectarr[i]) {
                 s.classList.add('true');
+                c++;
             } else {
                 s.classList.add('false');
+                e++;
             }
             m.innerHTML = k;
             s.classList.add('block');
             document.body.appendChild(s);
             s.appendChild(m);
         }
+        stime.innerHTML = '<span style="color: #00a500">' + c + '</span>/<span style="color: #be0000">' + e + '</span>'
     }
 }
 
@@ -103,3 +110,24 @@ backbt.onclick = function () {
         data.cacheset = data.selectarr[data.nqsn];
     }
 }
+
+function delay(n) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, n * 1000);
+    });
+}
+
+async function showtime() {
+    if (data.nqsn >= data.aqsn || data.rt <= new Date().getTime()) {
+        data.nqsn = data.aqsn - 1;
+        submitbt.click();
+    }
+    else {
+        var c = data.rt - (new Date().getTime()) + 1E3;
+        stime.innerHTML = String(Math.floor(c / 6E4)).padStart(2, '0') + ':' + String(Math.floor(Math.floor(c / 1E3) % 60)).padStart(2, '0');
+        await delay(.05);
+        return showtime();
+    }
+}
+
+showtime();
