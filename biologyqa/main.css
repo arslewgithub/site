@@ -105,10 +105,15 @@ textarea {
     font-size: 18px;
 }
 
-div.top-info span {
-    margin-left: -53px;
+div.top-info>span {
     margin-top: 12px;
     display: inline-block;
+}
+
+#stime {
+    float: right;
+    margin-right: 15px;
+    margin-left: 0;
 }
 
 #qsframe {
