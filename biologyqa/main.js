@@ -7,7 +7,7 @@ else {
 }
 data.qst = [];
 data.nqsn = 0;
-data.rt = Number(new Date().getTime()) + (data.aqsn * 15000);
+data.rt = Number(new Date().getTime()) + (data.aqsn * 10000);
 data.cacheset = undefined;
 data.selectarr = [];
 fetch("question.json")
