@@ -12,7 +12,7 @@
             height: 100%;
             margin: 0;
             margin-left: calc(50vw - 210px);
-            background: #dce8ff;
+            background: #F0E9FF;
         }
         
         html, body {
@@ -74,6 +74,10 @@
         
         table.rotated tfoot tr th.c {
             transform: rotate(180deg);
+        }
+        
+        tfoot tr th.c:active {
+            box-shadow: inset 1px 1px 0px .5px #555555;
         }
 
         td.chart:active {
@@ -165,6 +169,8 @@
 			margin: 0;
 			padding: 0;
 			color: #9C153C;
+			text-align: center;
+			width: 100%;
 		}
 		
 		h4, h5{
@@ -215,13 +221,11 @@
             0% {
                 scale: 1;
             }
-
             50% {
                 scale: 1.3;
-                background: #9C153C;
+                background: #AC254C;
                 color: #FFD268;
             }
-
             100% {
                 scale: 1;
             }
@@ -254,9 +258,9 @@
 
 <body>
 	<h1>Seeat V9</h1>
-	<h4>509 Easy Seating Generator</h4>
+	<br>
     <div class="formcenter">
-        <table>
+        <table class="rotated">
             <tbody>
                 <tr>
                     <td class="chart"></td>
@@ -313,7 +317,7 @@
                     <td class=""></td>
                 </tr>
             </tbody>
-            <tfoot><tr><th colspan="2"></th><th colspan="3" class="c">講堂</th><th colspan="2"></th></tr></tfoot>
+            <tfoot><tr><th colspan="2"></th><th colspan="3" class="c">講臺</th><th colspan="2"></th></tr></tfoot>
         </table>
         <div class="btdiv">
             <button style="background: #bbffbb; color: #13a928;">快速重新生成</button><br>
@@ -335,8 +339,8 @@
 	    <h4>About:</h4>
 	    <h5>Project Name: Seeat</h5>
 	    <h5>Series Code: Original</h5>
-	    <h5>Version: 9.0</h5>
-	    <h5>Last Update: 2024-01-26</h5>
+	    <h5>Version: 9.1</h5>
+	    <h5>Last Update: 2024-01-27</h5>
 	    <h4>Series:</h4>
 	    <h5>Seeat 509: <a href="https://gweb.airratstrip.tk/seeat/">https://gweb.airratstrip.tk/seeat/</a></h5>
 	    <h5>Seeat 504: <a href="https://gweb.airratstrip.tk/seeat/504">https://gweb.airratstrip.tk/seeat/504/</a></h5>
@@ -346,21 +350,30 @@
             var arre = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
             if (list1.value != '') {
                 var pa = list1.value.split(' '), a = [];
-                pa.forEach((e)=>{a.push(Number(e))})
-                if (a.length > 5) {
-                    var v = a.length - 5;
-                    for (var i = 0; i < v; i++) {
-                        a.splice(Math.floor(Math.random() * (a.length - 1)), 1)
-                    };
-                }
-                for (var i = 0; i < a.length; i++) {
-                    for (var j = Number(a[i]); j > 0; j--) {
-                        if (Number(a[i]) == Number(arre[j - 1])) {
-                            arre.splice(j - 1, 1);
-                        }
+                pa.forEach((e)=>{
+                    if (arre.indexOf(Number(e)) != -1 && a.indexOf(Number(e)) == -1) {
+                        a.push(Number(e));
                     }
-                };
-                return ([arre, a]);
+                });
+                if (a.length != 0) {
+                    if (a.length > 5) {
+                        var v = a.length - 5;
+                        for (var i = 0; i < v; i++) {
+                            a.splice(Math.floor(Math.random() * (a.length - 1)), 1)
+                        };
+                    }
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = Number(a[i]); j > 0; j--) {
+                            if (Number(a[i]) == Number(arre[j - 1])) {
+                                arre.splice(j - 1, 1);
+                            }
+                        }
+                    };
+                    return ([arre, a]);
+                }
+                else {
+                    return ([arre, []]);
+                }
             }
             else {
                 return ([arre, []]);
