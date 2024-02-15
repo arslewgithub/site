@@ -257,7 +257,7 @@
 </head>
 
 <body>
-	<h1>Seeat V9</h1>
+	<h1>Seeat V10</h1>
 	<br>
     <div class="formcenter">
         <table class="rotated">
@@ -339,15 +339,16 @@
 	    <h4>About:</h4>
 	    <h5>Project Name: Seeat</h5>
 	    <h5>Series Code: Original</h5>
-	    <h5>Version: 9.1</h5>
+	    <h5>Version: 10</h5>
 	    <h5>Last Update: 2024-01-27</h5>
 	    <h4>Series:</h4>
-	    <h5>Seeat 509: <a href="https://gweb.airratstrip.tk/seeat/">https://gweb.airratstrip.tk/seeat/</a></h5>
-	    <h5>Seeat 504: <a href="https://gweb.airratstrip.tk/seeat/504">https://gweb.airratstrip.tk/seeat/504/</a></h5>
+	    <h5>Seeat 509: <a href="https://arslewgithub.github.io/site/seeat/">https://arslewgithub.github.io/site/seeat/</a></h5>
+	    <h5>Seeat 504: <a href="https://arslewgithub.github.io/site/seeat/504">https://arslewgithub.github.io/site/seeat/504/</a></h5>
     </div>
     <script>
         function an() {
             var arre = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
+            arre.splice(0x1E, 1)
             if (list1.value != '') {
                 var pa = list1.value.split(' '), a = [];
                 pa.forEach((e)=>{
@@ -474,7 +475,7 @@
             var r = [];
             console.log(a);
             console.log(af);
-            for (var c = 0; c < 31; c++) {
+            for (var c = 0; c < 30; c++) {
                 r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
             };
             console.log(a)
@@ -515,6 +516,27 @@
             r.splice(p, 0, m[0]);
             var k = (Math.floor(Math.random() * 14) + 13);
             r.splice(k, 0, String(0x5).padStart(2, '0'));
+            if (ao[1].indexOf(0x22) == -1) {
+                var z = 50;
+                if(ct <= 0){ z = 100; ct += 1;};
+                var rp = Math.floor(Math.random() * 1E2);
+                if ((rp < z) && (k % 7) != 6 && ((k + 1) % 7) != 6) {
+                    var cs = String(r.splice(k + (Math.floor(rp / 50) * 2) - 1, 1, String(0x22)));
+                    r.push(cs);
+                }
+                else if ((rp < 99) && (k % 7) == 6) {
+                    var cs = String(r.splice(k + 1, 1, String(0x22)));
+                    r.push(cs);
+                }
+                else if ((rp < 99) && ((k + 1) % 7) == 6) {
+                    var cs = String(r.splice(k - 1, 1, String(0x22)));
+                    r.push(cs);
+                }
+                else {
+                    var cs = r.splice(Math.floor(Math.random() * 37), 1, String(0x22));
+                    r.push(cs);
+                }
+            }
             presave = r;
             return r;
         }
@@ -534,6 +556,7 @@
                 e.innerHTML = r[n];
             });
         }
+        var ct = -10;
     </script>
 </body>
 
