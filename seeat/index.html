@@ -522,19 +522,19 @@
                 var rp = Math.floor(Math.random() * 1E2);
                 if ((rp < z) && (k % 7) != 6 && ((k + 1) % 7) != 6) {
                     var cs = String(r.splice(k + (Math.floor(rp / 50) * 2) - 1, 1, String(0x22)));
-                    r.push(cs);
+                    r.splice(0x21, 0, cs);
                 }
                 else if ((rp < 99) && (k % 7) == 6) {
                     var cs = String(r.splice(k + 1, 1, String(0x22)));
-                    r.push(cs);
+                    r.splice(0x21, 0, cs);
                 }
                 else if ((rp < 99) && ((k + 1) % 7) == 6) {
                     var cs = String(r.splice(k - 1, 1, String(0x22)));
-                    r.push(cs);
+                    r.splice(0x21, 0, cs);
                 }
                 else {
                     var cs = r.splice(Math.floor(Math.random() * 37), 1, String(0x22));
-                    r.push(cs);
+                    r.splice(0x21, 0, cs);
                 }
             }
             presave = r;
