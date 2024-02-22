@@ -20,7 +20,7 @@
             white-space: nowrap;
             padding: 8px;
             border: 1px solid #999;
-            border-radius: 7px;
+            border-radius: 8px;
         }
 
         .bottomblock .exe {
@@ -30,7 +30,6 @@
             border: 1px solid #273dff;
             border-radius: 10px;
             background-color: #97adff;
-            cursor: pointer;
             user-select: none;
             color: #273dff;
             font-weight: bold;
@@ -40,7 +39,6 @@
             background-repeat: no-repeat;
             background-image: url(https://cdn-icons-png.flaticon.com/512/6220/6220543.png);
             background-position: 50%;
-            
         }
 
         .bottomblock #hintbt {
@@ -50,9 +48,8 @@
             padding: 0;
             margin: 0;
             border: 1px solid #27BB3D;
-            border-radius: 10px;
+            border-radius: 20px;
             background-color: #97EEAD;
-            cursor: pointer;
             user-select: none;
             font-weight: bold;
             float: left;
@@ -120,7 +117,6 @@
             border-radius: 10px;
             background-color: #97adff;
             height: 30px;
-            cursor: pointer;
             user-select: none;
             color: #273dff;
             font-weight: bold;
@@ -139,7 +135,6 @@
             border-radius: 10px;
             background-color: #FF6;
             height: 40px;
-            cursor: pointer;
             user-select: none;
             font-size: 18px;
             width: calc((100% / 6) - 8px)
@@ -162,7 +157,6 @@
             width: calc(50% - 13px);
             border-radius: 10px;
             height: 40px;
-            cursor: pointer;
             user-select: none;
             margin: 5px;
             font-size: 16px;
@@ -189,6 +183,15 @@
             width: 100%;
             height: calc(100% - 160px);
             overflow-x: auto;
+        }
+        
+        div.blockframe span
+        div.blockframe button {
+            user-select: none;
+        }
+        
+        div.blockframe input:focus {
+            border-bottom: 1px solid #273dff;
         }
 
         .outconsolet .input_log {
@@ -226,14 +229,8 @@
             }
         }
 
-        h1,
-        h4 {
-            margin: 1px;
-        }
-
         #consoleclear {
             width: min-content;
-            cursor: pointer;
             margin: -10px 7% -20px 0;
             background: #FDD;
             float: right;
@@ -250,7 +247,7 @@
         }
 
         #hint {
-            height: calc(100% - 102.6px);
+            height: calc(100% - 106px);
             overflow: auto;
             margin-top: 6.7px;
         }
@@ -269,17 +266,23 @@
         h1,
         h2,
         h4{
+            margin: 1px;
             margin-left: 20px;
+            font-family: monospace;
+            user-select: none;
         }
         
         .ed{
             filter: brightness(.75);
         }
+        * {
+            font-family: sans-serif;
+        }
     </style>
 </head>
 
 <body>
-    <h1>JSCS 2.4.5</h1>
+    <h1>JSCS 2.4.6</h1>
     <h4>JavaScript Command Sender</h4>
     <h2 id="wait">Loading...</h2>
     <main style="display: none;">
@@ -584,7 +587,7 @@
 
         db.collection('jscommand').doc('jsrespon')
             .onSnapshot(doc => {
-                if (doc.data().text !== '') {
+                if (doc.data().type !== '') {
                     printout(doc.data().text, doc.data().type);
                 }
             });
@@ -702,11 +705,11 @@
         document.querySelectorAll('textarea').forEach((e) => {
             e.oninput = function () {
                 this.style.height = '15.5px';
-                if (e.scrollHeight <= 310) {
+                if (e.scrollHeight <= 341) {
                     this.style.height = e.scrollHeight - 15.5 + 'px';
                 }
                 else {
-                    this.style.height = '310px';
+                    this.style.height = '341px';
                 }
             };
         });
