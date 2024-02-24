@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Command Sender</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        .cmdblock textarea {
+            width: calc(100% - 16px);
+            resize: none;
+            background-color: #e3eaff;
+            white-space: nowrap;
+            padding: 8px;
+            border: 1px solid #999;
+            border-radius: 8px;
+            height: 25vh;
+        }
+        .cmdblock textarea:focus {
+            background-color: #FFFA;
+        }
+        .cmdblock {
+            margin: 5px 10px;
+            width: calc(100% - 20px);
+        }
+        #cexe {
+            padding: 0;
+            margin: 6px;
+            border: 1px solid #273dff;
+            border-radius: 20px;
+            background-color: #97adff;
+            user-select: none;
+            color: #273dff;
+            font-weight: bold;
+            float: right;
+            background-size: 23px;
+            background-repeat: no-repeat;
+            background-image: url(https://cdn-icons-png.flaticon.com/512/6220/6220543.png);
+            background-position: 50%;
+            width: 40px;
+            height: 40px;
+        }
+        #stype button {
+            width: calc(50% - 23px);
+            border-radius: 10px;
+            height: 40px;
+            user-select: none;
+            margin: 10px;
+            font-size: 16px;
+            border: 1px solid #999;
+        }
+        #stype {
+            width: 100%;
+            display: inline-block;
+        }
+        #stype button.set {
+            background: #47E;
+            color: #FFF;
+        }
+        #hintbt {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+            padding: 0;
+            margin: 6px;
+            border: 1px solid #27BB3D;
+            border-radius: 20px;
+            background-color: #97EEAD;
+            user-select: none;
+            font-weight: bold;
+            float: right;
+        }
+        div.blockframe {
+            margin: 5px 10px;
+            padding: 10px;
+            border: 1px solid #999999;
+            background-color: #e3eaff;
+            border-radius: 10px;
+            max-width: calc(100% - 41.5px);
+            user-select: none;
+        }
+        body {
+            background-image: linear-gradient(777deg, #d5f9ff, #c6dbff, #bed3ff, #ffd5ff);
+            background-size: cover;
+            height: 100%;
+            margin: 0 8px;
+            overflow: hidden;
+        }
+        main {
+            height: 100%;
+        }
+        p.infotxt {
+            margin: 0;
+            margin-bottom: 2px;
+            padding: 0;
+            user-select: none;
+        }
+        div.blockframe input {
+            border: 0;
+            border-bottom: 1px solid #999999;
+            background-color: transparent;
+            font-size: 18px;
+        }
+        div.blockframe select {
+            border: 0;
+            border-bottom: 1px solid #999999;
+            background-color: transparent;
+            font-size: 16px;
+            user-select: none;
+        }
+        :focus-visible {
+            outline: 0;
+        }
+        div.blockframe button.exe {
+            border: 1px solid #273dff;
+            border-radius: 10px;
+            background-color: #97adff;
+            height: 30px;
+            user-select: none;
+            color: #273dff;
+            font-weight: bold;
+            width: 40px;
+            margin: -2px 0;
+            float: right;
+            background-size: 20px;
+            background-repeat: no-repeat;
+            background-image: url(https://cdn-icons-png.flaticon.com/512/6220/6220543.png);
+            background-position: 50%;
+            user-select: none;
+        }
+        button.va {
+            border: 1px solid #FA0;
+            margin: 10px 2px 2px 2px;
+            border-radius: 10px;
+            background-color: #FF6;
+            height: 40px;
+            user-select: none;
+            font-size: 18px;
+            width: calc((100% / 6) - 8px)
+        }
+        button.ibtn1 {
+            border: 1px solid #5024ff;
+            background-color: #b69dff;
+            color: #5024ff;
+        }
+        button.ibtn2 {
+            border: 1px solid #ff0000;
+            background-color: #ff8f8f;
+            color: #F00;
+        }
+        button.ibtn1,
+        button.ibtn2 {
+            width: calc(50% - 13px);
+            border-radius: 10px;
+            height: 40px;
+            user-select: none;
+            margin: 5px;
+            font-size: 16px;
+        }
+        input[type="text"].ipttxt1 {
+            width: calc(100% - 152px);
+        }
+        input[type="url"].ipturl2 {
+            width: calc(100% - 136px);
+        }
+        input[type="url"].ipturl1 {
+            width: calc(100% - 183px);
+        }
+        .deving, *:disabled {
+            opacity: .5;
+            pointer-events: none;
+        }
+        div.blockframe.outconsolet {
+            width: 100%;
+            height: calc(70% - 190px);
+            overflow-x: auto;
+        }
+        div.blockframe span
+        div.blockframe button {
+            user-select: none;
+        }
+        div.blockframe input:focus {
+            border-bottom: 1px solid #273dff;
+        }
+        .outconsolet .input_log {
+            background: #bcfe;
+        }
+        .outconsolet .output_log {
+            background: #f0f8ffe0;
+        }
+        .outconsolet .output_error {
+            background: #fbbe;
+        }
+        .outconsolet>.output_error,
+        .outconsolet>.input_log,
+        .outconsolet>.output_log {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 7px;
+            border: .5px solid #999;
+            word-break: break-all;
+            animation: consoleani .35s;
+        }
+        @keyframes consoleani {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0%);
+            }
+        }
+        #consoleclear {
+            width: min-content;
+            margin: -10px 7% -20px 0;
+            background: #FDD;
+            float: right;
+        }
+        button:active,
+        #consoleclear:active {
+            scale: .95;
+        }
+        button,
+        #consoleclear {
+            transition: .125s;
+        }
+        #hint {
+            height: calc(100% - 106px);
+            overflow: auto;
+            margin-top: 6.7px;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            border: 3px solid #0000;
+            background-clip: content-box;
+            background-color: #ababab;
+        }
+        h1,
+        h2,
+        h4{
+            margin: 1px;
+            margin-left: 20px;
+            font-family: monospace;
+            user-select: none;
+        }
+        .ed{
+            filter: brightness(.75);
+        }
+        * {
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <button id="hintbt">💡</button>
+    <button id="cexe" disabled></button>
+    <h1>JSCS 2.5.1</h1>
+    <h4>JavaScript Command Sender</h4>
+    <h2 id="wait">Loading...</h2>
+    <main style="display: none;">
+        <div id="stype">
+            <button class="set">目前頁面</button>
+            <button>所有頁面</button>
+        </div>
+        <div id="hint">
+            <div class="blockframe">
+                <span>讓</span>
+                <select id="select1">
+                    <option value="1">影片和音樂</option>
+                    <option value="2">影片</option>
+                    <option value="3">音樂</option>
+                </select>
+                <span>的速度為</span>
+                <input type="number" value="100" style="width: 50px;">
+                <span>%</span>
+                <button class="exe"></button>
+            </div>
+            <div class="blockframe">
+                <span>調整頁面上的所有</span>
+                <select id="select2">
+                    <option value="1">影片和音樂</option>
+                    <option value="2">影片</option>
+                    <option value="3">音樂</option>
+                </select>
+                <span>:</span>
+                <br>
+                <button class="va">⏮️</button>
+                <button class="va">⏪</button>
+                <button class="va">▶️</button>
+                <button class="va">⏸️</button>
+                <button class="va">⏩</button>
+                <button class="va">⏭️</button>
+            </div>
+            <div class="blockframe">
+                <select id="select3">
+                    <option value="1">新分頁</option>
+                    <option value="2">新視窗</option>
+                </select>
+                <span>的網址:</span>
+                <input type="url" class="ipturl1">
+                <button class="exe"></button>
+            </div>
+            <div class="blockframe">
+                <span>跳轉網頁至</span>
+                <input type="url" class="ipturl2">
+                <button class="exe"></button>
+            </div>
+            <div class="blockframe">
+                <span>顯示提示訊息</span>
+                <input type="text" class="ipttxt1">
+                <button class="exe"></button>
+            </div>
+            <div class="blockframe">
+                <button class="ibtn1">重新整理</button>
+                <button class="ibtn1">防止點擊</button>
+                <br>
+                <button class="ibtn2">清除內容</button>
+                <button class="ibtn2">頁面當機</button>
+            </div>
+        </div>
+        <div class="cmdblock" style="display: none;">
+            <textarea placeholder="執行JavaScript"></textarea>
+        </div>
+        <div class="blockframe" id="consoleclear" style="display: none;">❌</div>
+        <div class="blockframe outconsolet" style="display: none;">
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
+    <script type="module">
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3JGX-ydbKCYEpOanFJVpqmcfQ4dsRTKg",
+            authDomain: "fir-0013.firebaseapp.com",
+            projectId: "fir-0013",
+            storageBucket: "fir-0013.appspot.com",
+            messagingSenderId: "93999488005",
+            appId: "1:93999488005:web:c89844afc1b6c03cba506c",
+            measurementId: "G-3JHGRDKG9W"
+        };
+        firebase.initializeApp(firebaseConfig)
+        const db = firebase.firestore()
+        function cs() {
+            db.collection('jscommand')
+                .doc(senttype)
+                .set({
+                    text: ''
+                })
+        }
+        function sent(t) {
+            if (t !== '') {
+                db.collection('jscommand')
+                    .doc(senttype)
+                    .set({
+                        text: t
+                    });
+                printin(t);
+            }
+            document.querySelector('.ipturl1').value = '';
+            document.querySelector('.ipturl2').value = '';
+            document.querySelector('.ipttxt1').value = '';
+            document.querySelectorAll('textarea')[0].value = '';
+            setTimeout(cs, 100);
+        }
+        document.querySelectorAll('.exe')[0].onclick = function () {
+            if (document.querySelector('#select1').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+            }
+            else if (document.querySelector('#select1').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+            }
+            else if (document.querySelector('#select1').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.playbackRate = ' + document.querySelector('input[type=number]').value / 100 + '})')
+            }
+        }
+        document.querySelectorAll('.exe')[1].onclick = function () {
+            if (document.querySelector('#select3').value == '1') {
+                if ((document.querySelector('.ipturl1').value.includes('https://')) == true || (document.querySelector('.ipturl1').value.includes('http://') == true)) {
+                    sent('window.open(\'' + document.querySelector('.ipturl1').value + '\')');
+                }
+                else {
+                    sent('window.open(\'http://' + document.querySelector('.ipturl1').value + '\')');
+                }
+            }
+            else if (document.querySelector('#select3').value == '2') {
+                if ((document.querySelector('.ipturl1').value.includes('https://')) == true || (document.querySelector('.ipturl1').value.includes('http://') == true)) {
+                    sent('window.open(\'' + document.querySelector('.ipturl1').value + '\', \'New Window\', config=\'height=450, width=800, location=no\')');
+                }
+                else {
+                    sent('window.open(\'http://' + document.querySelector('.ipturl1').value + '\', \'New Window\' , config=\'height=450, width=800, location=no\')');
+                }
+            }
+        }
+        document.querySelectorAll('.exe')[2].onclick = function () {
+            if ((document.querySelector('.ipturl2').value.includes('https://')) == true || (document.querySelector('.ipturl2').value.includes('http://') == true)) {
+                sent('location.href = \'' + document.querySelector('.ipturl2').value + '\'');
+            }
+            else {
+                sent('location.href = \'http://' + document.querySelector('.ipturl2').value + '\'');
+            }
+        }
+        document.querySelectorAll('.exe')[3].onclick = function () {
+            sent('alert(\'' + String(document.querySelector('.ipttxt1').value).replaceAll("\\", "\\\\").replaceAll("'", "\\'") + '\')');
+        }
+        cexe.onclick = function () {
+            sent(document.querySelectorAll('textarea')[0].value);
+        }
+        document.querySelectorAll('.ibtn1')[0].onclick = function () {
+            sent('location.reload()');
+        }
+        document.querySelectorAll('.ibtn1')[1].onclick = function () {
+            sent('for(var i=0;i<document.all.length;i++){document.all[i].style.pointerEvents="none";' +
+                'document.all[i].style.userSelect="none";' +
+                'document.all[i].style.pointerEvents="none";' +
+                'document.all[i].style.cursor="none";' +
+                'document.all[i].oncontextmenu=function(){return false;};' +
+                'document.all[i].onkeydown=function(){return false;};' +
+                'document.all[i].onkeyup=function(){return false;};' +
+                'document.all[i].onkeypress=function(){return false;};};' +
+                'if(navigator.keyboard && navigator.keyboard.lock){' +
+                'navigator.keyboard.lock(["Escape", "F11"])};');
+        }
+        document.querySelectorAll('.ibtn2')[0].onclick = function () {
+            sent('document.all[0].remove(); document.doctype.remove()');
+        }
+        document.querySelectorAll('.ibtn2')[1].onclick = function () {
+            sent('while(true){};');
+        }
+        var hinthide = false, senttype = "jscommanddoc";
+        hintbt.onclick = function () {
+            if (hinthide == true) {
+                hint.style.display = '';
+                hintbt.classList.remove('ed');
+                document.querySelector('.outconsolet').style.display = 'none';
+                document.querySelector('.cmdblock').style.display = 'none';
+                consoleclear.style.display = 'none';
+                cexe.disabled = true;
+                hinthide = false;
+            }
+            else if (hinthide == false) {
+                hint.style.display = 'none';
+                hintbt.classList.add('ed');
+                document.querySelector('.outconsolet').style.display = '';
+                document.querySelector('.cmdblock').style.display = '';
+                consoleclear.style.display = '';
+                cexe.disabled = false;
+                hinthide = true;
+            }
+        }
+        document.querySelectorAll('#stype button')[0].onclick = function () {
+            this.classList.add('set');
+            document.querySelectorAll('#stype button')[1].classList.remove('set');
+            senttype = "jscommanddoc";
+        }
+        document.querySelectorAll('#stype button')[1].onclick = function () {
+            this.classList.add('set');
+            document.querySelectorAll('#stype button')[0].classList.remove('set');
+            senttype = "jscmdall";
+        }
+        function keyFunction0() {
+            if (event.keyCode == 13) {
+                if (document.querySelector('#select3').value == '1') {
+                    if ((document.querySelector('.ipturl1').value.includes('https://')) == true || (document.querySelector('.ipturl1').value.includes('http://') == true)) {
+                        sent('window.open(\'' + document.querySelector('.ipturl1').value + '\')');
+                    }
+                    else {
+                        sent('window.open(\'http://' + document.querySelector('.ipturl1').value + '\')');
+                    }
+                }
+                else if (document.querySelector('#select3').value == '2') {
+                    if ((document.querySelector('.ipturl1').value.includes('https://')) == true || (document.querySelector('.ipturl1').value.includes('http://') == true)) {
+                        sent('window.open(\'' + document.querySelector('.ipturl1').value + '\', \'New Window\', config=\'height=450, width=800, location=no\')');
+                    }
+                    else {
+                        sent('window.open(\'http://' + document.querySelector('.ipturl1').value + '\', \'New Window\' , config=\'height=450, width=800, location=no\')');
+                    }
+                }
+            }
+        }
+        wait.remove();
+        document.querySelector('main').style.display = ''
+        document.querySelectorAll('.va')[0].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime = 0;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime = 0;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime = 0;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime = 0;})')
+            }
+        }
+        document.querySelectorAll('.va')[1].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime -= 10;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime -= 10;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime -= 10;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime -= 10;})')
+            }
+        }
+        document.querySelectorAll('.va')[2].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.play();});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.play();})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.play()};)')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.play();})')
+            }
+        }
+        document.querySelectorAll('.va')[3].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.pause();});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.pause();})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.pause()};)')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.pause();})')
+            }
+        }
+        document.querySelectorAll('.va')[4].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 10;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 10;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime += 10;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime += 10;})')
+            }
+        }
+        document.querySelectorAll('.va')[5].onclick = function () {
+            if (document.querySelector('#select2').value == '1') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime = e.duration;});Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime = e.duration;})')
+            }
+            else if (document.querySelector('#select2').value == '2') {
+                sent('Array.from(document.querySelectorAll(\'video\')).forEach((e) => {e.currentTime = e.duration;})')
+            }
+            else if (document.querySelector('#select2').value == '3') {
+                sent('Array.from(document.querySelectorAll(\'audio\')).forEach((e) => {e.currentTime = e.duration;})')
+            }
+        }
+        function keyFunction1() {
+            if (event.keyCode == 13) {
+                if ((document.querySelector('.ipturl2').value.includes('https://')) == true || (document.querySelector('.ipturl2').value.includes('http://') == true)) {
+                    sent('location.href = \'' + document.querySelector('.ipturl2').value + '\'');
+                }
+                else {
+                    sent('location.href = \'http://' + document.querySelector('.ipturl2').value + '\'');
+                }
+            }
+        }
+        function keyFunction2() {
+            if (event.keyCode == 13) {
+                sent('alert(\'' + String(document.querySelector('.ipttxt1').value).replaceAll("\\", "\\\\").replaceAll("'", "\\'") + '\')');
+            }
+        }
+        document.querySelector('.ipturl1').onkeydown = keyFunction0;
+        document.querySelector('.ipturl2').onkeydown = keyFunction1;
+        document.querySelector('.ipttxt1').onkeydown = keyFunction2;
+        db.collection('jscommand').doc('jsrespon')
+            .onSnapshot(doc => {
+                if (doc.data().type !== '') {
+                    printout(doc.data().text, doc.data().type);
+                }
+            });
+        db.collection('jscommand').doc('jsresponerr')
+            .onSnapshot(doc => {
+                if (doc.data().text !== '') {
+                    printouterr(doc.data().text);
+                }
+            });
+        consoleclear.onclick = function () {
+            if (confirm('確定要清空輸出記錄?')) {
+                document.querySelectorAll('.outconsolet .input_log').forEach((e) => { e.remove(); });
+                document.querySelectorAll('.outconsolet .output_log').forEach((e) => { e.remove(); });
+                document.querySelectorAll('.outconsolet .output_error').forEach((e) => { e.remove(); });
+                consoleclear.style.scale = '0';
+            }
+        }
+        consoleclear.style.scale = '0';
+        function printin(txt) {
+            var et = document.querySelector('div.outconsolet');
+            var jslog = document.createElement('div');
+            jslog.innerHTML = String(txt).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll(' ', '&nbsp;').replaceAll('\n', '<br>');
+            jslog.classList.add('input_log');
+            jslog.contentEditable = 'true';
+            jslog.oninput = function () {
+                if (this.innerHTML == "") {
+                    try {
+                        this.nextSibling.focus();
+                    } catch (e) { }
+                    this.remove();
+                    if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
+                        consoleclear.style.scale = '0';
+                    }
+                }
+            }
+            et.appendChild(jslog);
+            consoleclear.style.scale = '1';
+        }
+        function printout(txt, type) {
+            var et = document.querySelector('div.outconsolet');
+            var jslog = document.createElement('div');
+            switch (txt) {
+                case 'undefined':
+                    jslog.style.color = '#626';
+                    type = 'undefinded';
+                    break;
+                case 'null':
+                    jslog.style.color = '#826';
+                    break;
+                default:
+                    break;
+            }
+            switch (type) {
+                case 'string':
+                    txt = "'" + txt + "'";
+                    jslog.style.color = '#B40';
+                    break;
+                case 'number':
+                    jslog.style.color = '#20B';
+                    break;
+                case 'bigint':
+                    jslog.style.color = '#20B';
+                    break;
+                case 'boolean':
+                    jslog.style.color = '#072';
+                    break;
+                default:
+                    break;
+            }
+            jslog.innerHTML = String(txt).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll(' ', '&nbsp;').replaceAll('\n', '<br>');
+            jslog.classList.add('output_log');
+            jslog.contentEditable = 'true';
+            jslog.oninput = function () {
+                if (this.innerHTML == "") {
+                    try {
+                        this.nextSibling.focus();
+                    } catch (e) { }
+                    this.remove();
+                    if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
+                        consoleclear.style.scale = '0';
+                    }
+                }
+            }
+            et.appendChild(jslog);
+            consoleclear.style.scale = '1';
+        }
+        function printouterr(txt) {
+            var et = document.querySelector('div.outconsolet');
+            var jslog = document.createElement('div');
+            jslog.innerHTML = String(txt).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll(' ', '&nbsp;').replaceAll('\n', '<br>');
+            jslog.classList.add('output_error');
+            jslog.contentEditable = 'true';
+            jslog.style.color = '#C00';
+            jslog.oninput = function () {
+                if (this.innerHTML == "") {
+                    try {
+                        this.nextSibling.focus();
+                    } catch (e) { }
+                    this.remove();
+                    if (document.querySelector('div.outconsolet').childNodes.length <= 1) {
+                        consoleclear.style.scale = '0';
+                    }
+                }
+            }
+            et.appendChild(jslog);
+            consoleclear.style.scale = '1';
+        }
+    </script>
+</body>
+</html>
