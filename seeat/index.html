@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -14,10 +14,10 @@
             margin-left: calc(50vw - 210px);
             background: #F0E9FF;
         }
-        
         html, body {
             overflow: hidden;
             overflow-y: auto;
+            /*touch-action: manipulation;*/
         }
         
         @media (max-width:400px), print{
@@ -101,7 +101,7 @@
             margin-left: 10px;
             padding-bottom: 5px;
             font-size: 18px;
-            transition: .125s;
+            transition: .0625s;
             box-shadow: inset 0 -5px 0px 0px #111;
             font-weight: bold;
             user-select: none;
@@ -134,7 +134,7 @@
         td.chart.selectd {
             background: #CC447C;
             color: #FFD268;
-			animation: getani2 1.75s;
+			animation: getani2 2.25s;
         }
         
         button#save_seeat {
@@ -233,31 +233,55 @@
 		@keyframes getani2 {
 			0% {
 				scale: 1;
+				z-index: 9;
+				position: relative;
 			}
-			30% {
+			20% {
 				scale: 1.3;
 			    background: #EC649C;
 				color: #FFD268;
+				z-index: 9;
+				position: relative;
 			}
-			55% {
+			35% {
 				scale: 1.2;
 			    background: #DC548C;
 				color: #FFD268;
+				z-index: 9;
+				position: relative;
 			}
-			70% {
-				scale: 1.22;
+			50% {
+				scale: 1.28;
 			    background: #EC649C;
 				color: #FFD268;
+				z-index: 9;
+				position: relative;
+			}
+			65% {
+				scale: 1.22;
+			    background: #DC548C;
+				color: #FFD268;
+				z-index: 9;
+				position: relative;
+			}
+			80% {
+				scale: 1.26;
+			    background: #EC649C;
+				color: #FFD268;
+				z-index: 9;
+				position: relative;
 			}
 			100% {
 				scale: 1;
+				z-index: 9;
+				position: relative;
 			}
 		}
     </style>
 </head>
 
 <body>
-	<h1>Seeat V10</h1>
+	<h1>Seeat V11</h1>
 	<br>
     <div class="formcenter">
         <table class="rotated">
@@ -320,17 +344,17 @@
             <tfoot><tr><th colspan="2"></th><th colspan="3" class="c">講臺</th><th colspan="2"></th></tr></tfoot>
         </table>
         <div class="btdiv">
-            <button style="background: #bbffbb; color: #13a928;">快速重新生成</button><br>
-            <button style="color: #b91253;">動畫重新生成</button>
-            <button id="rotatebt">將座位表翻轉</button><br>
+            <button style="background: #bbffbb; color: #13a928;">立即生成</button><br>
+            <button style="color: #b91253;">過渡生成</button>
+            <button id="rotatebt">翻轉表格</button><br>
         </div>
         <div class="btdiv">
-            <button id="editbt" style="background: #5678ff;">開啟修改模式</button><br>
-            <button id="save_seeat">保存此座位表</button>
+            <button id="editbt" style="background: #5678ff;">開啟修改</button><br>
+            <button id="save_seeat">保存表格</button>
         </div>
         <div class="btdiv">
-            <button id="randombt">隨機選擇一個座位</button><br>
-            <button id="clearran">清除所有選擇記錄</button>
+            <button id="randombt">隨機標記座位</button><br>
+            <button id="clearran">清除所有標記</button>
         </div>
         <div class="btdiv">
             <input id="list1" placeholder="輸入想坐第一排的座號(以空格分隔)">
@@ -339,8 +363,8 @@
 	    <h4>About:</h4>
 	    <h5>Project Name: Seeat</h5>
 	    <h5>Series Code: Original</h5>
-	    <h5>Version: 10</h5>
-	    <h5>Last Update: 2024-01-27</h5>
+	    <h5>Version: 11</h5>
+	    <h5>Last Update: 2024-03-04</h5>
 	    <h4>Series:</h4>
 	    <h5>Seeat 509: <a href="https://arslewgithub.github.io/site/seeat/">https://arslewgithub.github.io/site/seeat/</a></h5>
 	    <h5>Seeat 504: <a href="https://arslewgithub.github.io/site/seeat/504">https://arslewgithub.github.io/site/seeat/504/</a></h5>
@@ -380,13 +404,116 @@
                 return ([arre, []]);
             }
         }
-        document.getElementsByTagName('button')[0].onmousedown = g;
-        document.getElementsByTagName('button')[1].onmousedown = ag;
-        rotatebt.onmousedown = r;
-        save_seeat.onmousedown = function () {localStorage.setItem("seeat", JSON.stringify(presave));alert('saved!')}
-        randombt.onmousedown = rs;
-        clearran.onmousedown = function () {document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');})};
-        editbt.onmousedown = eb;
+        var so, q = 0, anii, s, em = false, presave = [], ct = -50;
+        function isMobileDevice() {
+            let mobileDevices = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
+            for (var i = 0; i < mobileDevices.length; i++) {
+                if (navigator.userAgent.match(mobileDevices[i])) {
+                    //console.log("isMobileDevice: match " + mobileDevices[i]);
+                    return true;
+                }
+            }
+            return false;
+        }
+        if (isMobileDevice()) {
+            /* 禁止多指觸控
+            document.addEventListener('touchstart', (event) => {
+                if (event.touches && event.touches.length > 1) {  // 禁止多指觸控
+                   event.preventDefault();
+                }
+            }, { passive: false });*/
+            let lastTouchEndTime = 0;
+            document.addEventListener('touchend', (event) => {
+                const now = new Date().getTime();
+                if((now - lastTouchEndTime) <= 300) {      // 偵測時間差是否小於 300ms
+                    setTimeout(function () {event.preventDefault()});
+                }
+                lastTouchEndTime = now;
+            }, false);
+            document.getElementsByTagName('button')[0].ontouchend = function(){if(!this.disabled){g()}};
+            document.getElementsByTagName('button')[0].ontouchmove = function(e){if(!this.disabled){ct-=1;g();return false;}};
+            document.getElementsByTagName('button')[1].ontouchstart = function (e) {
+                var able = true;
+                this.addEventListener('touchmove', function (){able = false;})
+                this.addEventListener('touchend', exe)
+                function exe(){
+                    if (able && !this.disabled) {
+                        ag();
+                    }
+                    this.removeEventListener('touchmove', function (){able = false;})
+                    this.removeEventListener('touchend', exe);
+                }
+            };
+            rotatebt.ontouchstart = function (e) {
+                var able = true;
+                this.addEventListener('touchmove', function (){able = false;})
+                this.addEventListener('touchend', exe)
+                function exe(){
+                    if (able && !this.disabled) {
+                        r();
+                    }
+                    this.removeEventListener('touchmove', function (){able = false;})
+                    this.removeEventListener('touchend', exe)
+                }
+            };
+            save_seeat.ontouchstart = function (e) {
+                var able = true;
+                this.addEventListener('touchmove', function (){able = false;})
+                this.addEventListener('touchend', exe)
+                function exe(){
+                    if (able && !this.disabled) {
+                        localStorage.setItem("seeat", JSON.stringify(presave));alert('saved!');
+                    }
+                    this.removeEventListener('touchmove', function (){able = false;})
+                    this.removeEventListener('touchend', exe)
+                }
+            }
+            randombt.ontouchstart = function (e) {
+                var able = true;
+                this.addEventListener('touchmove', function (){able = false;})
+                this.addEventListener('touchend', exe)
+                function exe(){
+                    if (able && !this.disabled) {
+                        rs();
+                    }
+                    this.removeEventListener('touchmove', function (){able = false;})
+                    this.removeEventListener('touchend', exe)
+                }
+            };
+            clearran.ontouchstart = function (e) {
+                var able = true;
+                this.addEventListener('touchmove', function (){able = false;})
+                this.addEventListener('touchend', exe)
+                function exe(){
+                    if (able && !this.disabled) {
+                        document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');});
+                    }
+                    this.removeEventListener('touchmove', function (){able = false;})
+                    this.removeEventListener('touchend', exe)
+                }
+            };
+            editbt.ontouchstart = function (e) {
+                var able = true;
+                this.addEventListener('touchmove', function (){able = false;})
+                this.addEventListener('touchend', exe)
+                function exe(){
+                    if (able && !this.disabled) {
+                        eb();
+                    }
+                    this.removeEventListener('touchmove', function (){able = false;})
+                    this.removeEventListener('touchend', exe)
+                }
+            };
+        }
+        else {
+            document.getElementsByTagName('button')[0].onmousedown = g;
+            document.getElementsByTagName('button')[1].onmousedown = ag;
+            rotatebt.onmousedown = r;
+            save_seeat.onmousedown = function () {localStorage.setItem("seeat", JSON.stringify(presave));alert('saved!')}
+            randombt.onmousedown = rs;
+            clearran.onmousedown = function () {document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');})};
+            editbt.onmousedown = eb;
+        }
         function rs() {
             if(document.querySelectorAll('td.chart:not(.selectd)').length == 0) {
                 if(confirm('已全部選擇完畢, 是否重置?')) {
@@ -434,11 +561,10 @@
             document.getElementsByTagName('button')[1].disabled = false;
             editbt.disabled = false;
         }
-        var so, q = 0, anii, s, em = false, presave = [], ct = -7;
         function eb() {
             if (em == true) {
                 editbt.style.background = '#5678ff';
-                editbt.innerHTML = '開啟修改模式';
+                editbt.innerHTML = '開啟修改';
                 document.querySelectorAll('.chart').forEach((e, n) => {
                     e.contentEditable = false;
                     presave[n] = e.innerHTML;
@@ -450,7 +576,7 @@
             }
             else {
                 editbt.style.background = '#fe5550';
-                editbt.innerHTML = '關閉修改模式';
+                editbt.innerHTML = '關閉修改';
                 document.querySelectorAll('.chart').forEach(e => {
                     e.contentEditable = true;
                 });
@@ -514,7 +640,7 @@
             }
             r.splice(p, 0, m[1]);
             r.splice(p, 0, m[0]);
-            var k = (Math.floor(Math.random() * 14) + 13);
+            var k = (Math.floor(Math.random() * 14) + 19);
             r.splice(k, 0, String(0x5).padStart(2, '0'));
             if (ao[1].indexOf(0x22) == -1) {
                 var z = 50;
@@ -556,7 +682,6 @@
                 e.innerHTML = r[n];
             });
         }
-        var ct = -50;
     </script>
 </body>
 
