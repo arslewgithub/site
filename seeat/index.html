@@ -426,7 +426,7 @@
             document.addEventListener('touchend', (event) => {
                 const now = new Date().getTime();
                 if((now - lastTouchEndTime) <= 300) {      // 偵測時間差是否小於 300ms
-                    setTimeout(function () {event.preventDefault()});
+                    event.preventDefault();
                 }
                 lastTouchEndTime = now;
             }, false);
@@ -590,99 +590,4 @@
             var e = document.querySelector('table');
             if (e.classList.contains('rotated')) {
                 e.classList.remove('rotated');
-            } else {
-                e.classList.add('rotated');
-            }
-        }
-        function b() {
-            const ao = Array.from(an());
-            var a = Array.from(ao[0]);
-            var af = Array.from(ao[1]);
-            var r = [];
-            console.log(a);
-            console.log(af);
-            for (var c = 0; c < 30; c++) {
-                r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
-            };
-            console.log(a)
-            console.log(af)
-            a.forEach(v=>{af.push(v)})
-            console.log(a)
-            console.log(af)
-            for (var c = 0; c < 5; c++) {
-                r.push(String(af.splice(Math.floor(Math.random() * af.length), 1)).padStart(2, '0'));
-            };
-            switch (Math.floor(Math.random() * 2)) {
-                case 0:
-                    var m = [String(0xC), String(0x10)];
-                    break;
-                case 1:
-                    var m = [String(0x10), String(0xC)];
-                    break;
-                default:
-                    break;
-            }
-            switch (Math.floor(Math.random() * 4)) {
-                case 0:
-                    var p = 0;
-                    break;
-                case 1:
-                    var p = 1;
-                    break;
-                case 2:
-                    var p = 3;
-                    break;
-                case 3:
-                    var p = 4;
-                    break;
-                default:
-                    break;
-            }
-            r.splice(p, 0, m[1]);
-            r.splice(p, 0, m[0]);
-            var k = (Math.floor(Math.random() * 14) + 19);
-            r.splice(k, 0, String(0x5).padStart(2, '0'));
-            if (ao[1].indexOf(0x22) == -1) {
-                var z = 50;
-                if(ct <= 0){ z = 100; ct += 1;};
-                var rp = Math.floor(Math.random() * 1E2);
-                if ((rp < z) && (k % 7) != 6 && ((k + 1) % 7) != 6) {
-                    var cs = String(r.splice(k + (Math.floor(rp / 50) * 2) - 1, 1, String(0x22)));
-                    r.splice(0x21, 0, cs);
-                }
-                else if ((rp < 99) && (k % 7) == 6) {
-                    var cs = String(r.splice(k + 1, 1, String(0x22)));
-                    r.splice(0x21, 0, cs);
-                }
-                else if ((rp < 99) && ((k + 1) % 7) == 6) {
-                    var cs = String(r.splice(k - 1, 1, String(0x22)));
-                    r.splice(0x21, 0, cs);
-                }
-                else {
-                    var cs = r.splice(Math.floor(Math.random() * 37), 1, String(0x22));
-                    r.splice(0x21, 0, cs);
-                }
-            }
-            presave = r;
-            return r;
-        }
-        function delay(n) {
-            return new Promise(function (resolve) {
-                setTimeout(resolve, n * 1000);
-            });
-        }
-		if (localStorage.getItem('seeat') == null || localStorage.getItem('seeat') == [] || JSON.parse(localStorage.getItem('seeat')).length != 39) {
-		    document.querySelectorAll('.chart').forEach((e, n) => {
-			    e.innerHTML = '';
-		    });
-		}
-		else {
-			var r = JSON.parse(localStorage.getItem('seeat'));
-            document.querySelectorAll('.chart').forEach((e, n) => {
-                e.innerHTML = r[n];
-            });
-        }
-    </script>
-</body>
-
-</html>
+            } els
