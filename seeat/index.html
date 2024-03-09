@@ -943,9 +943,9 @@
 		    });
 		}
 		else {
-			var r = JSON.parse(localStorage.getItem('seeat'));
+			var j = JSON.parse(localStorage.getItem('seeat'));
             document.querySelectorAll('.chart').forEach((e, n) => {
-                e.innerHTML = r[n];
+                e.innerHTML = j[n];
             });
         }
     </script>
