@@ -685,7 +685,7 @@
                             clearInterval(ed1)
                         };
                         pv();
-                    }, 130);
+                    }, 100);
                     unuse = false 
                 }, 300);
                 this.addEventListener('mousemove', function () { able = false; });
@@ -707,11 +707,11 @@
                 ed2 = setTimeout(function () {
                     ed1 = setInterval(function () {
                         if (flow >= presave.length - 1) {
-                            clearInterval(ed1)
+                            clearInterval(ed1);
                         };
                         nt();
-                    }, 130);
-                unuse = false 
+                    }, 100);
+                unuse = false ;
                 }, 300);
                 this.addEventListener('mousemove', function () { able = false; })
                 this.addEventListener('mouseup', exe)
@@ -998,7 +998,7 @@
                 setTimeout(resolve, n * 1000);
             });
         }
-        if (localStorage.getItem('seeat') == null || localStorage.getItem('seeat') == [] || JSON.parse(localStorage.getItem('seeat')).length != 39) {
+        if (localStorage.getItem('seeat') == null || localStorage.getItem('seeat') == [] || JSON.parse(localStorage.getItem('seeat')).length >= 39) {
             document.querySelectorAll('.chart').forEach((e, n) => {
                 e.innerHTML = '';
             });
