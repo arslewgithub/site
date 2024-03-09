@@ -753,11 +753,23 @@
             document.querySelectorAll('td.chart.selectd').forEach(e => { e.classList.remove('selectd'); })
             document.getElementsByTagName('button')[0].disabled = true;
             document.getElementsByTagName('button')[1].disabled = true;
+            const s = Date.now();
+            if (em == true) {
+                editbt.style.background = '#5678ff';
+                editbt.innerHTML = '開啟修改';
+                document.querySelectorAll('.chart').forEach((e, n) => {
+                    e.contentEditable = false;
+                    if(presave.length <= 0) {
+                        return false;
+                    }
+                    presave[flow][n] = String(parseInt(e.innerText)).padStart(2, '0');
+                });
+                em = false;
+            }
+            var r = b();
             editbt.disabled = true;
             previous.disabled = true;
             next.disabled = true;
-            const s = Date.now();
-            var r = b();
             document.querySelectorAll('.chart').forEach((e, n) => {
                 e.innerHTML = '00';
             });
@@ -787,9 +799,24 @@
             console.log((Date.now() - s) / 1000 + 's')
             document.getElementsByTagName('button')[0].disabled = false;
             document.getElementsByTagName('button')[1].disabled = false;
-            editbt.disabled = false;
-            previous.disabled = false;
-            next.disabled = false;
+            if (presave.length > 0) {
+                editbt.disabled = false;
+            }
+            else {
+                editbt.disabled = false;
+            };
+            if (flow >= presave.length - 1) {
+                next.disabled = true;
+            }
+            else {
+                next.disabled = false;
+            };
+            if (flow <= 0) {
+                previous.disabled = true;
+            }
+            else {
+                previous.disabled = false;
+            }
         }
         function eb() {
             if (em == true) {
