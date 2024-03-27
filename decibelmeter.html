@@ -11,70 +11,78 @@
 </head>
 <body>
   <h1>分貝計</h1>
-  <button id="startStopButton">開始</button>
+  <button id="startStopButton" onclick="toggleMicrophone()">開始</button>
   <h2 id="decibelDisplay">0 分貝</h2>
 
   <script>
-    // 取得音訊流
-    navigator.mediaDevices.getUserMedia({ audio: true })
-      .then(function(stream) {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const analyser = audioContext.createAnalyser();
-        const microphone = audioContext.createMediaStreamSource(stream);
+    let isRecording = false;
+    let audioContext;
+    let analyser;
+    let microphone;
+    let dataArray;
+    let startStopButton;
 
-        // 連接音訊流到分析器
-        microphone.connect(analyser);
+    function toggleMicrophone() {
+      if (!isRecording) {
+        startMicrophone();
+      } else {
+        stopMicrophone();
+      }
+    }
 
-        // 分析器參數設定
-        analyser.fftSize = 2048;
-        let dataArray = new Uint8Array(analyser.fftSize);
+    function startMicrophone() {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(stream) {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          analyser = audioContext.createAnalyser();
+          microphone = audioContext.createMediaStreamSource(stream);
 
-        // 開始/停止按鈕事件處理函式
-        let isRecording = false;
-        const startStopButton = document.getElementById('startStopButton');
-        startStopButton.addEventListener('click', function() {
-          if (!isRecording) {
-            isRecording = true;
-            audioContext.resume();
-            startStopButton.textContent = '停止';
-            updateDecibel();
-          } else {
-            isRecording = false;
-            audioContext.suspend();
-            startStopButton.textContent = '開始';
-          }
+          // 連接音訊流到分析器
+          microphone.connect(analyser);
+
+          // 分析器參數設定
+          analyser.fftSize = 2048;
+          const bufferLength = analyser.frequencyBinCount;
+          dataArray = new Uint8Array(bufferLength);
+
+          isRecording = true;
+          audioContext.resume();
+          startStopButton.textContent = '停止';
+          updateDecibel();
+        })
+        .catch(function(err) {
+          console.error('無法取得音訊流：', err);
         });
+    }
 
-        // 更新分貝數顯示函式
-        function updateDecibel() {
-          if (isRecording) {
-            requestAnimationFrame(updateDecibel);
-          }
-          analyser.getByteFrequencyData(dataArray);
-          const average = getAverageDecibel(dataArray);
-          document.getElementById('decibelDisplay').textContent = average.toFixed(2) + ' 分貝';
-        }
+    function stopMicrophone() {
+      isRecording = false;
+      audioContext.suspend();
+      startStopButton.textContent = '開始';
+    }
 
-        // 計算平均分貝數函式
-        function getAverageDecibel(dataArray) {
-          let values = 0;
-          const length = dataArray.length;
-          for (let i = 0; i < length; i++) {
-            values += dataArray[i];
-          }
-          const average = values / length;
-          const decibel = 20 * Math.log10(average / 128);
+    // 更新分貝數顯示函式
+    function updateDecibel() {
+      if (isRecording) {
+        requestAnimationFrame(updateDecibel);
+      }
+      analyser.getByteFrequencyData(dataArray);
+      const average = getAverageDecibel(dataArray);
+      const decibel = average >= 0 ? average.toFixed(2) + ' 分貝' : '0 分貝'; // 解決分貝數為負的問題
+      document.getElementById('decibelDisplay').textContent = decibel;
+    }
 
-          if (isNaN(decibel) || decibel === -Infinity) {
-            return 0;
-          }
-
-          return decibel;
-        }
-      })
-      .catch(function(err) {
-        console.error('無法取得音訊流：', err);
-      });
+    // 計算平均分貝數函式
+    function getAverageDecibel(dataArray) {
+      let values = 0;
+      const length = dataArray.length;
+      for (let i = 0; i < length; i++) {
+        values += dataArray[i];
+      }
+      const average = values / length;
+      const decibel = 20 * Math.log10(average / 128);
+      return decibel;
+    }
   </script>
 </body>
 </html>
