@@ -42,10 +42,6 @@
 
           // 分析器參數設定
           analyser.fftSize = 2048;
-          analyser.minDecibels = -90; // 新增這行
-          analyser.maxDecibels = -10; // 新增這行
-          analyser.smoothingTimeConstant = 0.85; // 新增這行
-
           const bufferLength = analyser.frequencyBinCount;
           dataArray = new Uint8Array(bufferLength);
 
@@ -71,9 +67,9 @@
       if (isRecording) {
         requestAnimationFrame(updateDecibel);
       }
-      analyser.getByteFrequencyData(dataArray);
+      analyser.getByteTimeDomainData(dataArray); // 修正此行
       const average = getAverageDecibel(dataArray);
-      const decibel = average >= 0 ? average.toFixed(2) + ' 分貝' : '0 分貝'; // 解決分貝數為負的問題
+      const decibel = average.toFixed(2) + ' 分貝';
       document.getElementById('decibelDisplay').textContent = decibel;
     }
 
@@ -82,10 +78,10 @@
       let values = 0;
       const length = dataArray.length;
       for (let i = 0; i < length; i++) {
-        values += dataArray[i];
+        values += (dataArray[i] - 128) ** 2;
       }
-      const average = values / length;
-      const decibel = 20 * Math.log10(average / 128);
+      const average = Math.sqrt(values / length);
+      const decibel = 20 * Math.log10(average);
       return decibel;
     }
   </script>
