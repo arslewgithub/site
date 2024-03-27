@@ -47,6 +47,7 @@
 
           isRecording = true;
           audioContext.resume();
+          startStopButton = document.getElementById('startStopButton'); // 新增這行
           startStopButton.textContent = '停止';
           updateDecibel();
         })
