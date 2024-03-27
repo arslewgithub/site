@@ -1,77 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-    <title>分貝計</title>
-    <meta charset="UTF-8">
-    <style>
-        #db-meter {
-            width: 200px;
-            height: 100px;
-            border: 1px solid black;
-            background-color: lightgray;
-            position: relative;
-        }
-
-        #db-level {
-            position: absolute;
-            bottom: 0;
-            height: 0;
-            background-color: red;
-            transition: height 0.1s ease-out;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>分貝計</title>
+  <style>
+    body {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <h1>分貝計</h1>
-    <div id="db-meter">
-        <div id="db-level"></div>
-    </div>
+  <h1>分貝計</h1>
+  <button id="startStopButton">開始</button>
+  <h2 id="decibelDisplay">0 分貝</h2>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            var dbMeter = document.getElementById('db-meter');
-            var dbLevel = document.getElementById('db-level');
+  <script>
+    // 取得音訊流
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(function(stream) {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioContext.createAnalyser();
+        const microphone = audioContext.createMediaStreamSource(stream);
 
-            function updateDBLevel(dbValue) {
-                dbLevel.style.height = dbValue + 'px';
-            }
+        // 連接音訊流到分析器
+        microphone.connect(analyser);
 
-            navigator.mediaDevices.getUserMedia({
-                audio: true
-            })
-            .then(function(stream) {
-                var audioContext = new AudioContext();
-                var analyser = audioContext.createAnalyser();
-                var microphone = audioContext.createMediaStreamSource(stream);
+        // 分析器參數設定
+        analyser.fftSize = 2048;
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
 
-                microphone.connect(analyser);
-
-                analyser.fftSize = 2048;
-                var bufferLength = analyser.frequencyBinCount;
-                var dataArray = new Uint8Array(bufferLength);
-
-                function update() {
-                    analyser.getByteFrequencyData(dataArray);
-
-                    var sum = 0;
-                    for (var i = 0; i < bufferLength; i++) {
-                        sum += dataArray[i];
-                    }
-
-                    var average = sum / bufferLength;
-                    var dbValue = Math.max(0, average - 100);
-
-                    updateDBLevel(dbValue);
-
-                    requestAnimationFrame(update);
-                }
-
-                update();
-            })
-            .catch(function(err) {
-                console.error('無法訪問麥克風：', err);
-            });
+        // 開始/停止按鈕事件處理函式
+        let isRecording = false;
+        const startStopButton = document.getElementById('startStopButton');
+        startStopButton.addEventListener('click', function() {
+          if (!isRecording) {
+            isRecording = true;
+            audioContext.resume();
+            startStopButton.textContent = '停止';
+            updateDecibel();
+          } else {
+            isRecording = false;
+            audioContext.suspend();
+            startStopButton.textContent = '開始';
+          }
         });
-    </script>
+
+        // 更新分貝數顯示函式
+        function updateDecibel() {
+          if (isRecording) {
+            requestAnimationFrame(updateDecibel);
+          }
+          analyser.getByteFrequencyData(dataArray);
+          const average = getAverageDecibel(dataArray);
+          document.getElementById('decibelDisplay').textContent = average.toFixed(2) + ' 分貝';
+        }
+
+        // 計算平均分貝數函式
+        function getAverageDecibel(dataArray) {
+          const values = 0;
+          const length = dataArray.length;
+          for (let i = 0; i < length; i++) {
+            values += dataArray[i];
+          }
+          const average = values / length;
+          const decibel = 20 * Math.log10(average / 128);
+          return decibel;
+        }
+      })
+      .catch(function(err) {
+        console.error('無法取得音訊流：', err);
+      });
+  </script>
 </body>
 </html>
