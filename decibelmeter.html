@@ -42,12 +42,16 @@
 
           // 分析器參數設定
           analyser.fftSize = 2048;
+          analyser.minDecibels = -90; // 新增這行
+          analyser.maxDecibels = -10; // 新增這行
+          analyser.smoothingTimeConstant = 0.85; // 新增這行
+
           const bufferLength = analyser.frequencyBinCount;
           dataArray = new Uint8Array(bufferLength);
 
           isRecording = true;
           audioContext.resume();
-          startStopButton = document.getElementById('startStopButton'); // 新增這行
+          startStopButton = document.getElementById('startStopButton');
           startStopButton.textContent = '停止';
           updateDecibel();
         })
