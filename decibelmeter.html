@@ -28,7 +28,7 @@
         // 分析器參數設定
         analyser.fftSize = 2048;
         const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
+        let dataArray = new Uint8Array(bufferLength); // 使用 let 代替 const
 
         // 開始/停止按鈕事件處理函式
         let isRecording = false;
@@ -58,7 +58,7 @@
 
         // 計算平均分貝數函式
         function getAverageDecibel(dataArray) {
-          const values = 0;
+          let values = 0; // 使用 let 代替 const
           const length = dataArray.length;
           for (let i = 0; i < length; i++) {
             values += dataArray[i];
