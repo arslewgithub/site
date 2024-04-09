@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
 	<meta charset="UTF-8">
 	<meta name="description" content="504座位隨機抽選器，快速生成座位表，不用慢慢一個一個用其他選號器抽選，再慢慢寫到黑板上，一個按鈕按下去，直接顯示！">
@@ -22,12 +22,27 @@
 		tbody {
 			width: 420px;
 			height: 300px;
+            transition: .125s;
 		}
         td.chart[contenteditable="true"]:focus {
 		    background: #9F583B;
 	        color: #FFF;
 	        scale: 1.2;
             outline: none;
+        }
+        tfoot tr th.c {
+            border: 0.5px solid #999999;
+            border-radius: 7px;
+            background: #9F583B;
+            color: #FFF;
+            height: 40px;
+            font-size: 22px;
+            box-shadow: inset -1.25px -1.25px 0px 0.5px #555555;
+            transition: scale .25s, background .25s;
+        }
+        
+        table.rotated tfoot tr th.c {
+            transform: rotate(180deg);
         }
 		td {
 			width: 100rem;
@@ -44,7 +59,6 @@
 			background: #37408C;
 			color: #FFF;
 			box-shadow: inset -1px -1px 0px 0px #555555;
-            transition: .125s;
 		}
 
 		button {
@@ -74,6 +88,12 @@
 			scale: .95;
 			box-shadow: 0 0 1px 0px #333a;
 		}
+		
+        @media (max-width:600px), print{
+            button {
+                cursor: auto;
+            }
+        }
 		
 		td.geted {
 			animation: getani .75s;
@@ -109,13 +129,37 @@
             background: #fff7;
         }
         
+        button#randombt {
+            color: #FFF;
+            background: #aa30ff;
+        }
+
+        button#rotatebt {
+            background: #fcffbb;
+            color: #a88711;
+        }
+        
+        button#cls {
+            background: linear-gradient(45deg, #DB6 30%, #FD9 50%, #DB6 100%);
+            color: #926900;
+            font-weight: 700;
+        }
+        
+        table.rotated {
+            transform: rotate(180deg);
+        }
+        
+        table.rotated td {
+            transform: rotate(180deg);
+        }
+        
 		h1{
 			margin: 0;
 			padding: 0;
 			color: #9F583B;
 		}
 		
-		h4, h5{
+		h3, h4, h5{
 			margin: 0;
 			padding: 0;
 			margin-left: 30px;
@@ -124,6 +168,11 @@
 		
 		h5 {
 			margin-left: 50px;
+        }
+        
+        div.formcenter.loading {
+            opacity: 0;
+            pointer-events: none;
         }
 		
 		@keyframes getani {
@@ -167,9 +216,9 @@
 </head>
 
 <body>
-	<h1>Seeat (504 - V3)</h1>
-	<h4>504 Easy Seating Generator — by 50905</h4>
-	<div class="formcenter">
+	<h1>Seeat V6</h1>
+	<h3>正在從資料庫獲取座位表...<br><span>若資料庫連接時間過久，請點擊<a href="https://arslewgithub.github.io/site/seeat/504v5.html">這裡</a>以使用舊版網頁</span></h3>
+	<div class="formcenter loading">
 		<table>
 			<tbody>
 				<tr>
@@ -218,49 +267,127 @@
 					<td class=""></td>
 				</tr>
 			</tbody>
+            <tfoot><tr><th colspan="2"></th><th colspan="2" class="c">講臺</th><th colspan="2"></th></tr></tfoot>
 		</table>
         <div class="btdiv">
-            <button style="background: #bbffbb; color: #13a928;">快速重新生成</button><br>
-            <button style="color: #b91253;">動畫重新生成</button>
-            <button style="background: #fcffbb; color: #a88711;">手動重新生成</button><br>
+            <button style="background: #bbffbb; color: #13a928;">立即生成</button><br>
+            <button style="color: #b91253;">過渡生成</button>
+            <button id="rotatebt">翻轉表格</button><br>
         </div>
         <div class="btdiv">
             <button id="editbt" style="background: #5678ff;">開啟修改模式</button><br>
-            <button id="save_seeat">保存此座位表</button>
         </div>
         <div class="btdiv">
-            <button id="randombt">隨機選擇一個座位</button><br>
-            <button id="clearran">清除所有選擇記錄</button>
+            <button id="randombt">隨機標記座位</button><br>
+            <button id="clearran">清除所有標記</button>
         </div>
         <br>
 	    <h4>About:</h4>
 	    <h5>Project Name: Seeat</h5>
 	    <h5>Series Code: S504</h5>
-	    <h5>Version: 4</h5>
-	    <h5>Last Update: 2023-12-05</h5>
+	    <h5>Version: 6</h5>
+	    <h5>Last Update: 2024-03-05</h5>
 	    <h5>Contact the developer: s110076@mail.hwsh.tc.edu.tw</h5>
 	    <h4>Series:</h4>
-	    <h5>Seeat 509: <a href="https://gweb.airratstrip.tk/seeat/">https://gweb.airratstrip.tk/seeat/</a></h5>
-	    <h5>Seeat 504: <a href="https://gweb.airratstrip.tk/seeat/504">https://gweb.airratstrip.tk/seeat/504/</a></h5>
+	    <h5>Seeat 509: <a href="../">https://arslewgithub.github.io/site/seeat/</a></h5>
+	    <h5>Seeat 504: <a href="">https://arslewgithub.github.io/site/seeat/504/</a></h5>
 	</div>
-	<script>
+	<script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js'
+        import { getFirestore, doc, updateDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js'
+        const fConfig = {apiKey: "AIzaSyC3JGX-ydbKCYEpOanFJVpqmcfQ4dsRTKg", authDomain: "fir-0013.firebaseapp.com", projectId: "fir-0013", storageBucket: "fir-0013.appspot.com", messagingSenderId: "93999488005", appId: "1:93999488005:web:c89844afc1b6c03cba506c", measurementId: "G-3JHGRDKG9W"};
+        var app = initializeApp(fConfig);
+        var db = getFirestore(app);
+        var rt = doc(db, "Seeat", "S504");
+        var so, q = 0, anii, s, em = false, presave = [], devst = 10;
+        onSnapshot(rt, h=>{
+            var w = h.data().arr;
+            var k = h.data().selectarr;
+            var t = h.data().lastUpdate;
+            if (presave != w) {
+                document.querySelectorAll('.chart').forEach((e, n) => {
+                    if(w[n] != undefined) {
+                        e.innerHTML = (w[n] == 'NaN')? '&nbsp;&nbsp;': w[n];
+                    }
+                    else {
+                        e.innerHTML = '&nbsp;&nbsp;';
+                    }
+                });
+                presave = w;
+                document.querySelector('h3').innerHTML = '504 Easy Seating Generator';
+            }
+            if (new Date().getTime() - t > 288E5) {
+                updateDoc(rt, {
+                    selectarr: [],
+                    lastUpdate: new Date().getTime()
+                });
+            }
+            else {
+                k.forEach(e => {
+                    document.querySelectorAll('td.chart')[e].classList.add('selectd');
+                })
+            }
+            document.querySelector('.loading').classList.remove('loading');
+		})
         document.getElementsByTagName('button')[0].onclick = g;
         document.getElementsByTagName('button')[1].onclick = ag;
-        document.getElementsByTagName('button')[2].onclick = sg;
-        save_seeat.onclick = function () {localStorage.setItem("seeat", JSON.stringify(presave));alert('saved!')}
         randombt.onclick = rs;
-        clearran.onclick = function () {document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');})};
+        rotatebt.onmousedown = r;
+        clearran.onclick = function () {
+                document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');})
+                us()
+        };
         editbt.onclick = eb;
+        document.querySelector('tfoot tr th.c').ontouchstart = function () {
+            var able = true;
+            this.addEventListener('touchmove', disqualified)
+            function disqualified() {able = false;}
+            this.addEventListener('touchend', exe)
+            function exe() {
+                if (able) {
+                    devst -= 1;
+                    if (devst > 0) {
+                        console.log(`%c剩餘 ${devst} 次啟用開發者模式`, 'color:#46E')
+                    } else if (devst < 0) {
+                        console.log('%c不需要再點擊, 開發者模式已啟用', 'color:#46E')
+                    };
+                    if (devst == 0) {
+                        var elebt = document.createElement('button');
+                        elebt.id = "cls";
+                        elebt.innerText = "cloud.data.delete"
+                        elebt.onclick = function () {
+                            if (confirm("確定清除雲端的所有數據?")) {
+                                chartClear();
+                            };
+                        };
+                        document.querySelectorAll('div.btdiv')[1].appendChild(elebt);
+                        alert('開發者模式已啟用')
+                    }
+                }
+                this.removeEventListener('touchmove', disqualified)
+                this.removeEventListener('touchend', exe)
+            }
+        }
         function rs() {
             if(document.querySelectorAll('td.chart:not(.selectd)').length == 0) {
                 if(confirm('已全部選擇完畢, 是否重置?')) {
                     document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');});
+                    us()
                 }
             }
             else {
                 var q = Math.floor(Math.random() * document.querySelectorAll('td.chart:not(.selectd)').length);
                 document.querySelectorAll('td.chart:not(.selectd)')[q].classList.add('selectd');
+                us()
             }
+        }
+        function us() {
+            var parr = [];
+            document.querySelectorAll('td.chart').forEach((e, n) => {e.classList.contains('selectd')&&(parr.push(n))})
+            updateDoc(rt, {
+                selectarr: parr,
+                lastUpdate: new Date().getTime()
+            });
         }
         function g() {
             document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');})
@@ -275,21 +402,14 @@
             document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');})
             document.getElementsByTagName('button')[0].disabled = true;
             document.getElementsByTagName('button')[1].disabled = true;
-            document.getElementsByTagName('button')[2].disabled = true;
             editbt.disabled = true;
-            randombt.disabled = true;
-            clearran.disabled = true;
-            clearran.style.filter = 'brightness(.7)';
             const s = Date.now();
             var r = b();
-            document.querySelectorAll('.chart').forEach((e, n) => {
-                e.innerHTML = '00';
-            });
-            var anii = setInterval("Array.from(document.querySelectorAll('.rananiing')).forEach((e, n) => {e.innerHTML = String(Math.floor(Math.random() * 36) + 1).padStart(2, '0');});", 0);
-            document.querySelectorAll('.chart').forEach((e, n) => {
+            var anii = setInterval("Array.from(document.querySelectorAll('.rananiing')).forEach(e => {e.innerHTML = String(Math.floor(Math.random() * 34) + 1).padStart(2, '0');});", 8);
+            document.querySelectorAll('.chart').forEach(e => {
                 e.classList.add('rananiing');
             });
-            for (var q = 0; q < 34; q++) {
+            for (var q = 0; q < 33; q++) {
                 await delay(0.0875);
                 document.querySelectorAll('.chart')[q].classList.add('geted');
                 document.querySelectorAll('.chart')[q].classList.remove('rananiing');
@@ -300,26 +420,29 @@
             console.log((Date.now() - s) / 1000 + 's')
             document.getElementsByTagName('button')[0].disabled = false;
             document.getElementsByTagName('button')[1].disabled = false;
-            document.getElementsByTagName('button')[2].disabled = false;
             editbt.disabled = false;
-            randombt.disabled = false;
-            clearran.disabled = false;
-            clearran.style.filter = '';
         }
-        var so, q = 0, anii, s, em = false, presave = [];
+        function r() {
+            var e = document.querySelector('table');
+            if (e.classList.contains('rotated')) {
+                e.classList.remove('rotated');
+            } else {
+                e.classList.add('rotated');
+            }
+        }
         function eb() {
-            if (em == true) {
+            if (em) {
                 editbt.style.background = '#5678ff';
                 editbt.innerHTML = '開啟修改模式';
+                var p = [];
                 document.querySelectorAll('.chart').forEach((e, n) => {
                     e.contentEditable = false;
-                    presave[n] = e.innerHTML;
+                    p[n] = String(parseInt(e.innerText)).padStart(2, '0');
                 });
+                (p!=presave)&&(presave = p,updateDoc(rt, {arr: p}))
                 em = false;
                 document.getElementsByTagName('button')[0].disabled = false;
                 document.getElementsByTagName('button')[1].disabled = false;
-                document.getElementsByTagName('button')[2].disabled = false;
-                save_seeat.disabled = false;
             }
             else {
                 editbt.style.background = '#fe5550';
@@ -330,50 +453,6 @@
                 em = true;
                 document.getElementsByTagName('button')[0].disabled = true;
                 document.getElementsByTagName('button')[1].disabled = true;
-                document.getElementsByTagName('button')[2].disabled = true;
-                save_seeat.disabled = true;
-            }
-        }
-        async function sg() {
-            document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');})
-            document.getElementsByTagName('button')[0].disabled = true;
-            document.getElementsByTagName('button')[1].disabled = true;
-            editbt.disabled = true;
-            randombt.disabled = true;
-            clearran.disabled = true;
-            clearran.style.filter = 'brightness(.7)';
-            if (so === undefined) {
-            s = Date.now();
-                so = b();
-                document.querySelectorAll('.chart').forEach((e, n) => {
-                    e.innerHTML = '00';
-                });
-                anii = setInterval("Array.from(document.querySelectorAll('.rananiing')).forEach((e, n) => {e.innerHTML = String(Math.floor(Math.random() * 36) + 1).padStart(2, '0');});", 0);
-                document.querySelectorAll('.chart').forEach((e, n) => {
-                    e.classList.add('rananiing');
-                });
-            }
-            else if (q < 33) {
-                document.querySelectorAll('.chart')[q].classList.remove('rananiing');
-                document.querySelectorAll('.chart')[q].classList.add('geted');
-                document.querySelectorAll('.chart')[q].innerHTML = so[q];
-                setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 800);
-                q += 1;
-            }
-            else {
-                clearInterval(anii);
-                document.querySelectorAll('.chart')[q].classList.add('geted');
-                document.querySelectorAll('.chart')[q].innerHTML = so[q];
-                setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 800);
-                q = 0;
-                so = undefined;
-                console.log((Date.now() - s) / 1000 + 's')
-                document.getElementsByTagName('button')[0].disabled = false;
-                document.getElementsByTagName('button')[1].disabled = false;
-                editbt.disabled = false;
-                randombt.disabled = false;
-                clearran.disabled = false;
-                clearran.style.filter = '';
             }
         }
 		function b() {
@@ -390,7 +469,10 @@
 			var t2 = String(r.splice(25, 1));
 			r.splice(25, 0, t1);
 			r.splice(29, 0, t2);
-			presave = r;
+            updateDoc(rt, {
+                arr: r
+            });
+            presave = r;
 			return r;
 		}
 		function delay(n) {
@@ -398,15 +480,12 @@
 				setTimeout(resolve, n * 1000);
 			});
 		}
-		if (localStorage.getItem('seeat') == null || localStorage.getItem('seeat') == [] || JSON.parse(localStorage.getItem('seeat')).length != 34) {
-		    document.querySelectorAll('.chart').forEach((e, n) => {
-			    e.innerHTML = '';
-		    });
-		}
-		else {
-			var r = JSON.parse(localStorage.getItem('seeat'));
-            document.querySelectorAll('.chart').forEach((e, n) => {
-                e.innerHTML = r[n];
+        function chartClear() {
+            document.querySelectorAll('td.chart.selectd').forEach(e => {e.classList.remove('selectd');})
+            updateDoc(rt, {
+                selectarr: [],
+                arr: [],
+                lastUpdate: new Date().getTime()
             });
         }
 	</script>
