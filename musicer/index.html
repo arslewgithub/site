@@ -125,18 +125,18 @@
         table {
             border-spacing: 0;
         }
-        
+
         .ctlbk>input[type="range"] {
             padding: 4px;
             width: calc(100% - 13px);
             height: 6px;
         }
-        
+
         #pdt, #psd {
             font-size: 20px;
             text-align: center;
         }
-        
+
         .ctlbk {
             width: calc(100% - 18px);
             text-align: center;
@@ -198,82 +198,56 @@
         <input type="range" max="200" min="50" value="100" id="sd">
     </div>
     <script>
-        var allow = false, timeRec = 0, timeline, timePause = 0;
+        var allow = false, timeRec = 0, timeline, timePause = 0, mobileDevice, sline = 4, keyboards = [];
+        var bname = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'], bsty = ['#FFAEB3', '#FFC7BE', '#FFC48A', '#FFD7AD', '#FFF388', '#C0FF81', '#E2FFC5', '#7FFFC0', '#BEFFE7', '#7EC3FF', '#BBDCFF', '#AC9BFF'];
+        var fa = [16.352, 17.324, 18.354, 19.445, 20.602, 21.827, 23.125, 24.500, 25.957, 27.500, 29.135, 30.868];
+        const keyAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+        function playKeySound(frequency, soundType) {
+            const osc = keyAudioContext.createOscillator();
+            osc.type = soundType;
+            osc.frequency.setValueAtTime(frequency, keyAudioContext.currentTime);
+            //osc.detune.value = 400;
+            gainNode = keyAudioContext.createGain();
+            gainNode.gain.value = 1;
+            osc.connect(gainNode);
+            osc.start();
+            gainNode.connect(keyAudioContext.destination);
+            return osc;
+        };
         (() => {
-            var bname = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'], bsty = ['#FFAEB3', '#FFC7BE', '#FFC48A', '#FFD7AD', '#FFF388', '#C0FF81', '#E2FFC5', '#7FFFC0', '#BEFFE7', '#7EC3FF', '#BBDCFF', '#AC9BFF'];
-            var fa = [16.352, 17.324, 18.354, 19.445, 20.602, 21.827, 23.125, 24.500, 25.957, 27.500, 29.135, 30.868];
-            function isMobileDevice() {
-                let mobileDevices = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
-                for (var i = 0; i < mobileDevices.length; i++) {
-                    if (navigator.userAgent.match(mobileDevices[i])) {
-                        return true;
-                    }
+            let mobileDevices =['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
+            for (var i = 0; i < mobileDevices.length; i++) {
+                if (navigator.userAgent.match(mobileDevices[i])) {
+                    mobileDevice = true;
+                    return;
                 }
-                return false;
             }
-            if (isMobileDevice()) {
-                rt.ontouchstart = function () {
-                    if (allow) {
-                        timePause = new Date().getTime();
-                        rt.innerText = `Continue (${((new Date().getTime() - timeRec) / 1E3 + '').padEnd(5, '0')})`;
-                        allow = false;
-                        clearInterval(timeline);
-                    }
-                    else {
-                        if (timePause == 0 && timeRec == 0) {
-                            document.querySelector('textarea').value = "";
-                        }
-                        timeRec = new Date().getTime() + timeRec - timePause;
-                        timeline = setInterval(`rt.innerHTML = ((new Date().getTime() - timeRec) / 1E3 + '').padEnd(5, '0')`, 1);
-                        allow = true;
-                    }
-                }
-                sutopu.ontouchstart = function () {
+            mobileDevice = false;
+        })();
+        (() => {
+            rt.onclick = function () {
+                if (allow) {
+                    timePause = new Date().getTime();
+                    rt.innerText = `Continue (${((new Date().getTime() - timeRec) / 1E3 + '').padEnd(5, '0')})`;
                     allow = false;
-                    rt.innerText = "Start";
-                    timeRec = 0;
-                    timePause = 0;
                     clearInterval(timeline);
-                }
-            } else {
-                rt.onmousedown = function () {
-                    if (allow) {
-                        timePause = new Date().getTime();
-                        rt.innerText = `Continue (${((new Date().getTime() - timeRec) / 1E3 + '').padEnd(5, '0')})`;
-                        allow = false;
-                        clearInterval(timeline);
+                } else {
+                    if (timePause == 0 && timeRec == 0) {
+                        document.querySelector('textarea').value = "";
                     }
-                    else {
-                        if (timePause == 0 && timeRec == 0) {
-                            document.querySelector('textarea').value = "";
-                        }
-                        timeRec = new Date().getTime() + timeRec - timePause;
-                        timeline = setInterval(`rt.innerHTML = ((new Date().getTime() - timeRec) / 1E3 + '').padEnd(5, '0')`, 1);
-                        allow = true;
-                    }
-                }
-                sutopu.onmousedown = function () {
-                    allow = false;
-                    rt.innerText = "Start";
-                    timeRec = 0;
-                    timePause = 0;
-                    clearInterval(timeline);
+                    timeRec = new Date().getTime() + timeRec - timePause;
+                    timeline = setInterval(`rt.innerHTML = ((new Date().getTime() - timeRec) / 1E3 + '').padEnd(5, '0')`, 1);
+                    allow = true;
                 }
             }
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            function playKeySound(frequency, soundType) {
-                const osc = audioContext.createOscillator();
-                osc.type = soundType;
-                osc.frequency.setValueAtTime(frequency, audioContext.currentTime);
-                //osc.detune.value = 400;
-                gainNode = audioContext.createGain();
-                gainNode.gain.value = 1;
-                osc.connect(gainNode);
-                osc.start();
-                gainNode.connect(audioContext.destination);
-                return osc;
+            sutopu.onclick = function () {
+                allow = false;
+                rt.innerText = "Start";
+                timeRec = 0;
+                timePause = 0;
+                clearInterval(timeline);
             }
-            if (isMobileDevice()) {
+            if (mobileDevice) {
                 let lastTouchTime = 0;
                 document.addEventListener('touchstart', (event) => {
                     const now = new Date().getTime();
@@ -286,7 +260,8 @@
                         }
                     }
                     lastTouchTime = now;
-                }, false);
+                },
+                    false);
             }
             for (var i = 0; i < 10; i++) {
                 var ctr = document.createElement('tr');
@@ -301,7 +276,7 @@
                     ib.style.background = bsty[j];
                     ib.i = i * 1;
                     ib.j = j * 1;
-                    if (isMobileDevice()) {
+                    if (mobileDevice) {
                         ib.ontouchstart = function () {
                             this.style.filter = 'invert(.3)';
                             this.style.scale = .9;
@@ -310,7 +285,7 @@
                             function stop() {
                                 var t = document.querySelector('textarea');
                                 if (allow) {
-                                    var v = t.value == '' ? [] : JSON.parse(t.value);
+                                    var v = t.value == '' ? []: JSON.parse(t.value);
                                     v.push({
                                         time: (time - timeRec) / 1E3,
                                         frequency: fa[this.j] * (2 ** this.i),
@@ -341,7 +316,7 @@
                             function stop() {
                                 var t = document.querySelector('textarea');
                                 if (allow) {
-                                    var v = t.value == '' ? [] : JSON.parse(t.value);
+                                    var v = t.value == '' ? []: JSON.parse(t.value);
                                     v.push({
                                         time: (time - timeRec) / 1E3,
                                         frequency: fa[lis.j] * (2 ** lis.i),
@@ -368,8 +343,49 @@
                 }
                 document.querySelector('table>tbody').appendChild(ctr);
             }
-        })()
-        playbt.onclick = function () { playMusic(JSON.parse(document.querySelector('textarea').value)) };
+        })();
+        if (!mobileDevice) {
+            function setLine(n) {
+                document.querySelectorAll('tr')[n].style.background = '#bdd1ff';
+                sline = n;
+            }
+            function keyPlay(event) {
+                if (keyboards.indexOf(event.keyCode) != -1) {
+                    const lis = document.querySelectorAll('tr')[sline].querySelectorAll('td')[keyboards.indexOf(event.keyCode) + 1];
+                    lis.style.filter = 'invert(.3)';
+                    lis.style.scale = .9;
+                    document.addEventListener('mouseup', stop);
+                    var time = new Date().getTime();
+                    function stop() {
+                        var t = document.querySelector('textarea');
+                        if (allow) {
+                            var v = t.value == '' ? []: JSON.parse(t.value);
+                            v.push({
+                                time: (time - timeRec) / 1E3,
+                                frequency: fa[lis.j] * (2 ** lis.i),
+                                duration: (new Date().getTime() - time) / 1E3,
+                                type: document.querySelector('input[name="waveform"]:checked').value
+                            });
+                            v.sort(function (a, b) {
+                                return a.time - b.time;
+                            });
+                            t.value = JSON.stringify(v);
+                        }
+                        lis.style.filter = '';
+                        lis.style.scale = '';
+                        s.stop();
+                        document.removeEventListener('mouseup', stop);
+                    }
+                    if (!this.disabled) {
+                        var s = playKeySound(fa[lis.j] * (2 ** lis.i), document.querySelector('input[name="waveform"]:checked').value);
+                    }
+                }
+            }
+            document.addEventListener('keydown', keyPlay)
+        }
+        playbt.onclick = function () {
+            playMusic(JSON.parse(document.querySelector('textarea').value))
+        };
         dt.oninput = function () {
             pdt.innerText = 'Detune: ' + (dt.value / 1E2);
         }
@@ -392,7 +408,7 @@
                     osc.connect(audioContext.destination);
                     osc.start(audioContext.currentTime);
                     osc.stop(audioContext.currentTime + (collection[i].duration / ((sd.value ** 2) / 1E4)));
-                    await delay(i == (collection.length - 1) ? 0 : ((collection[i + 1].time - collection[i].time) / ((sd.value ** 2) / 1E4)));
+                    await delay(i == (collection.length - 1) ? 0: ((collection[i + 1].time - collection[i].time) / ((sd.value ** 2) / 1E4)));
                     if (i == collection.length - 1) {
                         if (pylp.checked) {
                             await delay(0.5 + (collection[i].duration / ((sd.value ** 2) / 1E4)));
@@ -410,4 +426,4 @@
     </script>
 </body>
 
-  </html>
+</html>
