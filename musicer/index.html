@@ -132,7 +132,8 @@
             height: 6px;
         }
 
-        #pdt, #psd {
+        #pdt,
+        #psd {
             font-size: 20px;
             text-align: center;
         }
@@ -198,7 +199,7 @@
         <input type="range" max="200" min="50" value="100" id="sd">
     </div>
     <script>
-        var allow = false, timeRec = 0, timeline, timePause = 0, mobileDevice, sline = 4, keyboards = [];
+        var allow = false, timeRec = 0, timeline, timePause = 0, mobileDevice, sline = 4, keyboards = [65, 87, 83, 69, 68, 70, 84, 71, 89, 72, 85, 74];
         var bname = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'], bsty = ['#FFAEB3', '#FFC7BE', '#FFC48A', '#FFD7AD', '#FFF388', '#C0FF81', '#E2FFC5', '#7FFFC0', '#BEFFE7', '#7EC3FF', '#BBDCFF', '#AC9BFF'];
         var fa = [16.352, 17.324, 18.354, 19.445, 20.602, 21.827, 23.125, 24.500, 25.957, 27.500, 29.135, 30.868];
         const keyAudioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -215,7 +216,7 @@
             return osc;
         };
         (() => {
-            let mobileDevices =['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
+            let mobileDevices = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
             for (var i = 0; i < mobileDevices.length; i++) {
                 if (navigator.userAgent.match(mobileDevices[i])) {
                     mobileDevice = true;
@@ -285,7 +286,7 @@
                             function stop() {
                                 var t = document.querySelector('textarea');
                                 if (allow) {
-                                    var v = t.value == '' ? []: JSON.parse(t.value);
+                                    var v = t.value == '' ? [] : JSON.parse(t.value);
                                     v.push({
                                         time: (time - timeRec) / 1E3,
                                         frequency: fa[this.j] * (2 ** this.i),
@@ -316,7 +317,7 @@
                             function stop() {
                                 var t = document.querySelector('textarea');
                                 if (allow) {
-                                    var v = t.value == '' ? []: JSON.parse(t.value);
+                                    var v = t.value == '' ? [] : JSON.parse(t.value);
                                     v.push({
                                         time: (time - timeRec) / 1E3,
                                         frequency: fa[lis.j] * (2 ** lis.i),
@@ -344,45 +345,62 @@
                 document.querySelector('table>tbody').appendChild(ctr);
             }
         })();
-        if (!mobileDevice) {
-            function setLine(n) {
-                document.querySelectorAll('tr')[n].style.background = '#bdd1ff';
-                sline = n;
-            }
-            function keyPlay(event) {
-                if (keyboards.indexOf(event.keyCode) != -1) {
-                    const lis = document.querySelectorAll('tr')[sline].querySelectorAll('td')[keyboards.indexOf(event.keyCode) + 1];
-                    lis.style.filter = 'invert(.3)';
-                    lis.style.scale = .9;
-                    document.addEventListener('mouseup', stop);
-                    var time = new Date().getTime();
-                    function stop() {
-                        var t = document.querySelector('textarea');
-                        if (allow) {
-                            var v = t.value == '' ? []: JSON.parse(t.value);
-                            v.push({
-                                time: (time - timeRec) / 1E3,
-                                frequency: fa[lis.j] * (2 ** lis.i),
-                                duration: (new Date().getTime() - time) / 1E3,
-                                type: document.querySelector('input[name="waveform"]:checked').value
-                            });
-                            v.sort(function (a, b) {
-                                return a.time - b.time;
-                            });
-                            t.value = JSON.stringify(v);
-                        }
-                        lis.style.filter = '';
-                        lis.style.scale = '';
-                        s.stop();
-                        document.removeEventListener('mouseup', stop);
-                    }
-                    if (!this.disabled) {
-                        var s = playKeySound(fa[lis.j] * (2 ** lis.i), document.querySelector('input[name="waveform"]:checked').value);
+        (() => {
+            if (!mobileDevice) {
+                var pressed = Array(12).fill(false);
+                document.querySelectorAll('tr')[sline + 1].style.background = '#bdd1ff';
+                document.querySelectorAll('tr')[sline + 1].style.boxShadow = 'inset 0 0 0 1.5px #007bff';
+                function setLine(event) {
+                    if (event.keyCode <= 105 && event.keyCode >= 96) {
+                        sline = event.keyCode - 96;
+                        document.querySelectorAll('tr').forEach(e => {
+                            e.style.background = '';
+                            e.style.boxShadow = '';
+                        })
+                        document.querySelectorAll('tr')[event.keyCode - 95].style.background = '#bdd1ff';
+                        document.querySelectorAll('tr')[event.keyCode - 95].style.boxShadow = 'inset 0 0 0 1.5px #007bff';
                     }
                 }
+                function keyPlay(event) {
+                    if (keyboards.indexOf(event.keyCode) != -1 && !pressed[keyboards.indexOf(event.keyCode)]) {
+                        const lis = document.querySelectorAll('tr')[sline + 1].querySelectorAll('td')[keyboards.indexOf(event.keyCode) + 1].querySelector('input');
+                        lis.style.filter = 'invert(.3)';
+                        lis.style.scale = .9;
+                        document.addEventListener('keyup', stop);
+                        var time = new Date().getTime();
+                        pressed[keyboards.indexOf(event.keyCode)] = true;
+                        function stop() {
+                            if (keyboards.indexOf(event.keyCode) == lis.j) {
+                                var t = document.querySelector('textarea');
+                                if (allow) {
+                                    var v = t.value == '' ? [] : JSON.parse(t.value);
+                                    v.push({
+                                        time: (time - timeRec) / 1E3,
+                                        frequency: fa[lis.j] * (2 ** lis.i),
+                                        duration: (new Date().getTime() - time) / 1E3,
+                                        type: document.querySelector('input[name="waveform"]:checked').value
+                                    });
+                                    v.sort(function (a, b) {
+                                        return a.time - b.time;
+                                    });
+                                    t.value = JSON.stringify(v);
+                                }
+                                lis.style.filter = '';
+                                lis.style.scale = '';
+                                s.stop();
+                                document.removeEventListener('keyup', stop);
+                                pressed[keyboards.indexOf(event.keyCode)] = false;
+                            }
+                        }
+                        if (!this.disabled) {
+                            var s = playKeySound(fa[lis.j] * (2 ** lis.i), document.querySelector('input[name="waveform"]:checked').value);
+                        }
+                    }
+                }
+                document.addEventListener('keydown', keyPlay)
+                document.addEventListener('keydown', setLine)
             }
-            document.addEventListener('keydown', keyPlay)
-        }
+        })()
         playbt.onclick = function () {
             playMusic(JSON.parse(document.querySelector('textarea').value))
         };
@@ -408,7 +426,7 @@
                     osc.connect(audioContext.destination);
                     osc.start(audioContext.currentTime);
                     osc.stop(audioContext.currentTime + (collection[i].duration / ((sd.value ** 2) / 1E4)));
-                    await delay(i == (collection.length - 1) ? 0: ((collection[i + 1].time - collection[i].time) / ((sd.value ** 2) / 1E4)));
+                    await delay(i == (collection.length - 1) ? 0 : ((collection[i + 1].time - collection[i].time) / ((sd.value ** 2) / 1E4)));
                     if (i == collection.length - 1) {
                         if (pylp.checked) {
                             await delay(0.5 + (collection[i].duration / ((sd.value ** 2) / 1E4)));
