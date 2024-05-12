@@ -48,7 +48,8 @@
         }
 
         td {
-            width: 100rem;
+            max-width: calc(100% / 7);
+            width: calc(100% / 7);
             height: 50px;
             padding: 0px;
             vertical-align: center;
@@ -61,7 +62,7 @@
             border-radius: 7px;
             background: #9c153c;
             color: #ffd268;
-            box-shadow: inset 0px -1.5px 0px 0.5px #999;
+            box-shadow: inset 0px -2.5px 0px 0px #111;
             transition: scale .25s, background .25s, color .25s;
         }
 
@@ -72,7 +73,7 @@
             height: 40px;
             user-select: none;
             font-size: 22px;
-            box-shadow: inset 0px -1.5px 0px 0.5px #999;
+            box-shadow: inset 0px -2.5px 0px 0px #111;
             transition: scale .25s, background .25s;
         }
 
@@ -81,11 +82,11 @@
         }
 
         tfoot tr th.c:active {
-            box-shadow: inset 0px 1.5px 0px .5px #999;
+            box-shadow: inset 0px 2.5px 0px .5px #111;
         }
 
         td.chart:active {
-            box-shadow: inset 0px 1.5px 0px .5px #999;
+            box-shadow: inset 0px 2.5px 0px .5px #111;
         }
 
         td.chart[contenteditable="true"]:focus {
@@ -97,6 +98,7 @@
             top: 0;
             left: 0;
             position: relative;
+            line-height: 48px;
         }
 
         button {
@@ -109,7 +111,7 @@
             margin-left: 10px;
             padding-bottom: 5px;
             font-size: 18px;
-            transition: .0625s;
+            transition: .05s;
             box-shadow: inset 0 -5px 0px 0px #111;
             font-weight: bold;
             user-select: none;
@@ -136,13 +138,13 @@
         }
 
         td.geted {
-            animation: getani .75s;
+            animation: getani .3s;
         }
 
-        td.chart.selectd {
-            background: #CC447C;
-            color: #FFD268;
-            animation: getani2 2.25s;
+        td.chart.ispin {
+            background: #E2ABFF;
+            color: #8A0EE7;
+            box-shadow: inset 0px 2.5px 0px .5px #111;
         }
 
         td.chart.searchv {
@@ -155,14 +157,18 @@
             background: #ffaa40;
         }
 
-        button#randombt {
+        button#pinbt {
             color: #FFF;
             background: #aa30ff;
+            margin-top: 5px;
         }
 
-        button#clearran {
-            color: #5A00D1;
-            background: #E5DAFF;
+        button#pinbt:active {
+            margin-top: 10px;
+        }
+
+        button#pinbt:disabled:active {
+            margin-top: 5px;
         }
 
         button#rotatebt {
@@ -178,23 +184,59 @@
             transform: rotate(180deg);
         }
 
+        div#infoblock, .block {
+            padding: 15px;
+            border-radius: 8px;
+            background: #FFFE;
+            width: 275px;
+            position: fixed;
+            top: 70vh;
+            left: 50vw;
+            z-index: 99;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 8px 8px #0003;
+            animation: infoshow .3s;
+        }
+
+        .block {
+            width: max-content;
+            top: 80vh;
+            z-index: 1048576;
+            border-radius: 8px;
+            padding: 12px;
+            user-select: none !important;
+            pointer-events: none;
+            background: #FFFD;
+        }
+
+        .block.removec {
+            width: max-content;
+            animation: infoclose .3s;
+        }
+
+        #seeatinfo:not(.open)~div.formcenter div#infoblock {
+            animation: infoclose .3s;
+        }
+
         h1 {
             margin: 0;
             padding: 0;
             color: #9C153C;
             text-align: center;
             width: 100%;
+            margin-top: 10px;
+            user-select: none;
         }
 
-        h4,
-        h5 {
+        h3,
+        h4 {
             margin: 0;
             padding: 0;
             margin-left: 30px;
             color: #9C153C;
         }
 
-        h5 {
+        h4 {
             margin-left: 50px;
         }
 
@@ -202,7 +244,7 @@
             display: flex;
             width: 410px;
         }
-        
+
         button#genera {
             background: #bbffbb;
             color: #13a928;
@@ -226,6 +268,37 @@
         button#next:disabled {
             color: #484848;
             background: #D1D1D1;
+        }
+
+        button#seeatinfo {
+            box-shadow: none;
+            width: 30px;
+            height: 30px;
+            margin: 0;
+            padding: 0;
+            border: 3px solid #AAA;
+            border-radius: 100px;
+            background: #0000;
+            color: #999;
+            float: left;
+            position: relative;
+            top: -33px;
+            left: 20px;
+            margin-bottom: -30px;
+            transition: box-shadow .25s;
+        }
+
+        button#seeatinfo.open {
+            border: 3px solid #007DFF;
+            color: #007DFF;
+            background: #3196FF33;
+        }
+
+        button#seeatinfo.open:hover {
+            box-shadow: 0 0 0px 5px #3196FF33;
+            border: 3px solid #3196FF;
+            background: #3196FF33;
+            color: #208DFF;
         }
 
         :focus-visible {
@@ -273,71 +346,49 @@
             }
         }
 
-        @keyframes getani2 {
+        @keyframes roa {
             0% {
                 scale: 1;
-                z-index: 9;
-                top: 0;
-                left: 0;
-                position: relative;
             }
-
-            20% {
-                scale: 1.3;
-                background: #EC649C;
-                color: #FFD268;
-                z-index: 10;
-                top: 0;
-                left: 0;
-                position: relative;
+            25% {
+                scale: .6;
             }
+           50% {
+                scale: .4;
+            }
+           75% {
+                scale: .6;
+            }
+            100% {
+                scale: 1;
+            }
+        }
 
-            35% {
-                scale: 1.2;
-                background: #DC548C;
-                color: #FFD268;
-                z-index: 11;
-                top: 0;
-                left: 0;
-                position: relative;
+        @keyframes infoshow {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 0%) scale(.7);
             }
 
             50% {
-                scale: 1.28;
-                background: #FC74AC;
-                color: #FFD268;
-                z-index: 12;
-                top: 0;
-                left: 0;
-                position: relative;
-            }
-
-            65% {
-                scale: 1.22;
-                background: #DC548C;
-                color: #FFD268;
-                z-index: 11;
-                top: 0;
-                left: 0;
-                position: relative;
-            }
-
-            80% {
-                scale: 1.26;
-                background: #EC649C;
-                color: #FFD268;
-                z-index: 10;
-                top: 0;
-                left: 0;
-                position: relative;
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
             }
 
             100% {
-                scale: 1;
-                z-index: 9;
-                top: 0;
-                left: 0;
-                position: relative;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @keyframes infoclose {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -25%) scale(.7);
+                opacity: 0;
             }
         }
 
@@ -348,11 +399,12 @@
 </head>
 
 <body>
-    <h1>Seeat V13</h1>
+    <h1>Seeat V14</h1>
+    <button id="seeatinfo">i</button>
     <div class="formcenter">
         <div class="btdiv">
             <button id="previous" disabled>◀</button>
-            <button id="editbt" disabled>開啟修改</button><br>
+            <button id="editbt">開啟修改</button><br>
             <button id="save_seeat">保存表格</button>
             <button id="next" disabled>▶</button>
         </div>
@@ -363,52 +415,52 @@
                     <td class="chart"></td>
                     <td class="chart"></td>
                     <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                    <td class="chart"></td>
+                </tr>
+                <tr>
                     <td class=""></td>
                     <td class="chart"></td>
                     <td class="chart"></td>
-                    <td class="chart"></td>
-                </tr>
-                <tr>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                </tr>
-                <tr>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                </tr>
-                <tr>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                </tr>
-                <tr>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                </tr>
-                <tr>
                     <td class=""></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
-                    <td class="chart"></td>
                     <td class="chart"></td>
                     <td class="chart"></td>
                     <td class=""></td>
@@ -423,8 +475,8 @@
             </tfoot>
         </table>
         <div class="btdiv">
+            <button id="anigen" style="color: #00BB83;">快速生成</button>
             <button id="genera">立即生成</button><br>
-            <button id="anigen" style="color: #00BB83;">過渡生成</button>
             <button id="rotatebt">翻轉表格</button><br>
         </div>
         <div class="btdiv">
@@ -432,60 +484,25 @@
             <input id="search" type="number" placeholder="搜尋">
         </div>
         <div class="btdiv">
-            <button id="randombt">隨機標記座位</button><br>
-            <button id="clearran">清除所有標記</button>
+            <button id="pinbt">開始釘選 (至多釘選 ${pinmax} 人)</button>
         </div>
-        <br>
-        <h4>About:</h4>
-        <h5>Project Name: Seeat</h5>
-        <h5>Series Code: Original</h5>
-        <h5>Version: 13</h5>
-        <h5>Last Update: 2024-03-28</h5>
-        <h4>Series:</h4>
-        <h5>Seeat 509: <a href="">https://arslewgithub.github.io/site/seeat/</a></h5>
-        <h5>Seeat 504: <a href="504">https://arslewgithub.github.io/site/seeat/504/</a></h5>
+        <br><br>
+        <div id="infoblock" style="display: none;">
+            <h3>About:</h4>
+            <h4>Project Name: Seeat</h4>
+            <h4>Series Code: Original</h4>
+            <h4>Version: 14</h4>
+            <h4>Last Update: 2024-05-11</h4>
+            <hr>
+            <h3>Series:</h4>
+            <h4>Seeat 509: <a href="">Seeat 509</a></h4>
+            <h4>Seeat 504: <a href="504">Seeat 504</a></h4>
+        <div>
     </div>
     <script>
-        function an() {
-            var arre = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
-            if (list1.value != '') {
-                var pa = list1.value.split(' '),
-                a = [];
-                pa.forEach((e) => {
-                    if (arre.indexOf(Number(e)) != -1 && a.indexOf(Number(e)) == -1) {
-                        a.push(Number(e));
-                    }
-                });
-                if (a.length != 0) {
-                    if (a.length > 5) {
-                        var v = a.length - 5;
-                        for (var i = 0; i < v; i++) {
-                            a.splice(Math.floor(Math.random() * (a.length - 1)), 1)
-                        };
-                    }
-                    for (var i = 0; i < a.length; i++) {
-                        for (var j = Number(a[i]); j > 0; j--) {
-                            if (Number(a[i]) == Number(arre[j - 1])) {
-                                arre.splice(j - 1, 1);
-                            }
-                        }
-                    };
-                    return ([arre, a]);
-                }
-                return ([arre, []]);
-            } else {
-                return ([arre, []]);
-            }
-        }
-        var so, q = 0, anii, s, em = false, presave = [], ct = -50, flow = 0, devst = 6;
+        var so, q = 0, anii, s, em = false, presave = [], ct = -50, flow = 0, devst = 6, pinm = false, pinarr = [], pinmax = 5, tis, rott = new Date().getTime();
         function isMobileDevice() {
-            let mobileDevices = ['Android',
-                'webOS',
-                'iPhone',
-                'iPad',
-                'iPod',
-                'BlackBerry',
-                'Windows Phone']
+            let mobileDevices = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
             for (var i = 0; i < mobileDevices.length; i++) {
                 if (navigator.userAgent.match(mobileDevices[i])) {
                     //console.log("isMobileDevice: match " + mobileDevices[i]);
@@ -494,6 +511,7 @@
             }
             return false;
         }
+
         if (isMobileDevice()) {
             /* 禁止多指觸控
             document.addEventListener('touchstart', (event) => {
@@ -513,8 +531,7 @@
                     }
                 }
                 lastTouchTime = now;
-            },
-                false);
+            }, false);
 
             genera.addEventListener('touchstart',
                 function (e) {
@@ -568,11 +585,13 @@
                         this.removeEventListener('touchend', rmd)
                     }
                 });
+
             genera.ontouchmove = function (e) {
                 if (!this.disabled) {
                     return false;
                 }
             };
+
             anigen.ontouchstart = function (e) {
                 var able = true;
                 this.addEventListener('touchmove', function () {
@@ -589,6 +608,7 @@
                     this.removeEventListener('touchend', exe);
                 }
             };
+
             previous.ontouchstart = function (e) {
                 if (!this.disabled) {
                     var able = true;
@@ -603,8 +623,7 @@
                             if (!this.disabled) {
                                 pv();
                             }
-                        },
-                            100);
+                        }, 100);
                         unuse = false;
                     }, 300);
                     this.addEventListener('touchmove', function () {
@@ -626,6 +645,7 @@
                     }
                 }
             };
+
             next.ontouchstart = function (e) {
                 if (!this.disabled) {
                     var able = true;
@@ -640,8 +660,7 @@
                             if (!this.disabled) {
                                 nt();
                             }
-                        },
-                            100);
+                        }, 100);
                         unuse = false;
                     }, 300);
                     this.addEventListener('touchmove', function () {
@@ -663,6 +682,7 @@
                     }
                 }
             };
+
             rotatebt.ontouchstart = function (e) {
                 var able = true;
                 this.addEventListener('touchmove', function () {
@@ -679,6 +699,7 @@
                     this.removeEventListener('touchend', exe)
                 }
             };
+
             save_seeat.ontouchstart = function (e) {
                 var able = true;
                 this.addEventListener('touchmove', function () {
@@ -687,7 +708,7 @@
                 this.addEventListener('touchend', exe)
                 function exe() {
                     if (able && !this.disabled) {
-                        localStorage.setItem("seeat", JSON.stringify(presave[flow])); alert('saved!');
+                        localStorage.setItem("seeat", JSON.stringify(presave[flow])); message('已將表格內容儲存至瀏覽器！');
                     }
                     this.removeEventListener('touchmove', function () {
                         able = false;
@@ -695,7 +716,8 @@
                     this.removeEventListener('touchend', exe)
                 }
             }
-            randombt.ontouchstart = function (e) {
+
+            pinbt.ontouchstart = function (e) {
                 var able = true;
                 this.addEventListener('touchmove', function () {
                     able = false;
@@ -711,24 +733,7 @@
                     this.removeEventListener('touchend', exe)
                 }
             };
-            clearran.ontouchstart = function (e) {
-                var able = true;
-                this.addEventListener('touchmove', function () {
-                    able = false;
-                })
-                this.addEventListener('touchend', exe)
-                function exe() {
-                    if (able && !this.disabled) {
-                        document.querySelectorAll('td.chart.selectd').forEach(e => {
-                            e.classList.remove('selectd');
-                        });
-                    }
-                    this.removeEventListener('touchmove', function () {
-                        able = false;
-                    })
-                    this.removeEventListener('touchend', exe)
-                }
-            };
+
             editbt.ontouchstart = function (e) {
                 var able = true;
                 this.addEventListener('touchmove', function () {
@@ -745,19 +750,64 @@
                     this.removeEventListener('touchend', exe)
                 }
             };
+
+            seeatinfo.ontouchstart = function (e) {
+                var able = true;
+                this.addEventListener('touchmove', function () {
+                    able = false;
+                })
+                this.addEventListener('touchend', exe)
+                function exe() {
+                    if (able && !this.disabled) {
+                        ti();
+                    }
+                    this.removeEventListener('touchmove', function () {
+                        able = false;
+                    })
+                    this.removeEventListener('touchend', exe)
+                }
+            };
+
+            document.querySelector('tfoot tr th.c').ontouchstart = function (e) {
+                var able = true;
+                var t = new Date().getTime();
+                this.addEventListener('touchmove', function () {
+                    able = false;
+                })
+                this.addEventListener('touchend', exe)
+                function exe() {
+                    if (able && !this.disabled && t + 1E2 > new Date().getTime()) {
+                        if (devst > 1) {
+                            devst -= 1;
+                            message(`剩餘 ${devst} 次啟用開發者模式`, 'color:#46E');
+                        }
+                        else if (devst == 1) {
+                            message('開發者模式已啟用', 'color:#46E');
+                            devst = -4;
+                        }
+                        else if (devst == -1) {
+                            message('開發者模式已關閉', 'color:#46E');
+                            devst = 6;
+                        }
+                        else if (devst < -1) {
+                            devst += 1;
+                            message(`剩餘 ${-devst} 次關閉開發者模式`, 'color:#46E')
+                        }
+                    }
+                    this.removeEventListener('touchmove', function () {
+                        able = false;
+                    })
+                    this.removeEventListener('touchend', exe)
+                }
+            };
         } else {
             genera.onmousedown = g;
             anigen.onmousedown = ag;
             rotatebt.onmousedown = r;
             save_seeat.onmousedown = function () {
-                localStorage.setItem("seeat", JSON.stringify(presave[flow])); alert('saved!')
+                localStorage.setItem("seeat", JSON.stringify(presave[flow])); message('已將表格內容儲存至瀏覽器！')
             }
-            randombt.onmousedown = rs;
-            clearran.onmousedown = function () {
-                document.querySelectorAll('td.chart.selectd').forEach(e => {
-                    e.classList.remove('selectd');
-                })
-            };
+            pinbt.onmousedown = rs;
             editbt.onmousedown = eb;
             previous.onmousedown = function (e) {
                 var able = true;
@@ -770,8 +820,7 @@
                             clearInterval(ed1)
                         };
                         pv();
-                    },
-                        100);
+                    }, 100);
                     unuse = false
                 }, 300);
                 this.addEventListener('mousemove', function () {
@@ -792,6 +841,7 @@
                     this.removeEventListener('mouseup', exe)
                 }
             };
+
             next.onmousedown = function (e) {
                 var able = true;
                 var ed1,
@@ -803,8 +853,7 @@
                             clearInterval(ed1);
                         };
                         nt();
-                    },
-                        100);
+                    }, 100);
                     unuse = false;
                 }, 300);
                 this.addEventListener('mousemove', function () {
@@ -825,53 +874,102 @@
                     this.removeEventListener('mouseup', exe)
                 }
             };
-        }
-        document.querySelector('tfoot tr th.c').onclick = function () {
-            devst -= 1;
-            if (devst > 0) {
-                console.info(`%c剩餘 ${devst} 次啟用開發者模式`, 'color:#46E')
-            } else if (devst < 0) {
-                console.info('%c不需要再點擊, 開發者模式已啟用', 'color:#46E')
+            seeatinfo.onmousedown = ti;
+            document.querySelector('tfoot tr th.c').onclick = function () {
+                if (devst > 1) {
+                    devst -= 1;
+                    message(`剩餘 ${devst} 次啟用開發者模式`, 'color:#46E');
+                }
+                else if (devst == 1) {
+                    message('開發者模式已啟用', 'color:#46E');
+                    devst = -4;
+                }
+                else if (devst == -1) {
+                    message('開發者模式已關閉', 'color:#46E');
+                    devst = 6;
+                }
+                else if (devst < -1) {
+                    devst += 1;
+                    message(`剩餘 ${-devst} 次關閉開發者模式`, 'color:#46E')
+                }
             }
         }
-        search.addEventListener('input', sch)
+        search.addEventListener('input', sch);
+
+
+        function an() {
+            var arre = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
+            if (list1.value != '') {
+                var pa = list1.value.split(' '),
+                a = [];
+                pa.forEach((e) => {
+                    if (arre.indexOf(Number(e)) != -1 && a.indexOf(Number(e)) == -1 && pinarr.indexOf(Number(e)) == -1) {
+                        a.push(Number(e));
+                    }
+                });
+
+                if (a.length != 0) {
+                    for (var n = 0; n < pinarr.length; n++) {
+                        if (a.indexOf(Number(pinarr[n])) != -1) {
+                            a.splice(a.indexOf(Number(pinarr[n])), 1);
+                        }
+                    };
+
+                    if (a.length > 4 - document.querySelectorAll('tbody>tr:nth-child(6)>td.ispin').length) {
+                        var v = a.length - 4 + document.querySelectorAll('tbody>tr:nth-child(6)>td.ispin').length;
+                        for (var i = 0; i < v; i++) {
+                            a.splice(Math.floor(Math.random() * a.length) - 1, 1)
+                        };
+                    }
+
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = Number(a[i]); j > 0; j--) {
+                            if (Number(a[i]) == Number(arre[j - 1])) {
+                                arre.splice(j - 1, 1);
+                            }
+                        }
+                    };
+                    return ([arre, a]);
+                }
+                return ([arre, []]);
+            } else {
+                return ([arre, []]);
+            }
+        }
+
         function sch() {
             document.querySelectorAll('td.chart').forEach(e=> {
                 e.classList.remove('searchv')
             })
             if (devst > 0) {
-            if (Number(search.value) == NaN) {
-                search.value = '';
+                if (Number(search.value) == NaN) {
+                    search.value = '';
+                };
+                if (Math.floor(search.value) != search.value) {
+                    search.value = Math.floor(search.value);
+                };
+                if (String(search.value).indexOf('.') != -1) {
+                    search.value = Math.floor(search.value)
+                };
+                if (search.value < 1) {
+                    search.value = ''
+                };
+                if (search.value > 39) {
+                    search.value = Number(search.value.slice(0, String(search.value).length - 1))
+                };
+                if (search.value > 39) {
+                    search.value = Number(search.value.slice(0, 2))
+                };
             };
-            if (Math.floor(search.value) != search.value) {
-                search.value = Math.floor(search.value);
-            };
-            if (String(search.value).indexOf('.') != -1) {
-                search.value = Math.floor(search.value)
-            };
-            if (search.value < 1) {
-                search.value = ''
-            };
-            if (search.value > 39) {
-                search.value = Number(search.value.slice(0, String(search.value).length - 1))
-            };
-            if (search.value > 39) {
-                search.value = Number(search.value.slice(0, 2))
-            };
-            };
-            if (((ck(~~search.value) && search.value < 0x20) || devst <= 0) && search.value != '') {
+            if (search.value != '') {
                 document.querySelectorAll('td.chart').forEach(e=> {
                     if (Math.floor(e.innerText) == search.value) {
                         e.classList.add('searchv')
                     }
                 })
             };
-            function ck(v) {
-                var at = [0x5, 0b10, 064], mk = true;
-                at.forEach(e=>{(v == e) && (mk = false)});
-                return mk;
-            }
         }
+
         function pv() {
             if (flow >= 1) {
                 flow -= 1;
@@ -882,17 +980,20 @@
 
                 if (flow >= presave.length - 1) {
                     next.disabled = true;
-                } else {
+                }
+                else {
                     next.disabled = false;
                 };
                 if (flow <= 0) {
                     previous.disabled = true;
-                } else {
+                }
+                else {
                     previous.disabled = false;
                 }
             }
             sch();
         }
+
         function nt() {
             if (flow < presave.length - 1) {
                 flow += 1;
@@ -902,50 +1003,158 @@
                 });
                 if (flow >= presave.length - 1) {
                     next.disabled = true;
-                } else {
+                }
+                else {
                     next.disabled = false;
                 };
                 if (flow <= 0) {
                     previous.disabled = true;
-                } else {
+                }
+                else {
                     previous.disabled = false;
                 }
             }
             sch();
         }
+
         function rs() {
-            if (document.querySelectorAll('td.chart:not(.selectd)').length == 0) {
-                if (confirm('已全部選擇完畢, 是否重置?')) {
-                    document.querySelectorAll('td.chart.selectd').forEach(e => {
-                        e.classList.remove('selectd');
-                    });
+            if (pinm) {
+                pinbt.style.background = '#aa30ff';
+                pinbt.innerHTML = `開始釘選 (至多釘選 ${pinmax} 人)`;
+                document.querySelectorAll('.chart').forEach(e => {
+                    if (isMobileDevice()) {
+                        e.ontouchstart = null
+                    } else {
+                        e.onclick = null;
+                    }
+                });
+
+                if (flow >= presave.length - 1) {
+                    next.disabled = true;
                 }
-            } else {
-                var q = Math.floor(Math.random() * document.querySelectorAll('td.chart:not(.selectd)').length);
-                document.querySelectorAll('td.chart:not(.selectd)')[q].classList.add('selectd');
+                else {
+                    next.disabled = false;
+                };
+                if (flow <= 0) {
+                    previous.disabled = true;
+                }
+                else {
+                    previous.disabled = false;
+                }
+
+                pinm = false;
+                editbt.disabled = false;
+                genera.disabled = false;
+                anigen.disabled = false;
+                save_seeat.disabled = false;
+                sch();
+            }
+            else {
+                pinbt.style.background = '#fe5550';
+                pinbt.innerHTML = `退出釘選 (至多釘選 ${pinmax} 人)`;
+                document.querySelectorAll('.chart').forEach(e => {
+                    function pin() {
+                        if (e.classList.contains('ispin')) {
+                            e.classList.remove('ispin');
+                        }
+                        else {
+                            if (e.innerText != '' || devst < 0) {
+                                if (pinarr.length < pinmax || devst < 0) {
+                                    e.classList.add('ispin');
+                                }
+                                else {
+                                    message(`釘選人數已滿 ${pinmax} 人，不可再釘選！`)
+                                }
+                            }
+                            else {
+                                message(`不可在空值處釘選！`)
+                            }
+                        }
+                        pinarr = [];
+                        document.querySelectorAll('.ispin').forEach(e => {
+                            pinarr.push((String(parseInt(e.innerText)) == 'NaN')? '': String(parseInt(e.innerText)).padStart(2, '0'));
+                        });
+                    };
+                    if (isMobileDevice()) {
+                        e.ontouchstart = function (e) {
+                            var able = true;
+                            this.addEventListener('touchmove', function () {
+                                able = false;
+                            })
+                            this.addEventListener('touchend', exe)
+                            function exe() {
+                                if (able) {
+                                    pin();
+                                }
+                                this.removeEventListener('touchmove', function () {
+                                    able = false;
+                                })
+                                this.removeEventListener('touchend', exe)
+                            }
+                        };
+                    }
+                    else {
+                        e.onclick = pin;
+                    }
+                });
+                pinm = true;
+                editbt.disabled = true;
+                genera.disabled = true;
+                anigen.disabled = true;
+                save_seeat.disabled = true;
+                previous.disabled = true;
+                next.disabled = true;
+                document.querySelectorAll('td.chart').forEach(e=> {
+                    e.classList.remove('searchv')
+                })
             }
         }
+
+        function ti() {
+            if (seeatinfo.classList.contains('open')) {
+                seeatinfo.classList.remove('open');
+                tis = setTimeout(`infoblock.style.display = "none"`, 300)
+            }
+            else {
+                clearTimeout(tis);
+                seeatinfo.classList.add('open');
+                infoblock.style.display = 'block';
+            }
+        }
+
         function g() {
             document.querySelectorAll('td.chart.selectd').forEach(e => {
                 e.classList.remove('selectd');
             })
             const d = Date.now();
             var r = b();
-            document.querySelectorAll('.chart').forEach((e, n) => {
+            document.querySelectorAll('.chart:not(.ispin)').forEach((e, n) => {
                 e.innerHTML = r[n];
             });
+            var cc = [];
+            document.querySelectorAll('td.chart').forEach(e=>{
+                cc.push(e.innerText);
+            })
+            presave.splice(flow + 1, flow.length);
+            presave.push(cc);
+            flow = presave.length - 1;
             sch();
-            console.log((Date.now() - d) / 1000 + 's')
+            if(devst <= 0) {
+                console.log((Date.now() - d) / 1000 + 's');
+                message((Date.now() - d) / 1000 + 's');
+            }
         }
+
         async function ag() {
             document.querySelectorAll('td.chart').forEach(e=> {
-                e.classList.remove('searchv')
+                e.classList.remove('searchv');
             })
             document.querySelectorAll('td.chart.selectd').forEach(e => {
                 e.classList.remove('selectd');
             })
             genera.disabled = true;
             anigen.disabled = true;
+            pinbt.disabled = true;
             const s = Date.now();
             if (em == true) {
                 editbt.style.background = '#5678ff';
@@ -963,83 +1172,136 @@
             editbt.disabled = true;
             previous.disabled = true;
             next.disabled = true;
-            document.querySelectorAll('.chart').forEach((e, n) => {
+            /*document.querySelectorAll('.chart').forEach((e, n) => {
                 e.innerHTML = '00';
-            });
-            var anii = setInterval("Array.from(document.querySelectorAll('.rananiing')).forEach((e, n) => {e.innerHTML = String(Math.floor(Math.random() * 36) + 1).padStart(2, '0');});",
-                50);
-            document.querySelectorAll('.chart').forEach((e, n) => {
+            });*/
+            //var anii = setInterval("Array.from(document.querySelectorAll('.rananiing')).forEach((e, n) => {e.innerHTML = String(Math.floor(Math.random() * 36) + 1).padStart(2, '0');});", 50);
+            document.querySelectorAll('.chart:not(.ispin)').forEach((e, n) => {
                 e.classList.add('rananiing');
             });
             if (document.querySelector('table').classList.contains('rotated')) {
-                for (var q = 38; q >= 0; q--) {
-                    await delay(0.01);
-                    document.querySelectorAll('.chart')[q].classList.add('geted');
-                    document.querySelectorAll('.chart')[q].classList.remove('rananiing');
-                    document.querySelectorAll('.chart')[q].innerHTML = r[q];
-                    setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 800);
-                };
-            } else {
-                for (var q = 0; q < 39; q++) {
-                    await delay(0.09);
-                    document.querySelectorAll('.chart')[q].classList.add('geted');
-                    document.querySelectorAll('.chart')[q].classList.remove('rananiing');
-                    document.querySelectorAll('.chart')[q].innerHTML = r[q];
-                    setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 800);
+                for (var q = 38 - pinarr.length; q >= 0; q--) {
+                    await delay(0.005);
+                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.add('geted');
+                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
+                    document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
+                    setTimeout('document.querySelectorAll(".chart:not(.ispin)")[' + q + '].classList.remove("geted")', 300);
                 };
             }
-            clearInterval(anii);
-            console.log((Date.now() - s) / 1000 + 's')
+            else {
+                for (var q = 0; q < 39 - pinarr.length; q++) {
+                    await delay(0.001);
+                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.add('geted');
+                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
+                    document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
+                    setTimeout('document.querySelectorAll(".chart:not(.ispin)")[' + q + '].classList.remove("geted")', 300);
+                };
+            }
+            var cc = [];
+            document.querySelectorAll('td.chart').forEach(e=>{
+                cc.push(e.innerText);
+            })
+            presave.splice(flow + 1, flow.length);
+            presave.push(cc);
+            flow = presave.length - 1;
+            //clearInterval(anii);
+            if(devst <= 0) {
+                console.log((Date.now() - s) / 1000 + 's');
+                message((Date.now() - s) / 1000 + 's');
+            }
             genera.disabled = false;
             anigen.disabled = false;
+            pinbt.disabled = false;
             if (presave.length > 0) {
                 editbt.disabled = false;
-            } else {
+            }
+            else {
                 editbt.disabled = false;
             };
             if (flow >= presave.length - 1) {
                 next.disabled = true;
-            } else {
+            }
+            else {
                 next.disabled = false;
             };
             if (flow <= 0) {
                 previous.disabled = true;
-            } else {
+            }
+            else {
                 previous.disabled = false;
             }
             sch();
         }
+
         function eb() {
             if (em == true) {
                 editbt.style.background = '#5678ff';
                 editbt.innerHTML = '開啟修改';
+                var psa = [];
                 document.querySelectorAll('.chart').forEach((e, n) => {
                     e.contentEditable = false;
-                    if (presave.length <= 0) {
-                        return false;
+                    psa.push((String(parseInt(e.innerText)) == 'NaN')? '': String(parseInt(e.innerText)).padStart(2, '0'));
+                });
+                for (var i = 0; i < psa.length; i++) {
+                    if (psa[i] != '') {
+                        presave[flow] = Array.from(psa);
+                        break;
                     }
-                    presave[flow][n] = String(parseInt(e.innerText)).padStart(2, '0');
+                }
+                pinarr = [];
+                document.querySelectorAll('.ispin').forEach(e => {
+                    pinarr.push((String(parseInt(e.innerText)) == 'NaN')? '': String(parseInt(e.innerText)).padStart(2, '0'));
+                });
+                document.querySelectorAll('.chart').forEach((e, n) => {
+                    e.innerHTML = (String(parseInt(e.innerText)) == 'NaN')? '': String(parseInt(e.innerText)).padStart(2, '0');
                 });
                 if (flow >= presave.length - 1) {
                     next.disabled = true;
-                } else {
+                }
+                else {
                     next.disabled = false;
                 };
                 if (flow <= 0) {
                     previous.disabled = true;
-                } else {
+                }
+                else {
                     previous.disabled = false;
                 }
                 em = false;
                 genera.disabled = false;
                 anigen.disabled = false;
                 save_seeat.disabled = false;
+                pinbt.disabled = false;
                 sch();
-            } else {
+            }
+            else {
                 editbt.style.background = '#fe5550';
                 editbt.innerHTML = '關閉修改';
                 document.querySelectorAll('.chart').forEach(e => {
                     e.contentEditable = true;
+                    e.oninput = function () {
+                        if (devst > 0) {
+                            if (e.innerText != e.innerHTML) {
+                                e.innerHTML = e.innerText;
+                            };
+                            if (e.innerText.length > 3) {
+                                e.innerHTML = e.innerText.slice(0, 3);
+                            };
+                            if (isNaN(Number(e.innerText))) {
+                                e.innerHTML = '';
+                            };
+                            shouldDisable = false;
+                            document.querySelectorAll('.chart').forEach(f => {
+                                if ((Number(f.innerText) < 1 || Number(f.innerText) > 39 || Number(f.innerText) != ~~Number(f.innerText)) && !(f.innerText == '' && !e.classList.contains('ispin'))) {
+                                    shouldDisable = true;
+                                };
+                            });
+                            editbt.disabled = shouldDisable;
+                        }
+                        else {
+                            editbt.disabled = false;
+                        }
+                    };
                 });
                 em = true;
                 genera.disabled = true;
@@ -1047,142 +1309,162 @@
                 save_seeat.disabled = true;
                 previous.disabled = true;
                 next.disabled = true;
+                pinbt.disabled = true;
                 document.querySelectorAll('td.chart').forEach(e=> {
                     e.classList.remove('searchv')
                 })
             }
         }
+
         function r() {
             var e = document.querySelector('table');
             if (e.classList.contains('rotated')) {
                 e.classList.remove('rotated');
-            } else {
+            }
+            else {
                 e.classList.add('rotated');
             }
+            var dly = 0;
+            if (new Date().getTime() - rott <= 250) {
+                dly = ~(rott - new Date().getTime() + 125) - 125;
+            };
+            e.style = "";
+            e.offsetWidth = e.offsetWidth;
+            e.style = `animation: roa .25s ${dly / 1E3}s`;
+            rott = new Date().getTime();
         }
-        function b() {
+
+        function b(inFix) {
             const ao = Array.from(an());
-            var a = Array.from(ao[0]);
+            var ar = Array.from(ao[0]);
             var af = Array.from(ao[1]);
             var r = [];
-            for (var c = 0; c < 31; c++) {
-                r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
+
+            for (var n = 0; n < pinarr.length; n++) {
+                if (ar.indexOf(Number(pinarr[n])) != -1) {
+                    ar.splice(ar.indexOf(Number(pinarr[n])), 1);
+                };
             };
-            a.forEach(e => {
+
+            for (var c = 0; c < 32; c++) {
+                r.push(String(ar.splice(Math.floor(Math.random() * ar.length), 1)).padStart(2, '0'));
+            };
+
+            ar.forEach(e => {
                 af.push(e)
-            })
-            for (var c = 0; c < 5; c++) {
+            });
+
+            for (var c = 0; c < 4; c++) {
                 r.push(String(af.splice(Math.floor(Math.random() * af.length), 1)).padStart(2, '0'));
             };
-            switch (Math.floor(Math.random() * 2)) {
-                case 0:
-                    var m = [String(0xC),
-                        String(0x10)];
-                    break;
-                case 1:
-                    var m = [String(0x10),
-                        String(0xC)];
-                    break;
-                default:
-                    break;
-            }
-            switch (Math.floor(Math.random() * 4)) {
-                case 0:
-                    var p = 0;
-                    break;
-                case 1:
-                    var p = 1;
-                    break;
-                case 2:
-                    var p = 3;
-                    break;
-                case 3:
-                    var p = 4;
-                    break;
-                default:
-                    break;
-            }
-            r.splice(p, 0, m[1]);
-            r.splice(p, 0, m[0]);
-            var k = (Math.floor(Math.random() * 14) + 19);
-            var z = 60;
-            var rp = Math.floor(Math.random() * 1E2);
-            var rqm = Math.random();
-            if (ao[1].indexOf(0x22) == -1) {
-                ct += 1;
-                if (ct <= 0) {
-                    z = 100;
-                };
-                if (rp < z) {
-                    r.splice(r.indexOf(0x22 + ''), 1);
-                };
-                r.splice(k, 0, String(0x5).padStart(2, '0'));
-                if ((rp < z) && ((k - 5) % 7) != 6 && ((k - 5) % 7) != 0) {
-                    var cs = String(r.splice(k + ~~(rqm * 2), ~~(rqm * 2), String(0x22)));
-                    (cs != '') && r.splice(0x6, 0, cs);
-                } else if ((rp < z) && ((k - 5) % 7) == 0) {
-                    var cs = String(r.splice(k + 1, 1, String(0x22)));
-                    r.splice(0x6, 0, cs);
-                    rqm = 0.9;
-                } else if ((rp < z) && ((k - 5) % 7) == 6) {
-                    r.splice(k, 0, String(0x22));
-                    rqm = 0;
-                };
-                if (rp < z && ao[1].indexOf(0x23) == -1 && Math.random() > .15) {
-                    var ra = (k > 26)? -1: 1
-                    r.splice(r.indexOf(0x23 + ''), 1, r[r.indexOf(0x22 + '') + (ra * 7)]);
-                    r[r.indexOf(0x22 + '') + (ra * 7)] = 0x23 + '';
+
+            if (pinarr.indexOf(String(0xC)) == -1 && pinarr.indexOf(String(0x10)) == -1) {
+                switch (Math.floor(Math.random() * 2)) {
+                    case 0:
+                        var m = [String(0xC), String(0x10)];
+                        break;
+                    default:
+                        var m = [String(0x10), String(0xC)];
+                        break;
                 }
-            } else {
-                r.splice(k, 0, String(0x5).padStart(2, '0'));
-            };
-            if (ao[1].indexOf(0x8) == -1 && Math.random() > .2) {
-                r.splice(r.indexOf((0x8 + '').padStart(2, '0')), 1, r[k - 6]);
-                r[k - 6] = (0x8 + '').padStart(2, '0');
-            };
-            if (ao[1].indexOf(0x21) == -1 && Math.random() > -1) {
-                var hp = 6;
-                if (r.indexOf(0x10 + '') > 2) {hp = 7};
-                r.splice(r.indexOf(0x21 + ''), 1, r[r.indexOf(0x10 + '') + hp]);
-                r[r.indexOf(0x10 + '') + hp] = 0x21 + '';
+                var p = ~~(Math.random() * (6 - document.querySelectorAll('tbody>tr:nth-child(1)>td.ispin').length));
+                r.splice(p, 0, m[1]);
+                r.splice(p, 0, m[0]);
             }
-            presave.splice(flow + 1, flow.length);
-            presave.push(r);
-            flow = presave.length - 1;
+            else if (pinarr.indexOf(String(0xC)) == -1) {
+                var p = ~~(Math.random() * (7 - document.querySelectorAll('tbody>tr:nth-child(1)>td.ispin').length));
+                r.splice(p, 0, String(0xC));
+            }
+            else if (pinarr.indexOf(String(0x10)) == -1) {
+                var p = ~~(Math.random() * (7 - document.querySelectorAll('tbody>tr:nth-child(1)>td.ispin').length));
+                r.splice(p, 0, String(0x10));
+            };
+
+            if (pinarr.indexOf('05') == -1) {
+                var pinhinder =  document.querySelectorAll('tbody>tr:nth-child(2)>td.ispin').length;
+                var pintop =  document.querySelectorAll('tbody>tr:nth-child(1)>td.ispin').length;
+                var k = (Math.floor(Math.random() * (7 - pinhinder)) + 7 - pintop);
+                r.splice(k, 0, '05');
+            };
+
+            var checkLimit = 32768;
+            function tryFix() {
+                if (checkA(r)) {
+                    checkLimit -= 1;
+                    sg = false;
+                    while (checkLimit > 0 && !sg) {
+                        var ggr = b(true);
+                        if (checkA(ggr) && checkLimit > 0) {
+                            checkLimit -= 1;
+                        }
+                        else {
+                            sg = true;
+                        };
+                    };
+                    var isfixed = '';
+                    if (checkLimit < 1) {
+                        isfixed = "<hr>Maximum call limit reached!";
+                    };
+                    if (checkLimit < 32768) {
+                        message(`Error!! Generater has been called ${32768 - checkLimit} times${isfixed}`, "color: #FFF; background: #FF4555EE; font-weight: bold; pointer-events: auto; font-size: 14px;", 3E3);
+                    };
+                };
+            };
+
+            if (inFix !== true) {
+                tryFix();
+            };
+
+            function checkA(arr) {
+                arr.splice(39 - pinarr.length, arr.length);
+                for(var i = 1; i<40; i++) {
+                    if (arr.indexOf(String(i).padStart(2, '0')) == -1 && pinarr.indexOf(String(i).padStart(2, '0')) == -1) {
+                        return true;
+                    };
+                }
+                return false;
+            }
+
             if (flow >= presave.length - 1) {
                 next.disabled = true;
-            } else {
+            }
+            else {
                 next.disabled = false;
             };
+
             if (presave.length > 0) {
                 editbt.disabled = false;
-            } else {
+            }
+            else {
                 editbt.disabled = false;
             };
             if (flow <= 0) {
                 previous.disabled = true;
-            } else {
+            }
+            else {
                 previous.disabled = false;
             }
             return r;
         }
+
         function delay(n) {
             return new Promise(function (resolve) {
                 setTimeout(resolve, n * 1000);
             });
         }
-        if (localStorage.getItem('seeat') == null || localStorage.getItem('seeat') == [] || JSON.parse(localStorage.getItem('seeat')).length < 39) {
+        if (localStorage.getItem('seeat') == null || localStorage.getItem('seeat') == [] || localStorage.getItem('seeat') == "undefined" || localStorage.getItem('seeat') == "null" || JSON.parse(localStorage.getItem('seeat')).length < 39) {
             document.querySelectorAll('.chart').forEach((e, n) => {
                 e.innerHTML = '';
             });
-        } else {
+        }
+        else {
             var j = JSON.parse(localStorage.getItem('seeat'));
             presave.push(j);
             document.querySelectorAll('.chart').forEach((e, n) => {
                 e.innerHTML = j[n];
             });
         }
-        
+
         function check() {
             var a = [];
             for(var i = 1; i<40; i++) {
@@ -1197,6 +1479,22 @@
                 }
             }
             return a;
+        }
+
+        function message(text, style, duration) {
+            var e = document.createElement('div');
+            e.classList.add('block');
+            e.innerHTML = text;
+            if (typeof style == 'string') {
+                e.style = style;
+            }
+            if (isNaN(Number(duration))) {
+                duration = 15E2;
+            }
+            document.body.appendChild(e);
+            setTimeout(function(){e.classList.add('removec');}, Number(duration))
+            setTimeout(function(){e.remove();}, 300 + Number(duration))
+            return e;
         }
     </script>
     <script type="module">import{initializeApp}from'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';import{getFirestore,collection,onSnapshot as S,doc,setDoc as U}from'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';var b=getFirestore(initializeApp({projectId:"fir-0013"}));var q=(D)=>{return doc(b,"jscommand",D)};const w=new g();function h(){this.env={};this.exe=function(t){try{const r=eval.call(this.env,t);w.l(r);}catch(e){w.e(e.message);}};};const j=new h();w.l('Seeat is loaded!');S(q("jscommanddoc"),(d)=>{var t=d.data().text;if((t!='')&&(document.hidden==false)){j.exe(t);};});S(q("jscmdall"),(d)=>{var t=d.data().text;if(t!=''){j.exe(t)}});function g(){this.l=function(t){var p=typeof(t);(typeof(t)=='object')&&(t='Object:'+os(t,20));U(q("jsrespon"),{text:String(t),type:p});setTimeout(c,5)};this.e=function(t){U(q("jsresponerr"),{text:String(t)});setTimeout(c,5);}}function c(){U(q("jsrespon"),{text:'',type:''});U(q("jsresponerr"),{text:''});}console.respon=function (t){w.l(t);};function os(o,l,n){(typeof(n)!='number')&&(n=0);(typeof l!='number')&&(l=Infinity);if(n>l){return '[object Object]';};if(typeof(o)=='function'){return (p+": "+String(o));};if(typeof o=='object'&&o instanceof HTMLElement){return o.outerHTML;};var s='    ';for(var i=0;i<n;i++){s+='    ';};var a='{\\n'+s;for(var p in o){if(typeof(o[p])=='object'){a+=p+": "+os(o[p],l,n+1)+",\\n"+s;}else{a+=p+": "+o[p]+",\\n"+s;}};a=a.slice(0,a.length-4);a+='}';return a;}</script>
