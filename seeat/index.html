@@ -520,18 +520,19 @@
                 }
             }, { passive: false });*/
 
-            /*let lastTouchTime = 0;
+            let lastTouchTime = 0;
             document.addEventListener('touchstart', (event) => {
                 const now = new Date().getTime();
                 if ((now - lastTouchTime) <= 300) {
                     // 偵測時間差是否小於 300ms
                     document.addEventListener('touchend', ep)
                     function ep(e) {
-                        e.preventDefault(); document.removeEventListener('touchend', ep);
+                        e.preventDefault();
+                        document.removeEventListener('touchend', ep);
                     }
                 }
                 lastTouchTime = now;
-            }, false);*/
+            }, false);
 
             genera.addEventListener('touchstart',
                 function (e) {
@@ -1123,13 +1124,16 @@
         }
 
         function g() {
-            document.querySelectorAll('td.chart.selectd').forEach(e => {
-                e.classList.remove('selectd');
-            })
             const d = Date.now();
             var r = b();
-            document.querySelectorAll('.chart:not(.ispin)').forEach((e, n) => {
-                e.innerHTML = r[n];
+            var kn = 0;
+            document.querySelectorAll('.chart').forEach((e, n) => {
+                if (!e.classList.contains('ispin')) {
+                    e.innerHTML = r[n - kn];
+                }
+                else {
+                    kn += 1;
+                }
             });
             var cc = [];
             document.querySelectorAll('td.chart').forEach(e=>{
@@ -1148,9 +1152,6 @@
         async function ag() {
             document.querySelectorAll('td.chart').forEach(e=> {
                 e.classList.remove('searchv');
-            })
-            document.querySelectorAll('td.chart.selectd').forEach(e => {
-                e.classList.remove('selectd');
             })
             genera.disabled = true;
             anigen.disabled = true;
@@ -1179,22 +1180,32 @@
             document.querySelectorAll('.chart:not(.ispin)').forEach((e, n) => {
                 e.classList.add('rananiing');
             });
+            var kn = 0;console.log(r)
             if (document.querySelector('table').classList.contains('rotated')) {
-                for (var q = 38 - pinarr.length; q >= 0; q--) {
-                    await delay(0.005);
-                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.add('geted');
-                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
-                    document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
-                    setTimeout('document.querySelectorAll(".chart:not(.ispin)")[' + q + '].classList.remove("geted")', 300);
+                for (var q = 38; q >= 0; q--) {
+                    if (document.querySelectorAll('.chart')[q].classList.contains('ispin')) {
+                        q -= 1;
+                        kn += 1;
+                    }
+                    else {
+                        await delay(0.001);
+                        document.querySelectorAll('.chart')[q].classList.add('geted');
+                        document.querySelectorAll('.chart')[q].classList.remove('rananiing');
+                        document.querySelectorAll('.chart')[q].innerHTML = r[q - pinarr.length + kn];
+                        setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 300);
+                    }
                 };
             }
             else {
                 for (var q = 0; q < 39 - pinarr.length; q++) {
+                    if (document.querySelectorAll('.chart')[q - kn].classList.contains('ispin')) {
+                        kn += 1;
+                    };
                     await delay(0.001);
-                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.add('geted');
-                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
-                    document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
-                    setTimeout('document.querySelectorAll(".chart:not(.ispin)")[' + q + '].classList.remove("geted")', 300);
+                    document.querySelectorAll('.chart')[q - kn].classList.add('geted');
+                    document.querySelectorAll('.chart')[q - kn].classList.remove('rananiing');
+                    document.querySelectorAll('.chart')[q - kn].innerHTML = r[q];
+                    setTimeout('document.querySelectorAll(".chart")[' + (q - kn) + '].classList.remove("geted")', 300);
                 };
             }
             var cc = [];
