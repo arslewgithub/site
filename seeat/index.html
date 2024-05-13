@@ -262,6 +262,8 @@
             min-width: 45px;
             color: black;
             background: #FFF;
+            b
+            font-family: "sans-serif";
         }
 
         button#previous:disabled,
@@ -492,7 +494,7 @@
             <h4>Project Name: Seeat</h4>
             <h4>Series Code: Original</h4>
             <h4>Version: 14</h4>
-            <h4>Last Update: 2024-05-11</h4>
+            <h4>Last Update: 2024-05-13</h4>
             <hr>
             <h3>Series:</h4>
             <h4>Seeat 509: <a href="">Seeat 509</a></h4>
@@ -521,17 +523,13 @@
             }, { passive: false });*/
 
             let lastTouchTime = 0;
-            document.addEventListener('touchstart', (event) => {
+            let lastTouchEndTime = 0;
+            document.addEventListener('touchend', (event) => {
                 const now = new Date().getTime();
-                if ((now - lastTouchTime) <= 300) {
-                    // 偵測時間差是否小於 300ms
-                    document.addEventListener('touchend', ep)
-                    function ep(e) {
-                        e.preventDefault();
-                        document.removeEventListener('touchend', ep);
-                    }
+                if((now - lastTouchEndTime) <= 300) {      // 偵測時間差是否小於 300ms
+                    event.preventDefault();
                 }
-                lastTouchTime = now;
+                lastTouchEndTime = now;
             }, false);
 
             genera.addEventListener('touchstart',
@@ -1126,14 +1124,8 @@
         function g() {
             const d = Date.now();
             var r = b();
-            var kn = 0;
-            document.querySelectorAll('.chart').forEach((e, n) => {
-                if (!e.classList.contains('ispin')) {
-                    e.innerHTML = r[n - kn];
-                }
-                else {
-                    kn += 1;
-                }
+            document.querySelectorAll('.chart:not(.ispin)').forEach((e, n) => {
+                e.innerHTML = r[n];
             });
             var cc = [];
             document.querySelectorAll('td.chart').forEach(e=>{
@@ -1143,6 +1135,13 @@
             presave.push(cc);
             flow = presave.length - 1;
             sch();
+            document.querySelectorAll('.chart').forEach(e => {
+                if (isMobileDevice()) {
+                    e.ontouchstart = null
+                } else {
+                    e.onclick = null;
+                }
+            });
             if(devst <= 0) {
                 console.log((Date.now() - d) / 1000 + 's');
                 message((Date.now() - d) / 1000 + 's');
@@ -1180,32 +1179,34 @@
             document.querySelectorAll('.chart:not(.ispin)').forEach((e, n) => {
                 e.classList.add('rananiing');
             });
-            var kn = 0;console.log(r)
+            document.querySelectorAll('.chart').forEach(e => {
+                e.ontouchstart = null
+                e.onclick = null;
+            });
             if (document.querySelector('table').classList.contains('rotated')) {
-                for (var q = 38; q >= 0; q--) {
-                    if (document.querySelectorAll('.chart')[q].classList.contains('ispin')) {
-                        q -= 1;
-                        kn += 1;
-                    }
-                    else {
-                        await delay(0.001);
-                        document.querySelectorAll('.chart')[q].classList.add('geted');
-                        document.querySelectorAll('.chart')[q].classList.remove('rananiing');
-                        document.querySelectorAll('.chart')[q].innerHTML = r[q - pinarr.length + kn];
-                        setTimeout('document.querySelectorAll(".chart")[' + q + '].classList.remove("geted")', 300);
-                    }
+                for (var q = 38 - pinarr.length; q >= 0; q--) {
+                    await delay(0.005);
+                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.add('geted');
+                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
+                    document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
+                    setTimeout('document.querySelectorAll(".chart:not(.ispin)")[' + q + '].classList.remove("geted")', 300);
+                    document.querySelectorAll('.chart').forEach(e => {
+                        e.ontouchstart = null
+                        e.onclick = null;
+                    });
                 };
             }
             else {
                 for (var q = 0; q < 39 - pinarr.length; q++) {
-                    if (document.querySelectorAll('.chart')[q - kn].classList.contains('ispin')) {
-                        kn += 1;
-                    };
                     await delay(0.001);
-                    document.querySelectorAll('.chart')[q - kn].classList.add('geted');
-                    document.querySelectorAll('.chart')[q - kn].classList.remove('rananiing');
-                    document.querySelectorAll('.chart')[q - kn].innerHTML = r[q];
-                    setTimeout('document.querySelectorAll(".chart")[' + (q - kn) + '].classList.remove("geted")', 300);
+                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.add('geted');
+                    document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
+                    document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
+                    setTimeout('document.querySelectorAll(".chart:not(.ispin)")[' + q + '].classList.remove("geted")', 300);
+                    document.querySelectorAll('.chart').forEach(e => {
+                        e.ontouchstart = null
+                        e.onclick = null;
+                    });
                 };
             }
             var cc = [];
