@@ -206,7 +206,6 @@
             padding: 12px;
             user-select: none !important;
             pointer-events: none;
-            background: #FFFD;
         }
 
         .block.removec {
@@ -262,8 +261,6 @@
             min-width: 45px;
             color: black;
             background: #FFF;
-            b
-            font-family: "sans-serif";
         }
 
         button#previous:disabled,
@@ -494,7 +491,7 @@
             <h4>Project Name: Seeat</h4>
             <h4>Series Code: Original</h4>
             <h4>Version: 14</h4>
-            <h4>Last Update: 2024-05-13</h4>
+            <h4>Last Update: 2024-05-11</h4>
             <hr>
             <h3>Series:</h4>
             <h4>Seeat 509: <a href="">Seeat 509</a></h4>
@@ -523,13 +520,17 @@
             }, { passive: false });*/
 
             let lastTouchTime = 0;
-            let lastTouchEndTime = 0;
-            document.addEventListener('touchend', (event) => {
+            document.addEventListener('touchstart', (event) => {
                 const now = new Date().getTime();
-                if((now - lastTouchEndTime) <= 300) {      // 偵測時間差是否小於 300ms
-                    event.preventDefault();
+                if ((now - lastTouchTime) <= 300) {
+                    // 偵測時間差是否小於 300ms
+                    document.addEventListener('touchend', ep)
+                    function ep(e) {
+                        e.preventDefault();
+                        document.removeEventListener('touchend', ep);
+                    }
                 }
-                lastTouchEndTime = now;
+                lastTouchTime = now;
             }, false);
 
             genera.addEventListener('touchstart',
@@ -1122,6 +1123,9 @@
         }
 
         function g() {
+            document.querySelectorAll('td.chart.selectd').forEach(e => {
+                e.classList.remove('selectd');
+            })
             const d = Date.now();
             var r = b();
             document.querySelectorAll('.chart:not(.ispin)').forEach((e, n) => {
@@ -1135,13 +1139,6 @@
             presave.push(cc);
             flow = presave.length - 1;
             sch();
-            document.querySelectorAll('.chart').forEach(e => {
-                if (isMobileDevice()) {
-                    e.ontouchstart = null
-                } else {
-                    e.onclick = null;
-                }
-            });
             if(devst <= 0) {
                 console.log((Date.now() - d) / 1000 + 's');
                 message((Date.now() - d) / 1000 + 's');
@@ -1151,6 +1148,9 @@
         async function ag() {
             document.querySelectorAll('td.chart').forEach(e=> {
                 e.classList.remove('searchv');
+            })
+            document.querySelectorAll('td.chart.selectd').forEach(e => {
+                e.classList.remove('selectd');
             })
             genera.disabled = true;
             anigen.disabled = true;
@@ -1179,10 +1179,6 @@
             document.querySelectorAll('.chart:not(.ispin)').forEach((e, n) => {
                 e.classList.add('rananiing');
             });
-            document.querySelectorAll('.chart').forEach(e => {
-                e.ontouchstart = null
-                e.onclick = null;
-            });
             if (document.querySelector('table').classList.contains('rotated')) {
                 for (var q = 38 - pinarr.length; q >= 0; q--) {
                     await delay(0.005);
@@ -1190,10 +1186,6 @@
                     document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
                     document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
                     setTimeout('document.querySelectorAll(".chart:not(.ispin)")[' + q + '].classList.remove("geted")', 300);
-                    document.querySelectorAll('.chart').forEach(e => {
-                        e.ontouchstart = null
-                        e.onclick = null;
-                    });
                 };
             }
             else {
@@ -1203,10 +1195,6 @@
                     document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
                     document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
                     setTimeout('document.querySelectorAll(".chart:not(.ispin)")[' + q + '].classList.remove("geted")', 300);
-                    document.querySelectorAll('.chart').forEach(e => {
-                        e.ontouchstart = null
-                        e.onclick = null;
-                    });
                 };
             }
             var cc = [];
@@ -1393,10 +1381,11 @@
             };
 
             if (pinarr.indexOf('05') == -1) {
-                var pinhinder =  document.querySelectorAll('tbody>tr:nth-child(2)>td.ispin').length;
-                var pintop =  document.querySelectorAll('tbody>tr:nth-child(1)>td.ispin').length;
-                var k = (Math.floor(Math.random() * (7 - pinhinder)) + 7 - pintop);
+                var pinhinder =  document.querySelectorAll('tbody>tr:nth-child(4)>td.ispin').length;
+                var pintop =  document.querySelectorAll('tbody>tr:nth-child(1)>td.ispin').length + document.querySelectorAll('tbody>tr:nth-child(2)>td.ispin').length + document.querySelectorAll('tbody>tr:nth-child(3)>td.ispin').length;
+                var k = (Math.floor(Math.random() * (7 - pinhinder)) + 21 - pintop);
                 r.splice(k, 0, '05');
+                //r.splice(k, 0, String(Math.floor(Math.random() * 1E2)).padStart(2, '0'));
             };
 
             var checkLimit = 32768;
