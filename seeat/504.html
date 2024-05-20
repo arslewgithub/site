@@ -216,7 +216,7 @@
 </head>
 
 <body>
-	<h1>Seeat V6</h1>
+	<h1>Seeat V7</h1>
 	<h3>正在從資料庫獲取座位表...<br><span>若資料庫連接時間過久，請點擊<a href="https://arslewgithub.github.io/site/seeat/504v5.html">這裡</a>以使用舊版網頁</span></h3>
 	<div class="formcenter loading">
 		<table>
@@ -227,7 +227,7 @@
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
-					<td class="chart"></td>
+					<td class=""></td>
 				</tr>
 				<tr>
 					<td class="chart"></td>
@@ -263,7 +263,7 @@
 					<td class="chart"></td>
 					<td class="chart"></td>
 					<td class="chart"></td>
-					<td class=""></td>
+					<td class="chart"></td>
 					<td class=""></td>
 				</tr>
 			</tbody>
@@ -285,8 +285,8 @@
 	    <h4>About:</h4>
 	    <h5>Project Name: Seeat</h5>
 	    <h5>Series Code: S504</h5>
-	    <h5>Version: 6</h5>
-	    <h5>Last Update: 2024-03-05</h5>
+	    <h5>Version: 7</h5>
+	    <h5>Last Update: 2024-05-20</h5>
 	    <h5>Contact the developer: s110076@mail.hwsh.tc.edu.tw</h5>
 	    <h4>Series:</h4>
 	    <h5>Seeat 509: <a href="../">https://arslewgithub.github.io/site/seeat/</a></h5>
@@ -299,7 +299,7 @@
         var app = initializeApp(fConfig);
         var db = getFirestore(app);
         var rt = doc(db, "Seeat", "S504");
-        var so, q = 0, anii, s, em = false, presave = [], devst = 10;
+        var so, q = 0, anii, s, em = false, presave = [], devst = 5;
         onSnapshot(rt, h=>{
             var w = h.data().arr;
             var k = h.data().selectarr;
@@ -327,7 +327,7 @@
                     document.querySelectorAll('td.chart')[e].classList.add('selectd');
                 })
             }
-            document.querySelector('.loading').classList.remove('loading');
+            document.querySelector('.loading')?.classList.remove('loading');
 		})
         document.getElementsByTagName('button')[0].onclick = g;
         document.getElementsByTagName('button')[1].onclick = ag;
@@ -410,7 +410,7 @@
                 e.classList.add('rananiing');
             });
             for (var q = 0; q < 33; q++) {
-                await delay(0.0875);
+                await delay(0.005);
                 document.querySelectorAll('.chart')[q].classList.add('geted');
                 document.querySelectorAll('.chart')[q].classList.remove('rananiing');
                 document.querySelectorAll('.chart')[q].innerHTML = r[q];
@@ -456,19 +456,20 @@
             }
         }
 		function b() {
-			var a = [1, 2, 3, 5, 6, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 30, 31, 32, 34];
+			var a = [1, 2, 3, 5, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 30, 31, 32, 34];
 			var r = [];
-			var take = ['07', '08', '15', '23', '28', '29', '33'];
-			for (var c = 0; c < 26; c++) {
+			var take = ['06', '08', '15', '23', '28', '29', '33'];
+			for (var c = 0; c < 25; c++) {
 				r.push(String(a.splice(Math.floor(Math.random() * a.length), 1)).padStart(2, '0'));
 			};
 			for (var c = 0; c < 7; c++) {
 				r.push(String(take.splice(Math.floor(Math.random() * take.length), 1)).padStart(2, '0'));
 			};
-			var t1 = String(r.splice(29, 1));
-			var t2 = String(r.splice(25, 1));
-			r.splice(25, 0, t1);
-			r.splice(29, 0, t2);
+			var t1 = String(r.splice(28, 1));
+			var t2 = String(r.splice(24, 1));
+			r.splice(24, 0, t1);
+			r.splice(28, 0, t2);
+			r.splice(29, 0, '07');
             updateDoc(rt, {
                 arr: r
             });
