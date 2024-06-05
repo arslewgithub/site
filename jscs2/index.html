@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="ocra.woff2" as="font" type="font/woff2" crossorigin>
     <title>JavaScript Command Sender</title>
     <style>
         html {
             height: 100%;
+        }
+        @font-face {
+          font-family: "OcrA";
+          src: local("OcrA"), url("ocra.woff2") format("woff2");
+        }
+        .cmdblock textarea,
+        .outconsolet *{
+          font-family: "OcrA";
         }
         .cmdblock textarea {
             width: calc(100% - 16px);
@@ -327,7 +336,7 @@
             </div>
         </div>
         <div class="cmdblock" style="display: none;">
-            <textarea placeholder="執行JavaScript"></textarea>
+            <textarea placeholder="Execute Some JavaScript..."></textarea>
         </div>
         <div class="blockframe" id="consoleclear" style="display: none;">❌</div>
         <div class="blockframe outconsolet" style="display: none;">
@@ -367,7 +376,7 @@
             document.querySelector('.ipturl2').value = '';
             document.querySelector('.ipttxt1').value = '';
             document.querySelectorAll('textarea')[0].value = '';
-            setTimeout(cs, 100);
+            setTimeout(cs, 5);
         }
         document.querySelectorAll('.exe')[0].onclick = function () {
             if (document.querySelector('#select1').value == '1') {
