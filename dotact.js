@@ -1,6 +1,3 @@
-(function (){
-    var m = document.createElement("script");
-    m.innerHTML = `
 function togetalldata() {
     $.ajax({
         type: "get",
@@ -332,7 +329,7 @@ function tosavesty(val1,val2) {
 			var entry4 = data["NOMESSAGE"];
 			
 			if (entry4 != "") {
-				alert(entry4);
+				console.log(entry4);
 			}
 						
         },
@@ -385,7 +382,7 @@ function tosavesty21(val1,val12) {
 			var entry9 = data["NUM0"];
 			
 			if (entry4 != "") {
-				alert(entry4);
+				console.log(entry4);
 			}
 			//togetalldata1();
 			$("#shownum2").empty();	
@@ -454,4 +451,421 @@ function togetalldata2() {
                             
                             if (entry5[i] != "") {
                             
-                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/green.png" width="30p
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/green.png" width="30px"></h6></div>';
+                            
+                            } else {
+                           
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/red2.png" width="30px"></h6></div>';
+
+                            }
+
+                            nowstr = nowstr + '<div class="col-md-6"><h5 style="margin-top:20px">'+entry2[i]+'</br>'+entry3[i]+'</h5></div>';
+                          
+                        nowstr = nowstr + '</div>';
+							}
+						}
+                    nowstr = nowstr + '</div>';
+                    
+                    nowstr = nowstr + '<div class="col-md-2">';
+                        
+						for (var i=0 ;i<entry1.length; i++) {
+							if (entry4[i].substr(0,1) == "2") {
+						
+                        nowstr = nowstr + '<div class="row">';
+                            if (entry5[i] != "") {
+                           nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/green.png" width="30px"></h6></div>';
+                            } else {
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/red2.png" width="30px"></h6></div>';
+                            }
+                            nowstr = nowstr + '<div class="col-md-6"><h5 style="margin-top:20px">'+entry2[i]+'</br>'+entry3[i]+'</h5></div>';
+                          
+                        nowstr = nowstr + '</div>';
+                           
+							}
+						}
+
+                   nowstr = nowstr + '</div>';
+                    
+                    nowstr = nowstr + '<div class="col-md-2">';
+						for (var i=0 ;i<entry1.length; i++) {
+							if (entry4[i].substr(0,1) == "3") {
+								
+                        nowstr = nowstr + '<div class="row">';
+						
+                            if (entry5[i]!= "") {
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/green.png" width="30px"></h6></div>';
+                            } else {
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/red2.png" width="30px"></h6></div>';
+
+                            }
+
+                            nowstr = nowstr + '<div class="col-md-6"><h5 style="margin-top:20px">'+entry2[i]+'</br>'+entry3[i]+'</h5></div>';
+                          
+                        nowstr = nowstr + '</div>';
+                            
+							}
+						}
+
+                    nowstr = nowstr + '</div>';
+                   
+                    nowstr = nowstr + '<div class="col-md-2">';
+
+						for (var i=0 ;i<entry1.length; i++) {
+							if (entry4[i].substr(0,1) == "4") {
+
+                        nowstr = nowstr + '<div class="row">';
+
+                            if (entry5[i] != "") {
+
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/green.png" width="30px"></h6></div>';
+
+                            } else {
+
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/red2.png" width="30px"></h6></div>';
+
+                            }
+
+                            nowstr = nowstr + '<div class="col-md-6"><h5 style="margin-top:20px">'+entry2[i]+'</br>'+entry3[i]+'</h5></div>';
+                          
+                        nowstr = nowstr + '</div>';
+                           
+
+							}
+						}
+                    nowstr = nowstr + '</div>';
+                       
+                    nowstr = nowstr + '<div class="col-md-2">';
+						for (var i=0 ;i<entry1.length; i++) {
+							if (entry4[i].substr(0,1) == "5") {
+
+                        nowstr = nowstr + '<div class="row">';
+
+                            if (entry5[i] != "") {
+
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/green.png" width="30px"></h6></div>';
+
+                            } else {
+
+                            nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/red2.png" width="30px"></h6></div>';
+
+                            }
+
+                            nowstr = nowstr + '<div class="col-md-6"><h5 style="margin-top:20px">'+entry2[i]+'</br>'+entry3[i]+'</h5></div>';
+                          
+                        nowstr = nowstr + '</div>';
+
+							}
+						}
+
+                    nowstr = nowstr + '</div>';
+                    
+                    nowstr = nowstr + '<div class="col-md-2">';
+
+                            for (var i=0 ;i<entry1.length; i++) {
+                                if (entry4[i].substr(0,1) == "6") {
+
+                            nowstr = nowstr + '<div class="row">';
+
+                                if (entry5[i] != "") {
+
+                                nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/green.png" width="30px"></h6></div>';
+
+                                } else {
+
+                                nowstr = nowstr + '<div class="col-md-2"><h6><img src="../images/red2.png" width="30px"></h6></div>';
+
+                                }
+
+                                nowstr = nowstr + '<div class="col-md-6"><h5 style="margin-top:20px">'+entry2[i]+'</br>'+entry3[i]+'</h5></div>';
+                              
+                            nowstr = nowstr + '</div>';
+
+                                }
+                            }
+
+                   nowstr = nowstr + '</div>';
+                       
+             nowstr = nowstr + '</div>';
+			   
+			  
+			 nowstrstr = nowstrstr+'<div class="row">';
+
+                        nowstrstr = nowstrstr+'<div class="col-md-6">';
+                        
+                            nowstrstr = nowstrstr+'<div class="row">';
+								if(entry21!=""){
+									for (var k=0 ; k<entry21.length ; k++) {
+									   
+									
+									nowstrstr = nowstrstr+'<div class="col-md-4">';
+										nowstrstr = nowstrstr+'<div class="row">';
+										   
+											if (entry25[k] != "") {
+											
+											nowstrstr = nowstrstr+'<div class="col-md-2"><h6><img src="../images/green.png" width="30px"></h6></div>';
+										   
+											} else {
+											
+											nowstrstr = nowstrstr+'<div class="col-md-2"><h6><img src="../images/red2.png" width="30px"></h6></div>';
+											
+											}
+											
+											nowstrstr = nowstrstr+'<div class="col-md-6"><h5 style="margin-top:15px">'+entry22[k]+'</br>'+entry23[k]+'</h5></div>';
+										nowstrstr = nowstrstr+'</div>';
+									nowstrstr = nowstrstr+'</div>';
+									
+										
+									}
+								}
+                                
+                                
+                            nowstrstr = nowstrstr+'</div>';
+                    	nowstrstr = nowstrstr+'</div>';
+						
+                        nowstrstr = nowstrstr+'<div class="col-md-6">';
+                           nowstrstr = nowstrstr+'<div class="row">';
+                                if(entry11!=""){
+									for (var k=0 ; k<entry11.length ; k++) {
+									   if((entry14[k].substr(0 ,1) != '1')&& (entry14[k].substr(0 ,1) != '2')&& (entry14[k].substr(0,1) != '3') && (entry14[k].substr(0 ,1) != '4') && (entry14[k].substr(0 ,1) != '5') &&(entry14[k].substr(0 ,1) != '6')){  
+								  
+									nowstrstr = nowstrstr+'<div class="col-md-4">';
+										
+										nowstrstr = nowstrstr+'<div class="row">';
+											
+											if (entry15[k] != "") {
+											
+											nowstrstr = nowstrstr+'<div class="col-md-2"><h6><img src="../images/green.png" width="30px"></h6></div>';
+											
+											} else {
+											
+											nowstrstr = nowstrstr+'<div class="col-md-2"><h6><img src="../images/red2.png" width="30px"></h6></div>';
+											
+											}
+											
+										   nowstrstr = nowstrstr+'<div class="col-md-6"><h5 style="margin-top:15px" >'+entry12[k]+'</br>'+entry13[k]+'</h5></div>';
+									   nowstrstr = nowstrstr+'</div>';
+									nowstrstr = nowstrstr+'</div>';
+									   }
+									   
+									}
+								}
+                                
+                                
+                            nowstrstr = nowstrstr+'</div>';
+                        nowstrstr = nowstrstr+'</div>';
+                        
+             nowstrstr = nowstrstr+'</div>';	   
+			
+			
+			
+			$("#studentstr").empty();	
+			$("#studentstr").append(nowstr);
+			$("#studentstr1").empty();	
+			$("#studentstr1").append(nowstrstr);
+
+			
+
+						
+        },
+        error: function(XHR, textStatus, errorThrown){
+            //$("#CHKYN").val("N");
+            //document.news_post.CHKUSERID.value = "N";
+            //$("#showoneitem").append('<font color=#FF0000>連線失敗，請確認,error:'+textStatus+',error:'+errorThrown+'</font>');
+           //alert("response:"+ XHR.responseText +" status:" + textStatus + " error:" + errorThrown);
+        }
+    });
+				   
+}
+function togetalldata3() {
+
+    $.ajax({
+        type: "get",
+        async: false,
+        url: ''+$("#MAXWEBURL").val()+'/httpprg/dotclasaction.php?fn1=GETDATA2&id='+$("#id").val()+'&COLSTR=account&jsoncallback=NOSELID',
+        dataType: 'jsonp',//指定以jsonp方式執行
+        jsonp: 'jsoncallback',//"mycallback"會以GET的變數名稱傳送，沒指定時，jQuery使用"callback"當變數名稱
+        jsonpCallback:'NOSELID',//"mycallback"變數的值，沒指定時，jQuery隨機產生
+        success: function(data){
+
+            var entry1 = data["NOWDETAMEDITS"].split('(AB)'); //唯一值
+            var entry2 = data["NOWDETBID"].split('(AB)');//課表
+            var entry3 = data["NOWDETSTUDNO"].split('(AB)');//學號
+            var entry4 = data["NOWDETSTUDNA"].split('(AB)');//姓名
+            var entry5 = data["NOWDETCLASNA"].split('(AB)');//班級
+            var entry6 = data["NOWDETSTUDSNO"].split('(AB)');//卡號
+            var entry7 = data["NOWDETINDATE"].split('(AB)');//刷卡時間
+            var entry8 = data["NOWDETSTY1"].split('(AB)');//出席
+            var entry9 = data["NOWDETSTY2"].split('(AB)');//遲到
+            var entry10 = data["NOWDETSTY3"].split('(AB)');//早退
+            var entry11 = data["NOWDETSTY4"].split('(AB)');//曠課
+            var entry12 = data["NOWDETMEMO"].split('(AB)');//備註
+            var entry13 = data["NOWDETSTUDID"].split('(AB)');//學生代號
+            var entry14 = data["NOWDETABXECTYPE"].split('(AB)');//請假狀況
+            var entry15 = data["NOWDETREDYN"].split('(AB)');//刪除狀況
+			var entry24 = data["NOWDETTXT"].split('(AB)');//刪除狀況
+			
+			var entry16 = data["TOTNUM"];
+			var entry17 = data["NUM1"];//出席人數
+			var entry18 = data["NUM2"];//遲到人數
+			var entry19 = data["NUM3"];//早退人數
+			var entry20 = data["NUM4"];//曠課人數
+			var entry21 = data["NUM0"];//請假人數
+			
+            var entry22 = "Y";//是否要登出
+            var entry23 = "Y";//是否能修改
+			if (entry22 == "N") {
+				window.location.href='http://rollcall.hwsh.tc.edu.tw/httpprg/logout.php';
+			}
+			
+			$("#shownum2").empty();	
+			$("#shownum2").append('<h6><img src="../images/green.png" width="30px"><font size="+1">　出席：'+entry17+'人</font></h6>');
+			$("#shownum3").empty();	
+			$("#shownum3").append('<h6><img src="../images/yell.png" width="30px"><font size="+1">　遲到：'+entry18+'人</font></h6>');
+			$("#shownum4").empty();	
+			$("#shownum4").append('<h6><img src="../images/suns.png" width="30px"><font size="+1">　早退：'+entry19+'人</font></h6>');
+			$("#shownum5").empty();	
+			$("#shownum5").append('<h6><img src="../images/red2.png" width="30px"><font size="+1">　曠課：'+entry20+'人</font></h6>');
+			$("#shownum6").empty();	
+			$("#shownum6").append('<h6><img src="../images/blue.png" width="30px"><font size="+1">　請假：'+entry21+'人</font></h6>');
+						
+			var nowstr = "";
+			var nowlistidstr = "";
+			var chstr="";
+			
+				
+			nowstr = nowstr + '<div class="row">';
+				
+			for (var i=0; i<entry1.length; i++){
+				var entry1_1=entry1[i].split('(CD)');
+				var entry4_1=entry4[i].split('(CD)');
+				var entry5_1=entry5[i].split('(CD)');
+				var entry6_1=entry6[i].split('(CD)');
+				var entry8_1=entry8[i].split('(CD)');
+				var entry9_1=entry9[i].split('(CD)');
+				var entry10_1=entry10[i].split('(CD)');
+				var entry11_1=entry11[i].split('(CD)');
+				var entry14_1=entry14[i].split('(CD)');
+				var entry24_1=entry24[i].split('(CD)');
+				nowstr = nowstr + '<div class="col-md-1" style="width: 230px;">';
+                nowstr = nowstr + '<div class="row connectedSortable" id="sortable'+i+'">';
+				for(var k=0; k<entry1_1.length;k++){
+					var NOWSSTR = "";
+					var NOWID = "";
+					var NOWPICSTGR = "";
+					if (entry14_1[k] != "") { //請假
+						NOWPICSTGR = 'blue';
+						NOWSSTR = '<font color="#FF0000">('+entry14_1[k]+')</font>';
+								
+					} else {
+						if (entry11_1[k] == "Y") {  //曠課
+							NOWPICSTGR = "red2";
+							NOWID = "4";
+							if(entry24_1[k]!=""){
+							NOWSSTR = '<font color="#FF0000">('+entry24_1[k]+')</font>';
+							}
+						} else {
+							if (entry8_1[k] == "Y") { //出席
+								NOWPICSTGR = "green";
+								NOWID = "1";
+							}
+							if (entry9_1[k] == "Y") { //遲到
+								NOWPICSTGR = "yell";
+								NOWID = "2";
+							}
+							if (entry10_1[k] == "Y") { //早退
+								NOWPICSTGR = "suns";
+								NOWID = "3";
+							}						
+						}									
+					}
+					if(entry23 != "N"){
+						if(entry1_1[k]!=""){
+							if(entry14_1[k] == ""){
+								nowstr = nowstr + '<div class="col-md-12 ui-sortable-handle" id="'+entry1_1[k]+'">';
+								nowstr = nowstr + '<img src="../images/'+NOWPICSTGR+'.png" height="30px" id="img'+entry1_1[k]+'">';
+								nowstr = nowstr + '<font size="+2"  face="微軟正黑體">'+entry5_1[k]+'-'+entry6_1[k]+'-'+entry4_1[k]+''+NOWSSTR+'';
+								nowstr = nowstr + '</font>';
+								nowstr = nowstr + '<div class="row">';
+								nowstr = nowstr + '<div class="col-md-2">';
+								nowstr = nowstr + '</div>';
+								 nowstr = nowstr + '<a onClick=movepic("img'+entry1_1[k]+'","../images/green.png");tosavesty21("'+entry1_1[k]+'","4") onmouseover=movepic("img1'+entry1_1[k]+'","../images/green.png") onmouseout=movepic("img1'+entry1_1[k]+'","../images/green1.png") ><img src="../images/green1.png" height="15px" width="20px" id="img1'+entry1_1[k]+'"></a>';
+								nowstr = nowstr + '<a onClick=movepic("img'+entry1_1[k]+'","../images/yell.png");tosavesty21("'+entry1_1[k]+'","1") onmouseover=movepic("img2'+entry1_1[k]+'","../images/yell.png") onmouseout=movepic("img2'+entry1_1[k]+'","../images/yell1.png")><img src="../images/yell1.png" height="15px" width="20px" id="img2'+entry1_1[k]+'"></a>';
+								nowstr = nowstr + '<a onClick=movepic("img'+entry1_1[k]+'","../images/suns.png");tosavesty21("'+entry1_1[k]+'","2") onmouseover=movepic("img3'+entry1_1[k]+'","../images/suns.png") onmouseout=movepic("img3'+entry1_1[k]+'","../images/suns1.png")><img src="../images/suns1.png" height="15px" width="20px" id="img3'+entry1_1[k]+'"></a>';
+								nowstr = nowstr + '<a onClick=movepic("img'+entry1_1[k]+'","../images/red2.png");tosavesty21("'+entry1_1[k]+'","3") onmouseover=movepic("img4'+entry1_1[k]+'","../images/red2.png") onmouseout=movepic("img4'+entry1_1[k]+'","../images/red1.png")><img src="../images/red1.png" height="15px" width="20px" id="img4'+entry1_1[k]+'"></a>';
+								nowstr = nowstr + '</div>';
+								nowstr = nowstr + '<h3></h3>';
+								nowstr = nowstr + '</div>';
+							}else{
+								nowstr = nowstr + '<div class="col-md-12 ui-sortable-handle" id="'+entry1_1[k]+'">';
+								nowstr = nowstr + '<img src="../images/'+NOWPICSTGR+'.png" height="30px" id=img'+entry1_1[k]+'>';
+								nowstr = nowstr + '<font style="text-align:left-center"  size="+2"  face="微軟正黑體">'+entry5_1[k]+'-'+entry6_1[k]+'-'+entry4_1[k]+''+NOWSSTR+'</font>';
+								nowstr = nowstr + '<div class="row">';
+								nowstr = nowstr + '<div class="col-md-2">';
+								nowstr = nowstr + '</div>';
+								nowstr = nowstr + '<a><img src="../images/BG.gif" height="15px" width="20px"></a>';
+								nowstr = nowstr + '</div>';
+								nowstr = nowstr + '<h3></h3>';
+								nowstr = nowstr + '</div>';
+							}
+						}else{
+							nowstr = nowstr + '<div class="col-md-12" name="seat" data-id="NOID">';
+							nowstr = nowstr + '<h3></h3>';
+							nowstr = nowstr + '<font size="+2" face="微軟正黑體" color="#FFFFFF">X </font>';
+							nowstr = nowstr + '<h3></h3>';
+							nowstr = nowstr + '</div>';
+						}
+					}else{
+						if(entry1_1[k]!=""){
+							if(entry14_1[k] == ""){
+								nowstr = nowstr + '<div class="col-md-12 ui-sortable-handle" id="'+entry1_1[k]+'">';
+								nowstr = nowstr + '<img src="../images/'+NOWPICSTGR+'.png" height="30px" id="img'+entry1_1[k]+'">';
+								nowstr = nowstr + '<font size="+2"  face="微軟正黑體">'+entry5_1[k]+'-'+entry6_1[k]+'-'+entry4_1[k]+''+NOWSSTR+'';
+								nowstr = nowstr + '</font>';
+								nowstr = nowstr + '<div class="row">';
+								nowstr = nowstr + '<div class="col-md-2">';
+								nowstr = nowstr + '</div>';
+								nowstr = nowstr + '</div>';
+								nowstr = nowstr + '<h3></h3>';
+								nowstr = nowstr + '</div>';
+							}else{
+								nowstr = nowstr + '<div class="col-md-12 ui-sortable-handle" id="'+entry1_1[k]+'">';
+								nowstr = nowstr + '<img src="../images/'+NOWPICSTGR+'.png" height="30px" id=img'+entry1_1[k]+'>';
+								nowstr = nowstr + '<font style="text-align:left-center"  size="+2"  face="微軟正黑體">'+entry5_1[k]+'-'+entry6_1[k]+'-'+entry4_1[k]+''+NOWSSTR+'</font>';
+								nowstr = nowstr + '<div class="row">';
+								nowstr = nowstr + '<div class="col-md-2">';
+								nowstr = nowstr + '</div>';
+								nowstr = nowstr + '<a><img src="../images/BG.gif" height="15px" width="20px"></a>';
+								nowstr = nowstr + '</div>';
+								nowstr = nowstr + '<h3></h3>';
+								nowstr = nowstr + '</div>';
+							}
+						}else{
+							nowstr = nowstr + '<div class="col-md-12" name="seat" data-id="NOID">';
+							nowstr = nowstr + '<h3></h3>';
+							nowstr = nowstr + '<font size="+2" face="微軟正黑體" color="#FFFFFF">X </font>';
+							nowstr = nowstr + '<h3></h3>';
+							nowstr = nowstr + '</div>';
+						}
+					}					
+				}
+				nowstr = nowstr + '</div>';
+				nowstr = nowstr + '</div>';
+			}
+			nowstr = nowstr + '<div class="row connectedSortable ui-sortable" style="text-align: center;">';
+			nowstr = nowstr + '<div class="col-md-12 ui-sortable-handle" style="width: 98%; background-color:#FFDEBD">';
+			nowstr = nowstr + '<h3>講台 </h3>';
+			nowstr = nowstr + '</div>';
+			nowstr = nowstr + '</div>';
+			nowstr = nowstr + '</div>';
+			$("#studentstr").empty();	
+			$("#studentstr").append(nowstr);
+
+        },
+        error: function(XHR, textStatus, errorThrown){
+            //$("#CHKYN").val("N");
+            //document.news_post.CHKUSERID.value = "N";
+            //$("#showoneitem").append('<font color=#FF0000>連線失敗，請確認,error:'+textStatus+',error:'+errorThrown+'</font>');
+            //alert("response:"+ XHR.responseText +" status:" + textStatus + " error:" + errorThrown);
+        }
+    });
+}
