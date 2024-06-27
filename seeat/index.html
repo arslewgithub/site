@@ -460,7 +460,7 @@
                     <td class=""></td>
                     <td class="chart"></td>
                     <td class="chart"></td>
-                    <td class=""></td>
+                    <td class="chart"></td>
                     <td class="chart"></td>
                     <td class="chart"></td>
                     <td class=""></td>
@@ -484,15 +484,15 @@
             <input id="search" type="number" placeholder="搜尋">
         </div>
         <div class="btdiv">
-            <button id="pinbt">開始釘選 (至多釘選 ${pinmax} 人)</button>
+            <button id="pinbt">開始釘選</button>
         </div>
         <br><br>
         <div id="infoblock" style="display: none;">
             <h3>About:</h4>
             <h4>Project Name: Seeat</h4>
             <h4>Series Code: Original</h4>
-            <h4>Version: 14.1</h4>
-            <h4>Last Update: 2024-06-24</h4>
+            <h4>Version: 14.2</h4>
+            <h4>Last Update: 2024-06-26</h4>
             <hr>
             <h3>Series:</h4>
             <h4>Seeat 509: <a href="">Seeat 509</a></h4>
@@ -879,7 +879,7 @@
 
 
         function an() {
-            var arre = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
+            var arre = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
             if (list1.value != '') {
                 var pa = list1.value.split(' '),
                 a = [];
@@ -896,8 +896,8 @@
                         }
                     };
 
-                    if (a.length > 4 - document.querySelectorAll('tbody>tr:nth-child(6)>td.ispin').length) {
-                        var v = a.length - 4 + document.querySelectorAll('tbody>tr:nth-child(6)>td.ispin').length;
+                    if (a.length > 5 - document.querySelectorAll('tbody>tr:nth-child(6)>td.ispin').length) {
+                        var v = a.length - 5 + document.querySelectorAll('tbody>tr:nth-child(6)>td.ispin').length;
                         for (var i = 0; i < v; i++) {
                             a.splice(Math.floor(Math.random() * a.length) - 1, 1)
                         };
@@ -935,10 +935,10 @@
                 if (search.value < 1) {
                     search.value = ''
                 };
-                if (search.value > 39) {
+                if (search.value > 40) {
                     search.value = Number(search.value.slice(0, String(search.value).length - 1))
                 };
-                if (search.value > 39) {
+                if (search.value > 40) {
                     search.value = Number(search.value.slice(0, 2))
                 };
             };
@@ -1001,7 +1001,7 @@
         function rs() {
             if (pinm) {
                 pinbt.style.background = '#aa30ff';
-                pinbt.innerHTML = `開始釘選 (至多釘選 ${pinmax} 人)`;
+                pinbt.innerHTML = `開始釘選`;
                 document.querySelectorAll('.chart').forEach(e => {
                     if (isMobileDevice()) {
                         e.ontouchstart = null
@@ -1032,19 +1032,19 @@
             }
             else {
                 pinbt.style.background = '#fe5550';
-                pinbt.innerHTML = `退出釘選 (至多釘選 ${pinmax} 人)`;
-                document.querySelectorAll('.chart').forEach(e => {
+                pinbt.innerHTML = `退出釘選`;
+                document.querySelectorAll('.chart').forEach((e, n) => {
                     function pin() {
                         if (e.classList.contains('ispin')) {
                             e.classList.remove('ispin');
                         }
                         else {
                             if (e.innerText != '' || devst < 0) {
-                                if (pinarr.length < pinmax || devst < 0) {
+                                if (n > (document.querySelectorAll("td.chart").length - document.querySelectorAll("tr:nth-child(6)>td.chart").length - 1) || devst < 0) {
                                     e.classList.add('ispin');
                                 }
                                 else {
-                                    message(`釘選人數已滿 ${pinmax} 人，不可再釘選！`)
+                                    message(`只能在第一排釘選！`)
                                 }
                             }
                             else {
@@ -1171,8 +1171,8 @@
                 e.classList.add('rananiing');
             });*/
             if (document.querySelector('table').classList.contains('rotated')) {
-                for (var q = 38 - pinarr.length; q >= 0; q--) {
-                    await delay(0.005);
+                for (var q = 39 - pinarr.length; q >= 0; q--) {
+                    await delay(0);
                     document.querySelectorAll('.chart:not(.ispin)')[q].classList.add('geted');
                     //document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
                     document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
@@ -1180,8 +1180,8 @@
                 };
             }
             else {
-                for (var q = 0; q < 39 - pinarr.length; q++) {
-                    await delay(0.001);
+                for (var q = 0; q < 40 - pinarr.length; q++) {
+                    await delay(0);
                     document.querySelectorAll('.chart:not(.ispin)')[q].classList.add('geted');
                     //document.querySelectorAll('.chart:not(.ispin)')[q].classList.remove('rananiing');
                     document.querySelectorAll('.chart:not(.ispin)')[q].innerHTML = r[q];
@@ -1347,7 +1347,7 @@
                 };
             };
 
-            for (var c = 0; c < 32; c++) {
+            for (var c = 0; c < 34; c++) {
                 r.push(String(ar.splice(Math.floor(Math.random() * ar.length), 1)).padStart(2, '0'));
             };
 
@@ -1355,22 +1355,8 @@
                 af.push(e)
             });
 
-            for (var c = 0; c < 4; c++) {
+            for (var c = 0; c < 5; c++) {
                 r.push(String(af.splice(Math.floor(Math.random() * af.length), 1)).padStart(2, '0'));
-            };
-
-            if (!(document.querySelectorAll('tbody>tr:nth-child(1)>td')[0].classList.contains("ispin") || document.querySelectorAll('tbody>tr:nth-child(1)>td')[1].classList.contains("ispin"))) {
-                var m = ~~(Math.random() * 2);
-                r.splice(0, 0, m? "16": "06");
-                r.splice(1, 0, m? "06": "16");
-            }
-            else if (pinarr.indexOf(String(0x6)) == -1) {
-                var p = ~~(Math.random() * (7 - document.querySelectorAll('tbody>tr:nth-child(1)>td.ispin').length));
-                r.splice(p, 0, String(0x10));
-            }
-            else if (pinarr.indexOf(String(0x10)) == -1) {
-                var p = ~~(Math.random() * (7 - document.querySelectorAll('tbody>tr:nth-child(1)>td.ispin').length));
-                r.splice(p, 0, String(0x6));
             };
 
             if (pinarr.indexOf('05') == -1) {
@@ -1410,8 +1396,8 @@
             };
 
             function checkA(arr) {
-                arr.splice(39 - pinarr.length, arr.length);
-                for(var i = 1; i<40; i++) {
+                arr.splice(40 - pinarr.length, arr.length);
+                for(var i = 1; i<41; i++) {
                     if (arr.indexOf(String(i).padStart(2, '0')) == -1 && pinarr.indexOf(String(i).padStart(2, '0')) == -1) {
                         return true;
                     };
@@ -1490,7 +1476,7 @@
             setTimeout(function(){e.remove();}, 300 + Number(duration))
             return e;
         }
-        console.error = function (t){message(t.message, "color: #FFF; background: #FF4555EE; font-weight: bold; font-size: 14px;", 5E3)};
+        console.error = function (t){message(t.message || t, "color: #FFF; background: #FF4555EE; font-weight: bold; font-size: 14px;", 5E3)};
     </script>
 </body>
 
