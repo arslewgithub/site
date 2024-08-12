@@ -1061,7 +1061,7 @@ _global.SENTRY_RELEASE = {
                 Q = [{
                     name: (0,
                     u.T)("Photography"),
-                    conversion_style: "anime_3",
+                    conversion_style: "photography",
                     type: j,
                     path: {
                         "1x": B(26308),
@@ -2443,7 +2443,7 @@ _global.SENTRY_RELEASE = {
             jA(this, "category", "operation"),
             jA(this, "options", {
                 aspect_ratio: "1:1",
-                style: "anime_4",
+                style: "photography",
                 allow_multiple_outputs: !0,
                 cfg_scale: 16,
                 num_inference_steps: 50,
