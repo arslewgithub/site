@@ -1293,7 +1293,7 @@
                             };
                             shouldDisable = false;
                             document.querySelectorAll('.chart').forEach(f => {
-                                if ((Number(f.innerText) < 1 || Number(f.innerText) > 39 || Number(f.innerText) != ~~Number(f.innerText)) && !(f.innerText == '' && !e.classList.contains('ispin'))) {
+                                if ((Number(f.innerText) < 1 || Number(f.innerText) > 40 || Number(f.innerText) != Math.floor(Number(f.innerText))) && !(f.innerText == '' && !e.classList.contains('ispin'))) {
                                     shouldDisable = true;
                                 };
                             });
